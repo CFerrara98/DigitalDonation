@@ -8,3 +8,7 @@ L'applicativo è realizzato dal team C09 del corso di Ingegneria del Software 20
 
 La cordinazione del progetto è stata affidata ai PM Francesco Abate e Carmine Ferrara  del corso di Gestione Dei Progetti Software 2021/22, tenuto dalla professoressa Ferrucci.
 
+Organizzazione del team:
+
+
+![Immagine1](https://user-images.githubusercontent.com/49783581/146887426-a6cd35a1-f50b-4261-b497-bb2c5d13be4a.jpg)
