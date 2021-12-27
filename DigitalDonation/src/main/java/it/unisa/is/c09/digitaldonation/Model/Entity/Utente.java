@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Utente {
 
+
     @Id
     private String codiceFiscale;
     private String nome;
@@ -20,7 +21,7 @@ public abstract class Utente {
     private String password;
 
     /**
-     * Costruttore che crea un oggetto Utente vuoto,
+     * Costruttore che crea un oggeto Utente vuoto,
      * che verra' popolato con i metodi setters.
      */
     public Utente() {
@@ -126,10 +127,18 @@ public abstract class Utente {
     public static final String CF_REGEX = "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$";
 
     /** Espressione regolare che definisce il formato dell'email. */
-    public static final String EMAIL_REGEX = "/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9_-]+)/gi";
+    public static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/"
+            + "=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f"
+            + "\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x"
+            + "0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-"
+            + "9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25["
+            + "0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2"
+            + "[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\"
+            + "x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]"
+            + "|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
     /** Espressione regolare che definisce il formato del campo password. */
-    public static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@!#$%'-\\/=^\\_`~+&])(?=.*[^0-9a-zA-Z]).{8,16}$";
+    public static final String PASSWORD_REGEX = "^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[@!#$%'-/=^_`~+&])(?=.*[^0-9a-zA-Z]).{8,16}$";
 
     /** Espressione regolare che definisce il formato dei campi nome e cognome. */
     public static final String NOME_COGNOME_REGEX = "^[a-zA-Zàòùèéìê' -]{3,20}+$";
