@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
- * Classe astratta che modella un donatore.
+ * Classe che modella un donatore.
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -127,21 +127,18 @@ public class Donatore extends Utente{
 
     /**
      * Metodo che setta la password dell'utente.
-     * @param password è la password dell'utente.
+     * @param listaIndisponibilita è la password dell'utente.
      */
     public void setListaIndisponibilita(List<Indisponibilita> listaIndisponibilita) {
         this.listaIndisponibilita = listaIndisponibilita;
     }
 
-    /** Espressione regolare che definisce il formato del campo codice fiscale. */
-    public static final String CF_REGEX = "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$";
+    /** Espressione regolare che definisce il formato del campo residenza. */
+    public static final String RESIDENZA_REGEX = "[A-Za-z,]+(['\\/.-]{0,1}[ ]{0,1}[A-Za-zà-ù,]+)*[a-zà-ù,]+([ ]{1}([ ]{0,1}[XIV]{1})+){0,1}([,]{0,1}[ ]{1}[0-9]{0,5}([\\/]([A-Za-z]|[0-9]{0,5})){0,1}){0,1}[,]{0,1}([ ]{1}[A-Za-zà-ù' çÇæÆñÑü,]{2,35}[ ]{1}[A-Z]{1,2})";
 
-    /** Espressione regolare che definisce il formato dell'email. */
-    public static final String EMAIL_REGEX = "/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9_-]+)/gi";
+    /** Espressione regolare che definisce il formato del campo di data di nascita. */
+    public static final String DATANASCITA_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][12]{1}\\d{3}$";
 
-    /** Espressione regolare che definisce il formato del campo password. */
-    public static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@!#$%'-\\/=^\\_`~+&])(?=.*[^0-9a-zA-Z]).{8,16}$";
-
-    /** Espressione regolare che definisce il formato dei campi nome e cognome. */
-    public static final String NOME_COGNOME_REGEX = "^[a-zA-Zàòùèéìê' -]{3,20}+$";
+    /** Espressione regolare che definisce il formato del campo luogo di nascita. */
+    public static final String LUOGONASCITA_REGEX = "^[a-zA-Zàòùèéìçê' -]{2,35}+$";
 }

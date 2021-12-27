@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @author Kevin Pacifico, Elpidio Mazza
  *
  *         Classe che definisce le operazioni per la modellazione e l'accesso
- *         alle informazioni persisteti relative ad un utente registrato alla
+ *         alle informazioni persistenti relative ad un utente registrato alla
  *         piattaforma.
  *
  * @see Utente
@@ -52,7 +52,7 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
      * @return Oggetto {@link Utente} che rappresenta l'utente. Può essere
      *         null se nel database non è possibile aggiornare le informazioni nel database.
      *
-     * @pre utent != null
+     * @pre utente != null
      */
     Utente save(Utente utente);
 
