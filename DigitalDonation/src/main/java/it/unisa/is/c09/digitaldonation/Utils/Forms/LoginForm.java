@@ -1,14 +1,13 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
 public class LoginForm {
+
     /**
      * Costruttore che crea un oggeto LoginForm vuoto,
      * che verra' popolato con i metodi setters.
+     * @author Mattia Sapere, Fabio Siepe.
      */
-    public LoginForm() {
-
-    }
-
+    public LoginForm() {}
     /**
      * Costruttore di un form di login con parametri utili nei casi di test.
      * @param email e' l'email inserita nel form.
@@ -26,7 +25,6 @@ public class LoginForm {
     public String getEmail() {
         return email.toLowerCase();
     }
-
     /**
      * Metodo che setta l'email dell'utente.
      * @param email e' l'email dell'utente.
@@ -50,7 +48,6 @@ public class LoginForm {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
     private String email;
     private String password;
