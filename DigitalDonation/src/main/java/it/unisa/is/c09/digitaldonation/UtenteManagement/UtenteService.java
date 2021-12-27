@@ -1,7 +1,7 @@
 package it.unisa.is.c09.digitaldonation.UtenteManagement;
 
-import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
-import it.unisa.is.c09.digitaldonation.Model.Repository.UtenteRepository;
+import it.unisa.is.c09.digitaldonation.web.Model.Entity.Utente;
+import it.unisa.is.c09.digitaldonation.web.Model.Repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,5 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonEsistenteException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonValidaException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
