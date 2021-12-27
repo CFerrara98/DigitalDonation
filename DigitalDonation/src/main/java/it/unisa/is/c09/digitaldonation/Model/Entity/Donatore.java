@@ -38,90 +38,99 @@ public class Donatore extends Utente{
      * @param cognome è il cognome dell'utente.
      * @param email è l'email dell'utente.
      * @param password è la password dell'utente.
+     * @param residenza è la residenza dell'utente.
+     * @param dataDiNascita è la data di nascita dell'utente.
+     * @param luogoDiNascita è il luogo di nascita dell'utente.
+     * @param tesserino è il tesserino dell'utente.
+     * @param listaIndisponibilita è la lista di indisponibilità dell'utente.
      */
-    public Utente(String codiceFiscale, String nome, String cognome, String email, String password, String residenza, Date dataDiNascita, String luogoDiNascita, Tesserino tesserino, List<Indisponibilita> listaIndisponibilita) {
+    public Donatore(String codiceFiscale, String nome, String cognome, String email, String password, String residenza, Date dataDiNascita, String luogoDiNascita, Tesserino tesserino, List<Indisponibilita> listaIndisponibilita) {
         super(codiceFiscale, nome, cognome, email, password);
-
+        this.residenza = residenza;
+        this.dataDiNascita = dataDiNascita;
+        this.luogoDiNascita = luogoDiNascita;
+        this.tesserino = tesserino;
+        this.listaIndisponibilita = new ArrayList<Indisponibilita>();
     }
 
     /**
-     * Metodo che ritorna il codice fiscale dell'utente.
-     * @return codiceFiscale e' il codiceFiscale dell'utente.
+     * Metodo che ritorna la residenza dell'utente.
+     * @return residenza e' la residenza dell'utente.
      */
-    public String getCodiceFiscale() {
-        return codiceFiscale;
+    public String getResidenza() {
+        return residenza;
     }
 
     /**
-     * Metodo che setta il codice fiscale dell'utente.
-     * @param codiceFiscale e' il codice fiscale dell'utente.
+     * Metodo che setta la residenza dell'utente.
+     * @param residenza e' la residenza fiscale dell'utente.
      */
-    public void setCodiceFiscale(String codiceFiscale) {
-        this.codiceFiscale = codiceFiscale;
+    public void setResidenza(String residenza) {
+        this.residenza = residenza;
     }
 
     /**
-     * Metodo che ritorna il nome dell'utente.
-     * @return nome e' il nome dell'utente.
+     * Metodo che ritorna la data di nascita dell'utente.
+     * @return dataDiNascita e' la data di nascita dell'utente.
      */
-    public String getNome() {
-        return nome;
+    public Date getDataDiNascita() {
+        return dataDiNascita;
     }
 
     /**
-     * Metodo che setta il nome dell'utente.
-     * @param nome e' il nome dell'utente.
+     * Metodo che setta la data di nascita dell'utente.
+     * @param dataDiNascita e' la data di nascita dell'utente.
      */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDataDiNascita(Date dataDiNascita) {
+        this.dataDiNascita = dataDiNascita;
     }
 
     /**
-     * Metodo che ritorna il cognome dell'utente.
-     * @return nome e' il cognome dell'utente.
+     * Metodo che ritorna il luogo di nascita dell'utente.
+     * @return luogoDiNascita e' il luogo di nascita dell'utente.
      */
-    public String getCognome() {
-        return cognome;
+    public String getLuogoDiNascita() {
+        return luogoDiNascita;
     }
 
     /**
-     * Metodo che setta il cognome dell'utente.
-     * @param cognome e' il cognome dell'utente.
+     * Metodo che setta il luogo di nascita dell'utente.
+     * @param luogoDiNascita e' il luogo di nascita dell'utente.
      */
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
+    public void setLuogoDiNascita(String luogoDiNascita) {
+        this.luogoDiNascita = luogoDiNascita;
     }
 
     /**
-     * Metodo che ritorna l'email dell'utente.
-     * @return email e' l'email dell'utente.
+     * Metodo che ritorna il tesserino dell'utente.
+     * @return tesserino e' il tesserino dell'utente.
      */
-    public String getEmail() {
-        return email;
+    public Tesserino getTesserino() {
+        return tesserino;
     }
 
     /**
-     * Metodo che setta l'email dell'utente.
-     * @param email è l'email dell'utente.
+     * Metodo che setta il tesserino dell'utente.
+     * @param tesserino è il tesserino dell'utente.
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTesserino(Tesserino tesserino) {
+        this.tesserino = tesserino;
     }
 
     /**
-     * Metodo che ritorna la password dell'utente.
-     * @return password e' la password dell'utente.
+     * Metodo che ritorna la lista di indisponibilità dell'utente.
+     * @return listaIndisponibilita e' la lista di indisponibilità dell'utente.
      */
-    public String getPassword() {
-        return password;
+    public List<Indisponibilita> getListaIndisponibilita() {
+        return listaIndisponibilita;
     }
 
     /**
      * Metodo che setta la password dell'utente.
      * @param password è la password dell'utente.
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setListaIndisponibilita(List<Indisponibilita> listaIndisponibilita) {
+        this.listaIndisponibilita = listaIndisponibilita;
     }
 
     /** Espressione regolare che definisce il formato del campo codice fiscale. */
