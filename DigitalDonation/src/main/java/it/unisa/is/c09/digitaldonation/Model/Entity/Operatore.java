@@ -1,16 +1,12 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella un operatore.
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Operatore extends Utente{
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sedeLocale")

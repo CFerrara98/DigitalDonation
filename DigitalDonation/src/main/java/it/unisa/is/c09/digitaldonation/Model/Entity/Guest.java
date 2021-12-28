@@ -21,7 +21,7 @@ public class Guest {
     private String gruppoSanguigno;
 
     /**
-     * Costruttore che crea un oggeto Guest vuoto,
+     * Costruttore che crea un oggetto Guest vuoto,
      * che verra' popolato con i metodi setters.
      */
     public Guest() {
@@ -157,5 +157,4 @@ public class Guest {
 
     /** Espressione regolare che definisce il formato del gruppo sanguigno */
     public static final String REG_GRUPPOSANGUIGNO = "^^(0-|0\\+|A-|A\\+|B-|B\\+|AB-|AB\\+)";
-
 }

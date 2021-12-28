@@ -1,7 +1,7 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +10,8 @@ import java.util.List;
  * Classe che modella un donatore.
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Donatore extends Utente{
 
-    @Id
     private String residenza;
     private Date dataDiNascita;
     private String luogoDiNascita;
@@ -63,7 +61,7 @@ public class Donatore extends Utente{
 
     /**
      * Metodo che setta la residenza dell'utente.
-     * @param residenza e' la residenza fiscale dell'utente.
+     * @param residenza e' la residenza dell'utente.
      */
     public void setResidenza(String residenza) {
         this.residenza = residenza;
