@@ -7,15 +7,16 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UtenteService implements UtenteServiceInterface{
+public class UtenteService implements UtenteServiceInterface {
 
     @Autowired
     UtenteRepository utenteRepository;
 
     /**
      * Permette di ottenerel'utente autenticato nel sistema
+     *
      * @return l'utente autenticato nel sistema, <b>null</b> se non vi è alcun
-     *         utente autenticato
+     * utente autenticato
      */
     @Override
     public Utente getUtenteAutenticato() {
@@ -60,19 +61,17 @@ public class UtenteService implements UtenteServiceInterface{
             AutenticazioneHolder.setUtente(email);
         }
     }
+
     /**
      * Controlla che l'email di un utente sia specificata e che rispetti il formato
      * prestabilito. Controlla inolte che tale email non sia già presente nel
      * sistema.
      *
      * @param email Stringa che rappresenta l'email da controllare
-     *
      * @return email La stringa che rappresenta l'email da controllare validata
-     *
      * @throws MailNonValidaException    se l'email non è specificata oppure se non
      *                                   rispetta il formato
-     *                                   {@link Utente#EMAIL_PATTERN}
-     *
+     *                                   {@link Utente#EMAIL_REGEX}
      * @throws MailNonEsistenteException se l'email specificata non è presente nel
      *                                   sistema
      */
@@ -80,7 +79,7 @@ public class UtenteService implements UtenteServiceInterface{
         if (email == null) {
             throw new MailNonValidaException();
         } else {
-            if (!email.matches(Utente.EMAIL_PATTERN)) {
+            if (!email.matches(Utente.EMAIL_REGEX)) {
                 throw new MailNonValidaException();
             } else if (!utenteRepository.existsUtenteByEmail(email)) {
                 throw new MailNonEsistenteException();
@@ -89,5 +88,16 @@ public class UtenteService implements UtenteServiceInterface{
             }
         }
     }
+
+    /**
+     * Permette di verificare se un'utente esiste nel database attraverso la propria
+     * email.
+     *
+     * @param email Stringa che rappresenta l'email di un utente
+     *
+     * @return true se l'utente esiste, false se l'utente non esiste
+     *
+     * @pre email != null
+     */
 
 }
