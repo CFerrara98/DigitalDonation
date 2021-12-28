@@ -64,6 +64,31 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
      * @pre codiceFiscale != null
      */
     void deleteByCodiceFiscale(String codiceFiscale);
+
+    /**
+     * Permette di verificare se un'utente esiste nel database attraverso la propria
+     * email.
+     *
+     * @param email Stringa che rappresenta l'email di un utente
+     *
+     * @return true se l'utente esiste, false se l'utente non esiste
+     *
+     * @pre email != null
+     */
+    boolean existsUtenteByEmail(String email);
+
+    /**
+     * Permette di ottenere un utente a partire dalla proria mail.
+     *
+     * @param email Stringa che rappresenta l'email dell'utente
+     *
+     * @return Oggetto {@link Utente} che rappresenta l'utente. <b>Può essere
+     *         null</b> se nel database non è presente un utente con email come
+     *         parametro
+     *
+     * @pre email != null
+     */
+    Utente findByEmail(String email);
 }
 
 
