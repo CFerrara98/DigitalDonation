@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * @author Kevin Pacifico, Elpidio Mazza
+ * Classe che modella l'indisponibilità a donare di un donatore.
+ */
 @Entity
 public class Indisponibilita {
     @ManyToOne

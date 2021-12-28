@@ -1,6 +1,7 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
+import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteServiceInterface;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonEsistenteException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonValidaException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
@@ -10,15 +11,16 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
- * Classe che definisce un validatore per {@link SedutaForm}.
+ * Classe che definisce un validatore per {@link GuestForm}.
  * Il controllo effettuato rigurda la
- * validità di alcuni campi definiti nell'entità Seduta.
+ * validità di alcuni campi definiti nell'entità Guest.
  *
  * @author Mattia Sapere, Fabio Siepe
  */
 
 @Component
-public class SedutaFormValidate implements Validator {
+public class GuestFormValidate implements Validator {
+
     @Autowired
     private OrganizzazioneSeduteService organizzazioneSeduteService;
 
@@ -39,5 +41,6 @@ public class SedutaFormValidate implements Validator {
     public void validate(Object target, Errors errors) {
 
     }
-
 }
+
+
