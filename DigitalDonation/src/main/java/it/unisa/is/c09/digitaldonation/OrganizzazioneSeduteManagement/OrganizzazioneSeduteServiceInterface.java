@@ -4,6 +4,8 @@ import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 public interface OrganizzazioneSeduteServiceInterface {
@@ -35,5 +37,21 @@ public interface OrganizzazioneSeduteServiceInterface {
     public String validaPatologie(String patologie) throws GuestFormException;
 
     public String validaGruppoSanguigno(String gruppoSanguigno) throws GuestFormException;
+
+    public Date validaDataSeduta(Date dataSeduta) throws SedutaFormException;
+
+    public String validaIndirizzo(String indirizzo) throws SedutaFormException;
+
+    public String validaCitta(String citta) throws SedutaFormException;
+
+    public String validaProvincia(String provincia) throws SedutaFormException;
+
+    public String validaCAP(String CAP) throws SedutaFormException;
+
+    public int validaNumeroPartecipanti(int numeroPartecipanti) throws SedutaFormException;
+
+    public Date validaDataInizioPrenotazioni(Date dataInizioPrenotazioni) throws SedutaFormException;
+
+    public Date validaDataFinePrenotazioni(Date dataFinePrenotazioni) throws SedutaFormException;
 
 }
