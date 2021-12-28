@@ -1,5 +1,6 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
+import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.GuestFormException;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteServiceInterface;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonEsistenteException;
@@ -36,10 +37,51 @@ public class GuestFormValidate implements Validator {
      * @param target Oggetto da validare
      * @param errors Oggetto in cui salvare l'esito della validazione
      */
-
     @Override
     public void validate(Object target, Errors errors) {
+        GuestForm guestForm = (GuestForm) target;
 
+        //Validazione del campo nome
+        try{
+            organizzazioneSeduteService.validaNome(guestForm.getNome());
+        } catch(GuestFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo cognome
+        try{
+            organizzazioneSeduteService.validaCognome(guestForm.getCognome());
+        } catch(GuestFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo telefono
+        try{
+            organizzazioneSeduteService.validaTelefono(guestForm.getTelefono());
+        } catch(GuestFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo codice fiscale
+        try{
+            organizzazioneSeduteService.validaCodiceFiscaleGuest(guestForm.getCodiceFiscale());
+        } catch(GuestFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo patologie
+        try{
+            organizzazioneSeduteService.validaPatologie(guestForm.getPatologie());
+        } catch(GuestFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo gruppo sanguigno
+        try{
+            organizzazioneSeduteService.validaGruppoSanguigno(guestForm.getGruppoSanguigno());
+        } catch(GuestFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
     }
 }
 
