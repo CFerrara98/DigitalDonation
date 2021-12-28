@@ -10,10 +10,8 @@ import java.util.List;
  * Classe astratta che modella un donatore.
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Donatore extends Utente{
+public class Donatore extends Utente {
 
-    @Id
     private String residenza;
     private Date dataDiNascita;
     private String luogoDiNascita;
@@ -22,6 +20,11 @@ public class Donatore extends Utente{
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "indisponibilita")
     private List<Indisponibilita> listaIndisponibilita;
+
+    @ManyToMany
+    @JoinTable(name = "donatore_donatore",
+            joinColumns = @JoinColumn(name = "donatore_codice_fiscale", referencedColumnName = "donatore_id_seduta"))
+    private List<Operatore> donatore = new ArrayList<>();
 
     /**
      * Costruttore che crea un oggetto Donatore vuoto,
@@ -144,4 +147,12 @@ public class Donatore extends Utente{
 
     /** Espressione regolare che definisce il formato dei campi nome e cognome. */
     public static final String NOME_COGNOME_REGEX = "^[a-zA-Zàòùèéìê' -]{3,20}+$";
+
+    public List<Operatore> getDonatore() {
+        return donatore;
+    }
+
+    public void setDonatore(List<Operatore> donatore) {
+        this.donatore = donatore;
+    }
 }

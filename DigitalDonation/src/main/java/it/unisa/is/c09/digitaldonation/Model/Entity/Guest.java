@@ -2,8 +2,9 @@ package it.unisa.is.c09.digitaldonation.Model.Entity;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
@@ -19,6 +20,11 @@ public class Guest {
     private String telefono;
     private String patologie;
     private String gruppoSanguigno;
+
+    @ManyToMany
+    @JoinTable(name = "guest_guest",
+            joinColumns = @JoinColumn(name = "guest_codice_fiscale", referencedColumnName = "guest_id_seduta"))
+    private List<Operatore> guest = new ArrayList<>();
 
     /**
      * Costruttore che crea un oggeto Guest vuoto,
@@ -157,5 +163,13 @@ public class Guest {
 
     /** Espressione regolare che definisce il formato del gruppo sanguigno */
     public static final String REG_GRUPPOSANGUIGNO = "^^(0-|0\\+|A-|A\\+|B-|B\\+|AB-|AB\\+)";
+
+    public List<Operatore> getGuest() {
+        return guest;
+    }
+
+    public void setGuest(List<Operatore> guest) {
+        this.guest = guest;
+    }
 
 }
