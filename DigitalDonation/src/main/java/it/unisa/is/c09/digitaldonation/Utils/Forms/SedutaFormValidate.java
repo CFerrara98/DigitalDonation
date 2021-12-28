@@ -1,6 +1,8 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
+import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.GuestFormException;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
+import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.SedutaFormException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonEsistenteException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonValidaException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
@@ -37,7 +39,62 @@ public class SedutaFormValidate implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
+        SedutaForm sedutaForm = (SedutaForm) target;
 
+        //Validazione del campo dataSeduta
+        try{
+            organizzazioneSeduteService.validaDataSeduta(sedutaForm.getDataSeduta());
+        } catch(SedutaFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo indirizzo
+        try{
+            organizzazioneSeduteService.validaIndirizzo(sedutaForm.getIndirizzo());
+        } catch(SedutaFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo città
+        try{
+            organizzazioneSeduteService.validaCitta(sedutaForm.getCitta());
+        } catch(SedutaFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo provincia
+        try{
+            organizzazioneSeduteService.validaProvincia(sedutaForm.getProvincia());
+        } catch(SedutaFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo CAP
+        try{
+            organizzazioneSeduteService.validaCAP(sedutaForm.getCAP());
+        } catch(SedutaFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo numeroPartecipanti
+        try{
+            organizzazioneSeduteService.validaNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
+        } catch(SedutaFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+
+        //Validazione del campo dataInizioPrenotazione
+        try{
+            organizzazioneSeduteService.validaDataInizioPrenotazioni(sedutaForm.getDataInizioPrenotazione());
+        } catch(SedutaFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
+        //Validazione del campo dataFinePrenotazione
+        try{
+            organizzazioneSeduteService.validaDataFinePrenotazioni(sedutaForm.getDataFinePrenotazione());
+        } catch(SedutaFormException e1) {
+            errors.reject("errore", e1.getMessage());
+        }
     }
 
 }
