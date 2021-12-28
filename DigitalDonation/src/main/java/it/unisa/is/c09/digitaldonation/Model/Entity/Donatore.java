@@ -18,13 +18,8 @@ public class Donatore extends Utente{
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tesserino")
     private Tesserino tesserino;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "indisponibilita")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "donatore")
     private List<Indisponibilita> listaIndisponibilita;
-
-    @ManyToMany
-    @JoinTable(name = "donatore_donatore",
-            joinColumns = @JoinColumn(name = "donatore_codice_fiscale", referencedColumnName = "donatore_id_seduta"))
-    private List<Operatore> donatore = new ArrayList<>();
 
     /**
      * Costruttore che crea un oggetto Donatore vuoto,

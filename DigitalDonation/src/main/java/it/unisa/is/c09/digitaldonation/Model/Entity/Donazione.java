@@ -11,11 +11,10 @@ import java.util.Date;
 public class Donazione {
 
     @Id
-    //TODO Fix Foreign Key
-    @ManyToOne
-    @JoinColumn(name="tesserino_id", nullable=false)
-    private Long idTesserino;
-    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idDonazione;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Tesserino tesserino;
     private Date dataDonazione;
     private String tipoDonazione;
 
@@ -28,30 +27,46 @@ public class Donazione {
 
     /**
      * Costruttore di una Donazione con parametri utili nei casi di test.
-     * @param idTesserino è l'id del tesserino.
+     * @param tesserino è l'oggetto tesserino.
      * @param dataDonazione è la data della donazione effettuata.
      * @param tipoDonazione è il tipo di donazione effettuata.
      */
-    public Donazione(Long idTesserino, Date dataDonazione, String tipoDonazione) {
-        this.idTesserino = idTesserino;
+    public Donazione(Tesserino tesserino, Date dataDonazione, String tipoDonazione) {
+        this.tesserino = tesserino;
         this.dataDonazione = dataDonazione;
         this.tipoDonazione = tipoDonazione;
     }
 
     /**
-     * Metodo che ritorna l'id del tesserino.
-     * @return idTesserino e' l'id del tesserino.
+     * Metodo che ritorna l'id della donazione.
+     * @return idDonazione e' l'id della donazione.
      */
-    public Long getIdTesserino() {
-        return idTesserino;
+    public Long getIdDonazione() {
+        return idDonazione;
     }
 
     /**
-     * Metodo che setta l'id del tesserino.
-     * @param idTesserino e' l'id del tesserino.
+     * Metodo che setta l'id della donazione.
+     * @param idDonazione e' l'id della donazione.
      */
-    public void setIdTesserino(Long idTesserino) {
-        this.idTesserino = idTesserino;
+    public void setIdDonazione(Long idDonazione) {
+        this.idDonazione = idDonazione;
+    }
+
+    /**
+     * Metodo che ritorna l'oggetto tesserino.
+     * @return tesserino e' l'oggetto tesserino.
+     */
+    public Tesserino getTesserino() {
+        return tesserino;
+    }
+
+    /**
+     * Metodo che setta l'oggetto tesserino.
+     * @param tesserino e' l'oggetto tesserino.
+     */
+    public void setTesserino(Tesserino tesserino) {
+        this.tesserino = tesserino;
     }
 
     /**

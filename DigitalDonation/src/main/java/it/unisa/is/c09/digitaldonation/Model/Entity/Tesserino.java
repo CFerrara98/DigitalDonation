@@ -23,8 +23,7 @@ public class Tesserino{
     private String gruppoSanguigno;
     private String rh;
 
-    //TODO Fix Foreign Key
-    @OneToMany(mappedBy="tesserino")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tesserino")
     private List<Donazione> listaDonazioni;
 
     /**

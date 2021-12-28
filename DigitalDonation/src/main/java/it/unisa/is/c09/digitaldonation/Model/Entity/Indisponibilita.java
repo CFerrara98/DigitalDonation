@@ -11,8 +11,10 @@ import java.util.Date;
 public class Indisponibilita {
 
     @Id
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "donatore")
-    private String codiceFiscaleDonatore;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idIndisponibilita;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Donatore donatore;
     private Date dataProssimaDisponibilita;
     private String motivazioni;
     private String nomeMedico;
@@ -25,32 +27,48 @@ public class Indisponibilita {
 
     /**
      * Costruttore di un'Indisponibilita' con parametri utili nei casi di test.
-     * @param codiceFiscaleDonatore è il codice fiscale del donatore.
+     * @param donatore è l'oggetto donatore.
      * @param dataProssimaDisponibilita è la data di fine indisponibilità.
      * @param motivazioni sono le motivazioni di indisponibilità.
      * @param nomeMedico è il nome del medico che ha effettuato la visita.
      */
-    public Indisponibilita(String codiceFiscaleDonatore, Date dataProssimaDisponibilita, String motivazioni, String nomeMedico) {
-        this.codiceFiscaleDonatore = codiceFiscaleDonatore;
+    public Indisponibilita(Donatore donatore, Date dataProssimaDisponibilita, String motivazioni, String nomeMedico) {
+        this.donatore = donatore;
         this.dataProssimaDisponibilita = dataProssimaDisponibilita;
         this.motivazioni = motivazioni;
         this.nomeMedico = nomeMedico;
     }
 
     /**
-     * Metodo che ritorna il codice fiscale del donatore.
-     * @return codiceFiscaleDonatore e' il codice fiscale del donatore.
+     * Metodo che ritorna l'id dell'indisponibilità.
+     * @return idIndisponibilita e' l'id dell'indisponibilità.
      */
-    public String getCodiceFiscaleDonatore() {
-        return codiceFiscaleDonatore;
+    public Long getIdIndisponibilita() {
+        return idIndisponibilita;
     }
 
     /**
-     * Metodo che setta il codice fiscale del donatore.
-     * @param codiceFiscaleDonatore e' il codice fiscale del donatore.
+     * Metodo che setta l'id dell'indisponibilità.
+     * @param idIndisponibilita e' l'id dell'indisponibilità.
      */
-    public void setCodiceFiscaleDonatore(String codiceFiscaleDonatore) {
-        this.codiceFiscaleDonatore = codiceFiscaleDonatore;
+    public void setIdIndisponibilita(Long idIndisponibilita) {
+        this.idIndisponibilita = idIndisponibilita;
+    }
+
+    /**
+     * Metodo che ritorna l'oggetto donatore.
+     * @return donatore e' l'oggetto donatore.
+     */
+    public Donatore getDonatore() {
+        return donatore;
+    }
+
+    /**
+     * Metodo che setta l'oggetto donatore.
+     * @param donatore e' l'oggetto donatore.
+     */
+    public void setDonatore(Donatore donatore) {
+        this.donatore = donatore;
     }
 
     /**
