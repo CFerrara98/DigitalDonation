@@ -27,19 +27,19 @@ public interface TesserinoRepository extends JpaRepository<Tesserino, Long> {
      *
      * @pre idTesserino != null
      */
-    Tesserino findTesserinoById(Long idTesserino);
+    Tesserino findTesserinoByIdTessera(Long idTesserino);
 
     /**
      * Permette di ottenere un tesserino a partire dal codice fiscale.
      *
-     * @param codiceFiscaleUtente Stringa che rappresenta il codice fiscale del donatore.
+     * @param donatoreUtenteCodiceFiscale Stringa che rappresenta il codice fiscale del donatore.
      *
      * @return Oggetto {@link Tesserino} che rappresenta il tesserino. Può essere
      *         null se nel database non è presente un tesserino con codice fiscale come parametro.
      *
      * @pre codiceFiscaleUtente != null
      */
-    Tesserino findDonatoreByCodiceFiscale(String codiceFiscaleUtente);
+    Tesserino findDonatoreBydonatoreUtenteCodiceFiscale(String donatoreUtenteCodiceFiscale);
 
     /**
      * Permette di salvare o aggiornare le informazioni di un tesserino nel database.

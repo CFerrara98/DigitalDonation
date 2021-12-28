@@ -21,14 +21,14 @@ public interface DonatoreRepository extends JpaRepository<Donatore, String> {
     /**
      * Permette di ottenere un donatore a partire dal proprio codice fiscale.
      *
-     * @param codiceFiscale Stringa che rappresenta il codice fiscale del donatore.
+     * @param codiceFiscaleUtente Stringa che rappresenta il codice fiscale del donatore.
      *
      * @return Oggetto {@link Donatore} che rappresenta il donatore. Può essere
      *         null se nel database non è presente un donatore con codice fiscale come parametro.
      *
      * @pre codiceFiscale != null
      */
-    Donatore findDonatoreByCodiceFiscale(String codiceFiscale);
+    Donatore findDonatoreByCodiceFiscaleUtente(String codiceFiscaleUtente);
 
     /**
      * Permette di salvare o aggiornare le informazioni di un donatore nel database.

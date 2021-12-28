@@ -32,14 +32,14 @@ public interface GuestRepository extends JpaRepository<Guest, String> {
     /**
      * Permette di ottenere un guest a partire dal proprio codice fiscale.
      *
-     * @param codiceFiscale Stringa che rappresenta il codice fiscale dell'utente.
+     * @param CodiceFiscaleGuest Stringa che rappresenta il codice fiscale dell'utente.
      *
      * @return Oggetto {@link Utente} che rappresenta l'utente. Può essere
      *         null se nel database non è presente un utente con codice fiscale come parametro.
      *
      * @pre codiceFiscale != null
      */
-    Utente findByCodiceFiscale(String codiceFiscale);
+    Utente findByCodiceFiscaleGuest(String CodiceFiscaleGuest);
 
 
 

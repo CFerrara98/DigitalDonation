@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 public class Guest {
     @Id
-    private String codiceFiscale;
+    private String codiceFiscaleGuest;
     private String nome;
     private String cognome;
     private String telefono;
@@ -34,7 +34,7 @@ public class Guest {
      * @param gruppoSanguigno è il gruppo sanguigno del guest.
      */
     public Guest(String codiceFiscale, String nome, String cognome, String telefono, String patologie, String gruppoSanguigno) {
-        this.codiceFiscale = codiceFiscale;
+        this.codiceFiscaleGuest = codiceFiscale;
         this.nome = nome;
         this.cognome = cognome;
         this.telefono = telefono;
@@ -47,16 +47,16 @@ public class Guest {
      * Metodo che ritorna il codice fiscale dell'utente.
      * @return codiceFiscale e' il codiceFiscale dell'utente.
      */
-    public String getCodiceFiscale() {
-        return codiceFiscale;
+    public String getcodiceFiscaleGuest() {
+        return codiceFiscaleGuest;
     }
 
     /**
      * Metodo che setta il codice fiscale dell'utente.
      * @param codiceFiscale e' il codice fiscale dell'utente.
      */
-    public void setCodiceFiscale(String codiceFiscale) {
-        this.codiceFiscale = codiceFiscale;
+    public void setcodiceFiscaleGueste(String codiceFiscale) {
+        this.codiceFiscaleGuest = codiceFiscale;
     }
 
     /**

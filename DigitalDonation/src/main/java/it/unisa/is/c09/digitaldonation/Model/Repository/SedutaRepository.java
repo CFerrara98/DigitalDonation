@@ -49,7 +49,7 @@ public interface SedutaRepository extends JpaRepository<Seduta, Long> {
      *
      * @pre idSeduta != null
      */
-    void deleteSedutaById(Long idSeduta);
+    void deleteSedutaByIdSeduta(Long idSeduta);
 
 
 }

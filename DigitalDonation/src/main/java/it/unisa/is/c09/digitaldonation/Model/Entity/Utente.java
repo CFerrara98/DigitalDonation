@@ -12,7 +12,7 @@ import javax.persistence.*;
 public abstract class Utente {
 
     @Id
-    private String codiceFiscale;
+    private String codiceFiscaleUtente;
     private String nome;
     private String cognome;
     @Column(unique = true)
@@ -35,7 +35,7 @@ public abstract class Utente {
      * @param password è la password dell'utente.
      */
     public Utente(String codiceFiscale, String nome, String cognome, String email, String password) {
-        this.codiceFiscale = codiceFiscale;
+        this.codiceFiscaleUtente = codiceFiscale;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
@@ -47,7 +47,7 @@ public abstract class Utente {
      * @return codiceFiscale e' il codiceFiscale dell'utente.
      */
     public String getCodiceFiscale() {
-        return codiceFiscale;
+        return codiceFiscaleUtente;
     }
 
     /**
@@ -55,7 +55,7 @@ public abstract class Utente {
      * @param codiceFiscale e' il codice fiscale dell'utente.
      */
     public void setCodiceFiscale(String codiceFiscale) {
-        this.codiceFiscale = codiceFiscale;
+        this.codiceFiscaleUtente = codiceFiscale;
     }
 
     /**

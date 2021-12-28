@@ -20,12 +20,12 @@ import org.springframework.stereotype.Repository;
         /**
          * Permette di ottenere un operatore a partire dal proprio codice fiscale.
          *
-         * @param codiceFiscale Stringa che rappresenta il codice fiscale dell'operatore.
+         * @param CodiceFiscaleUtente Stringa che rappresenta il codice fiscale dell'operatore.
          *
          * @return Oggetto {@link Operatore} che rappresenta l'operatore. Può essere
          *         null se nel database non è presente un operatore con codice fiscale come parametro.
          *
          * @pre codiceFiscale != null
          */
-        Operatore findOperatoreByCodiceFiscale(String codiceFiscale);
+        Operatore findOperatoreByCodiceFiscaleUtente(String CodiceFiscaleUtente);
 }

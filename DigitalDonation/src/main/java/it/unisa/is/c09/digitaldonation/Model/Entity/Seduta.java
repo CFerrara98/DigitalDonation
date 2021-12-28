@@ -27,9 +27,18 @@ public class Seduta {
     @ManyToOne
     @JoinColumn(name = "sede_locale_codice_identificativo")
     private SedeLocale sedeLocale;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "guest")
+    @ManyToMany
+    @JoinTable(
+            name = "Seduta_Guest",
+            joinColumns = @JoinColumn(name = "codiceFiscaleGuest"),
+            inverseJoinColumns = @JoinColumn(name = "idSeduta")
+    )
     private List<Guest> listaGuest;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "donatore")
+    @ManyToMany @JoinTable(
+            name = "Seduta_Donatore",
+            joinColumns = @JoinColumn(name = "codiceFiscaleUtente"),
+            inverseJoinColumns = @JoinColumn(name = "idSeduta")
+    )
     private List<Donatore> listaDonatore;
 
     /**
