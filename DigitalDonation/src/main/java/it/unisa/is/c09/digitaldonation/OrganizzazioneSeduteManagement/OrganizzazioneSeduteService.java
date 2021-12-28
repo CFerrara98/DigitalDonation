@@ -23,8 +23,13 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @param feedback   Il feedback del donatore
      */
     @Override
-    public void feedbackDonatore(Long idDonatore, boolean feedback) {
-
+    public void feedbackDonatore(Long idDonatore, boolean feedback) throws CannotRelaseFeedbackException{
+        if (idDonatore == null){
+            throw new CannotRelaseFeedbackException("feedbackError","Il campo id non può essere null.");
+        }
+        if(feedback){
+            //aggiungere nuovo partecipante alla lista
+        }
     }
 
     /**
@@ -38,7 +43,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     public List<Object> monitoraggioSeduta(Long idSeduta) {
         return null;
     }
-
     /**
      * Questo metodo permette di aggiungere guest alla seduta di donazione.
      *
@@ -57,6 +61,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @param seduta Id della seduta
      * @return la seduta creata
      */
+
     @Override
     public Seduta SchedulazioneSeduta(Seduta seduta) {
         return null;
@@ -68,6 +73,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @param idSeduta id della seduta da modificare
      * @return la seduta modificata
      */
+
     @Override
     public Seduta modificaSeduta(Long idSeduta) {
         return null;
@@ -89,6 +95,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @param idSeduta id della seduta da recuperare
      * @return la seduta recuperata
      */
+
     @Override
     public Seduta visualizzaSeduta(Long idSeduta) {
         return null;
@@ -99,6 +106,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *
      * @return Un elenco delle sedute
      */
+
     @Override
     public List<Seduta> visualizzaElencoSedute() {
         return null;

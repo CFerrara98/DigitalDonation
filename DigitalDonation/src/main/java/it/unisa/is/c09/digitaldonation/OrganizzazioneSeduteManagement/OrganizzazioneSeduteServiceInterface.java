@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OrganizzazioneSeduteServiceInterface {
 
-    public void feedbackDonatore(Long idDonatore, boolean feedback);
+    public void feedbackDonatore(Long idDonatore, boolean feedback) throws CannotRelaseFeedbackException;
 
     public List<Object> monitoraggioSeduta(Long idSeduta);
 

@@ -19,7 +19,7 @@ import org.springframework.validation.Validator;
  */
 
 @Component
-public class LoginFormValidator implements Validator {
+public class LoginFormValidate implements Validator {
 
     @Autowired
     private UtenteService utenteService;
