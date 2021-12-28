@@ -1,8 +1,8 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
 
-import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonEsistenteException;
-import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonValidaException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonEsistenteException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonValidaException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

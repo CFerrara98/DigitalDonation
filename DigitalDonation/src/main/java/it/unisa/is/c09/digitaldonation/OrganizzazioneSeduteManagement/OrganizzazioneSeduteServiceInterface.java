@@ -1,10 +1,10 @@
 package it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement;
 
+import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 

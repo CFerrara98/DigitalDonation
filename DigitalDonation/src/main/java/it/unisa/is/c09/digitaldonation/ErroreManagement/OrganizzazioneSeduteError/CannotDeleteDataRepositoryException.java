@@ -1,13 +1,11 @@
-package it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement;
-
+package it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError;
 
 /**
  * Eccezione generata in caso di parametri non validi durante il monitoraggio della seduta
  *
  * @author Mattia Sapere, Fabio Siepe
  */
-public class CannotLoadDataRepositoryException extends Exception {
-
+public class CannotDeleteDataRepositoryException extends Exception {
     private static final long serialVersionUID = 2441773366582183446L;
 
     /**
@@ -18,13 +16,13 @@ public class CannotLoadDataRepositoryException extends Exception {
     /**
      * Stringa che definisce il messaggio di default utilizzato nell'eccezione.
      */
-    private static final String MESSAGGIO_DEFAULT = "Seduta non valida";
+    private static final String MESSAGGIO_DEFAULT = "Errore nella cancellazione";
 
     /**
      * Genera un'eccezione che riporta come messaggio il messaggio di default:
      * {@link #MESSAGGIO_DEFAULT}.
      */
-    public CannotLoadDataRepositoryException() {
+    public CannotDeleteDataRepositoryException() {
         super(MESSAGGIO_DEFAULT);
     }
 
@@ -35,7 +33,7 @@ public class CannotLoadDataRepositoryException extends Exception {
      * @param messaggio Stringa che rappresenta il messaggio da mostrare
      *                  nell'output dell'eccezione
      */
-    public CannotLoadDataRepositoryException(String messaggio) {
+    public CannotDeleteDataRepositoryException(String messaggio) {
         super(messaggio);
     }
 
@@ -46,7 +44,7 @@ public class CannotLoadDataRepositoryException extends Exception {
      * @param target    Stringa che rappresenta il tipo di errore generato
      * @param messaggio Stringa che rappresenta il messaggio da mostrare nell'output dell'eccezione
      */
-    public CannotLoadDataRepositoryException(String target, String messaggio) {
+    public CannotDeleteDataRepositoryException(String target, String messaggio) {
         super(messaggio);
         this.target = target;
     }
@@ -60,4 +58,3 @@ public class CannotLoadDataRepositoryException extends Exception {
         this.target = target;
     }
 }
-

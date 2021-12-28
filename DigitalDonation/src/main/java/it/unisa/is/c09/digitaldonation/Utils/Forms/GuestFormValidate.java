@@ -1,11 +1,7 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.GuestFormException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.GuestFormException;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteServiceInterface;
-import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonEsistenteException;
-import it.unisa.is.c09.digitaldonation.UtenteManagement.MailNonValidaException;
-import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.UtenteManagement;
+package it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError;
 
 
 /**

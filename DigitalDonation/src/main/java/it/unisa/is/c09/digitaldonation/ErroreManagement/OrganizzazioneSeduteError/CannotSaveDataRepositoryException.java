@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement;
+package it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError;
 
 /**
  * Eccezione generata in caso di parametri non validi durante il monitoraggio della seduta
