@@ -42,7 +42,14 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
             throw new CannotRelaseFeedbackException("feedbackError", "Il campo id non può essere null.");
         }
         if (feedback) {
-            // Save(donatore) su Molto a molto Seduta_Donatore
+            //Feedback positivo
+            Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
+            seduta.addPartecipante(donatore);
+            sedutaRepository.save(seduta);
+        }
+        else {
+            //Feedback negativo
+            return;
         }
     }
 
@@ -76,16 +83,22 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         if (idSeduta == null) {
             throw new CannotSaveDataRepositoryException("sedutaError", "Il campo id della seduta non può essere null.");
         }
+
         if (guest.getcodiceFiscaleGuest() == null) {
             throw new CannotSaveDataRepositoryException("GuestError", "il campo CF del guest non può essere null");
         }
 
-        //Controllo Guest fa parte della seduta (seduta_Guest) molti a molti
+        if(sedutaRepository.existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(idSeduta, guest.getcodiceFiscaleGuest())){
+            throw new CannotSaveDataRepositoryException("SedutaError", "il guest è gia presente nella seduta");
+        }
 
-        // Save(donatore) su Molto a molto Seduta_Donatore
-
+        Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
+        seduta.addPartecipante(guest);
+        sedutaRepository.save(seduta);
         return guest;
     }
+
+
 
     /**
      * Questo metodo permette di creare una nuova seduta.

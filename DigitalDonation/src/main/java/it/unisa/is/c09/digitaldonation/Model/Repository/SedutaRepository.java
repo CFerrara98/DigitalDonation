@@ -1,6 +1,7 @@
 package it.unisa.is.c09.digitaldonation.Model.Repository;
 
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
+import org.springframework.data.geo.GeoResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -50,6 +51,9 @@ public interface SedutaRepository extends JpaRepository<Seduta, Long> {
      * @pre idSeduta != null
      */
     void deleteSedutaByIdSeduta(Long idSeduta);
+
+    boolean existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(Long idSeduta, String codiceFiscaleGuest);
+    boolean existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(Long idSeduta, String codiceFiscaleUtente);
 
 
 }

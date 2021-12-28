@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: matti
@@ -11,6 +12,10 @@
 <head>
     <jsp:include page="../../css/mycss.css"/>
     <title>HomePage</title>
+
+    <form:form action="/goLogin" method="get"><button style="margin: 0 auto;" type="submit" id="reg" class="btn btn-primary btn-block">VAI A LOGGARTI</button> </form:form>
+
+
 
 </head>
 <body>

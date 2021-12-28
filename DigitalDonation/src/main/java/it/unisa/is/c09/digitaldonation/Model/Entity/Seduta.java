@@ -42,6 +42,27 @@ public class Seduta {
     private List<Donatore> listaDonatore;
 
     /**
+     * Aggiunge il guest alla seduta di donazione.
+     * @param guest il donatore non registrato alla piattaforma.
+     */
+    public void addPartecipante(Guest guest){
+        if(guest!= null){
+            numeroPartecipanti++;
+            listaGuest.add(guest);
+        }
+    }
+    /**
+     * Aggiunge il donatore alla seduta di donazione.
+     * @param donatore il donatore alla seduta di donazione.
+     */
+    public void addPartecipante(Donatore donatore){
+        if(donatore!= null){
+            numeroPartecipanti++;
+            listaDonatore.add(donatore);
+        }
+    }
+
+    /**
      * Costruttore che crea un ogetto Seduta vuoto,
      * che verrà popolato con i metodi setters.
      */

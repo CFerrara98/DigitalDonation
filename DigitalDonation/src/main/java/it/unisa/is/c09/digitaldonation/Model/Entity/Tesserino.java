@@ -1,8 +1,8 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +22,7 @@ public class Tesserino{
     private Date dataRilascio;
     private String gruppoSanguigno;
     private String rh;
+    private String imgSource;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tesserino")
     private List<Donazione> listaDonazioni;
@@ -42,14 +43,34 @@ public class Tesserino{
      * @param gruppoSanguigno è il gruppo sanguigno sul tesserino.
      * @param rh è l'rh sul tesserino.
      * @param listaDonazioni è la lista si donazioni sul tesserino.
+     * @param imgSource è il path della immagine del donatore.
      */
-    public Tesserino(int numeroMatricola, String donatoreUtenteCodiceFiscale, Date dataRilascio, String gruppoSanguigno, String rh, List<Donazione> listaDonazioni) {
+    public Tesserino(int numeroMatricola, String donatoreUtenteCodiceFiscale,
+                     Date dataRilascio, String gruppoSanguigno, String rh,
+                     List<Donazione> listaDonazioni, String imgSource) {
         this.donatoreUtenteCodiceFiscale = donatoreUtenteCodiceFiscale;
         this.numeroMatricola = numeroMatricola;
         this.dataRilascio = dataRilascio;
         this.gruppoSanguigno = gruppoSanguigno;
         this.rh = rh;
         this.listaDonazioni = listaDonazioni;
+        this.imgSource = imgSource;
+    }
+
+    /**
+     * Metodo che ritorna il path della immagine del donatore.
+     * @return imgSource è il path della immagine del donatore.
+     */
+    public String getImgSource() {
+        return imgSource;
+    }
+
+    /**
+     * Metodo che setta il path della immagine del donatore.
+     * @param imgSource è il path della immagine del donatore.
+     */
+    public void setImgSource(String imgSource) {
+        this.imgSource = imgSource;
     }
 
     /**
@@ -178,4 +199,5 @@ public class Tesserino{
 
     /** Espressione regolare che definisce il formato del campo luogo di nascita. */
     public static final String GRUPPOSANGUIGNO_REGEX = "^(0-|0\\+|A-|A\\+|B-|B\\+|AB-|AB\\+)";
+
 }

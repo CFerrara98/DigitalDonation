@@ -5,14 +5,49 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.Mail
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.Model.Repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class UtenteService implements UtenteServiceInterface {
 
     @Autowired
     UtenteRepository utenteRepository;
+
+    /**
+     * Permette l'autenticazione di un utente nel sistema.
+     *
+     * @param email    Stringa che rappresenta l'email dell'utente
+     *
+     * @param password Stringa che rappresenta la password dell'utente
+     *
+     * @throws PasswordNonValidaException se la coppia (email, password) non è
+     *                                    presente nel sistema
+     *
+     * @return utente
+     */
+    public Utente login(String email, String password) throws PasswordNonValidaException {
+        Utente utente;
+        // Controlla se le credenziali corrispondono a quelle di uno studente e, nel
+        // caso, controlla
+        // che la richiesta d'iscrizione associatagli sia stata accettata
+        utente = utenteRepository.findByEmailAndPassword(email, password);
+        if (utente != null) {
+            AutenticazioneHolder.setUtente(email);
+            return utente;
+        }
+        else {
+            throw new PasswordNonValidaException("login","La password non è valida");
+        }
+    }
+
+    /**
+     * Permette la rimozione dell'utente dalla sessione.
+     */
+    public void logout(Utente utente) {
+        AutenticazioneHolder.setUtente(null);
+    }
+
 
     /**
      * Permette di ottenerel'utente autenticato nel sistema
@@ -71,12 +106,13 @@ public class UtenteService implements UtenteServiceInterface {
      *
      * @param email Stringa che rappresenta l'email da controllare
      * @return email La stringa che rappresenta l'email da controllare validata
-     * @throws MailNonValidaException    se l'email non è specificata oppure se non
+     * @throws MailNonValidaException se l'email non è specificata oppure se non
      *                                   rispetta il formato
      *                                   {@link Utente#EMAIL_REGEX}
      * @throws MailNonEsistenteException se l'email specificata non è presente nel
      *                                   sistema
      */
+
     @Override
     public String validaMail(String email) throws MailNonValidaException, MailNonEsistenteException {
         if (email == null) {
