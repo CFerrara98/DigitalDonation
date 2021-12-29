@@ -118,4 +118,16 @@ public class Indisponibilita {
     public void setNomeMedico(String nomeMedico) {
         this.nomeMedico = nomeMedico;
     }
+
+
+    @Override
+    public String toString() {
+        return "Indisponibilita{" +
+                "idIndisponibilita=" + idIndisponibilita +
+                ", donatore=" + donatore +
+                ", dataProssimaDisponibilita=" + dataProssimaDisponibilita +
+                ", motivazioni='" + motivazioni + '\'' +
+                ", nomeMedico='" + nomeMedico + '\'' +
+                '}';
+    }
 }

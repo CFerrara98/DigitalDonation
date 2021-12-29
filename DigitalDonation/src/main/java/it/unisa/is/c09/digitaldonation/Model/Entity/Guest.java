@@ -154,4 +154,17 @@ public class Guest {
 
     /** Espressione regolare che definisce il formato del gruppo sanguigno */
     public static final String REG_GRUPPOSANGUIGNO = "^^(0-|0\\+|A-|A\\+|B-|B\\+|AB-|AB\\+)";
+
+
+    @Override
+    public String toString() {
+        return "Guest{" +
+                "codiceFiscaleGuest='" + codiceFiscaleGuest + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", patologie='" + patologie + '\'' +
+                ", gruppoSanguigno='" + gruppoSanguigno + '\'' +
+                '}';
+    }
 }

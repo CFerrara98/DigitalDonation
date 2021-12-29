@@ -62,4 +62,13 @@ public class SedeLocale {
     public void setVia(String via) {
         this.via = via;
     }
+
+
+    @Override
+    public String toString() {
+        return "SedeLocale{" +
+                "codiceIdentificativo=" + codiceIdentificativo +
+                ", via='" + via + '\'' +
+                '}';
+    }
 }

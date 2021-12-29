@@ -133,5 +133,18 @@ public abstract class Utente {
 
     /** Espressione regolare che definisce il formato dei campi nome e cognome. */
     public static final String NOME_COGNOME_REGEX = "^[a-zA-Zàòùèéìê' -]{3,20}+$";
+
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "codiceFiscaleUtente='" + codiceFiscaleUtente + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
 }
 

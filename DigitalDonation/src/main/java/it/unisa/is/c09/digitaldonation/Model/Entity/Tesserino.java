@@ -200,4 +200,18 @@ public class Tesserino{
     /** Espressione regolare che definisce il formato del campo luogo di nascita. */
     public static final String GRUPPOSANGUIGNO_REGEX = "^(0-|0\\+|A-|A\\+|B-|B\\+|AB-|AB\\+)";
 
+
+    @Override
+    public String toString() {
+        return "Tesserino{" +
+                "idTessera=" + idTessera +
+                ", numeroMatricola=" + numeroMatricola +
+                ", donatoreUtenteCodiceFiscale='" + donatoreUtenteCodiceFiscale + '\'' +
+                ", dataRilascio=" + dataRilascio +
+                ", gruppoSanguigno='" + gruppoSanguigno + '\'' +
+                ", rh='" + rh + '\'' +
+                ", imgSource='" + imgSource + '\'' +
+                ", listaDonazioni=" + listaDonazioni +
+                '}';
+    }
 }

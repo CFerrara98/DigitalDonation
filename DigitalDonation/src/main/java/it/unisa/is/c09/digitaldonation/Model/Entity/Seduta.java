@@ -30,14 +30,14 @@ public class Seduta {
     @ManyToMany
     @JoinTable(
             name = "Seduta_Guest",
-            joinColumns = @JoinColumn(name = "codiceFiscaleGuest"),
-            inverseJoinColumns = @JoinColumn(name = "idSeduta")
+            joinColumns = @JoinColumn(name = "codice_fiscale_guest"),
+            inverseJoinColumns = @JoinColumn(name = "id_seduta")
     )
     private List<Guest> listaGuest;
     @ManyToMany @JoinTable(
             name = "Seduta_Donatore",
-            joinColumns = @JoinColumn(name = "codiceFiscaleUtente"),
-            inverseJoinColumns = @JoinColumn(name = "idSeduta")
+            joinColumns = @JoinColumn(name = "codice_fiscale_utente"),
+            inverseJoinColumns = @JoinColumn(name = "id_seduta")
     )
     private List<Donatore> listaDonatore;
 
@@ -288,7 +288,23 @@ public class Seduta {
     public static final String PROVINCIA_REGEX = "^[A-Z]{2,2}+$";
     public static final String DATA_INIZIO_PARTECIPAZIONE_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][2]{1}\\d{3}$";
     public static final String DATA_FINE_PARTECIPAZIONE_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][2]{1}\\d{3}$";
-    public static final String NUMERO_PARTECIPANTI_REGEX = "^(?:[1-9][0-9]{3}|[1-9][0-9]{2}|[1-9][0-9]|[1-9])$";
+    public static final String NUMERO_PARTECIPANTI_REGEX = "^(?:[0-9][0-9]{3}|[0-9][0-9]{2}|[1-9][1-9]|[0-9])$";
 
 
+    @Override
+    public String toString() {
+        return "Seduta{" +
+                "idSeduta=" + idSeduta +
+                ", date=" + date +
+                ", luogo='" + luogo + '\'' +
+                ", oraInizio=" + oraInizio +
+                ", oraFine=" + oraFine +
+                ", numeroPartecipanti=" + numeroPartecipanti +
+                ", dataInizioPrenotazione=" + dataInizioPrenotazione +
+                ", dataFinePrenotazione=" + dataFinePrenotazione +
+                ", sedeLocale=" + sedeLocale +
+                ", listaGuest=" + listaGuest +
+                ", listaDonatore=" + listaDonatore +
+                '}';
+    }
 }
