@@ -1,9 +1,9 @@
 package it.unisa.is.c09.digitaldonation.UtenteManagement;
 
-import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.PasswordNonValidaException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.AccessNotAuthorizedException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.UserNotLoggedException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -66,11 +66,11 @@ public class UtenteServiceUT {
     @Test
     public void controllaUtenteMailVuota() {
 
-        String messaggio = "Il campo mail non può essere nullo";
+        String messaggio = "L'email non può essere nulla.";
 
         try {
-            utenteService.login(null, "Mattiaspere.123");
-        } catch (PasswordNonValidaException e) {
+            utenteService.login(null, "Mattiasapere.123");
+        } catch (UserNotLoggedException e) {
             assertEquals(messaggio, e.getMessage());
         }
     }
@@ -84,14 +84,48 @@ public class UtenteServiceUT {
     @Test
     public void controllaUtentePasswordVuoto() {
 
-        String messaggio = "Il campo password non può essere nullo";
+        String messaggio = "La password non è valida.";
 
         try {
-            utenteService.login("mattiasapere@gmail.com", "Password123");
-        } catch (PasswordNonValidaException e) {
+            utenteService.login("mattiasapere@gmail.com", null);
+        } catch (UserNotLoggedException e) {
             assertEquals(messaggio, e.getMessage());
         }
     }
 
+    /**
+     * Testa il caso in cui la password o l'email sono errati.
+     *
+     * @result Il test è superato se il messaggio generato dal sistema è uguale a quello
+     * previsto dall'oracolo.
+     */
+    @Test
+    public void controllaUtentePasswordMailErrati() {
 
+        String messaggio = "Email o password errati.";
+
+        try {
+            utenteService.login("mattiasapere.com", "1");
+        } catch (UserNotLoggedException e) {
+            assertEquals(messaggio, e.getMessage());
+        }
+    }
+
+    /**
+     * Testa il caso in cui il logout è errato.
+     *
+     * @result Il test è superato se il messaggio generato dal sistema è uguale a quello
+     * previsto dall'oracolo.
+     */
+    @Test
+    public void controllaLogoutErrato() {
+
+        String messaggio = "Errore durante il logout.";
+
+        try {
+            utenteService.logout(null);
+        } catch (AccessNotAuthorizedException e) {
+            assertEquals(messaggio, e.getMessage());
+        }
+    }
 }

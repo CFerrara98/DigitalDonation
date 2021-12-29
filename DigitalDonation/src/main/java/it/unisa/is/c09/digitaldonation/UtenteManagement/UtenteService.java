@@ -1,8 +1,9 @@
 package it.unisa.is.c09.digitaldonation.UtenteManagement;
 
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.AccessNotAuthorizedException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonEsistenteException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonValidaException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.PasswordNonValidaException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.UserNotLoggedException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.Model.Repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,12 @@ public class UtenteService implements UtenteServiceInterface {
      *
      * @param password Stringa che rappresenta la password dell'utente
      *
-     * @throws PasswordNonValidaException se la coppia (email, password) non è presente nel sistema
+     * @throws UserNotLoggedException se la coppia (email, password) non è presente nel sistema
      *
      * @return utente
      */
-    public Utente login(String email, String password) throws PasswordNonValidaException {
+    @Override
+    public Utente login(String email, String password) throws UserNotLoggedException {
         Utente utente;
         // Controlla se le credenziali corrispondono a quelle di uno studente e, nel
         // caso, controlla
@@ -35,15 +37,23 @@ public class UtenteService implements UtenteServiceInterface {
             AutenticazioneHolder.setUtente(email);
             return utente;
         }
-        else {
-            throw new PasswordNonValidaException("login","La password non è valida");
+        else if(password == null){
+            throw new UserNotLoggedException("login","La password non è valida.");
+        }else if(email == null){
+            throw new UserNotLoggedException("login","L'email non può essere nulla.");
+        }else {
+            throw new UserNotLoggedException("login","Email o password errati.");
         }
     }
 
     /**
      * Permette la rimozione dell'utente dalla sessione.
      */
-    public void logout(Utente utente) {
+    public void logout(Utente utente) throws AccessNotAuthorizedException {
+        if(utente == null)
+        {
+            throw new AccessNotAuthorizedException("logout","Errore durante il logout.");
+        }
         AutenticazioneHolder.setUtente(null);
     }
 

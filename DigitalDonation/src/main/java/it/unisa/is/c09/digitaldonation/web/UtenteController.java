@@ -3,7 +3,7 @@ package it.unisa.is.c09.digitaldonation.web;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Operatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.PasswordNonValidaException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.UserNotLoggedException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginFormValidate;
@@ -78,7 +78,7 @@ public class UtenteController {
 
         try {
             utente = utenteService.login(loginForm.getEmail(), loginForm.getPassword());
-        } catch (PasswordNonValidaException e) {
+        } catch (UserNotLoggedException e) {
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
             redirectAttribute.addFlashAttribute("PasswordError", e.getMessage());
             model.addAttribute("utente", utente);
