@@ -13,7 +13,7 @@ public class MailNonValidaException extends Exception {
 
     /**
      * Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
-    private static final String MESSAGGIODEFAULT = "Email non valida";
+    private static final String MESSAGGIODEFAULT = "Email o password errati, per favore riprova.";
 
     /**
      * Costruisce un'eccezione che ha come messaggio {@link #MESSAGGIODEFAULT}.

@@ -78,6 +78,8 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
      * @pre email != null
      */
     Utente findByEmail(String email);
+
+    boolean existsUtenteByEmailAndPassword(String email, String password);
 }
 
 
