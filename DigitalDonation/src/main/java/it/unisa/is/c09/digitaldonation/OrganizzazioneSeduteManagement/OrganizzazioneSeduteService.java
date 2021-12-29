@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -47,13 +49,11 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
             Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
             seduta.addPartecipante(donatore);
             sedutaRepository.save(seduta);
-        }
-        else {
+        } else {
             //Feedback negativo
             return;
         }
     }
-
     /**
      * Questo metodo permette di recuperare i dettagli della seduta
      *
@@ -72,6 +72,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         lista.addAll(seduta.getListaDonatore());
         lista.addAll(seduta.getListaGuest());
         return lista;
+
     }
 
     /**
@@ -92,7 +93,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
             throw new CannotSaveDataRepositoryException("GuestError", "il campo CF del guest non può essere null");
         }
 
-        if(sedutaRepository.existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(idSeduta, guest.getcodiceFiscaleGuest())){
+        if (sedutaRepository.existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(idSeduta, guest.getcodiceFiscaleGuest())) {
             throw new CannotSaveDataRepositoryException("SedutaError", "il guest è gia presente nella seduta");
         }
 
@@ -101,7 +102,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         sedutaRepository.save(seduta);
         return guest;
     }
-
 
 
     /**
@@ -330,12 +330,12 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     public Date validaDataSeduta(Date dataSeduta) throws SedutaFormException {
         Date date = new Date();
         if (dataSeduta == null) {
-            throw new SedutaFormException("SedutaDataError", "La data non rispetta il formato");
+            throw new SedutaFormException("SedutaDataError", "La data seduta inserita non ispetta il formato: gg/mm/aaaa");
         } else {
-            if (!dataToRegex(dataSeduta).matches(Seduta.DATA_SEDUTA_REGEX)) {
-                throw new SedutaFormException("SedutaDataError", "La data non rispetta il formato");
+            if (!(parsDateToString(dataSeduta).matches(Seduta.DATA_SEDUTA_REGEX))) {
+                throw new SedutaFormException("SedutaDataError", "La data seduta inserita non ispetta il formato: gg/mm/aaaa");
             } else if (dataSeduta.before(date)) {
-                throw new SedutaFormException("SedutaDataError", "La data è minore della data corrente ");
+                throw new SedutaFormException("SedutaDataError", "La data seduta inserita è minore della data corrente.");
             }
             return dataSeduta;
         }
@@ -354,10 +354,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaIndirizzo(String indirizzo) throws SedutaFormException {
         if (indirizzo == null) {
-            throw new SedutaFormException("SedutaIndirizzoError", "L'indirizzo non rispetta il formato");
+            throw new SedutaFormException("SedutaIndirizzoError", "L’indirizzo inserito non è corretto.");
         } else {
             if (!indirizzo.matches(Seduta.INDIRIZZO_REGEX)) {
-                throw new SedutaFormException("SedutaIndirizzoError", "L'indirizzo non rispetta il formato");
+                throw new SedutaFormException("SedutaIndirizzoError", "L’indirizzo inserito non è corretto.");
             }
             return indirizzo;
         }
@@ -376,10 +376,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaCitta(String citta) throws SedutaFormException {
         if (citta == null) {
-            throw new SedutaFormException("SedutaCittaError", "La città non rispetta il formato");
+            throw new SedutaFormException("SedutaCittaError", "La città inserita non è corretta: non ammette caratteri numeri.");
         } else {
             if (!citta.matches(Seduta.CITTA_REGEX)) {
-                throw new SedutaFormException("SedutaCittaError", "La città non rispetta il formato");
+                throw new SedutaFormException("SedutaCittaError", "La città inserita non è corretta: non ammette caratteri numeri.");
             }
             return citta;
         }
@@ -398,10 +398,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaProvincia(String provincia) throws SedutaFormException {
         if (provincia == null) {
-            throw new SedutaFormException("SedutaProvinciaError", "La provincia non rispetta il formato");
+            throw new SedutaFormException("SedutaProvinciaError", "La provincia inserita non è corretta: ammette solo due caratteri.");
         } else {
             if (!provincia.matches(Seduta.PROVINCIA_REGEX)) {
-                throw new SedutaFormException("SedutaProvinciaError", "La provincia non rispetta il formato");
+                throw new SedutaFormException("SedutaProvinciaError", "La provincia inserita non è corretta: ammette solo due caratteri.");
             }
             return provincia;
         }
@@ -420,10 +420,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaCAP(String CAP) throws SedutaFormException {
         if (CAP == null) {
-            throw new SedutaFormException("SedutaCAPError", "Il CAP non rispetta il formato");
+            throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.");
         } else {
             if (!CAP.matches(Seduta.CAP_REGEX)) {
-                throw new SedutaFormException("SedutaCAPError", "Il CAP non rispetta il formato");
+                throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.");
             }
             return CAP;
         }
@@ -441,11 +441,11 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      */
     @Override
     public int validaNumeroPartecipanti(int numeroPartecipanti) throws SedutaFormException {
-        if (numeroPartecipanti > 0) {
-            throw new SedutaFormException("SedutaPartecipantiError", "Il numero dei partecipanti non rispetta il formato");
+        if (numeroPartecipanti < 0) {
+            throw new SedutaFormException("SedutaPartecipantiError", "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999");
         } else {
-            if (!Integer.toString(numeroPartecipanti).matches(Seduta.CAP_REGEX)) {
-                throw new SedutaFormException("SedutaPartecipantiError", "Il numero dei partecipanti non rispetta il formato");
+            if (!Integer.toString(numeroPartecipanti).matches(Seduta.NUMERO_PARTECIPANTI_REGEX)) {
+                throw new SedutaFormException("SedutaPartecipantiError", "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999");
             }
             return numeroPartecipanti;
         }
@@ -455,24 +455,27 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * Controlla che la data di inizio di partecipazione ad una seduta sia specificata e che rispetti il formato
      * prestabilito.
      *
-     * @param dataInizioPrenotazioni Date che rappresenta la data dell'inizio delle prenotazioni
+     * @param seduta Seduta da cui prendere le date da verificare
      * @return dataInizioPrenotazioni Date che rappresenta la data dell'inizio delle prenotazioni
      * @throws SedutaFormException se la data non è specificata oppure se non
      *                             rispetta il formato
      *                             {@link Seduta#DATA_INIZIO_PARTECIPAZIONE_REGEX}
      */
     @Override
-    public Date validaDataInizioPrenotazioni(Date dataInizioPrenotazioni) throws SedutaFormException {
+    public Date validaDataInizioPrenotazioni(Seduta seduta) throws SedutaFormException {
         Date date = new Date();
-        if (dataInizioPrenotazioni == null) {
-            throw new SedutaFormException("SedutaDataInizioError", "la data di inizio partecipazione non rispetta il formato");
+        if (seduta.getDataInizioPrenotazione() == null) {
+            throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
         } else {
-            if (!dataToRegex(dataInizioPrenotazioni).matches(Seduta.DATA_INIZIO_PARTECIPAZIONE_REGEX)) {
-                throw new SedutaFormException("SedutaDataInizioError", "La data di inizio partecipazione non rispetta il formato");
-            } else if (dataInizioPrenotazioni.before(date)) {
-                throw new SedutaFormException("SedutaDataInizioError", "La data di inizio partecipazione è minore della data corrente");
+            if (!(parsDateToString(seduta.getDataInizioPrenotazione()).matches(Seduta.DATA_INIZIO_PARTECIPAZIONE_REGEX))) {
+                throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
+            } else if (seduta.getDataInizioPrenotazione().before(date)) {
+                throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita è minore della data corrente");
+            } else if (seduta.getDataInizioPrenotazione().after(seduta.getDate())) {
+                throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita è maggiore della data seduta.");
             }
-            return dataInizioPrenotazioni;
+
+            return seduta.getDataInizioPrenotazione();
         }
     }
 
@@ -480,35 +483,60 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * Controlla che la data di fine di partecipazione ad una seduta sia specificata e che rispetti il formato
      * prestabilito.
      *
-     * @param dataFinePrenotazioni Date che rappresenta la data di fine delle prenotazioni
+     * @param seduta Seduta da cui prendere le date da verificare
      * @return dataInizioPrenotazioni Date che rappresenta la data di fine delle prenotazioni
      * @throws SedutaFormException se la data non è specificata oppure se non
      *                             rispetta il formato
      *                             {@link Seduta#DATA_FINE_PARTECIPAZIONE_REGEX}
      */
     @Override
-    public Date validaDataFinePrenotazioni(Date dataFinePrenotazioni) throws SedutaFormException {
+    public Date validaDataFinePrenotazioni(Seduta seduta) throws SedutaFormException {
         Date date = new Date();
-        if (dataFinePrenotazioni == null) {
-            throw new SedutaFormException("SedutaDataInizioError", "la data di fine partecipazione non rispetta il formato");
+        if (seduta.getDataFinePrenotazione() == null) {
+            throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
         } else {
-            if (!dataToRegex(dataFinePrenotazioni).matches(Seduta.DATA_FINE_PARTECIPAZIONE_REGEX)) {
-                throw new SedutaFormException("SedutaDataInizioError", "La data di fine partecipazione non rispetta il formato");
-            } else if (dataFinePrenotazioni.before(date)) {
-                throw new SedutaFormException("SedutaDataInizioError", "La data di fine partecipazione è minore della data corrente");
+            if (!(parsDateToString(seduta.getDataFinePrenotazione()).matches((Seduta.DATA_FINE_PARTECIPAZIONE_REGEX)))) {
+                throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
+            } else if (seduta.getDataFinePrenotazione().before(date)) {
+                throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è minore della data corrente.");
+            } else if (seduta.getDataFinePrenotazione().after(seduta.getDate())) {
+                throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è maggiore della data seduta.");
+            } else if (seduta.getDataFinePrenotazione().before(seduta.getDataInizioPrenotazione())) {
+                throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è minore della data inizio partecipazione.");
             }
-            return dataFinePrenotazioni;
+            return seduta.getDataFinePrenotazione();
         }
     }
 
     @Override
-    public Guest salvaGuest(Guest guest){
+    public Guest salvaGuest(Guest guest) {
         guestRepository.save(guest);
         return guest;
     }
 
-    private String dataToRegex(Date data) {
-        return String.valueOf(data.getDay()) + "/" + String.valueOf(data.getMonth()) + "/" + String.valueOf(data.getYear());
+    /**
+     * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa
+     *
+     * @param date data in input
+     * @return stringa gg-mm-aaaa
+     */
+    public static String parsDateToString(Date date) {
+        SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
+        String date1 = format1.format(date);
+        return date1;
+    }
+
+    /**
+     * Metodo che fa parsing dalla stringa date gg-mm-aaaa all'oggetto Date
+     *
+     * @param date stringa di formato gg-mm-aaa
+     * @return oggetto Date
+     * @throws ParseException
+     */
+    public static Date parsStringToDate(String date) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date newDate = formatter.parse(date);
+        return newDate;
     }
 
 }

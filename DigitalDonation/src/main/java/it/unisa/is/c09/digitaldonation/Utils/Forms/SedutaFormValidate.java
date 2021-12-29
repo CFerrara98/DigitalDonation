@@ -1,5 +1,6 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
+import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.SedutaFormException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class SedutaFormValidate implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         SedutaForm sedutaForm = (SedutaForm) target;
-
+        Seduta seduta = (Seduta) target;
         //Validazione del campo dataSeduta
         try{
             organizzazioneSeduteService.validaDataSeduta(sedutaForm.getDataSeduta());
@@ -81,13 +82,13 @@ public class SedutaFormValidate implements Validator {
 
         //Validazione del campo dataInizioPrenotazione
         try{
-            organizzazioneSeduteService.validaDataInizioPrenotazioni(sedutaForm.getDataInizioPrenotazione());
+            organizzazioneSeduteService.validaDataInizioPrenotazioni(seduta);
         } catch(SedutaFormException e1) {
             errors.reject("errore", e1.getMessage());
         }
         //Validazione del campo dataFinePrenotazione
         try{
-            organizzazioneSeduteService.validaDataFinePrenotazioni(sedutaForm.getDataFinePrenotazione());
+            organizzazioneSeduteService.validaDataFinePrenotazioni(seduta);
         } catch(SedutaFormException e1) {
             errors.reject("errore", e1.getMessage());
         }
