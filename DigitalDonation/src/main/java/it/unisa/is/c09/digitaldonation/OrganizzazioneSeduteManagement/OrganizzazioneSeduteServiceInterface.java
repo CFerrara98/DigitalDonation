@@ -17,7 +17,7 @@ public interface OrganizzazioneSeduteServiceInterface {
 
     public Guest inserimentoGuest(Long idSeduta, Guest guest) throws CannotSaveDataRepositoryException;
 
-    public Seduta SchedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException;
+    public Seduta schedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException;
 
     public Seduta modificaSeduta(Seduta seduta, Long idSeduta) throws CannotUpdateDataRepositoryException;
 

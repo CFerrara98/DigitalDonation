@@ -1,5 +1,6 @@
 package it.unisa.is.c09.digitaldonation.web;
 
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.AccessNotAuthorizedException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Operatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
@@ -7,10 +8,7 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.User
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginFormValidate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,10 +25,8 @@ import javax.servlet.http.HttpSession;
 public class UtenteController {
     @Autowired
     UtenteService utenteService;
-
     @Autowired
     LoginFormValidate loginFormValidator;
-
 
     /**
      * Metodo per la visualizzazione dell'homepage o della dashboard
@@ -51,8 +45,8 @@ public class UtenteController {
             } else if (utente instanceof Donatore) {
                 return "GUIGestioneUtente/dashboardDonatore";
             }
-            }
-            return "GUIGestioneUtente/homepage";
+        }
+        return "GUIGestioneUtente/homepage";
     }
 
     /**
@@ -81,20 +75,18 @@ public class UtenteController {
         } catch (UserNotLoggedException e) {
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
             redirectAttribute.addFlashAttribute("PasswordError", e.getMessage());
-            model.addAttribute("utente", utente);
             return "GUIGestioneUtente/login";
         }
         //Se è un operatore
         if (utente instanceof Operatore) {
-            request.getSession().setAttribute("email", utente.getEmail());
+            model.addAttribute("utente", utente);
             return "GUIGestioneUtente/dashboardOperatore";
 
         }
         //Se è un donatore
         else if (utente instanceof Donatore) {
-            request.getSession().setAttribute("email", utente.getEmail());
+            model.addAttribute("utente", utente);
             return "GUIGestioneUtente/dashboardDonatore";
-
         }
         else
         {
@@ -108,9 +100,13 @@ public class UtenteController {
      * @return String che ridireziona ad una pagina.
      */
     @RequestMapping(value = "/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request, Model model){
         Utente utente = utenteService.getUtenteAutenticato();
-        utenteService.logout(utente);
+        try {
+            utenteService.logout(utente);
+        } catch (AccessNotAuthorizedException e) {
+            return "GUIGestioneUtente/homepage";
+        }
         request.getSession().invalidate();
         return "GUIGestioneUtente/homepage";
     }

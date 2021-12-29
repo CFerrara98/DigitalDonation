@@ -17,7 +17,7 @@ public class Seduta {
     @Id
     @GeneratedValue
     private Long idSeduta;
-    private Date date;
+    private Date dataSeduta;
     private String luogo;
     private Time oraInizio;
     private Time oraFine;
@@ -93,7 +93,7 @@ public class Seduta {
                      List<Donatore> listaDonatore) {
 
         this.idSeduta = idSeduta;
-        this.date = date;
+        this.dataSeduta = date;
         this.luogo = luogo;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
@@ -106,14 +106,23 @@ public class Seduta {
     }
 
     /**
-     * Metodo che trasforma i parametri in un unico luogo
+     * Metodo che trasforma i parametri in un unico luogo.
      * @param indirizzo è l'indirizzo della seduta.
      * @param citta è la citta della seduta.
      * @param CAP è il CAP della seduta.
      * @param provincia è la provincia della seduta.
      */
-    public void parseLuogo(String indirizzo, String citta, String CAP, String provincia){
-        setLuogo(indirizzo+"*"+citta+"*"+CAP+"*"+provincia);
+    public static String parseToLuogo(String indirizzo, String citta, String CAP, String provincia){
+        return indirizzo+"&"+citta+"&"+CAP+"&"+provincia;
+    }
+
+    /**
+     * Metodo che trasforma il luogo in più parametri: indirizzo, citta, CAP, provincia.
+     * @param luogo è il luogo della seduta.
+     * @return String[] indirizzo, citta, CAP, provincia.
+     */
+    public static String[] parseFromLuogo(String luogo){
+        return luogo.split("&");
     }
 
     /**
@@ -136,16 +145,16 @@ public class Seduta {
      * Metodo che ritorna la data della seduta di donazione.
      * @return date data di quando la seduta di donazione si svolgerà.
      */
-    public Date getDate() {
-        return date;
+    public Date getDataSeduta() {
+        return dataSeduta;
     }
 
     /**
      * Metodo che setta il codice identificativo della seduta.
-     * @param date data di quando la seduta di donazione si svolgerà.
+     * @param data data di quando la seduta di donazione si svolgerà.
      */
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDataSeduta(Date data) {
+        this.dataSeduta = data;
     }
 
     /**
@@ -306,7 +315,7 @@ public class Seduta {
     public String toString() {
         return "Seduta{" +
                 "idSeduta=" + idSeduta +
-                ", date=" + date +
+                ", date=" + dataSeduta +
                 ", luogo='" + luogo + '\'' +
                 ", oraInizio=" + oraInizio +
                 ", oraFine=" + oraFine +

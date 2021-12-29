@@ -30,7 +30,7 @@ package it.unisa.is.c09.digitaldonation.UtenteManagement;
          * Permette di ottenere l'email dell'utente autenticato nel sistema.
          *
          * @return La stringa che rappresenta l'email dell'utente autenticato nel
-         *         sistema, <b>null</b> se non vi è alcun utente in sessione
+         *         sistema, null se non vi è alcun utente in sessione
          */
         static String getUtente() {
             return utenteThreadLocal.get();

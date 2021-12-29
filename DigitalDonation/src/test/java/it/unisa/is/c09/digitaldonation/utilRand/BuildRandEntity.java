@@ -2,11 +2,9 @@ package it.unisa.is.c09.digitaldonation.utilRand;
 
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 
-import javax.persistence.*;
 import java.sql.Time;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Random;
 
 import static it.unisa.is.c09.digitaldonation.utilRand.RandChoiser.*;
@@ -90,7 +88,7 @@ public class BuildRandEntity {
         }
         Seduta seduta = new Seduta();
         seduta.setIdSeduta(idSeduta);
-        seduta.setDate(date);
+        seduta.setDataSeduta(date);
         seduta.setLuogo(luogo);
         seduta.setOraInizio(oraInizio);
         seduta.setOraFine(oraFine);

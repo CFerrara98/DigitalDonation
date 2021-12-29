@@ -112,7 +112,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Seduta SchedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException {
+    public Seduta schedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException {
         if (seduta.getIdSeduta() == null) {
             throw new CannotSaveDataRepositoryException("sedutaError", "Il campo id della seduta non può essere null.");
         }
@@ -458,7 +458,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
                 throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
             } else if (seduta.getDataInizioPrenotazione().before(date)) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita è minore della data corrente");
-            } else if (seduta.getDataInizioPrenotazione().after(seduta.getDate())) {
+            } else if (seduta.getDataInizioPrenotazione().after(seduta.getDataSeduta())) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita è maggiore della data seduta.");
             }
 
@@ -485,7 +485,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
                 throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
             } else if (seduta.getDataFinePrenotazione().before(date)) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è minore della data corrente.");
-            } else if (seduta.getDataFinePrenotazione().after(seduta.getDate())) {
+            } else if (seduta.getDataFinePrenotazione().after(seduta.getDataSeduta())) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è maggiore della data seduta.");
             } else if (seduta.getDataFinePrenotazione().before(seduta.getDataInizioPrenotazione())) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è minore della data inizio partecipazione.");
@@ -524,4 +524,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         return newDate;
     }
 
+    public List<Seduta> getListaSedutePrenotabili(){
+        return sedutaRepository.findSedutePrenotabiliNoList();
+    }
 }

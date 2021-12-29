@@ -3,7 +3,10 @@ package it.unisa.is.c09.digitaldonation.Model.Repository;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 import org.springframework.data.geo.GeoResult;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  *
@@ -52,8 +55,13 @@ public interface SedutaRepository extends JpaRepository<Seduta, Long> {
      */
     void deleteSedutaByIdSeduta(Long idSeduta);
 
+    /**
+     * Restituisce la lista delle sedute prenotabili senza la lista di donatori e guest.
+     * @return List<Seduta> ritorna una lista di sedute.
+     */
+    @Query(value = "SELECT idSeduta, data_fine_prenotazione, data_inizio_prenotazione, dataSeduta, luogo, numero_partecipanti, sede_locale_codice_identificativo from seduta where dataSeduta > current_date", nativeQuery = true)
+    List<Seduta> findSedutePrenotabiliNoList();
+
     boolean existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(Long idSeduta, String codiceFiscaleGuest);
     boolean existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(Long idSeduta, String codiceFiscaleUtente);
-
-
 }
