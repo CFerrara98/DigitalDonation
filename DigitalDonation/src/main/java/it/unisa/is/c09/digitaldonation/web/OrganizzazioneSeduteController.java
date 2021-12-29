@@ -88,7 +88,7 @@ public class OrganizzazioneSeduteController {
 
     }
 
-   /* @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
+    @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
     public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, BindingResult result){
         Utente utente = utenteService.getUtenteAutenticato();
         sedutaFormValidate.validate(sedutaForm, result);
@@ -102,17 +102,17 @@ public class OrganizzazioneSeduteController {
             seduta.setDate(sedutaForm.getDataSeduta());
             seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
             seduta.setNumeroPartecipanti(0);
+            return "";
 
-
-            try {
-                //organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
+           /* try {
+                organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
                 return "ElencoSedute";
             } catch (CannotSaveDataRepositoryException e) {
                 return "ErrorePagina";
-            }
+            }*/
         }
         else
             return "ErrorePagina";
 
-    }*/
+    }
 }

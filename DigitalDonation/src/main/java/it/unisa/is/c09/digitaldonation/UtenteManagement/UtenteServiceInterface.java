@@ -10,10 +10,4 @@ public interface UtenteServiceInterface {
     public Utente login(String email, String password) throws PasswordNonValidaException;
 
     public void logout(Utente utente);
-
-    public void setUtenteAutenticato(String email);
-
-    public Utente getUtenteAutenticato();
-
-    public String validaMail(String email) throws MailNonValidaException, MailNonEsistenteException;
 }

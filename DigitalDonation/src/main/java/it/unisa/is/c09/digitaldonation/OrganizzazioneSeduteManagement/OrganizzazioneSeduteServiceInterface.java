@@ -26,35 +26,4 @@ public interface OrganizzazioneSeduteServiceInterface {
     public Seduta visualizzaSeduta(Long idSeduta) throws CannotLoadDataRepositoryException;
 
     public List<Seduta> visualizzaElencoSedute() throws CannotLoadDataRepositoryException;
-
-    public String validaNome(String nome) throws GuestFormException;
-
-    public String validaCognome(String cognome) throws GuestFormException;
-
-    public String validaTelefono(String telefono) throws GuestFormException;
-
-    public String validaCodiceFiscaleGuest(String codiceFiscale) throws GuestFormException;
-
-    public String validaPatologie(String patologie) throws GuestFormException;
-
-    public String validaGruppoSanguigno(String gruppoSanguigno) throws GuestFormException;
-
-    public Date validaDataSeduta(Date dataSeduta) throws SedutaFormException;
-
-    public String validaIndirizzo(String indirizzo) throws SedutaFormException;
-
-    public String validaCitta(String citta) throws SedutaFormException;
-
-    public String validaProvincia(String provincia) throws SedutaFormException;
-
-    public String validaCAP(String CAP) throws SedutaFormException;
-
-    public int validaNumeroPartecipanti(int numeroPartecipanti) throws SedutaFormException;
-
-    public Date validaDataInizioPrenotazioni(Seduta seduta) throws SedutaFormException;
-
-    public Date validaDataFinePrenotazioni(Seduta seduta) throws SedutaFormException;
-
-    public Guest salvaGuest(Guest guest);
-
 }

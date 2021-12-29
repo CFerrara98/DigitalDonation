@@ -192,7 +192,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @throws GuestFormException se il nome non è specificato oppure se non
      *                            rispetta il formato {@link Guest#NOME_COGNOME_REGEX}
      */
-    @Override
     public String validaNome(String nome) throws GuestFormException {
         if (nome == null) {
             throw new GuestFormException("GuestNomeError", "Il formato del nome è errato: bisogna inserire solo caratteri alfabetici.");
@@ -214,7 +213,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @throws GuestFormException se il cognome non è specificato oppure se non
      *                            rispetta il formato {@link Guest#NOME_COGNOME_REGEX}
      */
-    @Override
     public String validaCognome(String cognome) throws GuestFormException {
         if (cognome == null) {
             throw new GuestFormException("GuestCognomeError", "Il formato del cognome è errato: bisogna inserire solo caratteri alfabetici.");
@@ -236,7 +234,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @throws GuestFormException se il telefono non è specificato oppure se non
      *                            rispetta il formato {@link Guest#NUMERO_TELEFONO}
      */
-    @Override
     public String validaTelefono(String telefono) throws GuestFormException {
         if (telefono == null) {
             throw new GuestFormException("GuestTelefonoError", "Il formato del numero di telefono è errato: bisogna inserire solo caratteri numerici e simboli.");
@@ -259,7 +256,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @throws GuestFormException se il codice fiscale non è specificato oppure se non
      *                            rispetta il formato {@link Guest#CF_REGEX}
      */
-    @Override
     public String validaCodiceFiscaleGuest(String codiceFiscale) throws GuestFormException {
         if (codiceFiscale == null) {
             throw new GuestFormException("GuestCodiceFiscaleError", "Il formato del codice fiscale è errato: bisogna inserire solo caratteri alfanumerici.");
@@ -281,7 +277,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @throws GuestFormException se le patologie non sono specificate oppure se non
      *                            rispettano il formato {@link Guest#REG_PATOLOGIE}
      */
-    @Override
     public String validaPatologie(String patologie) throws GuestFormException {
         if (patologie == null) {
             throw new GuestFormException("GuestPatologieError", "Il formato delle patologie è errato: bisogna inserire solo caratteri alfanumerici e simboli composti da almeno 2 caratteri.");
@@ -303,7 +298,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @throws GuestFormException se il gruppo sanguigno non è specificate oppure se non
      *                            rispetta il formato {@link Guest#REG_GRUPPOSANGUIGNO}
      */
-    @Override
     public String validaGruppoSanguigno(String gruppoSanguigno) throws GuestFormException {
         if (gruppoSanguigno == null) {
             throw new GuestFormException("GuestGruppoSanguignoError", "Il formato del gruppo sanguigno è errato, è possibile inserire solo le seguenti combinazioni: 0-, 0+, A-, A+, B-, B+, AB-, AB+");
@@ -326,7 +320,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *                             rispetta il formato
      *                             {@link Seduta#DATA_SEDUTA_REGEX}
      */
-    @Override
     public Date validaDataSeduta(Date dataSeduta) throws SedutaFormException {
         Date date = new Date();
         if (dataSeduta == null) {
@@ -351,7 +344,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *                             rispetta il formato
      *                             {@link Seduta#DATA_SEDUTA_REGEX}
      */
-    @Override
     public String validaIndirizzo(String indirizzo) throws SedutaFormException {
         if (indirizzo == null) {
             throw new SedutaFormException("SedutaIndirizzoError", "L’indirizzo inserito non è corretto.");
@@ -373,7 +365,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *                             rispetta il formato
      *                             {@link Seduta#CITTA_REGEX}
      */
-    @Override
     public String validaCitta(String citta) throws SedutaFormException {
         if (citta == null) {
             throw new SedutaFormException("SedutaCittaError", "La città inserita non è corretta: non ammette caratteri numeri.");
@@ -395,7 +386,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *                             rispetta il formato
      *                             {@link Seduta#PROVINCIA_REGEX}
      */
-    @Override
     public String validaProvincia(String provincia) throws SedutaFormException {
         if (provincia == null) {
             throw new SedutaFormException("SedutaProvinciaError", "La provincia inserita non è corretta: ammette solo due caratteri.");
@@ -417,7 +407,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *                             rispetta il formato
      *                             {@link Seduta#CAP_REGEX}
      */
-    @Override
     public String validaCAP(String CAP) throws SedutaFormException {
         if (CAP == null) {
             throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.");
@@ -439,7 +428,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *                             rispetta il formato
      *                             {@link Seduta#NUMERO_PARTECIPANTI_REGEX}
      */
-    @Override
     public int validaNumeroPartecipanti(int numeroPartecipanti) throws SedutaFormException {
         if (numeroPartecipanti < 0) {
             throw new SedutaFormException("SedutaPartecipantiError", "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999");
@@ -461,7 +449,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *                             rispetta il formato
      *                             {@link Seduta#DATA_INIZIO_PARTECIPAZIONE_REGEX}
      */
-    @Override
     public Date validaDataInizioPrenotazioni(Seduta seduta) throws SedutaFormException {
         Date date = new Date();
         if (seduta.getDataInizioPrenotazione() == null) {
@@ -489,7 +476,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *                             rispetta il formato
      *                             {@link Seduta#DATA_FINE_PARTECIPAZIONE_REGEX}
      */
-    @Override
     public Date validaDataFinePrenotazioni(Seduta seduta) throws SedutaFormException {
         Date date = new Date();
         if (seduta.getDataFinePrenotazione() == null) {
@@ -508,7 +494,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         }
     }
 
-    @Override
     public Guest salvaGuest(Guest guest) {
         guestRepository.save(guest);
         return guest;

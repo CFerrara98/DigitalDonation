@@ -41,6 +41,5 @@ import org.springframework.stereotype.Repository;
          *
          * @pre email != null
          */
-        @Query("select s from SedeLocale s")
-        SedeLocale findByEmail(String email);
+        //SedeLocale findByEmail(String email);
 }

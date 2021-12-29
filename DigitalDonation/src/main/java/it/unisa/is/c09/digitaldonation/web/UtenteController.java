@@ -27,9 +27,6 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class UtenteController {
-
-    private Logger logger = LoggerFactory.getLogger(UtenteController.class);
-
     @Autowired
     UtenteService utenteService;
 
@@ -40,31 +37,32 @@ public class UtenteController {
     /**
      * Metodo per la visualizzazione dell'homepage o della dashboard
      *
-     * @param model
-     * @param session
-     * @return String stringa che rappresenta la pagina da visualizzare
+     * @param model è l'oggetto Model.
+     * @param session è la sessione dell'utente.
+     * @return String stringa che rappresenta la pagina da visualizzare.
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String visualizzaHome(HttpSession session, Model model) {
         Utente utente = utenteService.getUtenteAutenticato();
 
-        /*if (session.getAttribute("email") != null && utente != null) {
+        if (session.getAttribute("email") != null && utente != null) {
             if (utente instanceof Operatore) {
-                return "operatoreDashboard";
-            } else if (utente instanceof Volontario) {
-                return "volontarioDashboard";
+                return "GUIGestioneUtente/dashboardOperatore";
+            } else if (utente instanceof Donatore) {
+                return "GUIGestioneUtente/dashboardDonatore";
             }
-            }*/
+            }
             return "GUIGestioneUtente/homepage";
     }
 
-
     /**
-     * Metodo per effettuare il login
-     *
-     * @param request
-     * @param loginForm
-     * @return String stringa che rapprestenta la pagina da visualizzare
+     * Questo metodo permette di effettuare il login ad un utente registrate.
+     * @param request è la richiesta inviata dall'utente.
+     * @param loginForm è il form compilato dall'utente.
+     * @param result sono i campi del form.
+     * @param redirectAttribute è un attributo che permette di cambiare pagina.
+     * @param model è l'oggetto Model.
+     * @return String che ridireziona ad una pagina.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request, @ModelAttribute LoginForm loginForm,
@@ -75,44 +73,50 @@ public class UtenteController {
         if (result.hasErrors()) {
             // se ci sono errori il metodo controller setta tutti i parametri
             redirectAttribute.addFlashAttribute("EmailError", "Email o password non valide");
-            return "redirect:/loginPage";
+            return "GUIGestioneUtente/login";
         }
 
         try {
             utente = utenteService.login(loginForm.getEmail(), loginForm.getPassword());
         } catch (PasswordNonValidaException e) {
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
-            redirectAttribute.addFlashAttribute("PasswordError", "La password inserita non e' valida");
+            redirectAttribute.addFlashAttribute("PasswordError", e.getMessage());
             model.addAttribute("utente", utente);
-            return "redirect:/loginPage";
+            return "GUIGestioneUtente/login";
         }
         //Se è un operatore
         if (utente instanceof Operatore) {
             request.getSession().setAttribute("email", utente.getEmail());
-            logger.info("Operatore loggato");
             return "GUIGestioneUtente/dashboardOperatore";
 
         }
         //Se è un donatore
         else if (utente instanceof Donatore) {
             request.getSession().setAttribute("email", utente.getEmail());
-
-            logger.info("Donatore loggato");
             return "GUIGestioneUtente/dashboardDonatore";
 
         }
         else
         {
-            return "redirect:/";
+            return "GUIGestioneUtente/login";
         }
+    }
 
+    /**
+     * Metodo che permette ad un utente di effettuare il logout
+     * @param request è la richiesta inviata dall'utente.
+     * @return String che ridireziona ad una pagina.
+     */
+    @RequestMapping(value = "/logout")
+    public String logout(HttpServletRequest request){
+        Utente utente = utenteService.getUtenteAutenticato();
+        utenteService.logout(utente);
+        request.getSession().invalidate();
+        return "GUIGestioneUtente/homepage";
     }
 
     @RequestMapping("/goLogin")
     public String contactinfo() {
         return "GUIGestioneUtente/login";
     }
-
-
-
 }
