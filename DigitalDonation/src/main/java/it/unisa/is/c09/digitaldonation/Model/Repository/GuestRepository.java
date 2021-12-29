@@ -3,6 +3,7 @@ package it.unisa.is.c09.digitaldonation.Model.Repository;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -41,7 +42,13 @@ public interface GuestRepository extends JpaRepository<Guest, String> {
      */
     Utente findByCodiceFiscaleGuest(String CodiceFiscaleGuest);
 
-    boolean exists(String CodiceFiscaleGuest);
+    @Query("select (count(g) > 0) from Guest g where g.codiceFiscaleGuest = ?1")
+    boolean existGuest(String codiceFiscaleGuest);
+
+
+
+
+
 
 
 

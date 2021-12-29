@@ -30,14 +30,14 @@ public class Seduta {
     @ManyToMany
     @JoinTable(
             name = "Seduta_Guest",
-            joinColumns = @JoinColumn(name = "codice_fiscale_guest"),
-            inverseJoinColumns = @JoinColumn(name = "id_seduta")
+            joinColumns = @JoinColumn(name = "codiceFiscaleGuest"),
+            inverseJoinColumns = @JoinColumn(name = "idSeduta")
     )
     private List<Guest> listaGuest;
     @ManyToMany @JoinTable(
             name = "Seduta_Donatore",
-            joinColumns = @JoinColumn(name = "codice_fiscale_utente"),
-            inverseJoinColumns = @JoinColumn(name = "id_seduta")
+            joinColumns = @JoinColumn(name = "codiceFiscaleUtente"),
+            inverseJoinColumns = @JoinColumn(name = "idSeduta")
     )
     private List<Donatore> listaDonatore;
 

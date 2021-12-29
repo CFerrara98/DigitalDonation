@@ -62,7 +62,6 @@ public class UtenteController {
     public String login(HttpServletRequest request, @ModelAttribute LoginForm loginForm,
                         BindingResult result, RedirectAttributes redirectAttribute, Model model) {
 
-
         Utente utente = null;
         loginFormValidator.validate(loginForm, result);
         if (result.hasErrors()) {
@@ -82,12 +81,12 @@ public class UtenteController {
         //Se è un operatore
         if (utente instanceof Operatore) {
             request.getSession().setAttribute("email", utente.getEmail());
-            return "GUIGestioneUtente/operatoreDashboard";
+            return "GUIGestioneUtente/dashboardOperatore";
         }
         //Se è un donatore
         else if (utente instanceof Donatore) {
             request.getSession().setAttribute("email", utente.getEmail());
-            return "GUIGestioneUtente/donatoreDashboard";
+            return "GUIGestioneUtente/dashboardDonatore";
         }
         else
         {
