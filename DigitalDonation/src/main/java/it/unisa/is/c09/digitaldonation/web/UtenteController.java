@@ -67,7 +67,7 @@ public class UtenteController {
         loginFormValidator.validate(loginForm, result);
         if (result.hasErrors()) {
             // se ci sono errori il metodo controller setta tutti i parametri
-            redirectAttribute.addFlashAttribute("EmailError", result.getGlobalError().getDefaultMessage());
+            redirectAttribute.addFlashAttribute("EmailError", "Email non valida");
             return "redirect:/loginPage";
         }
 

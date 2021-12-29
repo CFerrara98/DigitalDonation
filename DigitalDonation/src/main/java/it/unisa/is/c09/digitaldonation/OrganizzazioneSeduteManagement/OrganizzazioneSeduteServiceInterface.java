@@ -5,6 +5,7 @@ import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface OrganizzazioneSeduteServiceInterface {
 
     public void feedbackDonatore(Donatore donatore, boolean feedback,Long idSeduta) throws CannotRelaseFeedbackException;
 
-    public Seduta monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException;
+    public ArrayList<Object> monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException;
 
     public Guest inserimentoGuest(Long idSeduta, Guest guest) throws CannotSaveDataRepositoryException;
 
