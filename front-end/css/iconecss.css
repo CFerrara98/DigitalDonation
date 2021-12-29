@@ -1,0 +1,42 @@
+.icone{
+    font-size:50px;
+
+  }
+  
+  /* On screens that are 992px or less, set the background color to blue */
+  @media screen and (max-width: 992px) {
+    .icone {
+      font-size:30px;
+    }
+  }
+  
+  /* On screens that are 600px or less, set the background color to olive */
+  @media screen and (max-width: 600px) {
+    .icone {
+        font-size:20px;
+  }
+
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto
+  }
+
+  
+  /* On screens that are 992px or less, set the background color to blue */
+  @media screen and (max-width: 992px) {
+    .table-container {
+        width: 100%;
+        overflow-x: scroll
+    }
+  }
+  
+  /* On screens that are 600px or less, set the background color to olive */
+  @media screen and (max-width: 600px) {
+    .table-container {
+        width: 100%;
+    overflow-x: scroll
+
+    }
+}

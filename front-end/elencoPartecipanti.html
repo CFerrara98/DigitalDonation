@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> Monitoraggio sedute</title>
+    <title> Elenco partecipanti</title>
+   
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -69,7 +70,7 @@
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                          Logout
-                                    </a>
+                                     </a>
                                  </div>
                         </li>
 
@@ -82,87 +83,84 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <div class="card-body">
-
                             <!-- indietro -->
-                            <a href="dashboardOperatore.html" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a> 
+                            <a href="monitoraggioSedute.html" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a> 
 
                             <!-- titolo -->
-                            <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Monitoraggio Sedute</h1> 
-                            
+                            <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Elenco partecipanti</h1>
+                           
                         </div>
                     </div>  
                          <!-- Sezione Elenco monitoraggi -->
 
-                    
                          <div class="card shadow mb-4 ">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Elenco sedute da svolgersi:</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Elenco partecipanti alla seduta del %data% presso %luogo%:</h6>
                             </div>
                             <h6>&nbsp;</h6>
                             <!-- seduta 1 -->
                             <div class="card shadow mb-4">
                                 <div class=" m-0 card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary h6">Seduta 1:</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary h6"> %nome% %cognome%</h6>
                                 </div>
                                 <div class="card-body">
-
-                                    <!-- Tabella -->
-
+                                    <!-- tabella -->
                                     <div class="table-container">
                                         <table class="table  ">
                                             <thead>
                                               <tr>
                                                 <th scope="col"></th>
-                                                <th scope="col">Elenco partecipanti</th>
-                                                <th scope="col">Modifica seduta</th>
-                                                <th scope="col">Elimina seduta</th>
+                                                <th scope="col">Indisponibilità</th>
+                                                <th scope="col">Conferma donazione</th>
                                               </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <th>
-                                                        <h4 class="small font-weight-bold">Data: %data%</h4>  
-                                                        <h4 class="small font-weight-bold">Luogo:%luogo%</h4>
+                                                        <h4 class="small font-weight-bold ">Telefono: %telefono%     </h4> 
+                                                        <h4 class="small font-weight-bold ">Codice Fiscale:%CF%</h4>
+                                                        <h4 class="small font-weight-bold ">Gruppo sanguigno:%gruppo%</h4>
                                                     </th>
-                                                    
+                                                    <!-- Bottom indisponibilità seduta -->
                                                     <th scope="row">
-                                                         <!-- Bottom Elenco partecipanti -->
                                                         <span  class="float-center col-xl-1 col-md-6 mb-2">
-                                                            <a href="elencoPartecipanti.html" role="button">
-                                                                <i class="fas fa-user icone"></i>
-                                                            </a>                             
-                                                        </span>
-                                                    </th>
-                                                   
-                                                    <!-- Bottom modifica seduta -->
+                                                        <a href=".html" role="button"> <i class="far fa-times-circle icone"></i></a>                                      
+                                                    </span></th>
+                                                    <!-- Bottom conferma donazione partecipanti -->
                                                     <td>
                                                         <span  class="float-center col-xl-1 col-md-6 mb-2">
-                                                            <a href=".html" role="button"> <i class="fas fa-cogs icone"></i></a>                                      
-                                                        </span>
-                                                    </td>
-
-                                                    <!-- Bottom Elimina seduta -->
-                                                    <td>
-                                                        <span  class="float-center col-xl-1 col-md-6 mb-2">
-                                                            <a href=".html" role="button"> <i class="fas fa-times icone"></i></a>  
+                                                                <a href=".html" role="button">
+                                                                    <i class="far fa-check-circle icone"  ></i>
+                                                                </a>                                                                
                                                         </span>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-
-                                    <!--FINE Tabella -->
-                                   
-
-                                         
-
-                                        
-
-                                       
-                                    
                                 </div>
                             </div>
+
+                              <!-- inserimento utente guest -->
+                              <div class="card shadow mb-4">
+                                <div class=" m-0 card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary h6"> Inserimento utente</h6>
+                                </div>
+                                <div class="card-body">
+                                       
+                            
+                                <!-- Bottom indisponibilità seduta -->
+                                <span  class="float-left col-xl-1 col-md-6 mb-2">
+                                    <a href="inserimentoUtenteGuest.html" role="button"> <i class="fas fa-plus icone"></i> </a>    
+                                                                     
+                                </span>
+                                <h2>
+                                     <a href="inserimentoUtenteGuest.html" role="button"> Inserimento utente Guest </a> 
+                                </h2>
+
+                                </div>
+                            </div>
+
                             </div>
                             <!-- fine elenco monitoraggio -->
                     </div>
@@ -211,5 +209,4 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
-
 </html>
