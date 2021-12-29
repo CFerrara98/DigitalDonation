@@ -191,10 +191,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaNome(String nome) throws GuestFormException {
         if (nome == null) {
-            throw new GuestFormException("GuestNomeError", "Il nome non rispetta il formato");
+            throw new GuestFormException("GuestNomeError", "Il formato del nome è errato: bisogna inserire solo caratteri alfabetici.");
         } else {
             if (!nome.matches(Guest.NOME_COGNOME_REGEX)) {
-                throw new GuestFormException("GuestNomeError", "Il nome non rispetta il formato");
+                throw new GuestFormException("GuestNomeError", "Il formato del nome è errato: bisogna inserire solo caratteri alfabetici.");
             } else {
                 return nome;
             }
@@ -213,10 +213,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaCognome(String cognome) throws GuestFormException {
         if (cognome == null) {
-            throw new GuestFormException("GuestCognomeError", "Il cognome non rispetta il formato");
+            throw new GuestFormException("GuestCognomeError", "Il formato del cognome è errato: bisogna inserire solo caratteri alfabetici.");
         } else {
             if (!cognome.matches(Guest.NOME_COGNOME_REGEX)) {
-                throw new GuestFormException("GuestCognomeError", "Il cognome non rispetta il formato");
+                throw new GuestFormException("GuestCognomeError", "Il formato del cognome è errato: bisogna inserire solo caratteri alfabetici.");
             } else {
                 return cognome;
             }
@@ -235,10 +235,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaTelefono(String telefono) throws GuestFormException {
         if (telefono == null) {
-            throw new GuestFormException("GuestTelefonoError", "Il numero di telefono non rispetta il formato");
+            throw new GuestFormException("GuestTelefonoError", "Il formato del numero di telefono è errato: bisogna inserire solo caratteri numerici e simboli.");
         } else {
             if (!telefono.matches(Guest.NUMERO_TELEFONO)) {
-                throw new GuestFormException("GuestTelefonoError", "Il numero di telefono non rispetta il formato");
+                throw new GuestFormException("GuestTelefonoError", "Il formato del numero di telefono è errato: bisogna inserire solo caratteri numerici e simboli.");
             } else {
                 return telefono;
             }
@@ -258,10 +258,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaCodiceFiscaleGuest(String codiceFiscale) throws GuestFormException {
         if (codiceFiscale == null) {
-            throw new GuestFormException("GuestCodiceFiscaleError", "Il codice fiscale non rispetta il formato");
+            throw new GuestFormException("GuestCodiceFiscaleError", "Il formato del codice fiscale è errato: bisogna inserire solo caratteri alfanumerici.");
         } else {
             if (!codiceFiscale.matches(Guest.CF_REGEX)) {
-                throw new GuestFormException("GuestCodiceFiscaleError", "Il codice fiscale non rispetta il formato");
+                throw new GuestFormException("GuestCodiceFiscaleError", "Il formato del codice fiscale è errato: bisogna inserire solo caratteri alfanumerici.");
             } else {
                 return codiceFiscale;
             }
@@ -280,10 +280,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaPatologie(String patologie) throws GuestFormException {
         if (patologie == null) {
-            throw new GuestFormException("GuestPatologieError", "La patologia non rispetta il formato");
+            throw new GuestFormException("GuestPatologieError", "Il formato delle patologie è errato: bisogna inserire solo caratteri alfanumerici e simboli composti da almeno 2 caratteri.");
         } else {
             if (!patologie.matches(Guest.REG_PATOLOGIE)) {
-                throw new GuestFormException("GuestPatologieError", "La patologia non rispetta il formato");
+                throw new GuestFormException("GuestPatologieError", "Il formato delle patologie è errato: bisogna inserire solo caratteri alfanumerici e simboli composti da almeno 2 caratteri.");
             } else {
                 return patologie;
             }
@@ -302,10 +302,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     public String validaGruppoSanguigno(String gruppoSanguigno) throws GuestFormException {
         if (gruppoSanguigno == null) {
-            throw new GuestFormException("GuestGruppoSanguignoError", "Il gruppo sanguigno non rispetta il formato");
+            throw new GuestFormException("GuestGruppoSanguignoError", "Il formato del gruppo sanguigno è errato, è possibile inserire solo le seguenti combinazioni: 0-, 0+, A-, A+, B-, B+, AB-, AB+");
         } else {
             if (!gruppoSanguigno.matches(Guest.REG_GRUPPOSANGUIGNO)) {
-                throw new GuestFormException("GuestGruppoSanguignoError", "Il gruppo sanguigno non rispetta il formato");
+                throw new GuestFormException("GuestGruppoSanguignoError", "Il formato del gruppo sanguigno è errato, è possibile inserire solo le seguenti combinazioni: 0-, 0+, A-, A+, B-, B+, AB-, AB+");
             } else {
                 return gruppoSanguigno;
             }
@@ -495,6 +495,12 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
             }
             return dataFinePrenotazioni;
         }
+    }
+
+    @Override
+    public Guest salvaGuest(Guest guest){
+        guestRepository.save(guest);
+        return guest;
     }
 
     private String dataToRegex(Date data) {

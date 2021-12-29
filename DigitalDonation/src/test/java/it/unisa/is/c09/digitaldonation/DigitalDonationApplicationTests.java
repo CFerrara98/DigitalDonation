@@ -8,6 +8,7 @@ class DigitalDonationApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("Prova");
     }
 
 }

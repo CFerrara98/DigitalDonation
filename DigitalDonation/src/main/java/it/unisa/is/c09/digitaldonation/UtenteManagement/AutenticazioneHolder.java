@@ -5,7 +5,7 @@ package it.unisa.is.c09.digitaldonation.UtenteManagement;
      * sistema. In pratica, tramite questa classe è possibile specificare l'email
      * dell'utente autenticato in maniera da renderlo visibile a livello di thread.
      *
-     * @author Mattia Sapere
+     * @author Mattia Sapere, Fabio Siepe
      */
     public class AutenticazioneHolder {
 

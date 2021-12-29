@@ -54,4 +54,6 @@ public interface OrganizzazioneSeduteServiceInterface {
 
     public Date validaDataFinePrenotazioni(Date dataFinePrenotazioni) throws SedutaFormException;
 
+    public Guest salvaGuest(Guest guest);
+
 }

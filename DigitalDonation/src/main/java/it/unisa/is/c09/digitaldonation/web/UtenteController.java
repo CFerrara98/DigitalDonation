@@ -3,7 +3,7 @@ package it.unisa.is.c09.digitaldonation.web;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Operatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
-import it.unisa.is.c09.digitaldonation.UtenteManagement.PasswordNonValidaException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.PasswordNonValidaException;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginFormValidate;

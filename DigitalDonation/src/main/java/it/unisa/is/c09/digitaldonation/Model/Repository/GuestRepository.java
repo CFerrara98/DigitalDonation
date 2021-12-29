@@ -41,7 +41,7 @@ public interface GuestRepository extends JpaRepository<Guest, String> {
      */
     Utente findByCodiceFiscaleGuest(String CodiceFiscaleGuest);
 
-
+    boolean exists(String CodiceFiscaleGuest);
 
 
 
