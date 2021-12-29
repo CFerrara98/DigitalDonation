@@ -7,7 +7,10 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.Pass
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginFormValidate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
+
 @Controller
 public class UtenteController {
+
+    private Logger logger = LoggerFactory.getLogger(UtenteController.class);
 
     @Autowired
     UtenteService utenteService;
@@ -81,12 +89,17 @@ public class UtenteController {
         //Se è un operatore
         if (utente instanceof Operatore) {
             request.getSession().setAttribute("email", utente.getEmail());
+            logger.info("Operatore loggato");
             return "GUIGestioneUtente/dashboardOperatore";
+
         }
         //Se è un donatore
         else if (utente instanceof Donatore) {
             request.getSession().setAttribute("email", utente.getEmail());
+
+            logger.info("Donatore loggato");
             return "GUIGestioneUtente/dashboardDonatore";
+
         }
         else
         {
@@ -97,7 +110,7 @@ public class UtenteController {
 
     @RequestMapping("/goLogin")
     public String contactinfo() {
-        return "GUIGestioneUtente/loginPage";
+        return "GUIGestioneUtente/login";
     }
 
 

@@ -4,9 +4,10 @@
 
 
 <link href="resources/css/product.css" rel="stylesheet" type="text/css">
-<link href="<c:url value="../../../view/css/error.css"/>" rel="stylesheet" type="text/css">
+<link href="<c:url value="../../../../resources/css/errorCss/error.css"/>" rel="stylesheet" type="text/css">
 
 <z:layout pageTitle="ErrorPage401">
+
 
 		<div>	
 			
@@ -19,11 +20,16 @@
 		<form method="get" action="Home">
 			<button  class="btn btn-success mt-2" >Go Back</button>
 		</form>
-                       
 
+	<div class="objects">
+		<img class="object_face_rocket" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="80px">
+
+		<div class="box_face">
+			<img class="object_face" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="140px">
+		</div>
             
                 
-            </div>
+	</div>
             
 
 

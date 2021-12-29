@@ -5,10 +5,8 @@
 
 <link href="resources/css/product.css" rel="stylesheet" type="text/css">
 
-<link href="<c:url value="../../../view/css/error.css"/>" rel="stylesheet" type="text/css">
+<link href="<c:url value="../../../../resources/css/errorCss/error.css"/>" rel="stylesheet" type="text/css">
 <z:layout pageTitle="ErrorPage403">
-
-
 
 		<div  >	
 			
@@ -25,14 +23,12 @@
             
             
             <div class="objects">
-                <img class="object_face_rocket" src="${pageContext.request.contextPath}/resources/images/error/triste.png" width="80px">
+                <img class="object_face_rocket" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="80px">
            
                 <div class="box_face">
-                    <img class="object_face" src="${pageContext.request.contextPath}/resources/images/error/triste.png" width="140px">
+                    <img class="object_face" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="140px">
             </div>
-            
-            
-            
+
             </div>
             
 

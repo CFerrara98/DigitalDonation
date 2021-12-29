@@ -9,7 +9,11 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link href="<c:url value="../../view/css/layout.css"/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value="../../resources/css/errorCss/layout.css"/>" rel="stylesheet" type="text/css">
+
+	<link href="resources/css/product.css" rel="stylesheet" type="text/css">
+
+	<link href="<c:url value="../../resources/css/errorCss/error.css"/>" rel="stylesheet" type="text/css">
 	<title>${pageTitle}</title>
 </head> 
 
@@ -32,7 +36,8 @@
 			<jsp:doBody />
 		</div>
 	</main>
-	
+
+
 	<script>
 	// When the user scrolls the page, execute myFunction
 	window.onscroll = function() {myFunction()};

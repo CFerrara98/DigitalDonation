@@ -49,7 +49,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Benvenuto!</h1>
                                 </div>
 
-                                <form class="user">
+                                <form class="user" method="post" action="/login" enctype="application/x-www-form-urlencoded" >
                                     <div class="form-group">
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Email:</h6>
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email">

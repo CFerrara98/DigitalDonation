@@ -5,16 +5,16 @@
 
 <link href="resources/css/product.css" rel="stylesheet" type="text/css">
 
-<link href="<c:url value="../../../view/css/error.css"/>" rel="stylesheet" type="text/css">
-<z:layout pageTitle="ErrorPage404">
+<link href="<c:url value="../../../../resources/css/errorCss/error.css"/>" rel="stylesheet" type="text/css">
+<z:layout pageTitle="ErrorPage503">
 
 
 
 		<div  >	
 			
-			<h1 class="error-code">404</h1>
-			<p class="error">Oops! Page not found</p>
-			<p class="error">Sorry, but the page you are looking for is not found.</p>
+			<h1 class="error-code">503</h1>
+			<p class="error">Service Unavailable </p>
+			<p class="error">The server is temporarily busy, try again later!</p>
 			
 		</div>
 	
@@ -25,10 +25,10 @@
             
             
             <div class="objects">
-                <img class="object_face_rocket" src="${pageContext.request.contextPath}/resources/images/error/triste.png" width="80px">
+                <img class="object_face_rocket" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="80px">
            
                 <div class="box_face">
-                    <img class="object_face" src="${pageContext.request.contextPath}/resources/images/error/triste.png" width="140px">
+                    <img class="object_face" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="140px">
             </div>
             
             
