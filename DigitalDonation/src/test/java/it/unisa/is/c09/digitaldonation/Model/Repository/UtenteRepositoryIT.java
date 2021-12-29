@@ -2,15 +2,9 @@ package it.unisa.is.c09.digitaldonation.Model.Repository;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonEsistenteException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonValidaException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.PasswordNonValidaException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.GuestFormException;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
-import it.unisa.is.c09.digitaldonation.Model.Repository.*;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
-import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.UserNotLoggedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -55,7 +49,7 @@ public class UtenteRepositoryIT {
     private String email;
     private String password;
 
-    public void validaCampi() throws MailNonValidaException, MailNonEsistenteException, PasswordNonValidaException {
+    public void validaCampi() throws MailNonValidaException, MailNonEsistenteException, UserNotLoggedException {
         utenteRepository.findByEmailAndPassword(email, password);
     }
 
@@ -75,7 +69,7 @@ public class UtenteRepositoryIT {
             assertEquals(message, exception.getMessage());
         } catch (MailNonValidaException exception) {
             assertEquals(message, exception.getMessage());
-        } catch (PasswordNonValidaException exception) {
+        } catch (UserNotLoggedException exception) {
             assertEquals(message, exception.getMessage());
         }
     }
@@ -96,7 +90,7 @@ public class UtenteRepositoryIT {
             assertEquals(message, exception.getMessage());
         } catch (MailNonValidaException exception) {
             assertEquals(message, exception.getMessage());
-        } catch (PasswordNonValidaException exception) {
+        } catch (UserNotLoggedException exception) {
             assertEquals(message, exception.getMessage());
         }
     }
@@ -116,7 +110,7 @@ public class UtenteRepositoryIT {
             e.printStackTrace();
         } catch (MailNonEsistenteException e) {
             e.printStackTrace();
-        } catch (PasswordNonValidaException e) {
+        } catch (UserNotLoggedException e) {
             e.printStackTrace();
         }
     }
