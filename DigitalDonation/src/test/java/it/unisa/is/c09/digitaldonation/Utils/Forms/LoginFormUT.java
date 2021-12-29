@@ -107,7 +107,7 @@ public class LoginFormUT {
     @Test
     public void VerificaEmailPasswordSuccesso() {
         email = "mattiasapere@gmail.com";
-        password = "Password123";
+        password = "Mattiaspere.123";
 
         try {
             validaCampi();

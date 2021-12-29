@@ -17,12 +17,11 @@ public class UtenteService implements UtenteServiceInterface {
     /**
      * Permette l'autenticazione di un utente nel sistema.
      *
-     * @param email    Stringa che rappresenta l'email dell'utente
+     * @param email Stringa che rappresenta l'email dell'utente
      *
      * @param password Stringa che rappresenta la password dell'utente
      *
-     * @throws PasswordNonValidaException se la coppia (email, password) non è
-     *                                    presente nel sistema
+     * @throws PasswordNonValidaException se la coppia (email, password) non è presente nel sistema
      *
      * @return utente
      */
