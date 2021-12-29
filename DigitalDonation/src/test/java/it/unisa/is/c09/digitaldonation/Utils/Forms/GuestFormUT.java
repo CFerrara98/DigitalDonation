@@ -58,7 +58,7 @@ public class GuestFormUT {
     private String patologie;
     private String gruppoSanguigno;
 
-    private GuestForm guestForm;
+    private Guest guest;
 
     public void validaCampi() throws GuestFormException {
         organizzazioneSeduteService.validaCodiceFiscaleGuest(codiceFiscaleGuest);
@@ -79,7 +79,7 @@ public class GuestFormUT {
         cognome = "De Martino";
         telefono = "3456789123";
         patologie = "Nessuna";
-        gruppoSanguigno = "AB";
+        gruppoSanguigno = "AB+";
 
         final String message = "Il formato del codice fiscale è errato: bisogna inserire solo caratteri alfanumerici.";
 
@@ -100,7 +100,7 @@ public class GuestFormUT {
         cognome = "De Martino";
         telefono = "3456789123";
         patologie = "Nessuna";
-        gruppoSanguigno = "AB";
+        gruppoSanguigno = "AB+";
 
         final String message = "Il formato del nome è errato: bisogna inserire solo caratteri alfabetici.";
 
@@ -121,7 +121,7 @@ public class GuestFormUT {
         cognome = "De Martino333";
         telefono = "3456789123";
         patologie = "Nessuna";
-        gruppoSanguigno = "AB";
+        gruppoSanguigno = "AB+";
 
         final String message = "Il formato del cognome è errato: bisogna inserire solo caratteri alfabetici.";
 
@@ -142,7 +142,7 @@ public class GuestFormUT {
         cognome = "De Martino";
         telefono = "AAAAAAAAAA";
         patologie = "Nessuna";
-        gruppoSanguigno = "AB";
+        gruppoSanguigno = "AB+";
 
         final String message = "Il formato del numero di telefono è errato: bisogna inserire solo caratteri numerici e simboli.";
 
@@ -163,7 +163,7 @@ public class GuestFormUT {
         cognome = "De Martino";
         telefono = "3456789123";
         patologie = ".";
-        gruppoSanguigno = "AB";
+        gruppoSanguigno = "AB+";
 
         final String message = "Il formato delle patologie è errato: bisogna inserire solo caratteri alfanumerici e simboli composti da almeno 2 caratteri.";
 
@@ -205,11 +205,11 @@ public class GuestFormUT {
         cognome = "De Martino";
         telefono = "3456789123";
         patologie = "Nessuna";
-        gruppoSanguigno = "AB";
+        gruppoSanguigno = "AB+";
 
        //when(guestRepository.exists(codiceFiscaleGuest)).thenReturn(false);
 
-       Guest guest = new Guest(codiceFiscaleGuest, nome, cognome, telefono, patologie, gruppoSanguigno);
+       guest = new Guest(codiceFiscaleGuest, nome, cognome, telefono, patologie, gruppoSanguigno);
 
         try {
             validaCampi();
