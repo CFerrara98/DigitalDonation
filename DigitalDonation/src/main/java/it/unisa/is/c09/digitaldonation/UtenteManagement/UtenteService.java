@@ -101,8 +101,7 @@ public class UtenteService implements UtenteServiceInterface {
 
     /**
      * Controlla che l'email di un utente sia specificata e che rispetti il formato
-     * prestabilito. Controlla inolte che tale email non sia già presente nel
-     * sistema.
+     * prestabilito.
      *
      * @param email Stringa che rappresenta l'email da controllare
      * @return email La stringa che rappresenta l'email da controllare validata
@@ -112,7 +111,6 @@ public class UtenteService implements UtenteServiceInterface {
      * @throws MailNonEsistenteException se l'email specificata non è presente nel
      *                                   sistema
      */
-
     @Override
     public String validaMail(String email) throws MailNonValidaException, MailNonEsistenteException {
         if (email == null) {

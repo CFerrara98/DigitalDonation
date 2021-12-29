@@ -106,6 +106,17 @@ public class Seduta {
     }
 
     /**
+     * Metodo che trasforma i parametri in un unico luogo
+     * @param indirizzo è l'indirizzo della seduta.
+     * @param citta è la citta della seduta.
+     * @param CAP è il CAP della seduta.
+     * @param provincia è la provincia della seduta.
+     */
+    public void parseLuogo(String indirizzo, String citta, String CAP, String provincia){
+        setLuogo(indirizzo+"*"+citta+"*"+CAP+"*"+provincia);
+    }
+
+    /**
      * Metodo che ritorna il codice identificativo della seduta.
      * @return codiceIdentificativo della seduta.
      */

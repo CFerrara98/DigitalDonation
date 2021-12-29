@@ -61,13 +61,17 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @return Una seduta
      */
     @Override
-    public Seduta monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException {
+    public ArrayList<Object> monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException {
 
         if (idSeduta == null) {
             throw new CannotLoadDataRepositoryException("sedutaError", "Il campo id della seduta non può essere null.");
         }
 
-        return sedutaRepository.findByIdSeduta(idSeduta);
+        Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
+        ArrayList<Object> lista = new ArrayList<Object>();
+        lista.addAll(seduta.getListaDonatore());
+        lista.addAll(seduta.getListaGuest());
+        return lista;
     }
 
     /**
