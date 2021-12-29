@@ -74,7 +74,7 @@ public class UtenteController {
         loginFormValidator.validate(loginForm, result);
         if (result.hasErrors()) {
             // se ci sono errori il metodo controller setta tutti i parametri
-            redirectAttribute.addFlashAttribute("EmailError", "Email non valida");
+            redirectAttribute.addFlashAttribute("EmailError", "Email o password non valide");
             return "redirect:/loginPage";
         }
 
@@ -82,7 +82,7 @@ public class UtenteController {
             utente = utenteService.login(loginForm.getEmail(), loginForm.getPassword());
         } catch (PasswordNonValidaException e) {
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
-            redirectAttribute.addFlashAttribute("PasswordError", e.getMessage());
+            redirectAttribute.addFlashAttribute("PasswordError", "La password inserita non e' valida");
             model.addAttribute("utente", utente);
             return "redirect:/loginPage";
         }

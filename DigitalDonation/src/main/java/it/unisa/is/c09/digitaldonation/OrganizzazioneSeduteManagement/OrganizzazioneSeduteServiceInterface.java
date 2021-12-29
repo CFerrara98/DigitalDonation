@@ -51,9 +51,9 @@ public interface OrganizzazioneSeduteServiceInterface {
 
     public int validaNumeroPartecipanti(int numeroPartecipanti) throws SedutaFormException;
 
-    public Date validaDataInizioPrenotazioni(Date dataInizioPrenotazioni) throws SedutaFormException;
+    public Date validaDataInizioPrenotazioni(Seduta seduta) throws SedutaFormException;
 
-    public Date validaDataFinePrenotazioni(Date dataFinePrenotazioni) throws SedutaFormException;
+    public Date validaDataFinePrenotazioni(Seduta seduta) throws SedutaFormException;
 
     public Guest salvaGuest(Guest guest);
 
