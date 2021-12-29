@@ -45,154 +45,143 @@
                         </div>
                     </form>
 
-                    <!-- Topbar Login/Logout in questa pagina non serve 
-                    <ul class="navbar-nav ml-auto">
-                        <div class="topbar-divider d-none d-sm-block"></div>
-                        <a class="btn btn-primary" href="login.html" role="button">Login</a>
+                    <!-- logout-->
 
-                    </ul>
-                    -->
+                    <!-- Nav Item - Utente -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <img class="img-profile rounded-circle" src="img/undraw_profile.svg" style="width:50px">
+                        </a>
+                        <!-- Dropdown - Utente -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                            <!-- Topbar Logout -->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
+                            </a>
+                        </div>
+                    </li>
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Schedulazione Sedute</h1>
-
-                    </div>
-
-                    <!-- Per dividere a blocchi-->
-                    <!-- Per inserire un intestazione -->
-                    <div class="row">
-                        <div class="container-sm" style="width:1400px">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h3 class="m-0 font-weight-bold text-primary">Compila i campi per schedulare una nuova seduta</h3>
-                                </div>
-                                <div class="card-body">
-
-
-
-                                </div>
-
-                                <form class="user">
-                                    <div class="form-group">
-
-                                        <div class="container-sm" style="width:500px">
-                                            <p style="color:#4e73df;">Inserisci la data della seduta: </p>
-                                            <input type="date" class="form-control form-control-user" id="exampleData" placeholder="Data Seduta:">
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body p-0">
+                            <!-- Nested Row within Card Body -->
+                            <div class="row justify-content-md-center">
+                                <div class="col-lg-7">
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Schedulazione seduta</h1>
+                                            <h3 class="h4 text-gray-900 mb-4">Compila i campi per schedulare una seduta</h3>
                                         </div>
+                                        <form class="user">
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <p style="color:#4e73df;">Data seduta: </p>
+                                                    <input type="date" class="form-control form-control-user" id="exampleData" placeholder="Data Seduta:">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <p style="color:#4e73df;">Numero di partecipanti: </p>
+                                                    <input type="text" class="form-control form-control-user" id="exampleNumeroPartecipanti" placeholder="es. 10">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p style="color:#4e73df;">Indirizzo della seduta: </p>
+                                                <input type="text" class="form-control form-control-user" id="exampleIndirizzo" placeholder="es. Via Giuseppe Verdi 1">
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                                    <p style="color:#4e73df;">Città: </p>
+                                                    <input type="text" class="form-control form-control-user" id="exampleCittà" placeholder="es. Salerno">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <p style="color:#4e73df;">CAP: </p>
+                                                    <input type="text" class="form-control form-control-user" id="exampleCAP" placeholder="es. 84100">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <p style="color:#4e73df;">Provincia: </p>
+                                                    <input type="text" class="form-control form-control-user" id="exampleProvincia" placeholder="es. Salerno">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <p style="color:#4e73df;">Orario di inizio: </p>
+                                                    <input type="time" class="form-control form-control-user" id="exampleOraInizioSeduta" placeholder="Orario inizio:">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <p style="color:#4e73df;">Orario di fine: </p>
+                                                    <input type="time" class="form-control form-control-user" id="exampleOraFineSeduta" placeholder="Orario fine:">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <p style="color:#4e73df;">Data di inizio prenotazione: </p>
+                                                    <input type="date" class="form-control form-control-user" id="exampleDataInizioPrenotazione" placeholder="Data inizio Prenotazione:">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <p style="color:#4e73df;">Data fine prenotazione: </p>
+                                                    <input type="date" class="form-control form-control-user" id="exampleDataFinePrenotazione" placeholder="Data fine Prenotazione:">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <a href=".html" class="btn btn-primary btn-user btn-block">
+                                                Conferma
+                                            </a>
 
-                                        <br>
+                                        </form>
 
-
-                                        <div class="container-sm" style="width:500px">
-                                            <p style="color:#4e73df;">Inserisci l'indirizzo della seduta: </p>
-                                            <input type="text" class="form-control form-control-user" id="exampleIndirizzo" placeholder="es. Via Giuseppe Verdi 1">
-                                        </div>
-
-                                        <br>
-
-
-                                        <div class="container-sm" style="width:500px">
-                                            <p style="color:#4e73df;">Inserisci la città: </p>
-                                            <input type="text" class="form-control form-control-user" id="exampleCittà" placeholder="es. Salerno">
-                                        </div>
-
-                                        <br>
-
-                                        <div class="container-sm" style="width:500px">
-                                            <p style="color:#4e73df;">Inserisci il CAP: </p>
-                                            <input type="text" class="form-control form-control-user" id="exampleCAP" placeholder="es. 84100">
-
-                                        </div>
-                                        <br>
-
-                                        <div class="container-sm" style="width:500px">
-                                            <p style="color:#4e73df;">Inserisci la provincia: </p>
-                                            <input type="text" class="form-control form-control-user" id="exampleProvincia" placeholder="es. Salerno">
-                                        </div>
-                                        <br>
-
-                                        <div class="container-sm" style="width:500px">
-                                            <p style="color:#4e73df;">Inserisci l'ora di inizio della seduta: </p>
-                                            <input type="time" class="form-control form-control-user" id="exampleOraInizioSeduta" placeholder="Orario inizio:">
-                                        </div>
-
-                                        <br>
-                                        <div class="container-sm" style="width:500px">
-                                            <p style="color:#4e73df;">Inserisci l'ora di fine della seduta: </p>
-                                            <input type="time" class="form-control form-control-user" id="exampleOraFineSeduta" placeholder="Orario fine:">
-                                        </div>
-
-                                        <br>
-                                        <div class="container-sm" style="width:500px">
-                                            <p style="color:#4e73df;">Inserisci la data di inizio della prenotazione: </p>
-                                            <input type="date" class="form-control form-control-user" id="exampleDataInizioPrenotazione" placeholder="Data inizio Prenotazione:">
-                                        </div>
-
-                                        <br>
-                                        <div class="container-sm" style="width:500px">
-                                            <p style="color:#4e73df;">Inserisci la data di fine della prenotazione: </p>
-                                            <input type="date" class="form-control form-control-user" id="exampleDataFinePrenotazione" placeholder="Data fine Prenotazione:">
-                                        </div>
-                                        <br>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="buttonForm" style="text-align: center;">
-                        <button type="button" style="border-radius: 50px; " class="btn btn-primary">Conferma</button>
-                    </div>
-                    <br>
-
+                    <!-- /.container-fluid -->
 
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Digital Donation 2021</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Digital Donation 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 
