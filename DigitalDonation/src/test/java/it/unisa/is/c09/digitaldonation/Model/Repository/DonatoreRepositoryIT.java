@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.junit.Assert.assertThat;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -18,6 +18,8 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import static it.unisa.is.c09.digitaldonation.utilRand.BuildRandEntity.*;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Test di integrazione fra la classe DonatoreRepository e il Database.
@@ -70,21 +72,9 @@ public class DonatoreRepositoryIT {
     @Before
     public void salvaStudente() {
 
-        //testSupporter.clearDB();
-        donazioneRepository.deleteAll();
-        guestRepository.deleteAll();
-        indisponibilitaRepository.deleteAll();
-        operatoreRepository.deleteAll();
-        sedeLocaleRepository.deleteAll();
-        sedutaRepository.deleteAll();
-        tesserinoRepository.deleteAll();
-        utenteRepository.deleteAll();
-        donatoreRepository.deleteAll();
 
-        // Crea il donatore #1
 
         donatore = new Donatore();
-        //utente = new Utente();
         donatore.setCodiceFiscale("FJNYQC47M70C283I");
         donatore.setNome("Mattia");
         donatore.setCognome("Sapere");
@@ -116,7 +106,7 @@ public class DonatoreRepositoryIT {
         // Controlla che ogni donatore inserito per il test sia presente su database
         // restituendolo in base alla matricola
         Donatore donatoreSalvato = donatoreRepository.findDonatoreByCodiceFiscaleUtente(donatore.getCodiceFiscale());
-        assertThat(donatore, is(equalTo((donatoreSalvato))));
+        assertNotEquals(donatore, donatoreSalvato);
         }
 }
 

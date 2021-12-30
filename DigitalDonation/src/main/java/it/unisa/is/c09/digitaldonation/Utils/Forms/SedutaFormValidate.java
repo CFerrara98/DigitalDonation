@@ -47,7 +47,9 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaDataSeduta(sedutaForm.getDataSeduta());
 
         } catch (SedutaFormException e1) {
-            errors.reject("Prova", e1.getMessage());
+            errors.reject("Data non valida.", e1.getMessage());
+            sedutaForm.setDataSeduta(null);
+            return;
         }
 
         //Validazione del campo indirizzo
@@ -55,7 +57,8 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaIndirizzo(sedutaForm.getIndirizzo());
         } catch (SedutaFormException e1) {
             errors.reject("Indirizzo non valido.", e1.getMessage());
-
+            sedutaForm.setIndirizzo(null);
+            return;
 
         }
 
@@ -64,6 +67,8 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaCitta(sedutaForm.getCitta());
         } catch (SedutaFormException e1) {
             errors.reject("Citta non valida.", e1.getMessage());
+            sedutaForm.setCitta(null);
+            return;
         }
 
         //Validazione del campo provincia
@@ -71,6 +76,8 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaProvincia(sedutaForm.getProvincia());
         } catch (SedutaFormException e1) {
             errors.reject("Provincia non valida.", e1.getMessage());
+            sedutaForm.setProvincia(null);
+            return;
         }
 
         //Validazione del campo CAP
@@ -78,6 +85,8 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaCAP(sedutaForm.getCAP());
         } catch (SedutaFormException e1) {
             errors.reject("CAP non valido.", e1.getMessage());
+            sedutaForm.setCAP(null);
+            return;
         }
 
         //Validazione del campo numeroPartecipanti
@@ -85,6 +94,8 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
         } catch (SedutaFormException e1) {
             errors.reject("Numero partecipanti non valido. cià", e1.getMessage());
+            sedutaForm.setNumeroPartecipanti(0);
+            return;
         }
 
         //Validazione del campo dataInizioPrenotazione
@@ -92,12 +103,16 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaDataInizioPrenotazioni(sedutaForm);
         } catch (SedutaFormException e1) {
             errors.reject("Errore nella data dell'inizio.", e1.getMessage());
+            sedutaForm.setDataInizioPrenotazione(null);
+            return;
         }
         //Validazione del campo dataFinePrenotazione
         try {
             organizzazioneSeduteService.validaDataFinePrenotazioni(sedutaForm);
         } catch (SedutaFormException e1) {
             errors.reject("Data di fine prenotazione non valida.", e1.getMessage());
+            sedutaForm.setDataFinePrenotazione(null);
+            return;
         }
     }
 
