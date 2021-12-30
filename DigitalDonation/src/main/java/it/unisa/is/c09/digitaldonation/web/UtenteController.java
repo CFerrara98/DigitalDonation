@@ -51,7 +51,7 @@ public class UtenteController {
                 return "GUIGestioneUtente/dashboardDonatore";
             }
         }
-        return "GUIGestioneUtente/homepage";
+        return "GUIGestioneUtente/login";
     }
 
     /**

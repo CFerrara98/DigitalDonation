@@ -5,6 +5,9 @@
   Time: 17:58
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -26,7 +29,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../resources/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
@@ -42,7 +45,7 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <img class="col-lg-6 d-none d-lg-block" src="img/logo.png" alt="...">
+                        <img class="col-lg-6 d-none d-lg-block" src=../../../../resources/img/logo-login.png alt="...">
 
                         <div class="col-lg-6">
                             <div class="p-5">
@@ -54,11 +57,28 @@
                                 <form:form action="/login" method="post" modelAttribute="loginForm" cssClass="user" enctype="application/x-www-form-urlencoded">
                                     <div class="form-group">
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Email:</h6>
-                                        <form:input path="email" type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
+
+                                        <c:choose>
+                                            <c:when test="${EmailError == null}">
+                                                <c:choose>
+                                                    <c:when test="${EmailPrecedente == null}">
+                                                        <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input type="email" value="${EmailPrecedente}" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="email" class="form-control is-invalid form-control-user" id="email" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
+                                                <span class = "myError">${EmailError}</span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
                                     </div>
                                     <div class="form-group">
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Password:</h6>
-                                        <form:input path="password" type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Inserisci la password"/>
+                                        <form:input path="password" type="password" class="form-control form-control-user" id="password" placeholder="Inserisci la password"/>
                                     </div>
                                     </div>
                                     <br>
