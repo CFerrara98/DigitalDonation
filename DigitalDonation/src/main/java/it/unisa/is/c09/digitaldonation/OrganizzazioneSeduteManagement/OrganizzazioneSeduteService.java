@@ -518,17 +518,5 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         return date1;
     }
 
-    /**
-     * Metodo che fa parsing dalla stringa date gg-mm-aaaa all'oggetto Date
-     *
-     * @param date stringa di formato gg-mm-aaa
-     * @return oggetto Date
-     * @throws ParseException
-     */
-    public static Date parsStringToDate(String date) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date newDate = formatter.parse(date);
-        return newDate;
-    }
 
 }
