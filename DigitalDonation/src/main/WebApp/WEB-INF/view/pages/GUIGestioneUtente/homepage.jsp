@@ -1,17 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: matti
-  Date: 27/12/2021
-  Time: 12:42
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<head>
+
 </head>
 <body>
-<p>Provaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-<a href="./login">Login</a>
+    <%@ include file="header.jsp" %>
+    <p>Provaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+    <a href="./login"></a>
 </body>
 </html>
