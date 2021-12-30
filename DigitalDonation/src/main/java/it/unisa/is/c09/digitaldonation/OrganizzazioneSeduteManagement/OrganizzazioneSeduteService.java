@@ -9,6 +9,7 @@ import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.GuestRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
 
+import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -443,26 +444,26 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * Controlla che la data di inizio di partecipazione ad una seduta sia specificata e che rispetti il formato
      * prestabilito.
      *
-     * @param seduta Seduta da cui prendere le date da verificare
+     * @param sedutaForm sedutaForm da cui prendere le date da verificare
      * @return dataInizioPrenotazioni Date che rappresenta la data dell'inizio delle prenotazioni
      * @throws SedutaFormException se la data non è specificata oppure se non
      *                             rispetta il formato
      *                             {@link Seduta#DATA_INIZIO_PARTECIPAZIONE_REGEX}
      */
-    public Date validaDataInizioPrenotazioni(Seduta seduta) throws SedutaFormException {
+    public Date validaDataInizioPrenotazioni(SedutaForm sedutaForm) throws SedutaFormException {
         Date date = new Date();
-        if (seduta.getDataInizioPrenotazione() == null) {
+        if (sedutaForm.getDataInizioPrenotazione() == null) {
             throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
         } else {
-            if (!(parsDateToString(seduta.getDataInizioPrenotazione()).matches(Seduta.DATA_INIZIO_PARTECIPAZIONE_REGEX))) {
+            if (!(parsDateToString(sedutaForm.getDataInizioPrenotazione()).matches(Seduta.DATA_INIZIO_PARTECIPAZIONE_REGEX))) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
-            } else if (seduta.getDataInizioPrenotazione().before(date)) {
+            } else if (sedutaForm.getDataInizioPrenotazione().before(date)) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita è minore della data corrente");
-            } else if (seduta.getDataInizioPrenotazione().after(seduta.getDataSeduta())) {
+            } else if (sedutaForm.getDataInizioPrenotazione().after(sedutaForm.getDataSeduta())) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita è maggiore della data seduta.");
             }
 
-            return seduta.getDataInizioPrenotazione();
+            return sedutaForm.getDataInizioPrenotazione();
         }
     }
 
@@ -470,27 +471,27 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * Controlla che la data di fine di partecipazione ad una seduta sia specificata e che rispetti il formato
      * prestabilito.
      *
-     * @param seduta Seduta da cui prendere le date da verificare
+     * @param sedutaForm sedutaForm da cui prendere le date da verificare
      * @return dataInizioPrenotazioni Date che rappresenta la data di fine delle prenotazioni
      * @throws SedutaFormException se la data non è specificata oppure se non
      *                             rispetta il formato
      *                             {@link Seduta#DATA_FINE_PARTECIPAZIONE_REGEX}
      */
-    public Date validaDataFinePrenotazioni(Seduta seduta) throws SedutaFormException {
+    public Date validaDataFinePrenotazioni(SedutaForm sedutaForm) throws SedutaFormException {
         Date date = new Date();
-        if (seduta.getDataFinePrenotazione() == null) {
+        if (sedutaForm.getDataFinePrenotazione() == null) {
             throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
         } else {
-            if (!(parsDateToString(seduta.getDataFinePrenotazione()).matches((Seduta.DATA_FINE_PARTECIPAZIONE_REGEX)))) {
+            if (!(parsDateToString(sedutaForm.getDataFinePrenotazione()).matches((Seduta.DATA_FINE_PARTECIPAZIONE_REGEX)))) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
-            } else if (seduta.getDataFinePrenotazione().before(date)) {
+            } else if (sedutaForm.getDataFinePrenotazione().before(date)) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è minore della data corrente.");
-            } else if (seduta.getDataFinePrenotazione().after(seduta.getDataSeduta())) {
+            } else if (sedutaForm.getDataFinePrenotazione().after(sedutaForm.getDataSeduta())) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è maggiore della data seduta.");
-            } else if (seduta.getDataFinePrenotazione().before(seduta.getDataInizioPrenotazione())) {
+            } else if (sedutaForm.getDataFinePrenotazione().before(sedutaForm.getDataInizioPrenotazione())) {
                 throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è minore della data inizio partecipazione.");
             }
-            return seduta.getDataFinePrenotazione();
+            return sedutaForm.getDataFinePrenotazione();
         }
     }
 
@@ -524,7 +525,4 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         return newDate;
     }
 
-    public List<Seduta> getListaSedutePrenotabili(){
-        return sedutaRepository.findSedutePrenotabiliNoList();
-    }
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.Date;
+
 /**
  * Classe che definisce un validatore per {@link SedutaForm}.
  * Il controllo effettuato rigurda la
@@ -18,7 +20,7 @@ import org.springframework.validation.Validator;
 
 @Component
 public class SedutaFormValidate implements Validator {
-    @Autowired
+
     private OrganizzazioneSeduteService organizzazioneSeduteService;
 
     @Override
@@ -36,61 +38,66 @@ public class SedutaFormValidate implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
+
         SedutaForm sedutaForm = (SedutaForm) target;
-        Seduta seduta = (Seduta) target;
+        organizzazioneSeduteService = new OrganizzazioneSeduteService();
         //Validazione del campo dataSeduta
-        try{
+        try {
+
             organizzazioneSeduteService.validaDataSeduta(sedutaForm.getDataSeduta());
-        } catch(SedutaFormException e1) {
-            errors.reject("errore", e1.getMessage());
+
+        } catch (SedutaFormException e1) {
+            errors.reject("Prova", e1.getMessage());
         }
 
         //Validazione del campo indirizzo
-        try{
+        try {
             organizzazioneSeduteService.validaIndirizzo(sedutaForm.getIndirizzo());
-        } catch(SedutaFormException e1) {
-            errors.reject("errore", e1.getMessage());
+        } catch (SedutaFormException e1) {
+            errors.reject("Indirizzo non valido.", e1.getMessage());
+
+
         }
 
         //Validazione del campo città
-        try{
+        try {
             organizzazioneSeduteService.validaCitta(sedutaForm.getCitta());
-        } catch(SedutaFormException e1) {
-            errors.reject("errore", e1.getMessage());
+        } catch (SedutaFormException e1) {
+            errors.reject("Citta non valida.", e1.getMessage());
         }
 
         //Validazione del campo provincia
-        try{
+        try {
             organizzazioneSeduteService.validaProvincia(sedutaForm.getProvincia());
-        } catch(SedutaFormException e1) {
-            errors.reject("errore", e1.getMessage());
+        } catch (SedutaFormException e1) {
+            errors.reject("Provincia non valida.", e1.getMessage());
         }
 
         //Validazione del campo CAP
-        try{
+        try {
             organizzazioneSeduteService.validaCAP(sedutaForm.getCAP());
-        } catch(SedutaFormException e1) {
-            errors.reject("errore", e1.getMessage());
+        } catch (SedutaFormException e1) {
+            errors.reject("CAP non valido.", e1.getMessage());
         }
 
         //Validazione del campo numeroPartecipanti
-        try{
+        try {
             organizzazioneSeduteService.validaNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
-        } catch(SedutaFormException e1) {
-            errors.reject("errore", e1.getMessage());
+        } catch (SedutaFormException e1) {
+            errors.reject("Numero partecipanti non valido. cià", e1.getMessage());
         }
 
         //Validazione del campo dataInizioPrenotazione
-        try{
-            organizzazioneSeduteService.validaDataInizioPrenotazioni(seduta);
-        } catch(SedutaFormException e1) {
-            errors.reject("errore", e1.getMessage());
+        try {
+            organizzazioneSeduteService.validaDataInizioPrenotazioni(sedutaForm);
+        } catch (SedutaFormException e1) {
+            errors.reject("Errore nella data dell'inizio.", e1.getMessage());
         }
         //Validazione del campo dataFinePrenotazione
-        try{
-            organizzazioneSeduteService.validaDataFinePrenotazioni(seduta);
-        } catch(SedutaFormException e1) {
-            errors.reject("errore", e1.getMessage());
+        try {
+            organizzazioneSeduteService.validaDataFinePrenotazioni(sedutaForm);
+        } catch (SedutaFormException e1) {
+            errors.reject("Data di fine prenotazione non valida.", e1.getMessage());
         }
     }
 
