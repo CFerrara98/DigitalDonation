@@ -18,13 +18,36 @@
 
 }
 
+.scrittalogo{
+  font-size:28px;
+
+}
+
+/* On screens that are 992px or less, set la scritta digial donation */
+@media screen and (max-width: 992px) {
+  .scrittalogo {
+    font-size:28px;
+  }
+}
+
+/* On screens that are 600px or less, elimina la scritta digital donation */
+@media screen and (max-width: 600px) {
+  .scrittalogo {
+      font-size:0px;
+}
+
+}
+
+
+
+
 .table-container {
     width: 100%;
     overflow-x: auto
   }
 
   
-  /* On screens that are 992px or less, set the background color to blue */
+  /* On screens that are 992px or less, set the table with scroll*/
   @media screen and (max-width: 992px) {
     .table-container {
         width: 100%;
@@ -32,11 +55,66 @@
     }
   }
   
-  /* On screens that are 600px or less, set the background color to olive */
+  /* On screens that are 600px or less, set the table with scroll */
   @media screen and (max-width: 600px) {
     .table-container {
         width: 100%;
     overflow-x: scroll
 
     }
+}
+
+
+
+
+
+.table-botton {
+  width: 100%;
+  overflow-x: auto
+}
+
+
+/* On screens that are 992px or less, set the table with scroll*/
+@media screen and (max-width: 992px) {
+  .large {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem
+}
+  .table-botton {
+      width: 100%;
+      overflow-x: scroll
+  }
+}
+
+/* On screens that are 600px or less, set the table with scroll */
+@media screen and (max-width: 426px) {
+  .botton-sm {
+    padding: .25rem .9rem;
+    font-size: .750rem;
+    line-height: 1.0;
+    border-radius: .2rem
+  }
+  
+  .table-botton {
+  
+      width: 100%;
+  overflow-x: scroll
+  }
+  
+}
+
+@media screen and (max-width: 350px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  /* potremmo nascondere l'header, ma lo spostiamo solo, per questioni di accessibilità */
+ 
+  /* i campi di ogni riga diventano la colonna destra */
+  td {
+    position: relative;
+    padding-right: 30% !important;
+  }
+  
 }
