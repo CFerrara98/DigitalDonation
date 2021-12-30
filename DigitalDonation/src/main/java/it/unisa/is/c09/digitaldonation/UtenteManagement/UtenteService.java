@@ -31,11 +31,12 @@ public class UtenteService implements UtenteServiceInterface {
      * @return utente
      */
     @Override
-    public Utente login(String email, String password) throws UserNotLoggedException {
+    public Utente login(String email, String password) throws UserNotLoggedException, NoSuchAlgorithmException {
         // Controlla se le credenziali corrispondono a quelle di uno studente e, nel
         // caso, controlla
         // che la richiesta d'iscrizione associatagli sia stata accettata
-        Utente utente = utenteRepository.findByEmailAndPassword(email, password);
+        String passwordCriptata = getMD5(password);
+        Utente utente = utenteRepository.findByEmailAndPassword(email, passwordCriptata);
 
         if (utente != null) {
             return utente;

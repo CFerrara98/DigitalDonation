@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.security.NoSuchAlgorithmException;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -72,6 +74,8 @@ public class UtenteServiceUT {
             utenteService.login(null, "Mattiasapere.123");
         } catch (UserNotLoggedException e) {
             assertEquals(messaggio, e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
@@ -90,6 +94,8 @@ public class UtenteServiceUT {
             utenteService.login("mattiasapere@gmail.com", null);
         } catch (UserNotLoggedException e) {
             assertEquals(messaggio, e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
@@ -108,6 +114,8 @@ public class UtenteServiceUT {
             utenteService.login("mattiasapere.com", "1");
         } catch (UserNotLoggedException e) {
             assertEquals(messaggio, e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 

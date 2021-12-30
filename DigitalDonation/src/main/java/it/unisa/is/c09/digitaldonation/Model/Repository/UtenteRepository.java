@@ -82,9 +82,10 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
 
     /**
      * Permette di verificare se un'utente esiste nel database attraverso la propria
-     * email.
-     * 
+     * email e password.
+     *
      * @param email Stringa che rappresenta l'email di un utente
+     * @param password Stringa che rappresenta l'email di un utente
      * @return true se l'utente esiste, false se l'utente non esiste
      * @pre email != null
      */
