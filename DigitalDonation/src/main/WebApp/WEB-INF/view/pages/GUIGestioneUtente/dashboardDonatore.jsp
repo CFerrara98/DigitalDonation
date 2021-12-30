@@ -19,4 +19,6 @@
             <img class="object_face" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="140px">
         </div>
 
+        <p>CIAOOOOOOOOOO</p>
+
 </z:layout>

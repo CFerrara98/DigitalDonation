@@ -38,14 +38,7 @@ public class UtenteController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String visualizzaHome(HttpSession session, Model model) {
-        /*Utente utente = utenteService.getUtenteAutenticato();
-        if (session.getAttribute("email") != null && utente != null) {
-            if (utente instanceof Operatore) {
-                return "GUIGestioneUtente/dashboardOperatore";
-            } else if (utente instanceof Donatore) {
-                return "GUIGestioneUtente/dashboardDonatore";
-            }
-        }*/
+        session.invalidate();
         return "GUIGestioneUtente/homepage";
     }
 
@@ -115,5 +108,15 @@ public class UtenteController {
     @RequestMapping(value ="/goLogin", method = RequestMethod.GET)
     public String goLogin(Model model) {
         return "GUIGestioneUtente/login";
+    }
+
+    @RequestMapping(value ="/dashboardDonatore", method = RequestMethod.GET)
+    public String dashboardDonatore(Model model) {
+        return "GUIGestioneUtente/dashboardDonatore";
+    }
+
+    @RequestMapping(value ="/dashboardOperatore", method = RequestMethod.GET)
+    public String dashboardOperatore(Model model) {
+        return "GUIGestioneUtente/dashboardOperatore";
     }
 }
