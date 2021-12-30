@@ -1,5 +1,6 @@
 package it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement;
 
+import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.GuestFormException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
@@ -217,6 +218,75 @@ public class OrganizzazioneSeduteServiceGuestUT {
             organizzazioneSeduteService.salvaGuest(guest);
         } catch (GuestFormException exception) {
             exception.printStackTrace();
+        }
+    }
+
+    /**
+     * Verifica inserimento Guest nel caso in cui l'id della seduta è null
+     */
+    @Test
+    public void VerificaInserimentoGuestIdSedutaNull() {
+        codiceFiscaleGuest = "MVYZZV65L56I556J";
+        nome = "Angela";
+        cognome = "De Martino";
+        telefono = "3456789123";
+        patologie = "Nessuna";
+        gruppoSanguigno = "AB+";
+
+        guest = new Guest(codiceFiscaleGuest, nome, cognome, telefono, patologie, gruppoSanguigno);
+
+        Long idSeduta = null;
+        final String message = "Il campo id della seduta non può essere null.";
+        try {
+            organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
+        } catch (CannotSaveDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica inserimento Guest nel caso in cui l'id del guest è null
+     */
+    @Test
+    public void VerificaInserimentoGuestCodiceFiscaleGuestNull() {
+        codiceFiscaleGuest = null;
+        nome = "Angela";
+        cognome = "De Martino";
+        telefono = "3456789123";
+        patologie = "Nessuna";
+        gruppoSanguigno = "AB+";
+
+        guest = new Guest(codiceFiscaleGuest, nome, cognome, telefono, patologie, gruppoSanguigno);
+
+        Long idSeduta = 745l;
+        final String message = "il campo CF del guest non può essere null";
+        try {
+            organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
+        } catch (CannotSaveDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica inserimento Guest nel caso in cui l'id del guest è null
+     */
+    @Test
+    public void VerificaInserimentoGuestSuccesso() {
+        codiceFiscaleGuest = "MVYZZV65L56I556J";
+        nome = "Angela";
+        cognome = "De Martino";
+        telefono = "3456789123";
+        patologie = "Nessuna";
+        gruppoSanguigno = "AB+";
+
+        guest = new Guest(codiceFiscaleGuest, nome, cognome, telefono, patologie, gruppoSanguigno);
+
+        Long idSeduta = 745l;
+        final String message = "il campo CF del guest non può essere null";
+        try {
+            assertEquals(guest,organizzazioneSeduteService.inserimentoGuest(idSeduta, guest));
+        } catch (CannotSaveDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
         }
     }
 }

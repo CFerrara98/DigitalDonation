@@ -81,7 +81,4 @@ public interface SedutaRepository extends JpaRepository<Seduta, Long> {
      */
     @Query(value = "SELECT idSeduta, data_fine_prenotazione, data_inizio_prenotazione, dataSeduta, luogo, numero_partecipanti, sede_locale_codice_identificativo from seduta where dataSeduta > current_date", nativeQuery = true)
     List<Seduta> findSedutePrenotabiliNoList();
-
-
-
 }

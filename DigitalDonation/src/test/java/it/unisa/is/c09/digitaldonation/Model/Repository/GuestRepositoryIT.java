@@ -91,7 +91,7 @@ import static org.junit.Assert.assertThat;
             // Controlla che ogni guest inserito per il test sia presente su database
             // restituendolo in base alla matricola
             Guest guestSalvato = guestRepository.findByCodiceFiscaleGuest(guest.getcodiceFiscaleGuest());
-            assertThat(guest.getcodiceFiscaleGuest(), is(equalTo(guest.getcodiceFiscaleGuest())));
+            assertThat(guest.getcodiceFiscaleGuest(), is(equalTo(guestSalvato.getcodiceFiscaleGuest())));
         }
 
         /**
