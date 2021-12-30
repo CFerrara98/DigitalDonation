@@ -1950,6 +1950,8 @@ pre code {
 .myError{
     font-size: 12px;
     color: #f55145;
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
 @media (prefers-reduced-motion:reduce) {

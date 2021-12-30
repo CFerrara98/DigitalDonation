@@ -2,6 +2,8 @@ package it.unisa.is.c09.digitaldonation.Model.Repository;
 
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -43,12 +45,14 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
     /**
      * Permette di salvare o aggiornare le informazioni di un utente nel database.
      *
-     * @param utente Oggetto che rappresenta le informazioni di un utente.
      * @return Oggetto {@link Utente} che rappresenta l'utente. Può essere
      * null se nel database non è possibile aggiornare le informazioni nel database.
      * @pre utente != null
      */
-    Utente save(Utente utente);
+    @Query(value="insert into Utente (codice_fiscale_utente, cognome, email, nome, password) values (:codice_fiscale_utente, :cognome, :email, :nome, MD5(:password))"
+            , nativeQuery = true)
+    Utente save(@Param("codice_fiscale_utente") String codiceFiscale, @Param("cognome") String cognome,
+                @Param("email") String email, @Param("nome") String nome, @Param("password") String password);
 
     /**
      * Permette di cancellare le informazioni di un utente nel database.

@@ -31,6 +31,12 @@ public class UtilServicePopulator {
     @Autowired
     DonazioneRepository donazioneRepository;
 
+    public void testMD5(){
+        Donatore d = createFullDonatore();
+        donatoreRepository.save(d);
+        System.out.println(d.toString());
+    }
+
 
     public void doDonazioni(int stop){
         ArrayList<Donatore> donatores = (ArrayList<Donatore>) donatoreRepository.findAll();
@@ -46,8 +52,6 @@ public class UtilServicePopulator {
             donazioneRepository.save(donazione);
             sedutaRepository.save(s);
         }
-
-
 
     }
 

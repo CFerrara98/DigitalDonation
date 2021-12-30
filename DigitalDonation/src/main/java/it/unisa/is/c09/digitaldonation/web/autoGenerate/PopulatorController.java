@@ -21,11 +21,13 @@ public class PopulatorController {
 
     @RequestMapping(value = "/generateEntity", method = RequestMethod.GET)
     public String generateEntity(HttpSession session) {
-        utilService.doDonatori(200);
+        /*utilService.doDonatori(200);
         utilService.doGuests(500);
         utilService.doOperatoriAndSedeLocale(10);
         utilService.doSedute(10);
         utilService.doDonazioni(80);
+        return "GUIGestioneUtente/homepage";*/
+        utilService.testMD5();
         return "GUIGestioneUtente/homepage";
     }
 

@@ -1,3 +1,4 @@
+<%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Utente" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -44,6 +45,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Benvenuto!</h1>
                                 </div>
+
                                 <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm"--%>
                                 <form:form action="./login" method="post" modelAttribute="loginForm" cssClass="user" enctype="application/x-www-form-urlencoded">
                                     <div class="form-group">
@@ -55,21 +57,30 @@
                                                         <form:input type="text" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <form:input type="text" value="${EmailPrecedente}" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
+                                                        <form:input type="text" value="${EmailPrecedente}" class="form-control form-control-user is-invalid" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </c:when>
                                             <c:otherwise>
-                                                <form:input type="text" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
-                                                <p>ciao</p>
-                                                <p>${EmailError}</p>
+                                                <form:input type="text" class="form-control form-control-user is-invalid" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
                                                 <span class="myError">${EmailError}</span>
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
+
                                     <div class="form-group">
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Password:</h6>
-                                        <form:input path="password" type="password" class="form-control form-control-user" id="password" placeholder="Inserisci la password"/>
+                                            <c:choose>
+                                                <c:when test="${PasswordError == null}">
+                                                    <input type="password" name="password" id="inputPassword" placeholder="Password" class="form-control">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input type="password" name="password" id="inputPassword" placeholder="Password" class="form-control is-invalid">
+                                                    <span class = "myError">${PasswordError}</span>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                        </div>
                                     </div>
 
                                     <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
@@ -86,13 +97,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
-
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

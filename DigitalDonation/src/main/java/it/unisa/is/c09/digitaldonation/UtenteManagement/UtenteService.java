@@ -29,13 +29,12 @@ public class UtenteService implements UtenteServiceInterface {
      */
     @Override
     public Utente login(String email, String password) throws UserNotLoggedException {
-        Utente utente;
         // Controlla se le credenziali corrispondono a quelle di uno studente e, nel
         // caso, controlla
         // che la richiesta d'iscrizione associatagli sia stata accettata
-        utente = utenteRepository.findByEmailAndPassword(email, password);
+        Utente utente = utenteRepository.findByEmailAndPassword(email, password);
+
         if (utente != null) {
-            AutenticazioneHolder.setUtente(email);
             return utente;
         }
         else if(password == null){
@@ -51,59 +50,8 @@ public class UtenteService implements UtenteServiceInterface {
      * Permette la rimozione dell'utente dalla sessione.
      */
     public void logout(Utente utente) throws AccessNotAuthorizedException {
-        if(utente == null)
-        {
+        if(utente == null) {
             throw new AccessNotAuthorizedException("logout","Errore durante il logout.");
-        }
-        AutenticazioneHolder.setUtente(null);
-    }
-
-
-    /**
-     * Permette di ottenerel'utente autenticato nel sistema
-     *
-     * @return l'utente autenticato nel sistema, <b>null</b> se non vi è alcun
-     * utente autenticato
-     */
-    public Utente getUtenteAutenticato() {
-        // Ottieni l'username dell'utente autenticato e restituisci null se non è
-        // presente alcun utente
-        // in sessione
-        String email = (AutenticazioneHolder.getUtente());
-        if (email == null) {
-            return null;
-        }
-
-        Utente utente;
-
-        // Controlla se l'username è associato ad uno studente
-        utente = utenteRepository.findByEmail(email);
-        if (utente != null) {
-            return utente;
-        }
-
-        return null;
-    }
-
-    /**
-     * Permette di specificare l'utente autenticato nel sistema, tramite l'email, in
-     * una variabile visibile a livello di thread così da condividere l'informazione
-     * con tutti gli altri livelli. Questo metodo può essere utilizzato per
-     * iniettare automaticamente l'utente nel thread associato alla richiesta a
-     * partire dall'attributo di sessione del server.
-     *
-     * @param email Stringa relativa all'email dell'utente che si vuole autenticare
-     *              nel sistema
-     */
-    public void setUtenteAutenticato(String email) {
-        // Se username è null, rimuovi la variabile di thread per prevenire memory leak
-        if (email == null) {
-            AutenticazioneHolder.setUtente(null);
-            return;
-        }
-
-        if (utenteRepository.existsUtenteByEmail(email)) {
-            AutenticazioneHolder.setUtente(email);
         }
     }
 

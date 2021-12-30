@@ -19,11 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
-
 @Controller
 public class UtenteController {
-
     @Autowired
     UtenteService utenteService;
     @Autowired
@@ -61,7 +58,7 @@ public class UtenteController {
             System.out.println("result.hasErrors()");
             // se ci sono errori il metodo controller setta tutti i parametri
             redirectAttribute.addFlashAttribute("EmailError", "Email o password errati, per favore riprova");
-            return "redirect:/goLogin";
+            return "redirect:/login";
         }
 
         try {
@@ -70,7 +67,7 @@ public class UtenteController {
             System.out.println("provo a ricaricare la mail");
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
             redirectAttribute.addFlashAttribute("PasswordError", "Email o password errati, per favore riprova");
-            return "redirect:/goLogin";
+            return "redirect:/login";
         }
 
         //Se è un operatore
@@ -84,7 +81,7 @@ public class UtenteController {
             return "GUIGestioneUtente/dashboardDonatore";
         }
         else {
-            return "redirect:/goLogin";
+            return "redirect:/login";
         }
     }
 
@@ -95,7 +92,7 @@ public class UtenteController {
      */
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request, Model model){
-        Utente utente = utenteService.getUtenteAutenticato();
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
         try {
             utenteService.logout(utente);
         } catch (AccessNotAuthorizedException e) {
@@ -105,16 +102,31 @@ public class UtenteController {
         return "GUIGestioneUtente/homepage";
     }
 
-    @RequestMapping(value ="/goLogin", method = RequestMethod.GET)
+    /**
+     * Metodo che permette di andare alla pagina di login.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina.
+     */
+    @RequestMapping(value ="/login", method = RequestMethod.GET)
     public String goLogin(Model model) {
         return "GUIGestioneUtente/login";
     }
 
+    /**
+     * Metodo che permette di andare alla dashboard del donatore.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina.
+     */
     @RequestMapping(value ="/dashboardDonatore", method = RequestMethod.GET)
     public String dashboardDonatore(Model model) {
         return "GUIGestioneUtente/dashboardDonatore";
     }
 
+    /**
+     * Metodo che permette di andare alla dashboard dell'operatore.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina.
+     */
     @RequestMapping(value ="/dashboardOperatore", method = RequestMethod.GET)
     public String dashboardOperatore(Model model) {
         return "GUIGestioneUtente/dashboardOperatore";

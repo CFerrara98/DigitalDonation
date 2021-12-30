@@ -45,7 +45,7 @@ public class OrganizzazioneSeduteController {
     public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
         Boolean feedback = (Boolean) model.getAttribute("feedback");
         Long idSeduta = (Long) model.getAttribute("idSeduta");
-        Donatore donatore = (Donatore) utenteService.getUtenteAutenticato();
+        Donatore donatore = (Donatore) request.getSession().getAttribute("utente");
         try {
             organizzazioneSeduteService.feedbackDonatore(donatore, feedback, idSeduta);
         } catch (CannotRelaseFeedbackException e) {
@@ -203,31 +203,61 @@ public class OrganizzazioneSeduteController {
 
     }
 
+    /**
+     * Metodo che permette di andare alla pagina dell'elenco dei partecipanti.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina.
+     */
     @RequestMapping(value ="/elencoPartecipanti", method = RequestMethod.GET)
     public String elencoPartecipanti(Model model) {
         return "GUIOrganizzazioneSedute/elencoPartecipanti";
     }
 
+    /**
+     * Metodo che permette di andare alla pagina di inserimento utente guest.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
     @RequestMapping(value ="/inserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(Model model) {
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
     }
 
+    /**
+     * Metodo che permette di andare alla pagina dell'elenco delle sedute.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina.
+     */
     @RequestMapping(value ="/monitoraggioSedute", method = RequestMethod.GET)
     public String monitoraggioSedute(Model model) {
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
     }
 
+    /**
+     * Metodo che permette di andare alla pagina di feedback della seduta.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
     @RequestMapping(value ="/partecipaSeduta", method = RequestMethod.GET)
     public String partecipaSeduta(Model model) {
         return "GUIOrganizzazioneSedute/partecipaSeduta";
     }
 
+    /**
+     * Metodo che permette di andare alla pagina di schedulazione di una nuova seduta.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
     @RequestMapping(value ="/schedulazioneSeduta", method = RequestMethod.GET)
     public String schedulazioneSeduta(Model model) {
         return "GUIOrganizzazioneSedute/schedulazioneSeduta";
     }
 
+    /**
+     * Metodo che permette di andare alla pagina dell'elenco dei partecipanti.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
     @RequestMapping(value ="/seduteDisponibili", method = RequestMethod.GET)
     public String seduteDisponibili(Model model) {
         return "GUIOrganizzazioneSedute/seduteDisponibili";

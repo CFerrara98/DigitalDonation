@@ -53,19 +53,17 @@ public class LoginFormValidate implements Validator {
             return;
         }*/
 
-
         //Validazione del campo email
         try {
             utenteService.validaMail(loginForm.getEmail());
         } catch(MailNonValidaException e1) {
             errors.reject("errore", e1.getMessage());
-            loginForm.setEmail(null);
+            loginForm.setEmail("");
             return;
         } catch(MailNonEsistenteException e2) {
             errors.reject("errore", e2.getMessage());
-            loginForm.setEmail(null);
+            loginForm.setEmail("");
             return;
         }
     }
-
 }
