@@ -1,7 +1,6 @@
 package it.unisa.is.c09.digitaldonation.Model.Repository;
 
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,15 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Date;
-import static it.unisa.is.c09.digitaldonation.utilRand.BuildRandEntity.*;
 import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Test di integrazione fra la classe DonatoreRepository e il Database.
@@ -63,16 +55,12 @@ public class DonatoreRepositoryIT {
 
     private Donatore donatore;
 
-    //private Utente utente;
-
     /**
-     * Salva la lista di studenti su database prima dell'esecuzione di ogni singolo
+     * Salva la lista di donatori su database prima dell'esecuzione di ogni singolo
      * test.
      */
     @Before
-    public void salvaStudente() {
-
-
+    public void salvaDonatore() {
 
         donatore = new Donatore();
         donatore.setCodiceFiscale("FJNYQC47M70C283I");
@@ -86,14 +74,12 @@ public class DonatoreRepositoryIT {
         donatore.setTesserino(null);
         donatore.setListaIndisponibilita(null);
 
-        /*codiceFiscale, nome, cognome, email, password*/
-
         donatoreRepository.save(donatore);
     }
 
     /**
-     * Testa l'interazione con il database per determinare se la ricerca di uno
-     * studente tramite matricola avvenga correttamente.
+     * Testa l'interazione con il database per determinare se la ricerca
+     * di un operatore tramite codice fiscale avvenga correttamente.
      *
      * @test {@link DonatoreRepository#findDonatoreByCodiceFiscaleUtente(String)}
      *
@@ -104,9 +90,23 @@ public class DonatoreRepositoryIT {
     public void findDonatoreByCodiceFiscaleUtente(){
 
         // Controlla che ogni donatore inserito per il test sia presente su database
-        // restituendolo in base alla matricola
+        // restituendolo in base al codice fiscale
         Donatore donatoreSalvato = donatoreRepository.findDonatoreByCodiceFiscaleUtente(donatore.getCodiceFiscale());
         assertNotEquals(donatore, donatoreSalvato);
         }
+
+    /**
+     * Testa il corretto funzionamento del metodo di salvataggio di un donatore.
+     *
+     * @test {@link DonatoreRepository#save(Donatore)}
+     *
+     * @result Il test è superato se il donatore viene correttamente
+     * salvato nel database
+     */
+    @Test
+    public void saveDonatore() {
+        Donatore donatoreSalvato= donatoreRepository.save(donatore);
+        assertNotEquals(donatore, donatoreSalvato);
+    }
 }
 

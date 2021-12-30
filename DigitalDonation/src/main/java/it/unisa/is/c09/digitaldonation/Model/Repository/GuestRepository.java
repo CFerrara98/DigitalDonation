@@ -29,7 +29,6 @@ public interface GuestRepository extends JpaRepository<Guest, String> {
      */
     Guest save(Guest guest);
 
-
     /**
      * Permette di ottenere un guest a partire dal proprio codice fiscale.
      *
@@ -40,16 +39,8 @@ public interface GuestRepository extends JpaRepository<Guest, String> {
      *
      * @pre codiceFiscale != null
      */
-    Utente findByCodiceFiscaleGuest(String CodiceFiscaleGuest);
+    Guest findByCodiceFiscaleGuest(String CodiceFiscaleGuest);
 
-    @Query("select (count(g) > 0) from Guest g where g.codiceFiscaleGuest = ?1")
-    boolean existGuest(String codiceFiscaleGuest);
-
-
-
-
-
-
-
-
+    /*@Query("select (count(g) > 0) from Guest g where g.codiceFiscaleGuest = ?1")
+    boolean existGuest(String codiceFiscaleGuest);*/
 }

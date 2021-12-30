@@ -5,9 +5,6 @@ import java.util.Date;
 
 public class SedutaForm {
 
-    public SedutaForm() {
-    }
-
     public SedutaForm(Date dataSeduta, String indirizzo, String citta, String provincia, String CAP, Time orarioInizio, Time orarioFine, int numeroPartecipanti, Date dataInizioPrenotazione, Date dataFinePrenotazione) {
         this.dataSeduta = dataSeduta;
         this.indirizzo = indirizzo;

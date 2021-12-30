@@ -41,13 +41,30 @@ public class LoginFormValidate implements Validator {
     public void validate(Object target, Errors errors) {
         LoginForm loginForm = (LoginForm) target;
 
+        /*        organizzazioneSeduteService = new OrganizzazioneSeduteService();
+        //Validazione del campo dataSeduta
+        try {
+
+            organizzazioneSeduteService.validaDataSeduta(sedutaForm.getDataSeduta());
+
+        } catch (SedutaFormException e1) {
+            errors.reject("Data non valida.", e1.getMessage());
+            sedutaForm.setDataSeduta(null);
+            return;
+        }*/
+
+        utenteService = new UtenteService();
         //Validazione del campo email
         try {
             utenteService.validaMail(loginForm.getEmail());
         } catch(MailNonValidaException e1) {
             errors.reject("errore", e1.getMessage());
+            loginForm.setEmail(null);
+            return;
         } catch(MailNonEsistenteException e2) {
             errors.reject("errore", e2.getMessage());
+            loginForm.setEmail(null);
+            return;
         }
     }
 
