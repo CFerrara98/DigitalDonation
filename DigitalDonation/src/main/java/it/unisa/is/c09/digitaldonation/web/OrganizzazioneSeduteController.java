@@ -202,4 +202,34 @@ public class OrganizzazioneSeduteController {
             return "errorsPages/error401";
 
     }
+
+    @RequestMapping(value ="/elencoPartecipanti", method = RequestMethod.GET)
+    public String elencoPartecipanti(Model model) {
+        return "GUIOrganizzazioneSedute/elencoPartecipanti";
+    }
+
+    @RequestMapping(value ="/inserimentoUtenteGuest", method = RequestMethod.GET)
+    public String inserimentoUtenteGuest(Model model) {
+        return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
+    }
+
+    @RequestMapping(value ="/monitoraggioSedute", method = RequestMethod.GET)
+    public String monitoraggioSedute(Model model) {
+        return "GUIOrganizzazioneSedute/monitoraggioSedute";
+    }
+
+    @RequestMapping(value ="/partecipaSeduta", method = RequestMethod.GET)
+    public String partecipaSeduta(Model model) {
+        return "GUIOrganizzazioneSedute/partecipaSeduta";
+    }
+
+    @RequestMapping(value ="/schedulazioneSeduta", method = RequestMethod.GET)
+    public String schedulazioneSeduta(Model model) {
+        return "GUIOrganizzazioneSedute/schedulazioneSeduta";
+    }
+
+    @RequestMapping(value ="/seduteDisponibili", method = RequestMethod.GET)
+    public String seduteDisponibili(Model model) {
+        return "GUIOrganizzazioneSedute/seduteDisponibili";
+    }
 }

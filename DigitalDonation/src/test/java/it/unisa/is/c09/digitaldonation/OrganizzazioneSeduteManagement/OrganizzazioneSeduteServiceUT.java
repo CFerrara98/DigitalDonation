@@ -1,8 +1,8 @@
 package it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement;
 
 
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.GuestFormException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.SedutaFormException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.Errors;
-
+import static org.mockito.Mockito.when;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -22,12 +22,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Classe di test di unità per il form di creazione di una seduta
  *
- * @author Mattia Sapere, Fabio Siepe, Marika Spagna Zito
+ * @author Mattia Sapere, Fabio Siepe
  */
 @RunWith(MockitoJUnitRunner.class)
 public class OrganizzazioneSeduteServiceUT {
@@ -76,7 +76,6 @@ public class OrganizzazioneSeduteServiceUT {
     private Date dataFinePrenotazione;
 
     private SedutaForm sedutaForm;
-
 
 
     public void validaCampi() throws SedutaFormException {
@@ -457,4 +456,257 @@ public class OrganizzazioneSeduteServiceUT {
         }
     }
 
+    /**
+     * Verifica feedbackDonatore con il campo codiceFisacle null
+     */
+    @Test
+    public void VerificaFeedbackDonatoreCodiceFiscaleNull() {
+        Donatore donatore;
+        boolean fedback = true;
+        Long idSeduta = 420l;
+        Calendar myCalendar1 = new GregorianCalendar(1999, 8, 10);
+        Date dataDiNacita = myCalendar1.getTime();
+        donatore = new Donatore(null, "Fabio", "Siepe", "fabio.siepe@gmail.com", "Password123", "Via Di Casa", dataDiNacita, "Mercato S.Severino", null, null);
+        final String message = "Il campo id non può essere null.";
+        try {
+            organizzazioneSeduteService.feedbackDonatore(donatore, fedback, idSeduta);
+        } catch (CannotRelaseFeedbackException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+
+    /**
+     * Verifica feedbackDonatore nel caso in cui l'id seduta non corrisponde a nessuna seduta
+     */
+    @Test
+    public void VerificaFeedbackDonatorePositivoSedutaNonTrovata() {
+        Donatore donatore;
+        boolean fedback = true;
+        Long idSeduta = 420l;
+        Calendar myCalendar1 = new GregorianCalendar(1999, 8, 10);
+        Date dataDiNacita = myCalendar1.getTime();
+        donatore = new Donatore("SPIFBA99M10F138Y", "Fabio", "Siepe", "fabio.siepe@gmail.com", "Password123", "Via Di Casa", dataDiNacita, "Mercato S.Severino", null, null);
+        final String message = "Errore! Seduta non trovata.";
+        try {
+            organizzazioneSeduteService.feedbackDonatore(donatore, fedback, idSeduta);
+        } catch (CannotRelaseFeedbackException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica feedbackDonatore nel caso di Successo
+     */
+    @Test
+    public void VerificaFeedbackDonatoreSuccesso() {
+        Donatore donatore;
+        boolean fedback = true;
+        Long idSeduta = 420l;
+        Calendar myCalendar1 = new GregorianCalendar(1999, 8, 10);
+        Date dataDiNacita = myCalendar1.getTime();
+        donatore = new Donatore("SPIFBA99M10F138Y", "Fabio", "Siepe", "fabio.siepe@gmail.com", "Password123", "Via Di Casa", dataDiNacita, "Mercato S.Severino", null, null);
+        final String message = "Errore! Seduta non trovata.";
+
+        //when(sedutaRepository.findByIdSeduta(idSeduta)).thenReturn();
+        try {
+            organizzazioneSeduteService.feedbackDonatore(donatore, fedback, idSeduta);
+        } catch (CannotRelaseFeedbackException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+
+    /**
+     * Verifica feedbackDonatore nel caso in cui il feedback sia false(negativo)
+     */
+    @Test
+    public void VerificaFeedbackDonatoreNegativo() {
+        Donatore donatore;
+        boolean fedback = false;
+        Long idSeduta = 420l;
+        Calendar myCalendar1 = new GregorianCalendar(1999, 8, 10);
+        Date dataDiNacita = myCalendar1.getTime();
+        donatore = new Donatore("SPIFBA99M10F138Y", "Fabio", "Siepe", "fabio.siepe@gmail.com", "Password123", "Via Di Casa", dataDiNacita, "Mercato S.Severino", null, null);
+        final String message = "Il campo id non può essere null.";
+        try {
+            organizzazioneSeduteService.feedbackDonatore(donatore, fedback, idSeduta);
+        } catch (CannotRelaseFeedbackException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica MonitoraggioSeduta nel caso in cui l'id seduta è null
+     */
+    @Test
+    public void VerificaMonitoraggioSeddutaIdnull() {
+        Long idSeduta = null;
+        final String message = "Il campo id della seduta non può essere null.";
+        try {
+            organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
+        } catch (CannotLoadDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica feedbackDonatore nel caso in cui l'id seduta non corrisponde a nessuna seduta
+     */
+    @Test
+    public void VerificaMonitoraggioSeddutaSedutaNull() {
+        Long idSeduta = 420l;
+        final String message = "Non è stata trovata nessuna seduta con questo id.";
+        try {
+            organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
+        } catch (CannotLoadDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica schedulazione sedute nel caso in cui l'id della seduta sia null
+     */
+    @Test
+    public void VerificaSchedulazioneSedutaIdSedutaNull() {
+        Long idSeduta = null;
+        Seduta seduta = new Seduta();
+        seduta.setIdSeduta(idSeduta);
+        final String message = "Il campo id della seduta non può essere null.";
+        try {
+            organizzazioneSeduteService.schedulazioneSeduta(seduta);
+        } catch (CannotSaveDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica schedulazione sedute quadno va a buon fine
+     */
+    @Test
+    public void VerificaSchedulazioneSedutaCorretta() {
+        Long idSeduta = null;
+        Seduta seduta = new Seduta(2l, null, null, null, null, 0, null, null, null, null, null);
+
+        final String message = "Il campo id della seduta non può essere null.";
+        try {
+            assertEquals(seduta, organizzazioneSeduteService.schedulazioneSeduta(seduta));
+        } catch (CannotSaveDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica modificaSeduta nel caso in cui la seduta è null
+     */
+    @Test
+    public void VerificaModificaSedutaSedutaNull() {
+        Seduta seduta = null;
+        Long idSeduta = 2l;
+        final String message = "La seduta non può essere null";
+        try {
+           organizzazioneSeduteService.modificaSeduta(seduta, idSeduta);
+        } catch (CannotUpdateDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica modificaSeduta nel caso in cui l'id della seduta è null
+     */
+    @Test
+    public void VerificaModificaSedutaIdSedutaNull() {
+        Seduta seduta = new Seduta(2l, null, null, null, null, 0, null, null, null, null, null);
+        Long idSeduta = null;
+        final String message = "La seduta da modificare non può essere null";
+        try {
+            organizzazioneSeduteService.modificaSeduta(seduta, idSeduta);
+        } catch (CannotUpdateDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica modificaSeduta nel caso in cui va a buon fine
+     */
+    @Test
+    public void VerificaModificaSedutaSuccesso() {
+        Seduta seduta = new Seduta(2l, null, null, null, null, 0, null, null, null, null, null);
+        Long idSeduta = 2l;
+        final String message = "La seduta da modificare non può essere null successo";
+        try {
+            assertEquals(seduta, organizzazioneSeduteService.modificaSeduta(seduta, idSeduta));
+        } catch (CannotUpdateDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+    /**
+     * Verifica eliminaSeduta nel caso in cui l'id sia null
+     */
+    @Test
+    public void VerificaEliminaSedutaIdNull() {
+        Long idSeduta = null;
+        final String message = "Errore durante l'eliminazione della seduta";
+        try {
+            organizzazioneSeduteService.eliminaSeduta(idSeduta);
+        } catch (CannotDeleteDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica eliminaSeduta nel caso di successo
+     */
+    @Test
+    public void VerificaEliminaSedutaSuccesso() {
+        Long idSeduta = 745l;
+        final String message = "Errore durante l'eliminazione della seduta Successo";
+        try {
+            organizzazioneSeduteService.eliminaSeduta(idSeduta);
+        } catch (CannotDeleteDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica visualizzaSeduta nel caso in cui l'id sia null
+     */
+    @Test
+    public void VerificaVisualizzaSedutaIdNull() {
+        Long idSeduta = null;
+        final String message = "La seduta da visualizzare deve esistere";
+        try {
+            organizzazioneSeduteService.visualizzaSeduta(idSeduta);
+        } catch (CannotLoadDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica visualizzaSeduta nel caso in cui vada tutto bene
+     */
+    @Test
+    public void VerificaVisualizzaSedutaSuccesso() {
+        Long idSeduta = 745l;
+        Seduta seduta = new Seduta();
+        seduta.setIdSeduta(idSeduta);
+        final String message = "La seduta da visualizzare deve esistere";
+        try {
+            assertEquals(seduta, organizzazioneSeduteService.visualizzaSeduta(idSeduta));
+        } catch (CannotLoadDataRepositoryException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica visualizzaSeduta nel caso in cui vada tutto bene
+     */
+    @Test
+    public void VerificaVisualizzaElencoSedute() {
+        try {
+            assertNotNull(organizzazioneSeduteService.visualizzaElencoSedute());
+        } catch (CannotLoadDataRepositoryException exception) {
+            fail("Nessuna seduta trovata");
+        }
+    }
 }

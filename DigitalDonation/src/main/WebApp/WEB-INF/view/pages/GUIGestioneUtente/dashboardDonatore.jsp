@@ -170,5 +170,11 @@
         <div class="box_face">
             <img class="object_face" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="140px">
         </div>
+<<<<<<< HEAD
          -->
+=======
+
+        <p>CIAOOOOOOOOOO</p>
+
+>>>>>>> 78f4025f5560648973d472feb28ac50d717030cf
 </z:layout>
