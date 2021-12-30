@@ -47,7 +47,12 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         }
         if (feedback) {
             //Feedback positivo
-            Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
+            Seduta seduta = new Seduta();
+            seduta = sedutaRepository.findByIdSeduta(idSeduta);
+            if(seduta == null)
+            {
+                throw new CannotRelaseFeedbackException("feedbackError", "Errore! Seduta non trovata.");
+            }
             seduta.addPartecipante(donatore);
             sedutaRepository.save(seduta);
         } else {
@@ -67,8 +72,11 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         if (idSeduta == null) {
             throw new CannotLoadDataRepositoryException("sedutaError", "Il campo id della seduta non può essere null.");
         }
-
         Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
+
+        if(seduta == null) {
+           throw new CannotLoadDataRepositoryException("sedutaError","Non è stata trovata nessuna seduta con questo id.");
+        }
         ArrayList<Object> lista = new ArrayList<Object>();
         lista.addAll(seduta.getListaDonatore());
         lista.addAll(seduta.getListaGuest());
@@ -154,7 +162,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         if (sedutaRepository.findByIdSeduta(idSeduta) == null) {
             throw new CannotDeleteDataRepositoryException("eliminazioneSedutaError", "Errore durante l'eliminazione della seduta");
         }
-
         sedutaRepository.deleteSedutaByIdSeduta(idSeduta);
     }
 
