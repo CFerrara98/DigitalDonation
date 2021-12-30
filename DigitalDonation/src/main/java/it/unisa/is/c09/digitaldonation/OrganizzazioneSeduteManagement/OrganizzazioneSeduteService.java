@@ -176,7 +176,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         if (idSeduta == null) {
             throw new CannotLoadDataRepositoryException("erroreVisualizzazioneSeduta", "La seduta da visualizzare deve esistere");
         }
-
         return sedutaRepository.findByIdSeduta(idSeduta);
     }
 

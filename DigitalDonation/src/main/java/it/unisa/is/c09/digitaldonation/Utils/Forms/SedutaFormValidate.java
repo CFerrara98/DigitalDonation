@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Classe che definisce un validatore per {@link SedutaForm}.
@@ -41,6 +43,7 @@ public class SedutaFormValidate implements Validator {
     public void validate(Object target, Errors errors) {
 
         SedutaForm sedutaForm = (SedutaForm) target;
+        organizzazioneSeduteService = new OrganizzazioneSeduteService();
         //Validazione del campo dataSeduta
         try {
 
@@ -48,7 +51,8 @@ public class SedutaFormValidate implements Validator {
 
         } catch (SedutaFormException e1) {
             errors.reject("Data non valida.", e1.getMessage());
-            sedutaForm.setDataSeduta(null);
+            Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
+            sedutaForm.setDataSeduta(myCalendar.getTime());
             return;
         }
 
@@ -57,7 +61,7 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaIndirizzo(sedutaForm.getIndirizzo());
         } catch (SedutaFormException e1) {
             errors.reject("Indirizzo non valido.", e1.getMessage());
-            sedutaForm.setIndirizzo(null);
+            sedutaForm.setIndirizzo("");
             return;
 
         }
@@ -67,7 +71,7 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaCitta(sedutaForm.getCitta());
         } catch (SedutaFormException e1) {
             errors.reject("Citta non valida.", e1.getMessage());
-            sedutaForm.setCitta(null);
+            sedutaForm.setCitta("");
             return;
         }
 
@@ -76,7 +80,7 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaProvincia(sedutaForm.getProvincia());
         } catch (SedutaFormException e1) {
             errors.reject("Provincia non valida.", e1.getMessage());
-            sedutaForm.setProvincia(null);
+            sedutaForm.setProvincia("");
             return;
         }
 
@@ -85,7 +89,7 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaCAP(sedutaForm.getCAP());
         } catch (SedutaFormException e1) {
             errors.reject("CAP non valido.", e1.getMessage());
-            sedutaForm.setCAP(null);
+            sedutaForm.setCAP("");
             return;
         }
 
@@ -103,7 +107,8 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaDataInizioPrenotazioni(sedutaForm);
         } catch (SedutaFormException e1) {
             errors.reject("Errore nella data dell'inizio.", e1.getMessage());
-            sedutaForm.setDataInizioPrenotazione(null);
+            Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
+            sedutaForm.setDataInizioPrenotazione(myCalendar.getTime());
             return;
         }
         //Validazione del campo dataFinePrenotazione
@@ -111,7 +116,8 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaDataFinePrenotazioni(sedutaForm);
         } catch (SedutaFormException e1) {
             errors.reject("Data di fine prenotazione non valida.", e1.getMessage());
-            sedutaForm.setDataFinePrenotazione(null);
+            Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
+            sedutaForm.setDataFinePrenotazione(myCalendar.getTime());
             return;
         }
     }

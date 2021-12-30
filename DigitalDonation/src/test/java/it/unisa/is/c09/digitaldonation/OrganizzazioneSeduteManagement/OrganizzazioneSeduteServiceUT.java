@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.Errors;
-
+import static org.mockito.Mockito.when;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -494,6 +494,28 @@ public class OrganizzazioneSeduteServiceUT {
             assertEquals(message, exception.getMessage());
         }
     }
+
+    /**
+     * Verifica feedbackDonatore nel caso di Successo
+     */
+    @Test
+    public void VerificaFeedbackDonatoreSuccesso() {
+        Donatore donatore;
+        boolean fedback = true;
+        Long idSeduta = 420l;
+        Calendar myCalendar1 = new GregorianCalendar(1999, 8, 10);
+        Date dataDiNacita = myCalendar1.getTime();
+        donatore = new Donatore("SPIFBA99M10F138Y", "Fabio", "Siepe", "fabio.siepe@gmail.com", "Password123", "Via Di Casa", dataDiNacita, "Mercato S.Severino", null, null);
+        final String message = "Errore! Seduta non trovata.";
+
+        //when(sedutaRepository.findByIdSeduta(idSeduta)).thenReturn();
+        try {
+            organizzazioneSeduteService.feedbackDonatore(donatore, fedback, idSeduta);
+        } catch (CannotRelaseFeedbackException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
 
     /**
      * Verifica feedbackDonatore nel caso in cui il feedback sia false(negativo)
