@@ -8,7 +8,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
@@ -62,19 +61,18 @@
                                             <c:when test="${EmailError == null}">
                                                 <c:choose>
                                                     <c:when test="${EmailPrecedente == null}">
-                                                        <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
+                                                        <input type="email" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email"/>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <input type="email" value="${EmailPrecedente}" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
+                                                        <input type="email" value="${EmailPrecedente}" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email"/>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </c:when>
                                             <c:otherwise>
-                                                <input type="email" class="form-control is-invalid form-control-user" id="email" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
-                                                <span class = "myError">${EmailError}</span>
+                                                <input type="email" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email"/>
+                                                <p>${EmailError}</p>
                                             </c:otherwise>
                                         </c:choose>
-                                        <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
                                     </div>
                                     <div class="form-group">
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Password:</h6>

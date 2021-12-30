@@ -1,6 +1,5 @@
 package it.unisa.is.c09.digitaldonation.web;
 
-import com.sun.istack.NotNull;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.AccessNotAuthorizedException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Operatore;
@@ -9,8 +8,6 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.User
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginFormValidate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +28,6 @@ public class UtenteController {
     @Autowired
     LoginFormValidate loginFormValidator;
 
-    private static Logger logger = LoggerFactory.getLogger(UtenteController.class);
-
     /**
      * Metodo per la visualizzazione dell'homepage o della dashboard
      *
@@ -42,16 +37,15 @@ public class UtenteController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String visualizzaHome(HttpSession session, Model model) {
-        Utente utente = utenteService.getUtenteAutenticato();
-        //logger.info("Invocata la servlet HOME mapped by /");
+        /*Utente utente = utenteService.getUtenteAutenticato();
         if (session.getAttribute("email") != null && utente != null) {
             if (utente instanceof Operatore) {
                 return "GUIGestioneUtente/dashboardOperatore";
             } else if (utente instanceof Donatore) {
                 return "GUIGestioneUtente/dashboardDonatore";
             }
-        }
-        return "GUIGestioneUtente/login";
+        }*/
+        return "GUIGestioneUtente/homepage";
     }
 
     /**
@@ -66,13 +60,11 @@ public class UtenteController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request,@ModelAttribute("loginForm") LoginForm loginForm,
                         BindingResult result, RedirectAttributes redirectAttribute, Model model) {
-        logger.info("Invocata la servlet login, passato come parametri "+"email: "+ loginForm.getEmail() +" password: "+ loginForm.getPassword());
-
         Utente utente = null;
         loginFormValidator.validate(loginForm, result);
         if (result.hasErrors()) {
             // se ci sono errori il metodo controller setta tutti i parametri
-            redirectAttribute.addFlashAttribute("EmailError", "Email o password non valide");
+            redirectAttribute.addFlashAttribute("EmailError", "Email o password errati, per favore riprova");
             return "GUIGestioneUtente/login";
         }
 
@@ -80,20 +72,18 @@ public class UtenteController {
             utente = utenteService.login(loginForm.getEmail(), loginForm.getPassword());
         } catch (UserNotLoggedException e) {
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
-            redirectAttribute.addFlashAttribute("PasswordError", e.getMessage());
+            redirectAttribute.addFlashAttribute("PasswordError", "Email o password errati, per favore riprova");
             return "GUIGestioneUtente/homepage";
         }
 
         //Se è un operatore
         if (utente instanceof Operatore) {
-            model.addAttribute("operatore", utente);
-            logger.info("Loggato con successo come Operatore "+loginForm.getEmail());
+            request.getSession().setAttribute("utente", utente);
             return "GUIGestioneUtente/homepage";
         }
         //Se è un donatore
         else if (utente instanceof Donatore) {
-            model.addAttribute("donatore", utente);
-            logger.info("Loggato con successo come Donatore "+loginForm.getEmail());
+            request.getSession().setAttribute("utente", utente);
             return "GUIGestioneUtente/dashboardDonatore";
         }
         else
@@ -119,8 +109,9 @@ public class UtenteController {
         return "GUIGestioneUtente/homepage";
     }
 
-    @RequestMapping("/goLogin")
-    public String contactinfo() {
+    @RequestMapping(value ="/login", method = RequestMethod.GET)
+    public String goLogin(Model model) {
+        System.out.println("SOno arrivato alla servlet");
         return "GUIGestioneUtente/login";
     }
 }

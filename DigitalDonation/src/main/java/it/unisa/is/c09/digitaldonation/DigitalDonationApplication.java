@@ -11,5 +11,4 @@ public class DigitalDonationApplication {
     public static void main(String[] args) {
         SpringApplication.run(DigitalDonationApplication.class, args);
     }
-
 }
