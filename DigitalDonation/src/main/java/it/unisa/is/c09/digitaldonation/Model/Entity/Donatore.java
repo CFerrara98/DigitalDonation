@@ -101,7 +101,7 @@ public class Donatore extends Utente{
      * @return luogoDiNascita e' il luogo di nascita dell'utente.
      * @param salerno
      */
-    public String getLuogoDiNascita(String salerno) {
+    public String getLuogoDiNascita() {
         return luogoDiNascita;
     }
 
