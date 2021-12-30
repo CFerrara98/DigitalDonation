@@ -3,9 +3,6 @@ package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
 public class GuestForm {
 
-    public GuestForm() {
-    }
-
     public GuestForm(String codiceFiscale, String nome, String cognome, String telefono, String patologie, String gruppoSanguigno) {
         this.codiceFiscale = codiceFiscale;
         this.nome = nome;
