@@ -21,6 +21,7 @@
         <!-- Main Content -->
         <div id="content">
 
+
             <!-- Begin Page Content -->
             <div class="container-fluid" style="background-color:#eaeef1; padding-top: 30px;">
 
@@ -41,60 +42,35 @@
                     </div>
                     <h6>&nbsp;</h6>
 
+                    <c:forEach begin="0" var="i" end="${listaSedutePrenotabili.size}">
                     <!-- prima seduta-->
                     <div class="card shadow mb-4">
+
                         <div class=" m-0 card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary h6">Seduta 1:</h6>
+                            <h6 class="m-0 font-weight-bold text-primary h6">Seduta <c:out value="${i+1}"></c:out>:</h6>
                         </div>
                         <div class="card-body">
-                            <h4 class="small font-weight-bold">Luogo:%luogo%
-                                <h4 class="small font-weight-bold">Data:%data%
-                                    <div class="buttonForm" style="text-align: center;">
-                                            <span class="float-right">
-                                                <a class="btn btn-primary" href="partecipaseduta.html" role="button">Partecipa</a>
+
+                            <!-- tabella-->
+                            <div class="table-botton">
+                                <table class="table  ">
+                                    <thead>
+                                    <tr>
+                                        <td scope="col"><h3 class="small font-weight-bold"> Luogo:<c:out value="${listaSedutePrenotabili.getIndex(i).luogo}"></c:out> </h3>
+                                            <h3 class="small font-weight-bold">  Data:<c:out value="${listaSedutePrenotabili.getIndex(i).dataSeduta}"></c:out></h3>
+                                        <td scope="col"><span  class=" float-right">
+                                                <a class="btn btn-primary botton-sm large" href="./visualizzaElencoSedute" role="button">Partecipa</a>
                                              </span>
-                                    </div>
-                                </h4>
-                            </h4>
+                                        </td>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <!-- fine tabella-->
                         </div>
                     </div>
 
-                    <!-- seconda seduta-->
-                    <div class="card shadow mb-4">
-                        <div class=" m-0 card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary h6">Seduta 2:</h6>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="small font-weight-bold">Luogo:%luogo%
-                                <h4 class="small font-weight-bold">Data:%data%
-                                    <div class="buttonForm" style="text-align: center;">
-
-                                            <span class="float-right">
-                                                <a class="btn btn-primary" href="partecipaseduta.html" role="button">Partecipa</a>
-                                             </span>
-                                    </div>
-                                </h4>
-                            </h4>
-                        </div>
-                    </div>
-
-                    <!-- terza seduta-->
-                    <div class="card shadow mb-4">
-                        <div class=" m-0 card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary h6">Seduta 3:</h6>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="small font-weight-bold">Luogo:%luogo%
-                                <h4 class="small font-weight-bold">Data:%data%
-                                    <div class="buttonForm" style="text-align: center;">
-                                            <span class="float-right">
-                        <a class="btn btn-primary" href="partecipaseduta.html" role="button">Partecipa</a>
-                     </span>
-                                    </div>
-                                </h4>
-                            </h4>
-                        </div>
-                    </div>
+                    </c:forEach>
 
                 </div>
 
@@ -119,30 +95,30 @@
     <!-- End of Content Wrapper -->
 
 </div>
-<!-- End of Page Wrapper -->
+    <!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </z:layout>

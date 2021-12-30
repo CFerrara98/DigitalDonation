@@ -41,78 +41,73 @@
 
 
     <div class="card shadow mb-4 ">
-    <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Elenco sedute da svolgersi:</h6>
-    </div>
-    <h6>&nbsp;</h6>
-    <!-- seduta 1 -->
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Elenco sedute da svolgersi:</h6>
+        </div>
+
+
+        <c:forEach begin="0" var="i" end="${listaSedute.size}"> <!-- controllare il dollaro -->
+    <!-- seduta %n% -->
     <div class="card shadow mb-4">
-    <div class=" m-0 card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary h6">Seduta 1:</h6>
-    </div>
+        <div class=" m-0 card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary h6">Seduta <c:out value="${i+1}"></c:out>:</h6>
+        </div>
     <div class="card-body">
 
     <!-- Tabella -->
 
     <div class="table-container">
-    <table class="table  ">
-    <thead>
-    <tr>
-    <th scope="col"></th>
-    <th scope="col">Elenco partecipanti</th>
-    <th scope="col">Modifica seduta</th>
-    <th scope="col">Elimina seduta</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <th>
-    <h4 class="small font-weight-bold">Data: %data%</h4>
-    <h4 class="small font-weight-bold">Luogo:%luogo%</h4>
-    </th>
+        <table class="table  ">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Elenco partecipanti</th>
+                    <th scope="col">Modifica seduta</th>
+                    <th scope="col">Elimina seduta</th>
+                </tr>
+            </thead>
+        <tbody>
+                <tr>
+                    <th>
+                        <h4 class="small font-weight-bold">Data: <c:out value="${listaSedute.getIndex(i).dataSeduta}"></c:out></h4>
+                        <h4 class="small font-weight-bold">Luogo:<c:out value="${listaSedute.getIndex(i).luogo}"></c:out></h4>
+                    </th>
+                    <th scope="row">
+                        <!-- Bottom Elenco partecipanti -->
+                        <span  class="float-center col-xl-1 col-md-6 mb-2">
+                            <a href="/monitoraggioSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>" role="button">
+                                <i class="fas fa-user icone"></i>
+                            </a>
+                        </span>
+                     </th>
 
-    <th scope="row">
-    <!-- Bottom Elenco partecipanti -->
-    <span  class="float-center col-xl-1 col-md-6 mb-2">
-    <a href="elencoPartecipanti.html" role="button">
-    <i class="fas fa-user icone"></i>
-    </a>
-    </span>
-    </th>
+                    <!-- Bottom modifica seduta -->
+                    <td>
+                        <span  class="float-center col-xl-1 col-md-6 mb-2">
+                            <a href="/modicaSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>" role="button"> <i class="fas fa-cogs icone"></i></a>
+                        </span>
+                    </td>
 
-    <!-- Bottom modifica seduta -->
-    <td>
-    <span  class="float-center col-xl-1 col-md-6 mb-2">
-    <a href=".html" role="button"> <i class="fas fa-cogs icone"></i></a>
-    </span>
-    </td>
-
-    <!-- Bottom Elimina seduta -->
-    <td>
-    <span  class="float-center col-xl-1 col-md-6 mb-2">
-    <a href=".html" role="button"> <i class="fas fa-times icone"></i></a>
-    </span>
-    </td>
-    </tr>
-    </tbody>
-    </table>
+                    <!-- Bottom Elimina seduta -->
+                    <td>
+                        <span  class="float-center col-xl-1 col-md-6 mb-2">
+                            <a href="/eliminaSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>" role="button"> <i class="fas fa-times icone"></i></a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!--FINE Tabella -->
 
-
-
-
-
-
-
-
+        </div>
     </div>
-    </div>
+
     </div>
     <!-- fine elenco monitoraggio -->
     </div>
-
+        </c:forEach>
     <!-- /.container-fluid -->
 
     </div>
