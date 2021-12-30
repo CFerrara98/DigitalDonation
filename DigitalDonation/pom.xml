@@ -171,12 +171,7 @@
             <artifactId>hibernate-validator</artifactId>
             <version>5.1.3.Final</version>
         </dependency>
-
     </dependencies>
-
-
-
-
 
     <build>
         <plugins>

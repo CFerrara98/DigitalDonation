@@ -49,10 +49,7 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
      * null se nel database non è possibile aggiornare le informazioni nel database.
      * @pre utente != null
      */
-    @Query(value="insert into Utente (codice_fiscale_utente, cognome, email, nome, password) values (:codice_fiscale_utente, :cognome, :email, :nome, MD5(:password))"
-            , nativeQuery = true)
-    Utente save(@Param("codice_fiscale_utente") String codiceFiscale, @Param("cognome") String cognome,
-                @Param("email") String email, @Param("nome") String nome, @Param("password") String password);
+    Utente save(Utente utente);
 
     /**
      * Permette di cancellare le informazioni di un utente nel database.
@@ -83,6 +80,14 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
      */
     Utente findByEmail(String email);
 
+    /**
+     * Permette di verificare se un'utente esiste nel database attraverso la propria
+     * email.
+     * 
+     * @param email Stringa che rappresenta l'email di un utente
+     * @return true se l'utente esiste, false se l'utente non esiste
+     * @pre email != null
+     */
     boolean existsUtenteByEmailAndPassword(String email, String password);
 }
 

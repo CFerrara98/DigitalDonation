@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
 
 
 @Controller
@@ -20,14 +21,16 @@ public class PopulatorController {
     UtilServicePopulator utilService;
 
     @RequestMapping(value = "/generateEntity", method = RequestMethod.GET)
-    public String generateEntity(HttpSession session) {
+    public String generateEntity(HttpSession session) throws NoSuchAlgorithmException {
         /*utilService.doDonatori(200);
         utilService.doGuests(500);
         utilService.doOperatoriAndSedeLocale(10);
         utilService.doSedute(10);
         utilService.doDonazioni(80);
         return "GUIGestioneUtente/homepage";*/
-        utilService.testMD5();
+        String password = utilService.getMD5("elpidio");
+        System.out.println(password);
+        System.out.println(password.length());
         return "GUIGestioneUtente/homepage";
     }
 
