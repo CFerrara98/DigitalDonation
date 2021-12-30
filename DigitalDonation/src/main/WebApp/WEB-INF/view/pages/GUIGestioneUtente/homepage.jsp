@@ -8,6 +8,6 @@
 <body>
     <%@ include file="header.jsp" %>
     <p>Provaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-    <a href="./login"></a>
+    <a href="./goLogin">Login</a>
 </body>
 </html>

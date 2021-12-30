@@ -1947,6 +1947,11 @@ pre code {
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
+.myError{
+    font-size: 12px;
+    color: #f55145;
+}
+
 @media (prefers-reduced-motion:reduce) {
     .form-control {
         transition: none

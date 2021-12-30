@@ -53,7 +53,7 @@
                                 </div>
 
                                 <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm"--%>
-                                <form:form action="/login" method="post" modelAttribute="loginForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+                                <form:form action="./login" method="post" modelAttribute="loginForm" cssClass="user" enctype="application/x-www-form-urlencoded">
                                     <div class="form-group">
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Email:</h6>
 
@@ -70,7 +70,7 @@
                                             </c:when>
                                             <c:otherwise>
                                                 <input type="email" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email"/>
-                                                <p>${EmailError}</p>
+                                                <span class="myError">${EmailError}</span>
                                             </c:otherwise>
                                         </c:choose>
                                     </div>

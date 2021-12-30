@@ -63,32 +63,33 @@ public class UtenteController {
         Utente utente = null;
         loginFormValidator.validate(loginForm, result);
         if (result.hasErrors()) {
+            System.out.println("result.hasErrors()");
             // se ci sono errori il metodo controller setta tutti i parametri
             redirectAttribute.addFlashAttribute("EmailError", "Email o password errati, per favore riprova");
-            return "GUIGestioneUtente/login";
+            return "redirect:/goLogin";
         }
 
         try {
             utente = utenteService.login(loginForm.getEmail(), loginForm.getPassword());
         } catch (UserNotLoggedException e) {
+            System.out.println("provo a ricaricare la mail");
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
             redirectAttribute.addFlashAttribute("PasswordError", "Email o password errati, per favore riprova");
-            return "GUIGestioneUtente/homepage";
+            return "redirect:/goLogin";
         }
 
         //Se è un operatore
         if (utente instanceof Operatore) {
             request.getSession().setAttribute("utente", utente);
-            return "GUIGestioneUtente/homepage";
+            return "GUIGestioneUtente/dashboardOperatore";
         }
         //Se è un donatore
         else if (utente instanceof Donatore) {
             request.getSession().setAttribute("utente", utente);
             return "GUIGestioneUtente/dashboardDonatore";
         }
-        else
-        {
-            return "GUIGestioneUtente/login";
+        else {
+            return "redirect:/goLogin";
         }
     }
 
@@ -109,9 +110,8 @@ public class UtenteController {
         return "GUIGestioneUtente/homepage";
     }
 
-    @RequestMapping(value ="/login", method = RequestMethod.GET)
+    @RequestMapping(value ="/goLogin", method = RequestMethod.GET)
     public String goLogin(Model model) {
-        System.out.println("SOno arrivato alla servlet");
         return "GUIGestioneUtente/login";
     }
 }
