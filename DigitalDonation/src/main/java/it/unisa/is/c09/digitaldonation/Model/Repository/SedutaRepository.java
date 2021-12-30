@@ -55,13 +55,33 @@ public interface SedutaRepository extends JpaRepository<Seduta, Long> {
      */
     void deleteSedutaByIdSeduta(Long idSeduta);
 
+    @Query(value = "SELECT idSeduta, data_fine_prenotazione, data_inizio_prenotazione, dataSeduta, luogo, numero_partecipanti, sede_locale_codice_identificativo from seduta where dataSeduta > current_date", nativeQuery = true)
+    List<Seduta> findSedutaPrenotabili();
+
+
     /**
-     * Restituisce la lista delle sedute prenotabili senza la lista di donatori e guest.
-     * @return List<Seduta> ritorna una lista di sedute.
+     * Metodo che controlla se esiste il guest all'interno della seduta in base al codice fiscale
+     * @param idSeduta id della seduta
+     * @param codiceFiscaleGuest codice fiscale del guest
+     * @return se il guest è gia presente nella seduta
+     */
+    boolean existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(Long idSeduta, String codiceFiscaleGuest);
+
+    /**
+     * Metodo che controlla se esiste il donaotre all'interno della seduta in base al codice fiscale
+     * @param idSeduta id della seduta
+     * @param codiceFiscaleUtente codice fiscale dell ' utente
+     * @return se il guest è gia presente nella seduta
+     */
+    boolean existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(Long idSeduta, String codiceFiscaleUtente);
+
+    /**
+     * Metodo che che ritorna solo le sedute a cui si puo fare la prenotazione
+     * @return lista sedute prenotabili ATTENZIONE le liste sono null!
      */
     @Query(value = "SELECT idSeduta, data_fine_prenotazione, data_inizio_prenotazione, dataSeduta, luogo, numero_partecipanti, sede_locale_codice_identificativo from seduta where dataSeduta > current_date", nativeQuery = true)
     List<Seduta> findSedutePrenotabiliNoList();
 
-    boolean existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(Long idSeduta, String codiceFiscaleGuest);
-    boolean existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(Long idSeduta, String codiceFiscaleUtente);
+
+
 }

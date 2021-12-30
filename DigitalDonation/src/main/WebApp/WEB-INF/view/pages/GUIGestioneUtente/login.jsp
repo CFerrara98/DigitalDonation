@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,22 +50,21 @@
                                     <h1 class="h4 text-gray-900 mb-4">Benvenuto!</h1>
                                 </div>
 
-                                <form class="user" method="post" action="/login" enctype="application/x-www-form-urlencoded" >
+                                <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm"--%>
+                                <form:form action="/login" method="post" modelAttribute="loginForm" cssClass="user" enctype="application/x-www-form-urlencoded">
                                     <div class="form-group">
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Email:</h6>
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email">
+                                        <form:input path="email" type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Inserisci l'indirizzo email"/>
                                     </div>
                                     <div class="form-group">
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Password:</h6>
-                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Inserisci la password">
+                                        <form:input path="password" type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Inserisci la password"/>
                                     </div>
-                                    <div class="form-group">
-
                                     </div>
                                     <br>
                                     <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+                                </form:form>
 
-                                </form>
 
                                 <!-- Ipotetico Cambio Password
                                 <div class="text-center">

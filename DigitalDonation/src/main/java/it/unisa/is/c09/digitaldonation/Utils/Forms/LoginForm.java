@@ -23,7 +23,7 @@ public class LoginForm {
      * @return email e' l'email dell'utente.
      */
     public String getEmail() {
-        return email.toLowerCase();
+        return email;
     }
     /**
      * Metodo che setta l'email dell'utente.

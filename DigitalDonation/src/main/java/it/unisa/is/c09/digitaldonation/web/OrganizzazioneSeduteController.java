@@ -118,7 +118,8 @@ public class OrganizzazioneSeduteController {
             guest.setGruppoSanguigno(guestForm.getGruppoSanguigno());
             try {
                 organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
-                return "GUIOrganizzazioneSedute/monitoraggioSedute";
+
+                return "redirect:/monitoraggioSeduta";
             } catch (CannotSaveDataRepositoryException e) {
                 return "errorsPages/error503";
             }

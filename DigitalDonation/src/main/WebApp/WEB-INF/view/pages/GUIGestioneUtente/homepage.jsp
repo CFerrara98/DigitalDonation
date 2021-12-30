@@ -12,10 +12,20 @@
 <head>
     <jsp:include page="../../css/mycss.css"/>
     <title>HomePage</title>
+    <p>${utente.email}</p>
+    <p>${utente.password}</p>
+    <p>${utente.nome}</p>
+    <p>${utente.codiceFiscale}</p>
+    <p>${utente.cognome}</p>
+    <p>${utente.toString()}</p>
+    <p>${operatore.toString()}</p>
+
 
     <form:form action="/goLogin" method="get"><button style="margin: 0 auto;" type="submit" id="reg" class="btn btn-primary btn-block">VAI A LOGGARTI</button> </form:form>
 
+    <form:form action="/generateEntity" method="get"><button style="margin: 0 auto;" type="submit" id="reg" class="btn btn-primary btn-block">Genera donatori</button> </form:form>
 
+    <form:form action="/logout" method="get"><button style="margin: 0 auto;" type="submit" id="reg" class="btn btn-primary btn-block">LogOut</button> </form:form>
 
 </head>
 <body>

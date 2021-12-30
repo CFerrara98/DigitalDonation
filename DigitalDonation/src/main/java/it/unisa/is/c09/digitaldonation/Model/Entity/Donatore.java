@@ -15,11 +15,15 @@ public class Donatore extends Utente{
     private String residenza;
     private Date dataDiNascita;
     private String luogoDiNascita;
-    @OneToOne(cascade = CascadeType.ALL)     @JoinColumn(name = "tesserino", referencedColumnName = "idTessera")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tesserino", referencedColumnName = "idTessera")
     private Tesserino tesserino;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "donatore")
     private List<Indisponibilita> listaIndisponibilita;
+
+
+
 
     /**
      * Costruttore che crea un oggetto Donatore vuoto,
@@ -49,6 +53,15 @@ public class Donatore extends Utente{
         this.luogoDiNascita = luogoDiNascita;
         this.tesserino = tesserino;
         this.listaIndisponibilita = new ArrayList<Indisponibilita>();
+    }
+
+
+    /**
+     * Aggiunge una indisponibilita
+     * @param indisponibilita descrizione dell'indisponibilita
+     */
+    public void addIndisponibilita(Indisponibilita indisponibilita){
+        listaIndisponibilita.add(indisponibilita);
     }
 
     /**

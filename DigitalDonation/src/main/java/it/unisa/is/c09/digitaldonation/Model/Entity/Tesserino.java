@@ -58,6 +58,14 @@ public class Tesserino{
     }
 
     /**
+     * Metodo per aggiungere una donazione al tesserino
+     * @param donazione la donzaione
+     */
+    public void addDonazione(Donazione donazione){
+        listaDonazioni.add(donazione);
+    }
+
+    /**
      * Metodo che ritorna il path della immagine del donatore.
      * @return imgSource è il path della immagine del donatore.
      */

@@ -1,5 +1,6 @@
 package it.unisa.is.c09.digitaldonation.web;
 
+import com.sun.istack.NotNull;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.AccessNotAuthorizedException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Operatore;
@@ -8,6 +9,8 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.User
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginFormValidate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +31,8 @@ public class UtenteController {
     @Autowired
     LoginFormValidate loginFormValidator;
 
+    private static Logger logger = LoggerFactory.getLogger(UtenteController.class);
+
     /**
      * Metodo per la visualizzazione dell'homepage o della dashboard
      *
@@ -38,7 +43,7 @@ public class UtenteController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String visualizzaHome(HttpSession session, Model model) {
         Utente utente = utenteService.getUtenteAutenticato();
-
+        //logger.info("Invocata la servlet HOME mapped by /");
         if (session.getAttribute("email") != null && utente != null) {
             if (utente instanceof Operatore) {
                 return "GUIGestioneUtente/dashboardOperatore";
@@ -59,8 +64,9 @@ public class UtenteController {
      * @return String che ridireziona ad una pagina.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(HttpServletRequest request, @ModelAttribute LoginForm loginForm,
+    public String login(HttpServletRequest request,@ModelAttribute("loginForm") LoginForm loginForm,
                         BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+        logger.info("Invocata la servlet login, passato come parametri "+"email: "+ loginForm.getEmail() +" password: "+ loginForm.getPassword());
 
         Utente utente = null;
         loginFormValidator.validate(loginForm, result);
@@ -75,17 +81,19 @@ public class UtenteController {
         } catch (UserNotLoggedException e) {
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
             redirectAttribute.addFlashAttribute("PasswordError", e.getMessage());
-            return "GUIGestioneUtente/login";
+            return "GUIGestioneUtente/homepage";
         }
+
         //Se è un operatore
         if (utente instanceof Operatore) {
-            model.addAttribute("utente", utente);
-            return "GUIGestioneUtente/dashboardOperatore";
-
+            model.addAttribute("operatore", utente);
+            logger.info("Loggato con successo come Operatore "+loginForm.getEmail());
+            return "GUIGestioneUtente/homepage";
         }
         //Se è un donatore
         else if (utente instanceof Donatore) {
-            model.addAttribute("utente", utente);
+            model.addAttribute("donatore", utente);
+            logger.info("Loggato con successo come Donatore "+loginForm.getEmail());
             return "GUIGestioneUtente/dashboardDonatore";
         }
         else

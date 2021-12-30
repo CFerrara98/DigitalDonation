@@ -1,24 +1,13 @@
-package it.unisa.is.c09.digitaldonation.utilRand;
+package it.unisa.is.c09.digitaldonation.web.autoGenerate;
 
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
-import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
-import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepositoryIT;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Random;
 
-import static it.unisa.is.c09.digitaldonation.utilRand.RandChoiser.*;
-import static it.unisa.is.c09.digitaldonation.utilRand.RandChoiser.generateDataInCuiAvveraLaSeduta;
-
+import static it.unisa.is.c09.digitaldonation.web.autoGenerate.RandChoiser.*;
 
 public class BuildRandEntity {
     private static final int LUNGHEZZA_PW =12;
@@ -61,14 +50,14 @@ public class BuildRandEntity {
      * @return Indisponibilita con campi casuali, Donatore è null
      */
     public static Indisponibilita createRandIndisponbilita(){
-        Long idIndisponibilita = new Long(randBetween(800,80000));
+        //Long idIndisponibilita = new Long(randBetween(800,80000));
         Donatore donatore = null;
         Date dataProssimaDisponibilita = generateFutureDate(new Date());
         String motivazioni = generateNomeOCognome();
         String nomeMedico = generateNomeOCognome()+" "+generateNomeOCognome();
 
         Indisponibilita indisponibilita = new Indisponibilita();
-        indisponibilita.setIdIndisponibilita(idIndisponibilita);
+        //indisponibilita.setIdIndisponibilita(idIndisponibilita);
         indisponibilita.setDataProssimaDisponibilita(dataProssimaDisponibilita);
         indisponibilita.setMotivazioni(motivazioni);
         indisponibilita.setNomeMedico(nomeMedico);
@@ -82,7 +71,7 @@ public class BuildRandEntity {
      * @return Seduta con campi randomizzati, SedeLocale è null
      */
     public static Seduta createRandSeduta(){
-        Long idSeduta = new Long(randBetween(800,80000));
+        //Long idSeduta = new Long(randBetween(800,80000));
         Date date = new Date();
         String luogo = generateIndirizzo();
         Time oraInizio = getThisTime(randBetween(0,24),randBetween(0,59));
@@ -97,7 +86,7 @@ public class BuildRandEntity {
             e.printStackTrace();
         }
         Seduta seduta = new Seduta();
-        seduta.setIdSeduta(idSeduta);
+        //seduta.setIdSeduta(idSeduta);
         seduta.setDataSeduta(date);
         seduta.setLuogo(luogo);
         seduta.setOraInizio(oraInizio);
@@ -203,7 +192,7 @@ public class BuildRandEntity {
 
         SedeLocale sedeLocale = new SedeLocale();
         sedeLocale.setVia(generateIndirizzo());
-        sedeLocale.setCodiceIdentificativo(new Long(randBetween(800,80000)));
+        //sedeLocale.setCodiceIdentificativo(new Long(randBetween(800,80000)));
         return sedeLocale;
     }
 
