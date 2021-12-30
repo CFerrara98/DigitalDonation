@@ -45,53 +45,240 @@
     <div class="text-center">
     <h3 class="h4 text-gray-900 mb-4">Compila i campi per schedulare una seduta</h3>
     </div>
-    <form class="user">
-    <div class="form-group row">
-    <div class="col-sm-6 mb-3 mb-sm-0">
-    <p style="color:#4e73df;">Data seduta: </p>
-    <input type="date" class="form-control form-control-user" id="exampleData" placeholder="Data Seduta:">
-    </div>
-    <div class="col-sm-6">
-    <p style="color:#4e73df;">Numero di partecipanti: </p>
-    <input type="text" class="form-control form-control-user" id="exampleNumeroPartecipanti" placeholder="es. 10">
+            <%--@elvariable id="SedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
+        <form:form action="./schedulazioneSeduta" method="post" modelAttribute="sedutaForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <p style="color:#4e73df;">Data seduta: </p>
+            <c:choose>
+                <c:when test="${DataError == null}">
+                    <c:choose>
+                        <c:when test="${DataPrecedente == null}">
+                            <form:input type="date" class="form-control form-control-user" id="data" placeholder="Data Seduta:" path="data"/>
+                </c:when>
+                        <c:otherwise>
+                        <form:input type="date" value="${DataPrecedente}" class="form-control form-control-user" id="data" placeholder="Data Seduta:" path="data"/>
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
+                <c:otherwise>
+                        <form:input type="date" class="form-control form-control-user" id="data" placeholder="Data Seduta:" path="data"/>
+
+                        <p>${DataError}</p>
+                        <span class="myError">${DataError}</span>
+                </c:otherwise>
+            </c:choose>
+
+            </div>
+
+        <div class="col-sm-6">
+            <p style="color:#4e73df;">Numero di partecipanti: </p>
+            <c:choose>
+                <c:when test="${NumeroPartecipantiError == null}">
+                    <c:choose>
+                        <c:when test="${NumeroPartecipantiPrecedente == null}">
+                            <form:input type="text" class="form-control form-control-user" id="numeroPartecipanti" placeholder="es. 10" path="numeroPartecipanti"/>
+                        </c:when>
+                        <c:otherwise>
+                            <form:input type="text" value="${NumeroPartecipantiPrecedente}" class="form-control form-control-user" id="numeroPartecipanti" placeholder="es. 10" path="numeroPartecipanti"/>
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
+                <c:otherwise>
+                    <form:input type="text" class="form-control form-control-user" id="numeroPartecipanti" placeholder="data Seduta:" path="numeroPartecipanti"/>
+
+                    <p>${NumeroPartecipantiError}</p>
+                    <span class="myError">${NumeroPartecipantiError}</span>
+                </c:otherwise>
+            </c:choose>
+
     </div>
     </div>
     <div class="form-group">
+
     <p style="color:#4e73df;">Indirizzo della seduta: </p>
-    <input type="text" class="form-control form-control-user" id="exampleIndirizzo" placeholder="es. Via Giuseppe Verdi 1">
+        <c:choose>
+            <c:when test="${IndirizzoError == null}">
+                <c:choose>
+                    <c:when test="${IndirizzoPrecedente == null}">
+                        <form:input type="text" class="form-control form-control-user" id="indirizzo" placeholder="es. Via Giuseppe Verdi 1" path="indirizzo"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="text" value="${IndirizzoPrecedente}" class="form-control form-control-user" id="indirizzo" placeholder="es. Via Giuseppe Verdi 1" path="indirizzo"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <form:input type="text" class="form-control form-control-user" id="indirizzo" placeholder="es. Via Giuseppe Verdi 1" path="indirizzo"/>
+
+                <p>${IndirizzoError}</p>
+                <span class="myError">${IndirizzoError}</span>
+            </c:otherwise>
+        </c:choose>
+
     </div>
     <div class="form-group row">
     <div class="col-sm-4 mb-3 mb-sm-0">
     <p style="color:#4e73df;">Città: </p>
-    <input type="text" class="form-control form-control-user" id="exampleCittà" placeholder="es. Salerno">
+
+        <c:choose>
+            <c:when test="${CittaError == null}">
+                <c:choose>
+                    <c:when test="${CittaPrecedente == null}">
+                        <form:input type="text" class="form-control form-control-user" id="citta" placeholder="es. Salerno" path="citta"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="text" value="${CittaPrecedente}" class="form-control form-control-user" id="citta" placeholder="es. Salerno" path="citta"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <form:input type="text" class="form-control form-control-user" id="citta" placeholder="es. Salerno" path="citta"/>
+
+                <p>${CittaError}</p>
+                <span class="myError">${CittaError}</span>
+            </c:otherwise>
+        </c:choose>
+
     </div>
     <div class="col-sm-4">
     <p style="color:#4e73df;">CAP: </p>
+        <c:choose>
+            <c:when test="${CAPError == null}">
+                <c:choose>
+                    <c:when test="${CAPPrecedente == null}">
+                        <form:input type="text" class="form-control form-control-user" id="cap" placeholder="es. 84100" path="cap"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="text" value="${CAPPrecedente}" class="form-control form-control-user" id="cap" placeholder="es. 84100" path="cap"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <form:input type="text" class="form-control form-control-user" id="cap" placeholder="es. 84100" path="cap"/>
+
+                <p>${CAPError}</p>
+                <span class="myError">${CAPError}</span>
+            </c:otherwise>
+        </c:choose>
+
     <input type="text" class="form-control form-control-user" id="exampleCAP" placeholder="es. 84100">
     </div>
     <div class="col-sm-4">
     <p style="color:#4e73df;">Provincia: </p>
-    <input type="text" class="form-control form-control-user" id="exampleProvincia" placeholder="es. Salerno">
+        <c:choose>
+            <c:when test="${ProvinciaError == null}">
+                <c:choose>
+                    <c:when test="${ProvinciaPrecedente == null}">
+                        <form:input type="text" class="form-control form-control-user" id="provincia" placeholder="es. Salerno" path="provincia"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="text" value="${ProvinciaPrecedente}" class="form-control form-control-user" id="provincia" placeholder="es. Salerno" path="provincia"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <form:input type="text" class="form-control form-control-user" id="provincia" placeholder="es. Salerno" path="provincia"/>
+
+                <p>${ProvinciaError}</p>
+                <span class="myError">${ProvinciaError}</span>
+            </c:otherwise>
+        </c:choose>
+
     </div>
     </div>
+
     <div class="form-group row">
     <div class="col-sm-6 mb-3 mb-sm-0">
     <p style="color:#4e73df;">Orario di inizio: </p>
-    <input type="time" class="form-control form-control-user" id="exampleOraInizioSeduta" placeholder="Orario inizio:">
+        <c:choose>
+            <c:when test="${OraInizioError == null}">
+                <c:choose>
+                    <c:when test="${OraInizioPrecedente == null}">
+                        <form:input type="time" class="form-control form-control-user" id="oraInizio" placeholder="Orario inizio:" path="oraInizio"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="time" value="${OraInizioPrecedente}" class="form-control form-control-user" id="oraInizio" placeholder="Orario inizio:" path="oraInizio"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <form:input type="time" class="form-control form-control-user" id="oraInizio" placeholder="Orario inizio:" path="oraInizio"/>
+
+                <p>${OraInizioError}</p>
+                <span class="myError">${OraInizioError}</span>
+            </c:otherwise>
+        </c:choose>
+
     </div>
     <div class="col-sm-6">
     <p style="color:#4e73df;">Orario di fine: </p>
-    <input type="time" class="form-control form-control-user" id="exampleOraFineSeduta" placeholder="Orario fine:">
+        <c:choose>
+            <c:when test="${OraFineError == null}">
+                <c:choose>
+                    <c:when test="${OraFinePrecedente == null}">
+                        <form:input type="time" class="form-control form-control-user" id="oraFine" placeholder="Orario fine:" path="oraFine"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="time" value="${OraFinePrecedente}" class="form-control form-control-user" id="oraFine" placeholder="Orario fine:" path="oraFine"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <form:input type="time" class="form-control form-control-user" id="oraFine" placeholder="Orario fine:" path="oraFine"/>
+
+                <p>${OraFineError}</p>
+                <span class="myError">${OraFineError}</span>
+            </c:otherwise>
+        </c:choose>
+
     </div>
     </div>
     <div class="form-group row">
     <div class="col-sm-6 mb-3 mb-sm-0">
     <p style="color:#4e73df;">Data di inizio prenotazione: </p>
-    <input type="date" class="form-control form-control-user" id="exampleDataInizioPrenotazione" placeholder="Data inizio Prenotazione:">
+        <c:choose>
+            <c:when test="${DataInizioError == null}">
+                <c:choose>
+                    <c:when test="${DataInizioPrecedente == null}">
+                        <form:input type="date" class="form-control form-control-user" id="dataInizio" placeholder="Data inizio Prenotazione:" path="dataInizio"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="date" value="${DataInizioPrecedente}" class="form-control form-control-user" id="dataInizio" placeholder="Data inizio Prenotazione:" path="dataInizio"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <form:input type="date" class="form-control form-control-user" id="dataInizio" placeholder="Data inizio Prenotazione:" path="dataInizio"/>
+
+                <p>${DataInizioError}</p>
+                <span class="myError">${DataInizioError}</span>
+            </c:otherwise>
+        </c:choose>
+
+
     </div>
     <div class="col-sm-6">
     <p style="color:#4e73df;">Data fine prenotazione: </p>
-    <input type="date" class="form-control form-control-user" id="exampleDataFinePrenotazione" placeholder="Data fine Prenotazione:">
+        <c:choose>
+            <c:when test="${DataFineError == null}">
+                <c:choose>
+                    <c:when test="${DataFinePrecedente == null}">
+                        <form:input type="date" class="form-control form-control-user" id="dataFine" placeholder="Data fine Prenotazione" path="dataFine"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="date" value="${DataFinePrecedente}" class="form-control form-control-user" id="dataFine" placeholder="Data fine Prenotazione" path="dataFine"/>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <form:input type="date" class="form-control form-control-user" id="dataFine" placeholder="Data fine Prenotazione" path="dataFine"/>
+
+                <p>${DataFineError}</p>
+                <span class="myError">${DataFineError}</span>
+            </c:otherwise>
+        </c:choose>
+
     </div>
     </div>
     <br>
