@@ -3251,44 +3251,44 @@ input[type=submit].btn-block {
 }
 
 @media (min-width:576px) {
-    .dropdown-menu-sm-left {
+    .dropdown-menu-left {
         right: auto;
         left: 0
     }
-    .dropdown-menu-sm-right {
+    .dropdown-menu-right {
         right: 0;
         left: auto
     }
 }
 
 @media (min-width:768px) {
-    .dropdown-menu-md-left {
+    .dropdown-menu-left {
         right: auto;
         left: 0
     }
-    .dropdown-menu-md-right {
+    .dropdown-menu-right {
         right: 0;
         left: auto
     }
 }
 
 @media (min-width:992px) {
-    .dropdown-menu-lg-left {
+    .dropdown-menu-left {
         right: auto;
         left: 0
     }
-    .dropdown-menu-lg-right {
+    .dropdown-menu-right {
         right: 0;
         left: auto
     }
 }
 
 @media (min-width:1200px) {
-    .dropdown-menu-xl-left {
+    .dropdown-menu-left {
         right: auto;
         left: 0
     }
-    .dropdown-menu-xl-right {
+    .dropdown-menu-right {
         right: 0;
         left: auto
     }

@@ -18,6 +18,29 @@
 
 }
 
+.scrittalogo{
+  font-size:28px;
+
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+  .scrittalogo {
+    font-size:28px;
+  }
+}
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+  .scrittalogo {
+      font-size:0px;
+}
+
+}
+
+
+
+
 .table-container {
     width: 100%;
     overflow-x: auto
