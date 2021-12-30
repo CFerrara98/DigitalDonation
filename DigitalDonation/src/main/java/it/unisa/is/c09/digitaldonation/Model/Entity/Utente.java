@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Utente {
+public class Utente {
 
     @Id
     private String codiceFiscaleUtente;

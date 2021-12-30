@@ -16,7 +16,7 @@ public class SedeLocale {
     private String via;
 
     /**
-     * Costruttore che crea un ogetto SedeLocale vuoto,
+     * Costruttore che crea un oggetto SedeLocale vuoto,
      * che verrà popolato con i metodi setters.
      */
     public SedeLocale(){

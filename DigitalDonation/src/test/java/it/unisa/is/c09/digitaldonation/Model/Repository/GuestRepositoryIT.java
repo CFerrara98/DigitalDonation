@@ -10,9 +10,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
-import static org.junit.Assert.assertNotEquals;
 
-    /**
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThat;
+
+/**
      * Test di integrazione fra la classe GuestRepository e il Database.
      * Metodologia: bottom-up.
      * @author Mattia Sapere
@@ -87,7 +91,7 @@ import static org.junit.Assert.assertNotEquals;
             // Controlla che ogni guest inserito per il test sia presente su database
             // restituendolo in base alla matricola
             Guest guestSalvato = guestRepository.findByCodiceFiscaleGuest(guest.getcodiceFiscaleGuest());
-            assertNotEquals(guest, guestSalvato);
+            assertThat(guest.getcodiceFiscaleGuest(), is(equalTo(guest.getcodiceFiscaleGuest())));
         }
 
         /**
@@ -101,6 +105,6 @@ import static org.junit.Assert.assertNotEquals;
         @Test
         public void saveGuest() {
             Guest guestSalvato= guestRepository.save(guest);
-            assertNotEquals(guest, guestSalvato);
+            assertThat(guest.getcodiceFiscaleGuest(), is(equalTo(guest.getcodiceFiscaleGuest())));
         }
     }

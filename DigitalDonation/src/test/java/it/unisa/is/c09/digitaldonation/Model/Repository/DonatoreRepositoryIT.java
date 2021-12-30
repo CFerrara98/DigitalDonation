@@ -1,6 +1,10 @@
 package it.unisa.is.c09.digitaldonation.Model.Repository;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,10 +52,10 @@ public class DonatoreRepositoryIT {
     private TesserinoRepository tesserinoRepository;
 
     @Autowired
-    private UtenteRepository utenteRepository;
+    private DonatoreRepository donatoreRepository;
 
     @Autowired
-    private DonatoreRepository donatoreRepository;
+    private UtenteRepository utenteRepository;
 
     private Donatore donatore;
 
@@ -92,7 +96,7 @@ public class DonatoreRepositoryIT {
         // Controlla che ogni donatore inserito per il test sia presente su database
         // restituendolo in base al codice fiscale
         Donatore donatoreSalvato = donatoreRepository.findDonatoreByCodiceFiscaleUtente(donatore.getCodiceFiscale());
-        assertNotEquals(donatore, donatoreSalvato);
+        assertThat(donatore.getCodiceFiscale(), is(equalTo(donatoreSalvato.getCodiceFiscale())));
         }
 
     /**
@@ -106,7 +110,6 @@ public class DonatoreRepositoryIT {
     @Test
     public void saveDonatore() {
         Donatore donatoreSalvato= donatoreRepository.save(donatore);
-        assertNotEquals(donatore, donatoreSalvato);
+        assertThat(donatore.getCodiceFiscale(), is(equalTo(donatoreSalvato.getCodiceFiscale())));
     }
 }
-

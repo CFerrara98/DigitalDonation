@@ -10,7 +10,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test di integrazione fra la classe IndisponibilitaRepository e il Database.
@@ -77,6 +81,6 @@ public class IndisponibilitaRepositoryIT {
     @Test
     public void saveIndisponibilita() {
         Indisponibilita indisponibilitaSalvata = indisponibilitaRepository.save(indisponibilita);
-        assertNotEquals(indisponibilita, indisponibilitaSalvata);
+        assertThat(indisponibilita.getIdIndisponibilita(), is(equalTo(indisponibilita.getIdIndisponibilita())));
     }
 }

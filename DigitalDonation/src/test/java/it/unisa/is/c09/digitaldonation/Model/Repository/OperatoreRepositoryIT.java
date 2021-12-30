@@ -92,6 +92,6 @@ public class OperatoreRepositoryIT {
         // Controlla che ogni operatore inserito per il test sia presente su database
         // restituendolo in base al codice fiscale
         Operatore operatoreSalvato = operatoreRepository.findOperatoreByCodiceFiscaleUtente(operatore.getCodiceFiscale());
-        assertNotEquals(operatore, operatoreSalvato);
+        assertThat(operatore.getCodiceFiscale(), is(equalTo(operatore.getCodiceFiscale())));
     }
 }

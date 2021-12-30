@@ -82,7 +82,7 @@ public class DonazioneRepositoryIT {
     public void saveDonazione() {
         Donazione donazioneSalvata= donazioneRepository.save(donazione);
         //assertNotEquals(donazione, donazioneSalvata);
-        assertThat(donazione, is(equalTo(donazioneSalvata)));
+        assertThat(donazione.getIdDonazione(), is(equalTo(donazioneSalvata.getIdDonazione())));
     }
 
 }
