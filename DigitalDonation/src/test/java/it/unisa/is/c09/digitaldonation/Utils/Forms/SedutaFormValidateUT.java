@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 
+import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -18,7 +19,7 @@ import java.util.GregorianCalendar;
 import static org.junit.Assert.*;
 
 /**
- * Classe di test di unità per il guest form
+ * Classe di test di unità per il seduta form
  *
  * @author Fabio Siepe
  */
@@ -36,6 +37,8 @@ public class SedutaFormValidateUT {
     private String citta;
     private String provincia;
     private String CAP;
+    private Time orarioInizio;
+    private Time orarioFine;
     private int numeroPartecipanti;
     private Date dataInizioPrenotazione;
     private Date dataFinePrenotazione;
@@ -55,12 +58,14 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
@@ -79,12 +84,14 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
         System.out.println(""+ errors.hasErrors());
         Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
@@ -104,13 +111,15 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         assertEquals("Indirizzo non valido.", "", sedutaForm.getIndirizzo());
@@ -129,13 +138,15 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
         final String message = "Citta non valida.";
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         assertEquals("Citta non valida.", "", sedutaForm.getCitta());
@@ -153,12 +164,14 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "821000";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         assertEquals("CAP non valido.", "", sedutaForm.getCAP());
@@ -176,12 +189,14 @@ public class SedutaFormValidateUT {
         provincia = "SALE";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
         final String message = "Provincia non valida.";
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         assertEquals("Provincia non valida.", "", sedutaForm.getProvincia());
@@ -199,13 +214,15 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 99999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         assertEquals("Numero partecipanti non valido. cià", 0, sedutaForm.getNumeroPartecipanti());
@@ -223,13 +240,15 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(202, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
         final String message = "Errore nella data dell'inizio.";
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
@@ -248,13 +267,15 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2020, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
         final String message = "Errore nella data dell'inizio.";
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
@@ -273,12 +294,14 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 5, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
@@ -297,12 +320,14 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(202, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
@@ -321,12 +346,14 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2020, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
@@ -345,12 +372,14 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 3, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
@@ -369,12 +398,14 @@ public class SedutaFormValidateUT {
         provincia = "SA";
         CAP = "82100";
         numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
         assertEquals("Data di fine prenotazione non valida.", sedutaForm, sedutaForm);

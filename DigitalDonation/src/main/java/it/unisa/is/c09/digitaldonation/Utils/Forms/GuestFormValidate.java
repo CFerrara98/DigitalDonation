@@ -35,13 +35,18 @@ public class GuestFormValidate implements Validator {
      */
     @Override
     public void validate(Object target, Errors errors) {
+
         GuestForm guestForm = (GuestForm) target;
+        organizzazioneSeduteService = new OrganizzazioneSeduteService();
+
 
         //Validazione del campo nome
         try{
             organizzazioneSeduteService.validaNome(guestForm.getNome());
         } catch(GuestFormException e1) {
             errors.reject("errore", e1.getMessage());
+            guestForm.setNome("");
+            return;
         }
 
         //Validazione del campo cognome
@@ -49,6 +54,8 @@ public class GuestFormValidate implements Validator {
             organizzazioneSeduteService.validaCognome(guestForm.getCognome());
         } catch(GuestFormException e1) {
             errors.reject("errore", e1.getMessage());
+            guestForm.setCognome("");
+            return;
         }
 
         //Validazione del campo telefono
@@ -56,6 +63,8 @@ public class GuestFormValidate implements Validator {
             organizzazioneSeduteService.validaTelefono(guestForm.getTelefono());
         } catch(GuestFormException e1) {
             errors.reject("errore", e1.getMessage());
+            guestForm.setTelefono("");
+            return;
         }
 
         //Validazione del campo codice fiscale
@@ -63,6 +72,8 @@ public class GuestFormValidate implements Validator {
             organizzazioneSeduteService.validaCodiceFiscaleGuest(guestForm.getCodiceFiscale());
         } catch(GuestFormException e1) {
             errors.reject("errore", e1.getMessage());
+            guestForm.setCodiceFiscale("");
+            return;
         }
 
         //Validazione del campo patologie
@@ -70,6 +81,8 @@ public class GuestFormValidate implements Validator {
             organizzazioneSeduteService.validaPatologie(guestForm.getPatologie());
         } catch(GuestFormException e1) {
             errors.reject("errore", e1.getMessage());
+            guestForm.setPatologie("");
+            return;
         }
 
         //Validazione del campo gruppo sanguigno
@@ -77,6 +90,8 @@ public class GuestFormValidate implements Validator {
             organizzazioneSeduteService.validaGruppoSanguigno(guestForm.getGruppoSanguigno());
         } catch(GuestFormException e1) {
             errors.reject("errore", e1.getMessage());
+            guestForm.setGruppoSanguigno("");
+            return;
         }
     }
 }
