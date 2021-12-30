@@ -91,18 +91,18 @@ public class GuestForm {
 
 
     /**
-     * Metodo che ritorna le patologieo del guest.
+     * Metodo che ritorna le patologie del guest.
      *
-     * @return patologie sono le patologieo del guest.
+     * @return patologie sono le patologie del guest.
      */
     public String getPatologie() {
         return patologie;
     }
 
     /**
-     * Metodo che setta e patologieo del guest.
+     * Metodo che setta e patologie del guest.
      *
-     * @param patologie sono le patologieo del guest.
+     * @param patologie sono le patologie del guest.
      */
     public void setPatologie(String patologie) {
         this.patologie = patologie;

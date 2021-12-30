@@ -34,6 +34,13 @@ public class OrganizzazioneSeduteController {
     @Autowired
     SedutaFormValidate sedutaFormValidate;
 
+    /**
+     * Metodo che permette al donatore di poter inviare un feedback.
+     * @param request è la richiesta dalla sessione.
+     * @param redirectAttribute è l'attributo di ridirezione.
+     * @param model è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/feedback", method = RequestMethod.POST)
     public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
         Boolean feedback = (Boolean) model.getAttribute("feedback");
@@ -48,6 +55,13 @@ public class OrganizzazioneSeduteController {
         return "GUIGestioneUtente/dashboardDonatore";
     }
 
+    /**
+     * Metodo che permette all'operatore di poter visualizzare una seduta con l'elenco dei partecipanti.
+     * @param request è la richiesta dalla sessione.
+     * @param redirectAttribute è l'attributo di ridirezione.
+     * @param model è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/monitoraggioSeduta", method = RequestMethod.GET)
     public String monitoraggioSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
         Utente utente = (Utente) model.getAttribute("utente");
@@ -71,10 +85,16 @@ public class OrganizzazioneSeduteController {
             return "errorsPages/error401";
     }
 
+    /**
+     * Metodo che permette all'operatore di poter visualizzare l'elenco delle sedute.
+     * @param request è la richiesta dalla sessione.
+     * @param model è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/visualizzaElencoSedute", method = RequestMethod.GET)
     public String visualizzaElencoSedute(HttpServletRequest request, Model model){
-        List<Seduta> listaSedutePrenotabili = organizzazioneSeduteService.getListaSedutePrenotabili();
-        model.addAttribute("listaSedutePrenotabili", listaSedutePrenotabili);
+       // List<Seduta> listaSedutePrenotabili = organizzazioneSeduteService.getListaSedutePrenotabili();
+        //model.addAttribute("listaSedutePrenotabili", listaSedutePrenotabili);
         Utente utente = (Utente) model.getAttribute("utente");
         if(utente instanceof Donatore){
             return "GUIOrganizzazioneSedute/seduteDisponibili";
@@ -84,6 +104,12 @@ public class OrganizzazioneSeduteController {
         }
     }
 
+    /**
+     * Metodo che permette al donatore di poter visualizzare una seduta.
+     * @param request è la richiesta dalla sessione.
+     * @param model è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/visualizzaSeduta", method = RequestMethod.GET)
     public String visualizzaSeduta(HttpServletRequest request, Model model){
         Utente utente = (Utente) model.getAttribute("utente");
@@ -103,6 +129,15 @@ public class OrganizzazioneSeduteController {
         }
     }
 
+    /**
+     * Metodo che permette all'operatore di poter inserire un utente guest all'interno di una seduta.
+     * @param request è la richiesta dalla sessione.
+     * @param guestForm è l'oggetto form dell'utente guest.
+     * @param redirectAttribute è l'attributo di ridirezione.
+     * @param model è l'oggetto Model.
+     * @param result è la variabile di binding.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/inserimentoGuest", method = RequestMethod.POST)
     public String inserimentoGuest(HttpServletRequest request, @ModelAttribute GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model){
         Utente utente = (Utente) model.getAttribute("utente");
@@ -129,6 +164,14 @@ public class OrganizzazioneSeduteController {
 
     }
 
+    /**
+     * Metodo che permette all'operatore di poter creare una nuova seduta.
+     * @param request è la richiesta dalla sessione.
+     * @param sedutaForm è l'oggetto form della seduta.
+     * @param redirectAttribute è l'attributo di ridirezione.
+     * @param model è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
     public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model){
         Utente utente = (Utente) model.getAttribute("utente");

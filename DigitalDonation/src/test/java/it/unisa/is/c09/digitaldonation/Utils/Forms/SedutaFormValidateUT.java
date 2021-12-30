@@ -1,13 +1,8 @@
-package it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement;
+package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
 
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.GuestFormException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.SedutaFormException;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
-import it.unisa.is.c09.digitaldonation.Model.Repository.*;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaFormValidate;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,56 +10,25 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.Errors;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
- * Classe di test di unità per il form di creazione di una seduta
+ * Classe di test di unità per il guest form
  *
- * @author Mattia Sapere, Fabio Siepe, Marika Spagna Zito
+ * @author Fabio Siepe
  */
 @RunWith(MockitoJUnitRunner.class)
-public class OrganizzazioneSeduteServiceUT {
+public class SedutaFormValidateUT {
 
     @Mock
-    private DonatoreRepository donatoreRepository;
-
-    @Mock
-    private DonazioneRepository donazioneRepository;
-
-    @Mock
-    private GuestRepository guestRepository;
-
-    @Mock
-    private IndisponibilitaRepository indisponibilitaRepository;
-
-    @Mock
-    private OperatoreRepository operatoreRepository;
-
-    @Mock
-    private SedeLocaleRepository sedeLocaleRepository;
-
-    @Mock
-    private SedutaRepository sedutaRepository;
-
-    @Mock
-    private TesserinoRepository tesserinoRepository;
-
-    @Mock
-    private UtenteRepository utenteRepository;
-
-    @Mock
-    private SedutaFormValidate sedutaFormValidate;
-
+    private Errors errors;
 
     @InjectMocks
-    private OrganizzazioneSeduteService organizzazioneSeduteService;
+    private SedutaFormValidate sedutaFormValidate;
 
     private Date dataSeduta;
     private String indirizzo;
@@ -77,19 +41,6 @@ public class OrganizzazioneSeduteServiceUT {
 
     private SedutaForm sedutaForm;
 
-
-
-    public void validaCampi() throws SedutaFormException {
-
-        organizzazioneSeduteService.validaDataSeduta(dataSeduta);
-        organizzazioneSeduteService.validaIndirizzo(indirizzo);
-        organizzazioneSeduteService.validaCitta(citta);
-        organizzazioneSeduteService.validaProvincia(provincia);
-        organizzazioneSeduteService.validaCAP(CAP);
-        organizzazioneSeduteService.validaNumeroPartecipanti(numeroPartecipanti);
-        organizzazioneSeduteService.validaDataInizioPrenotazioni(sedutaForm);
-        organizzazioneSeduteService.validaDataFinePrenotazioni(sedutaForm);
-    }
 
     /**
      * Verifica che il campo dataSeduta rispetti il formato
@@ -107,14 +58,11 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La data seduta inserita non ispetta il formato: gg/mm/aaaa";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Data seduta non valida.", null, sedutaForm.getDataSeduta());
     }
 
     /**
@@ -135,13 +83,10 @@ public class OrganizzazioneSeduteServiceUT {
         dataFinePrenotazione = myCalendar2.getTime();
 
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
 
-        final String message = "La data seduta inserita è minore della data corrente.";
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        assertEquals("Data seduta non valida.", null, sedutaForm.getDataSeduta());
+
     }
 
     /**
@@ -160,14 +105,12 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "L’indirizzo inserito non è corretto.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Indirizzo non valido.", null, sedutaForm.getIndirizzo());
     }
 
 
@@ -187,14 +130,12 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La città inserita non è corretta: non ammette caratteri numeri.";
+        final String message = "Citta non valida.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Citta non valida.", null, sedutaForm.getCitta());
     }
 
     /**
@@ -213,14 +154,11 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("CAP non valido.", null, sedutaForm.getCAP());
     }
 
     /**
@@ -239,14 +177,11 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
+        final String message = "Provincia non valida.";
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La provincia inserita non è corretta: ammette solo due caratteri.";
+        sedutaFormValidate.validate(sedutaForm, errors);
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        assertEquals("Provincia non valida.", null, sedutaForm.getProvincia());
     }
 
     /**
@@ -265,14 +200,12 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Numero partecipanti non valido. cià", 0, sedutaForm.getNumeroPartecipanti());
     }
 
     /**
@@ -291,14 +224,12 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.";
+        final String message = "Errore nella data dell'inizio.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Errore nella data dell'inizio.", null, sedutaForm.getDataInizioPrenotazione());
     }
 
     /**
@@ -317,14 +248,12 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La data inizio partecipazione inserita è minore della data corrente";
+        final String message = "Errore nella data dell'inizio.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Errore nella data dell'inizio.", null, sedutaForm.getDataInizioPrenotazione());
     }
 
     /**
@@ -343,14 +272,11 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La data inizio partecipazione inserita è maggiore della data seduta.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Errore nella data dell'inizio.", null, sedutaForm.getDataInizioPrenotazione());
     }
 
     /**
@@ -369,14 +295,11 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(202, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Data di fine prenotazione non valida.", null, sedutaForm.getDataFinePrenotazione());
     }
 
     /**
@@ -395,14 +318,11 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2020, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La data fine partecipazione inserita è minore della data corrente.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Data di fine prenotazione non valida.", null, sedutaForm.getDataFinePrenotazione());
     }
 
     /**
@@ -421,14 +341,11 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 3, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La data fine partecipazione inserita è minore della data inizio partecipazione.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Data di fine prenotazione non valida.", null, sedutaForm.getDataFinePrenotazione());
     }
 
     /**
@@ -447,14 +364,18 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "La schedulazione di una nuova seduta va a buon fine.";
 
-        try {
-            validaCampi();
-        } catch (SedutaFormException exception) {
-            assertEquals(message, exception.getMessage());
-        }
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaFormValidate.validate(sedutaForm, errors);
+
+        assertEquals("Data di fine prenotazione non valida.", sedutaForm, sedutaForm);
+    }
+
+    @Test
+    public void VerificaSupports() {
+
+        assertEquals("Volevo Solo più branche coverage", false, sedutaFormValidate.supports(SedutaFormValidate.class));
+
     }
 
 }

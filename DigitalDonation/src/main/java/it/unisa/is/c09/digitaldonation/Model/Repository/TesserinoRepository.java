@@ -1,9 +1,12 @@
 package it.unisa.is.c09.digitaldonation.Model.Repository;
 
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Donazione;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Collection;
 
 /**
  *
