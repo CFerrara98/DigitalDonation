@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 /**
  * Test di integrazione fra la classe SedutaRepository e il Database.
@@ -126,7 +127,6 @@ public class SedutaRepositoryIT {
         Seduta sedutaSalvata = sedutaRepository.save(seduta);
         assertThat(seduta.getIdSeduta(), is(equalTo(sedutaSalvata.getIdSeduta())));
     }
-
 
 
 }
