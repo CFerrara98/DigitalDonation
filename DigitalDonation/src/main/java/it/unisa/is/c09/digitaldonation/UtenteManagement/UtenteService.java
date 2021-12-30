@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 public class UtenteService implements UtenteServiceInterface {
 
     @Autowired
-    UtenteRepository utenteRepository;
+    private UtenteRepository utenteRepository;
+
 
     /**
      * Permette l'autenticazione di un utente nel sistema.

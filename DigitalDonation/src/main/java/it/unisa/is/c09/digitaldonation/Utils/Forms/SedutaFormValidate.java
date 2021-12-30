@@ -21,6 +21,7 @@ import java.util.Date;
 @Component
 public class SedutaFormValidate implements Validator {
 
+    @Autowired
     private OrganizzazioneSeduteService organizzazioneSeduteService;
 
     @Override
@@ -40,7 +41,6 @@ public class SedutaFormValidate implements Validator {
     public void validate(Object target, Errors errors) {
 
         SedutaForm sedutaForm = (SedutaForm) target;
-        organizzazioneSeduteService = new OrganizzazioneSeduteService();
         //Validazione del campo dataSeduta
         try {
 

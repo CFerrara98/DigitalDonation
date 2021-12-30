@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class UtenteController {
+
     @Autowired
     UtenteService utenteService;
     @Autowired
@@ -60,6 +61,7 @@ public class UtenteController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request,@ModelAttribute("loginForm") LoginForm loginForm,
                         BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+
         Utente utente = null;
         loginFormValidator.validate(loginForm, result);
         if (result.hasErrors()) {

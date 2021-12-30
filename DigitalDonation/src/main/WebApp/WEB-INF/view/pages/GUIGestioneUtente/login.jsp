@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: utente
-  Date: 29/12/2021
-  Time: 17:58
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -51,25 +44,25 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Benvenuto!</h1>
                                 </div>
-
                                 <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm"--%>
                                 <form:form action="./login" method="post" modelAttribute="loginForm" cssClass="user" enctype="application/x-www-form-urlencoded">
                                     <div class="form-group">
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Email:</h6>
-
                                         <c:choose>
                                             <c:when test="${EmailError == null}">
                                                 <c:choose>
                                                     <c:when test="${EmailPrecedente == null}">
-                                                        <input type="email" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email"/>
+                                                        <form:input type="text" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <input type="email" value="${EmailPrecedente}" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email"/>
+                                                        <form:input type="text" value="${EmailPrecedente}" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </c:when>
                                             <c:otherwise>
-                                                <input type="email" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email"/>
+                                                <form:input type="text" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
+                                                <p>ciao</p>
+                                                <p>${EmailError}</p>
                                                 <span class="myError">${EmailError}</span>
                                             </c:otherwise>
                                         </c:choose>
@@ -78,8 +71,7 @@
                                         <h6 class="h6 text-gray-900 mb-4">Inserisci Password:</h6>
                                         <form:input path="password" type="password" class="form-control form-control-user" id="password" placeholder="Inserisci la password"/>
                                     </div>
-                                    </div>
-                                    <br>
+
                                     <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
                                 </form:form>
 

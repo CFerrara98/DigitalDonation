@@ -53,7 +53,7 @@ public class LoginFormValidate implements Validator {
             return;
         }*/
 
-        utenteService = new UtenteService();
+
         //Validazione del campo email
         try {
             utenteService.validaMail(loginForm.getEmail());
