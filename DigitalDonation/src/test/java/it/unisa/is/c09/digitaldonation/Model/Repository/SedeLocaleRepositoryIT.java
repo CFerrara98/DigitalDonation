@@ -68,7 +68,7 @@ public class SedeLocaleRepositoryIT {
     public void salvaSedeLocale() {
 
         sedeLocale = new SedeLocale();
-        sedeLocale.setCodiceIdentificativo(2l);
+        //sedeLocale.setCodiceIdentificativo(2l);
         sedeLocale.setVia("Via Garibaldi, 44");
 
         sedeLocaleRepository.save(sedeLocale);
