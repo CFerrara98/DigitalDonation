@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
 public class UtenteService implements UtenteServiceInterface {
 
     @Autowired
-    private UtenteRepository utenteRepository;
+    private UtenteRepository utenteRepository ;
 
 
     /**

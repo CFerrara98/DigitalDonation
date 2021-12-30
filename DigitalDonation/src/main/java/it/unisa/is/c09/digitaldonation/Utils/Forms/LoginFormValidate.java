@@ -3,6 +3,7 @@ package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonEsistenteException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonValidaException;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,6 @@ import org.springframework.validation.Validator;
  * validità di alcuni campi definiti nell'entità Utente.
  *
  * @author Mattia Sapere, Fabio Siepe
- *
  */
 
 @Component
@@ -40,7 +40,7 @@ public class LoginFormValidate implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         LoginForm loginForm = (LoginForm) target;
-
+        utenteService = new UtenteService();
         /*        organizzazioneSeduteService = new OrganizzazioneSeduteService();
         //Validazione del campo dataSeduta
         try {
@@ -54,13 +54,15 @@ public class LoginFormValidate implements Validator {
         }*/
 
         //Validazione del campo email
+
+
         try {
             utenteService.validaMail(loginForm.getEmail());
-        } catch(MailNonValidaException e1) {
+        } catch (MailNonValidaException e1) {
             errors.reject("errore", e1.getMessage());
             loginForm.setEmail("");
             return;
-        } catch(MailNonEsistenteException e2) {
+        } catch (MailNonEsistenteException e2) {
             errors.reject("errore", e2.getMessage());
             loginForm.setEmail("");
             return;
