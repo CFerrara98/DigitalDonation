@@ -29,101 +29,96 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <div class="card-body">
                             <!-- indietro -->
-                            <a href="dashboardDonatore.html" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
-                            <!-- Titolo -->
-                            <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Elenco sedute ancora da svolgersi:</h1>
+                            <a href="monitoraggioSedute.html" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
+
+                            <!-- titolo -->
+                            <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Elenco partecipanti</h1>
 
                         </div>
                     </div>
+
+
+                    <!-- Sezione Elenco monitoraggi -->
 
                     <div class="card shadow mb-4 ">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Elenco sedute:</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Elenco partecipanti alla seduta del
+                                <c:out value="${dataSeduta}"></c:out> presso
+                                <c:out value="${luogoSeduta}"></c:out>:</h6>
                         </div>
                         <h6>&nbsp;</h6>
 
-                        <!-- prima seduta-->
+                        <!-- inserimento utente guest -->
                         <div class="card shadow mb-4">
-
                             <div class=" m-0 card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary h6">Seduta 1:</h6>
+                                <h6 class="m-0 font-weight-bold text-primary h6"> Inserimento utente</h6>
                             </div>
                             <div class="card-body">
 
-                                <!-- tabella-->
-                                <div class="table-botton">
-                                    <table class="table  ">
-                                        <thead>
-                                        <tr>
-                                            <td scope="col"><h3 class="small font-weight-bold"> Luogo:%luogo% </h3>
-                                                <h3 class="small font-weight-bold">  Data:%data%</h3>
-                                            <td scope="col"><span  class=" float-right">
-                                                <a class="btn btn-primary botton-sm large" href="partecipaseduta.html" role="button">Partecipa</a>
-                                             </span>
-                                            </td>
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                                <!-- fine tabella-->
-                            </div>
-                        </div>
 
-                        <!-- seconda seduta-->
-                        <div class="card shadow mb-4">
-                            <div class=" m-0 card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary h6">Seduta 2:</h6>
-                            </div>
-                            <div class="card-body">
+                                <!-- Bottom indisponibilità seduta -->
+                                <span  class="float-left col-xl-1 col-md-6 mb-2">
+                                    <a href="./inserimentoGuest" role="button"> <i class="fas fa-plus icone"></i> </a>
 
-                                <!-- tabella-->
-                                <div class="table-botton">
-                                    <table class="table  ">
-                                        <thead>
-                                        <tr>
-                                            <td scope="col"><h3 class="small font-weight-bold"> Luogo:%luogo% </h3>
-                                                <h3 class="small font-weight-bold">  Data:%data%</h3>
-                                            </td>
-                                            <td scope="col"><span  class=" float-right">
-                                                <a class="btn btn-primary botton-sm large" href="partecipaseduta.html" role="button">Partecipa</a>
-                                             </span>
-                                            </td>
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                                <!-- fine tabella-->
+                                </span>
+                                <h2>
+                                    <a href="./inserimentoGuest" role="button"> Inserimento utente Guest </a>
+                                </h2>
 
                             </div>
                         </div>
 
-                        <!-- terza seduta-->
+                        <c:forEach begin="0" var="i" end="${listaPartecipanti.size}">
+
+                        <!-- pRTECIPANTE -->
                         <div class="card shadow mb-4">
                             <div class=" m-0 card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary h6">Seduta 3:</h6>
+                                <h6 class="m-0 font-weight-bold text-primary h6">
+                                    <c:out value="${listaPartecipante.getIndex(i).nome}"></c:out>
+                                    <c:out value="${listaPartecipante.getIndex(i).cognome}"></c:out> </h6>
                             </div>
                             <div class="card-body">
-                                <!-- tabella-->
-                                <div class="table-botton">
+                                <!-- tabella -->
+                                <div class="table-container">
                                     <table class="table  ">
                                         <thead>
                                         <tr>
-                                            <td scope="col"><h3 class="small font-weight-bold"> Luogo:%luogo% </h3>
-                                                <h3 class="small font-weight-bold">  Data:%data%</h3></td>
-                                            <td scope="col"><span  class=" float-right">
-                                                <a class="btn btn-primary botton-sm large" href="partecipaseduta.html" role="button">Partecipa</a>
-                                             </span>
-                                            </td>
+                                            <th scope="col"></th>
+                                            <th scope="col">Indisponibilità</th>
+                                            <th scope="col">Conferma donazione</th>
                                         </tr>
                                         </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th>
+                                                <h4 class="small font-weight-bold ">Telefono: <c:out value="${listaPartecipante.getIndex(i).telefono}"></c:out>     </h4>
+                                                <h4 class="small font-weight-bold ">Codice Fiscale<c:out value="${listaPartecipante.getIndex(i).CF}"></c:out> </h4>
+                                                <h4 class="small font-weight-bold ">Gruppo sanguigno:<c:out value="${listaPartecipante.getIndex(i).gruppoSanguigno}"></c:out> </h4>
+                                            </th>
+                                            <!-- Bottom indisponibilità seduta -->
+                                            <th scope="row">
+                                                        <span  class="float-center col-xl-1 col-md-6 mb-2">
+                                                        <a href=".html" role="button"> <i class="far fa-times-circle icone"></i></a>
+                                                    </span></th>
+                                            <!-- Bottom conferma donazione partecipanti -->
+                                            <td>
+                                                        <span  class="float-center col-xl-1 col-md-6 mb-2">
+                                                                <a href=".html" role="button">
+                                                                    <i class="far fa-check-circle icone"  ></i>
+                                                                </a>
+                                                        </span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
                                     </table>
                                 </div>
-                                <!-- fine tabella-->
                             </div>
                         </div>
+
+                        </c:forEach>
 
                     </div>
-
+                    <!-- fine elenco monitoraggio -->
                 </div>
 
                 <!-- /.container-fluid -->
