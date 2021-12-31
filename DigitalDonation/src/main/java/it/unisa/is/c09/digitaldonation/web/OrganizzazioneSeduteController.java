@@ -266,6 +266,10 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value ="/goInserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(Model model) {
+       //lo abbiamo messo provvisoriamente per provare il guestform nella jsp "inserimentoUtenteGuest"
+       // GuestForm guestForm = new GuestForm();
+      //  model.addAttribute("guestForm", guestForm);
+
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
     }
 

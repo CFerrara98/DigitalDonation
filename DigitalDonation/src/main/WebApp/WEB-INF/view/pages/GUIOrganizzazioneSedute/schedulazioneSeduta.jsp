@@ -10,7 +10,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
-<z:layout pageTitle="schedulazioneSeduta">
+
+
+
+<z:layout pageTitle="schedulazione Seduta">
 
     <!-- Page Wrapper -->
     <div id="wrapper">

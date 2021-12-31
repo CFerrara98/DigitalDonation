@@ -10,7 +10,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<z:layout pageTitle="monitoraggioSedute">
+<z:layout pageTitle="monitoraggio Sedute">
 
     <!-- Page Wrapper -->
     <div id="wrapper">

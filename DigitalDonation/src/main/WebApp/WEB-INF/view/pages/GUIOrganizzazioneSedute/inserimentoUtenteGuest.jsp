@@ -5,12 +5,16 @@
   Time: 13:04
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<z:layout pageTitle="inserimentoUtenteGuest">
+
+<z:layout pageTitle="inserimento Utente Guest">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -55,8 +59,7 @@
                                                        modelAttribute="guestForm" cssClass="user"
                                                        enctype="application/x-www-form-urlencoded">
 
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <div class="form-group">
                                                     <p style="color:#4e73df;">Inserisci il nome dell'utente
                                                         Guest: </p>
                                                     <c:choose>
@@ -69,7 +72,7 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="nome" placeholder="es. Angela"
                                                                         path="nome"/>
                                                             <span class="myError">${NomeError}</span>
@@ -91,7 +94,7 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="cognome"
                                                                         placeholder="es. De Martino"
                                                                         path="cognome"/>
@@ -113,7 +116,7 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="tel"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="telefono"
                                                                         placeholder="es. 3456789123"
                                                                         path="telefono"/>
@@ -131,14 +134,14 @@
                                                         <c:when test="${CodiceFiscaleError == null}">
                                                             <form:input
                                                                     type="text"
-                                                                    class="form-control form-control-user"
+                                                                    class="form-control form-control-user "
                                                                     id="codiceFiscale"
                                                                     placeholder="es. MVYZZV65L56I556J"
                                                                     path="codiceFiscale"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="codiceFiscale"
                                                                         placeholder="es. MVYZZV65L56I556J"
                                                                         path="codiceFiscale"/>
@@ -165,7 +168,7 @@
                                                                 <c:otherwise>
                                                                     <form:input
                                                                             type="text"
-                                                                            class="form-control form-control-user"
+                                                                            class="form-control form-control-user is-invalid"
                                                                             id="patologie"
                                                                             placeholder="es. Nessuna"
                                                                             path="patologie"/>
@@ -184,7 +187,7 @@
                                                             <form:select name="gruppoSanguigno"
                                                                          id="gruppoSanguigno"
                                                                          class="form-control gruppo-sanguigno"
-                                                                         path="grupposanguigno"/>
+                                                                         path="gruppoSanguigno"/>
                                                             <form:option selected="true" value="A+ ">
                                                                 A+
                                                             </form:option>

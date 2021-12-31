@@ -90,10 +90,9 @@
                                             <span class="myError">${PasswordError}</span>
                                         </c:otherwise>
                                     </c:choose>
-
                                 </div>
                             </div>
-
+                            <br>
                             <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
                             </form:form>
 

@@ -9,7 +9,7 @@
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<z:layout pageTitle="dashboardDonatore">
+<z:layout pageTitle="partecipa Seduta">
     <!-- Page Wrapper -->
     <div id="wrapper">
 

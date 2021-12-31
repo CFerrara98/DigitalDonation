@@ -43,7 +43,7 @@ public class UtenteController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String visualizzaHome(HttpSession session, Model model) {
         session.invalidate();
-        return "GUIGestioneUtente/homepage";
+        return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
     }
 
 
