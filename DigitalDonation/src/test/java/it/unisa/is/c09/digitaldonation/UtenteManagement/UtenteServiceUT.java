@@ -13,13 +13,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
-<<<<<<< HEAD
+
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
-=======
+
 import java.security.NoSuchAlgorithmException;
 
->>>>>>> 802eb8019862438e5df865a6447f6feb30e3b591
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -141,7 +141,9 @@ public class UtenteServiceUT {
         try {
             utenteService.login("fabio.siepe@gmail.com", "password123");
         } catch (UserNotLoggedException e) {
-            fail("errore nel login!");
+            assertEquals("La password non è valida.", e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            fail("errore nel login! 2");
         }
     }
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
 
 @Controller
 public class UtenteController {
@@ -68,6 +69,8 @@ public class UtenteController {
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
             redirectAttribute.addFlashAttribute("PasswordError", "Email o password errati, per favore riprova");
             return "redirect:/login";
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
         //Se è un operatore
