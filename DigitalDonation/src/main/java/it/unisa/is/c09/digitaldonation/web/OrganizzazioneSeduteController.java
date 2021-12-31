@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -176,10 +177,19 @@ public class OrganizzazioneSeduteController {
     public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model){
         Utente utente = (Utente) model.getAttribute("utente");
         sedutaFormValidate.validate(sedutaForm, result);
+        if (result.hasErrors()) {
+            // se ci sono errori il metodo controller setta tutti i parametri
+            redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);
+            for (ObjectError x : result.getGlobalErrors()) {
+                redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
+                System.out.println(x.getCode());
+            }
+            return "redirect:/goSchedulazioneSeduta";
+        }
+
         if(utente instanceof Operatore) {
             Operatore operatore = (Operatore) utente;
             SedeLocale sedeLocale = operatore.getSedeLocale();
-
             Seduta seduta = new Seduta();
             seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
             seduta.setDataSeduta(sedutaForm.getDataSeduta());
@@ -188,19 +198,17 @@ public class OrganizzazioneSeduteController {
             seduta.setOraInizio(sedutaForm.getOrarioInizio());
             seduta.setOraFine(sedutaForm.getOrarioFine());
             seduta.setSedeLocale(sedeLocale);
-
             String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
             seduta.setLuogo(luogo);
             try {
                 organizzazioneSeduteService.schedulazioneSeduta(seduta);
+                return "GUIGestioneUtente/dashboardOperatore";
             } catch (CannotSaveDataRepositoryException e) {
-                return "errorsPages/error503";
+                return "redirect:/goSchedulazioneSeduta";
             }
-            return "GUIGestioneUtente/dashboardOperatore";
         }
         else
-            return "errorsPages/error401";
-
+            return "GUIGestioneUtente/homepage";
     }
 
     /**
@@ -248,7 +256,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/schedulazioneSeduta", method = RequestMethod.GET)
+    @RequestMapping(value ="/goSchedulazioneSeduta", method = RequestMethod.GET)
     public String schedulazioneSeduta(Model model) {
         return "GUIOrganizzazioneSedute/schedulazioneSeduta";
     }

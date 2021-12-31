@@ -50,33 +50,19 @@
                                                 <%--@elvariable id="SedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
                                             <form:form action="./schedulazioneSeduta" method="post"
                                                        modelAttribute="sedutaForm" cssClass="user"
-                                                       enctype="application/x-www-form-urlencoded">
+                                                       enctype="application/x-www-form-urlencoded">/////dqdwqdqwdwd
+
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <p style="color:#4e73df;">Data seduta: </p>
                                                     <c:choose>
                                                         <c:when test="${DataError == null}">
-                                                            <c:choose>
-                                                                <c:when test="${DataPrecedente == null}">
-                                                                    <form:input type="date"
-                                                                                class="form-control form-control-user"
-                                                                                id="data" placeholder="Data Seduta:"
-                                                                                path="data"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="date" value="${DataPrecedente}"
-                                                                                class="form-control form-control-user"
-                                                                                id="data" placeholder="Data Seduta:"
-                                                                                path="data"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
+                                                            <form:input type="date" class="form-control form-control-user" id="data" placeholder="Data Seduta:" path="data"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="date"
                                                                         class="form-control form-control-user" id="data"
                                                                         placeholder="Data Seduta:" path="data"/>
-
-                                                            <p>${DataError}</p>
                                                             <span class="myError">${DataError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
