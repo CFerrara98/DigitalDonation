@@ -91,16 +91,25 @@ public class UtenteService implements UtenteServiceInterface {
      * @return
      * @throws NoSuchAlgorithmException
      */
-    public static String getMD5(String data) throws NoSuchAlgorithmException
+    public static String getMD5(String data)
     {
-        MessageDigest messageDigest=MessageDigest.getInstance("MD5");
+        if(data != null) {
+            MessageDigest messageDigest = null;
+            try {
+                messageDigest = MessageDigest.getInstance("MD5");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
 
-        messageDigest.update(data.getBytes());
-        byte[] digest=messageDigest.digest();
-        StringBuffer sb = new StringBuffer();
-        for (byte b : digest) {
-            sb.append(Integer.toHexString((int) (b & 0xff)));
+            messageDigest.update(data.getBytes());
+            byte[] digest = messageDigest.digest();
+            StringBuffer sb = new StringBuffer();
+            for (byte b : digest) {
+                sb.append(Integer.toHexString((int) (b & 0xff)));
+            }
+            return sb.toString();
         }
-        return sb.toString();
+        else
+            return "";
     }
 }

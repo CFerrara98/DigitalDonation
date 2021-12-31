@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
 
 @Controller
 public class UtenteController {
@@ -55,7 +56,6 @@ public class UtenteController {
         Utente utente = null;
         loginFormValidator.validate(loginForm, result);
         if (result.hasErrors()) {
-            System.out.println("result.hasErrors()");
             // se ci sono errori il metodo controller setta tutti i parametri
             redirectAttribute.addFlashAttribute("EmailError", "Email o password errati, per favore riprova");
             return "redirect:/login";
@@ -68,6 +68,8 @@ public class UtenteController {
             redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
             redirectAttribute.addFlashAttribute("PasswordError", "Email o password errati, per favore riprova");
             return "redirect:/login";
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
         //Se è un operatore
@@ -107,7 +109,7 @@ public class UtenteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina.
      */
-    @RequestMapping(value ="/login", method = RequestMethod.GET)
+    @RequestMapping(value ="/goLogin", method = RequestMethod.GET)
     public String goLogin(Model model) {
         return "GUIGestioneUtente/login";
     }

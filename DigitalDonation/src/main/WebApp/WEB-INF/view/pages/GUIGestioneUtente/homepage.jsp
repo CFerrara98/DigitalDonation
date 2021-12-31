@@ -8,7 +8,5 @@
 
 <z:layout pageTitle="homepage">
     <p>Provaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-    <a href="./login">Login</a>
-
-    <a href="./generateEntity">Test</a>
+    <a href="./goLogin">Login</a>
 </z:layout>
