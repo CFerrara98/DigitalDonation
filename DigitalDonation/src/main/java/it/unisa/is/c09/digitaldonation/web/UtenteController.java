@@ -43,7 +43,7 @@ public class UtenteController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String visualizzaHome(HttpSession session, Model model) {
         session.invalidate();
-        return "GUIGestioneUtente/homepage";
+        return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
     }
 
 
@@ -140,7 +140,7 @@ public class UtenteController {
     public String dashboardDonatore(HttpServletRequest request, Model model) {
         if(request.getSession().getAttribute("utente") instanceof Donatore){
             //TODO Caricare la img del donatore come da mock-up
-            return "GUIGestioneUtente/dashboardOperatore";
+            return "GUIGestioneUtente/dashboardDonatore";
         }
         request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
         return "redirect:/";

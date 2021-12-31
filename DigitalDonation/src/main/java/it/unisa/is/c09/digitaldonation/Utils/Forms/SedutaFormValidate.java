@@ -46,9 +46,7 @@ public class SedutaFormValidate implements Validator {
         organizzazioneSeduteService = new OrganizzazioneSeduteService();
         //Validazione del campo dataSeduta
         try {
-
             organizzazioneSeduteService.validaDataSeduta(sedutaForm.getDataSeduta());
-
         } catch (SedutaFormException e1) {
             errors.reject("Data non valida.", e1.getMessage());
             Calendar myCalendar = new GregorianCalendar(1939, 9, 1);

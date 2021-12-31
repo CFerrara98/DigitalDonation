@@ -11,28 +11,29 @@
 
 <z:layout pageTitle="headerhomepage">
 
-<!-- Topbar -->
+    <!-- Topbar -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
 
-    <!-- Logo -->
-    <a class="navbar-brand" href="#"><img class="rounded-circle" src="../../resources/img/logo.png" alt="..." style="width:50px"></a>
+        <!-- Logo -->
+        <a class="navbar-brand" href="#"><img class="rounded-circle" src="../../resources/img/logo.png" alt="..."
+                                              style="width:50px"></a>
 
-    <!-- Topbar scritta Digital Donation -->
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div class="input-group">
-            <h1 class="h3 mb-0 text-gray-800">DIGITAL DONATION</h1>
-        </div>
-    </form>
+        <!-- Topbar scritta Digital Donation -->
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <h1 class="h3 mb-0 text-gray-800">DIGITAL DONATION</h1>
+            </div>
+        </form>
 
-    <!-- Topbar Login/Logout -->
-    <ul class="navbar-nav ml-auto">
-        <div class="topbar-divider d-none d-sm-block"></div>
-        <a class="btn btn-primary" href="./goLogin" role="button">Login</a>
+        <!-- Topbar Login/Logout -->
+        <ul class="navbar-nav ml-auto">
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <a class="btn btn-primary" href="./goLogin" role="button">Login</a>
 
-    </ul>
+        </ul>
 
-</nav>
-<!-- End of Topbar -->
+    </nav>
+    <!-- End of Topbar -->
 
 </z:layout>

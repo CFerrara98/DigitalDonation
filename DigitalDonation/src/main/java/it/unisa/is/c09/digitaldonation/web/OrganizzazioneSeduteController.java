@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,14 +23,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
 public class OrganizzazioneSeduteController {
 
-    private Logger logger = Logger.getLogger(String.valueOf(OrganizzazioneSeduteController.class));
+    private static Logger logger = Logger.getLogger(String.valueOf(OrganizzazioneSeduteController.class));
 
     @Autowired
     OrganizzazioneSeduteService organizzazioneSeduteService;
@@ -98,7 +103,7 @@ public class OrganizzazioneSeduteController {
             }
         }
         else
-            return "errorsPages/error401";
+            return "redirect:/";
     }
 
     /**
@@ -109,15 +114,17 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value = "/visualizzaElencoSedute", method = RequestMethod.GET)
     public String visualizzaElencoSedute(HttpServletRequest request, Model model){
-        // List<Seduta> listaSedutePrenotabili = organizzazioneSeduteService.getListaSedutePrenotabili();
-        //model.addAttribute("listaSedutePrenotabili", listaSedutePrenotabili);
-        Utente utente = (Utente) model.getAttribute("utente");
-        if(utente instanceof Donatore){
-            return "GUIOrganizzazioneSedute/seduteDisponibili";
-        }
-        else{
-            return "GUIOrganizzazioneSedute/monitoraggioSedute";
-        }
+        return "GUIOrganizzazioneSedute/monitoraggioSedute";
+    }
+
+    /**
+     * Metodo che permette di andare alla pagina dell'elenco dei partecipanti.
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
+    @RequestMapping(value ="/goSeduteDisponibili", method = RequestMethod.GET)
+    public String seduteDisponibili(Model model) {
+        return "GUIOrganizzazioneSedute/seduteDisponibili";
     }
 
     /**
@@ -128,9 +135,9 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value = "/visualizzaSeduta", method = RequestMethod.GET)
     public String visualizzaSeduta(HttpServletRequest request, Model model){
-        Utente utente = (Utente) model.getAttribute("utente");
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente instanceof Donatore) {
-            Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
+            Long idSeduta = (Long) model.getAttribute("idSeduta");
             List<Seduta> lista = (List<Seduta>) model.getAttribute("listaSedutePrenotabili");
             for (int i = 0; i < lista.size(); i++) {
                 if (lista.get(i).getIdSeduta() == idSeduta) {
@@ -141,7 +148,7 @@ public class OrganizzazioneSeduteController {
         }
 
         else{
-            return "errorsPages/error401";
+            return "redirect:/\"";
         }
     }
 
@@ -156,9 +163,18 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value = "/inserimentoGuest", method = RequestMethod.POST)
     public String inserimentoGuest(HttpServletRequest request, @ModelAttribute GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model){
-        Utente utente = (Utente) model.getAttribute("utente");
-        Long idSeduta = (Long) model.getAttribute("idSeduta");
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
         guestFormValidate.validate(guestForm, result);
+        Long idSeduta = (Long) model.getAttribute("idSeduta");
+        if (result.hasErrors()) {
+            // se ci sono errori il metodo controller setta tutti i parametri
+            redirectAttribute.addFlashAttribute("guestForm", guestForm);
+            for (ObjectError x : result.getGlobalErrors()) {
+                redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
+                System.out.println(x.getCode());
+            }
+            return "redirect:/goInserimentoUtenteGuest";
+        }
         if(utente instanceof Operatore) {
             Guest guest = new Guest();
             guest.setNome(guestForm.getNome());
@@ -169,14 +185,13 @@ public class OrganizzazioneSeduteController {
             guest.setGruppoSanguigno(guestForm.getGruppoSanguigno());
             try {
                 organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
-
                 return "redirect:/monitoraggioSeduta";
             } catch (CannotSaveDataRepositoryException e) {
-                return "errorsPages/error503";
+                return "redirect:/goInserimentoUtenteGuest";
             }
         }
         else
-            return "errorsPages/error401";
+            return "redirect:/";
 
     }
 
@@ -189,34 +204,62 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
-    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model){
-        Utente utente = (Utente) model.getAttribute("utente");
-        sedutaFormValidate.validate(sedutaForm, result);
-        if(utente instanceof Operatore) {
-            Operatore operatore = (Operatore) utente;
-            SedeLocale sedeLocale = operatore.getSedeLocale();
+    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
 
-            Seduta seduta = new Seduta();
-            seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
-            seduta.setDataSeduta(sedutaForm.getDataSeduta());
-            seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
-            seduta.setNumeroPartecipanti(0);
-            seduta.setOraInizio(sedutaForm.getOrarioInizio());
-            seduta.setOraFine(sedutaForm.getOrarioFine());
-            seduta.setSedeLocale(sedeLocale);
+        String dataSeduta = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataSeduta());
+        String dataInizio = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataInizioPrenotazione());
+        String dataFine = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataFinePrenotazione());
+        try {
+            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date dataSedutaD = (Date) formatter.parse(dataSeduta);
+            Date dataInizioD = (Date) formatter.parse(dataInizio);
+            Date dataFineD = (Date) formatter.parse(dataFine);
+            sedutaForm.setDataSeduta(dataSedutaD);
+            sedutaForm.setDataInizioPrenotazione(dataInizioD);
+            sedutaForm.setDataFinePrenotazione(dataFineD);
 
-            String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
-            seduta.setLuogo(luogo);
-            try {
-                organizzazioneSeduteService.schedulazioneSeduta(seduta);
-            } catch (CannotSaveDataRepositoryException e) {
-                return "errorsPages/error503";
+            sedutaFormValidate.validate(sedutaForm, result);
+            if (result.hasErrors()) {
+                // se ci sono errori il metodo controller setta tutti i parametri
+                redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);
+                for (ObjectError x : result.getGlobalErrors()) {
+                    redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
+                    System.out.println(x.getCode());
+                }
+                return "redirect:/goSchedulazioneSeduta";
             }
-            return "GUIGestioneUtente/dashboardOperatore";
-        }
-        else
-            return "errorsPages/error401";
 
+            if (utente instanceof Operatore) {
+                DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+                Date data1 = (Date)formatter2.parse(dataSeduta);
+                Date data2 = (Date)formatter2.parse(dataInizio);
+                Date data3 = (Date)formatter2.parse(dataFine);
+
+                Operatore operatore = (Operatore) utente;
+                SedeLocale sedeLocale = operatore.getSedeLocale();
+                Seduta seduta = new Seduta();
+                seduta.setDataFinePrenotazione(data3);
+                seduta.setDataSeduta(data1);
+                seduta.setDataInizioPrenotazione(data2);
+                seduta.setNumeroPartecipanti(0);
+                seduta.setOraInizio(sedutaForm.getOrarioInizio());
+                seduta.setOraFine(sedutaForm.getOrarioFine());
+                seduta.setSedeLocale(sedeLocale);
+                String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
+                seduta.setLuogo(luogo);
+                try {
+                    organizzazioneSeduteService.schedulazioneSeduta(seduta);
+                    return "GUIGestioneUtente/dashboardOperatore";
+                } catch (CannotSaveDataRepositoryException e) {
+                    return "redirect:/goSchedulazioneSeduta";
+                }
+            } else
+                return "redirect:/";
+        }catch(ParseException e)
+        {
+            return "redirect:/goSchedulazioneSeduta";
+        }
     }
 
     /**
@@ -224,7 +267,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina.
      */
-    @RequestMapping(value ="/elencoPartecipanti", method = RequestMethod.GET)
+    @RequestMapping(value ="/goElencoPartecipanti", method = RequestMethod.GET)
     public String elencoPartecipanti(Model model) {
         return "GUIOrganizzazioneSedute/elencoPartecipanti";
     }
@@ -234,8 +277,12 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/inserimentoUtenteGuest", method = RequestMethod.GET)
+    @RequestMapping(value ="/goInserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(Model model) {
+       //lo abbiamo messo provvisoriamente per provare il guestform nella jsp "inserimentoUtenteGuest"
+       // GuestForm guestForm = new GuestForm();
+      //  model.addAttribute("guestForm", guestForm);
+
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
     }
 
@@ -244,7 +291,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina.
      */
-    @RequestMapping(value ="/monitoraggioSedute", method = RequestMethod.GET)
+    @RequestMapping(value ="/goMonitoraggioSedute", method = RequestMethod.GET)
     public String monitoraggioSedute(Model model) {
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
     }
@@ -254,7 +301,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/partecipaSeduta", method = RequestMethod.GET)
+    @RequestMapping(value ="/goPartecipaSeduta", method = RequestMethod.GET)
     public String partecipaSeduta(Model model) {
         return "GUIOrganizzazioneSedute/partecipaSeduta";
     }
@@ -264,18 +311,10 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/schedulazioneSeduta", method = RequestMethod.GET)
+    @RequestMapping(value ="/goSchedulazioneSeduta", method = RequestMethod.GET)
     public String schedulazioneSeduta(Model model) {
+        SedutaForm sedutaForm = new SedutaForm();
+        model.addAttribute("sedutaForm", sedutaForm);
         return "GUIOrganizzazioneSedute/schedulazioneSeduta";
-    }
-
-    /**
-     * Metodo che permette di andare alla pagina dell'elenco dei partecipanti.
-     * @param model è l'oggetto model.
-     * @return String ridirezione alla pagina delle sedute disponibile.
-     */
-    @RequestMapping(value ="/seduteDisponibili", method = RequestMethod.GET)
-    public String seduteDisponibili(Model model) {
-        return "GUIOrganizzazioneSedute/seduteDisponibili";
     }
 }

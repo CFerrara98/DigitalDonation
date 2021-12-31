@@ -12,6 +12,7 @@ public class GuestForm {
         this.gruppoSanguigno = gruppoSanguigno;
     }
 
+
     /**
      * Metodo che ritorna il codice fiscale del guest.
      *
