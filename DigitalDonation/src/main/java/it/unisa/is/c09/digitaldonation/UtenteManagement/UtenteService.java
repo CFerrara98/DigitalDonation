@@ -9,8 +9,10 @@ import it.unisa.is.c09.digitaldonation.Model.Repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.MessageDigest;
+
 import java.security.NoSuchAlgorithmException;
+
+import static it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword.cryptoByMD5.getMD5;
 
 @Service
 public class UtenteService implements UtenteServiceInterface {
@@ -32,25 +34,22 @@ public class UtenteService implements UtenteServiceInterface {
      */
     @Override
     public Utente login(String email, String password) throws UserNotLoggedException, NoSuchAlgorithmException {
-        // Controlla se le credenziali corrispondono a quelle di uno studente e, nel
-        // caso, controlla
-        // che la richiesta d'iscrizione associatagli sia stata accettata
 
-        String passwordCriptata = getMD5(password);
-        Utente utente = utenteRepository.findByEmailAndPassword(email, password);
-
+        if (password == null) {
+            throw new UserNotLoggedException("login", "La password non è valida.");
+        }
+        if (email == null) {
+            throw new UserNotLoggedException("login", "L'email non può essere nulla.");
+        }
+        String newpass = getMD5(password);
+        Utente utente = utenteRepository.findByEmailAndPassword(email, getMD5(password));
         if (utente != null) {
             return utente;
         }
-        else if(password == null){
-            throw new UserNotLoggedException("login","La password non è valida.");
-        }else if(email == null){
-            throw new UserNotLoggedException("login","L'email non può essere nulla.");
-        }else {
-            throw new UserNotLoggedException("login","Email o password errati.");
-        }
+        throw new UserNotLoggedException("login", "Email o password errati.");
     }
 
+    //TODO METODO INUTILE!
     /**
      * Permette la rimozione dell'utente dalla sessione.
      */
@@ -86,31 +85,5 @@ public class UtenteService implements UtenteServiceInterface {
         }
     }
 
-    /**
-     *
-     * @param data la password da criptare.
-     * @return
-     * @throws NoSuchAlgorithmException
-     */
-    public static String getMD5(String data)
-    {
-        if(data != null) {
-            MessageDigest messageDigest = null;
-            try {
-                messageDigest = MessageDigest.getInstance("MD5");
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
 
-            messageDigest.update(data.getBytes());
-            byte[] digest = messageDigest.digest();
-            StringBuffer sb = new StringBuffer();
-            for (byte b : digest) {
-                sb.append(Integer.toHexString((int) (b & 0xff)));
-            }
-            return sb.toString();
-        }
-        else
-            return "";
-    }
 }

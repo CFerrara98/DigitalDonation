@@ -32,6 +32,8 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
      */
     Utente findByEmailAndPassword(String email, String password);
 
+
+
     /**
      * Permette di ottenere un utente a partire dal proprio codice fiscale.
      *

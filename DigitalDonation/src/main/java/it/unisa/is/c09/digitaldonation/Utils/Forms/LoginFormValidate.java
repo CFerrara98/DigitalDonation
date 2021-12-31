@@ -40,7 +40,7 @@ public class LoginFormValidate implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         LoginForm loginForm = (LoginForm) target;
-        utenteService = new UtenteService();
+
         /*        organizzazioneSeduteService = new OrganizzazioneSeduteService();
         //Validazione del campo dataSeduta
         try {
@@ -54,7 +54,6 @@ public class LoginFormValidate implements Validator {
         }*/
 
         //Validazione del campo email
-
 
         try {
             utenteService.validaMail(loginForm.getEmail());

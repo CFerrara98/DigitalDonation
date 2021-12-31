@@ -12,6 +12,8 @@
 
 <z:layout pageTitle="dashboardOperatore">
 
+    <c:if test="${utente!=null}"><a href="/logout"> SLOGGA</a></c:if>
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 

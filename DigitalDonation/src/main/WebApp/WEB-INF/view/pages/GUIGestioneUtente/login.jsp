@@ -48,43 +48,44 @@
 
                                 <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm"--%>
                                 <form:form action="./login" method="post" modelAttribute="loginForm" cssClass="user" enctype="application/x-www-form-urlencoded">
-                                    <div class="form-group">
-                                        <h6 class="h6 text-gray-900 mb-4">Inserisci Email:</h6>
-                                        <c:choose>
-                                            <c:when test="${EmailError == null}">
-                                                <c:choose>
-                                                    <c:when test="${EmailPrecedente == null}">
-                                                        <form:input type="text" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <form:input type="text" value="${EmailPrecedente}" class="form-control form-control-user is-invalid" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <form:input type="text" class="form-control form-control-user is-invalid" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
-                                                <span class="myError">${EmailError}</span>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <h6 class="h6 text-gray-900 mb-4">Inserisci Password:</h6>
+                                <div class="form-group">
+                                    <h6 class="h6 text-gray-900 mb-4">Inserisci Email:</h6>
+                                    <c:choose>
+                                        <c:when test="${EmailError == null}">
                                             <c:choose>
-                                                <c:when test="${PasswordError == null}">
-                                                    <input type="password" name="password" id="inputPassword" placeholder="Password" class="form-control">
+                                                <c:when test="${EmailPrecedente == null}">
+                                                    <form:input type="text" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input type="password" name="password" id="inputPassword" placeholder="Password" class="form-control is-invalid">
-                                                    <span class = "myError">${PasswordError}</span>
+                                                    <form:input type="text" value="${EmailPrecedente}" class="form-control form-control-user is-invalid" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
                                                 </c:otherwise>
                                             </c:choose>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form:input type="text" class="form-control form-control-user is-invalid" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
+                                            <span class="myError">${EmailError}</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
 
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <h6 class="h6 text-gray-900 mb-4">Inserisci Password:</h6>
+                                    <c:choose>
+                                        <c:when test="${PasswordError == null}">
+                                            <input type="password" name="password" id="inputPassword" placeholder="Password" class="form-control">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <input type="password" name="password" id="inputPassword" placeholder="Password" class="form-control is-invalid">
+                                            <span class = "myError">${PasswordError}</span>
+                                        </c:otherwise>
+                                    </c:choose>
 
-                                    <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
-                                </form:form>
+                                </div>
+                            </div>
+
+                            <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+                            </form:form>
+
 
 
                                 <!-- Ipotetico Cambio Password
