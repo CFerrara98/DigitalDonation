@@ -30,7 +30,7 @@
                         <div class="card-body">
 
                             <!-- indietro -->
-                            <a href="dashboardOperatore.html" role="button"> <i
+                            <a href="./dashboardOperatore" role="button"> <i
                                     class="fas fa-arrow-left float-left icone"></i></a>
 
                             <!-- titolo -->

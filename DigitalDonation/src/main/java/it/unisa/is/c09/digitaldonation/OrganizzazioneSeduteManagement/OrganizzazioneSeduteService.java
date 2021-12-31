@@ -20,6 +20,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Guest + Seduta
+ */
 @Service
 public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceInterface {
 

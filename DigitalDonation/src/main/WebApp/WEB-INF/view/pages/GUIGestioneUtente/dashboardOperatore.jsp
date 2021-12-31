@@ -51,7 +51,7 @@
                                         </td>
                                         <td scope="col"><span class=" float-right">
                                                 <a class="btn btn-primary botton-sm large"
-                                                   href="schedulazioneSeduta.html" role="button">Crea seduta</a>
+                                                   href="./goSchedulazioneSeduta" role="button">Crea seduta</a>
                                              </span>
                                         </td>
                                     </tr>
@@ -77,7 +77,7 @@
                                         </td>
                                         <td scope="col"><span class=" float-right">
                                                 <a class="btn btn-primary botton-sm large"
-                                                   href="monitoraggioSedute.html" role="button">Elenco sedute</a>
+                                                   href="./visualizzaElencoSedute" role="button">Elenco sedute</a>
                                              </span>
                                         </td>
                                     </tr>

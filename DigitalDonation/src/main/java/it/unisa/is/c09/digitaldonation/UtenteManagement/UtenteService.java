@@ -14,12 +14,15 @@ import java.security.NoSuchAlgorithmException;
 
 import static it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword.cryptoByMD5.getMD5;
 
+/**
+ * Utente
+ */
+
 @Service
 public class UtenteService implements UtenteServiceInterface {
 
     @Autowired
     private UtenteRepository utenteRepository ;
-
 
     /**
      * Permette l'autenticazione di un utente nel sistema.

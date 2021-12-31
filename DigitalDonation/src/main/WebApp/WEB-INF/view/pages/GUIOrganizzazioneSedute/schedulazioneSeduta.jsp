@@ -27,7 +27,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <div class="card-body">
                             <!-- indietro -->
-                            <a href="dashboardOperatore.html" role="button"> <i
+                            <a href="./dashboardOperatore" role="button"> <i
                                     class="fas fa-arrow-left float-left icone"></i></a>
 
                             <!-- titolo -->
