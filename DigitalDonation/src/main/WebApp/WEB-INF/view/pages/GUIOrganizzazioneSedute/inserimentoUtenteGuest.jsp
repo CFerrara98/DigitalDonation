@@ -21,7 +21,6 @@
             <!-- Main Content -->
             <div id="content">
 
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -37,6 +36,8 @@
 
                         </div>
                     </div>
+
+
                     <div class="container">
 
                         <div class="card o-hidden border-0 shadow-lg my-5">
@@ -50,43 +51,27 @@
                                                 <h3 class="h4 text-gray-900 mb-4">Compila i campi per inserire un utente
                                                     Guest</h3>
                                             </div>
-                                            <form class="user">
+                                                <form:form action="./inserimentoGuest" method="post"
+                                                           modelAttribute="guestForm" cssClass="user"
+                                                           enctype="application/x-www-form-urlencoded">
 
-                                                <div class="form-group">
-                                                        <form:form action="./inserimentoGuest" method="post"
-                                                                   modelAttribute="guestForm" cssClass="user"
-                                                                   enctype="application/x-www-form-urlencoded">
                                                     <div class="form-group row">
                                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                                             <p style="color:#4e73df;">Inserisci il nome dell'utente
                                                                 Guest: </p>
                                                             <c:choose>
                                                                 <c:when test="${NomeError == null}">
-                                                                    <c:choose>
-                                                                        <c:when test="${NomePrecedente == null}">
                                                                             <form:input type="text"
                                                                                         class="form-control form-control-user"
                                                                                         id="nome"
                                                                                         placeholder="es. Angela"
                                                                                         path="nome"/>
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <form:input type="text"
-                                                                                        value="${NomePrecedente}"
-                                                                                        class="form-control form-control-user"
-                                                                                        id="nome"
-                                                                                        placeholder="es. Angela"
-                                                                                        path="nome"/>
-                                                                        </c:otherwise>
-                                                                    </c:choose>
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <form:input type="text"
                                                                                 class="form-control form-control-user"
                                                                                 id="nome" placeholder="es. Angela"
                                                                                 path="nome"/>
-
-                                                                    <p>${NomeError}</p>
                                                                     <span class="myError">${NomeError}</span>
                                                                 </c:otherwise>
                                                             </c:choose>
@@ -96,30 +81,19 @@
 
                                                                 <form:form action="./inserimentoGuest" method="post"
                                                                            modelAttribute="guestForm" cssClass="user"
-                                                                           enctype="application/x-www-form-urlencoded">
+                                                                           enctype="application/x-www-form-urlencoded"/>
                                                             <div class="form-group row">
                                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                                     <p style="color:#4e73df;">Inserisci il cognome
                                                                         dell'utente Guest: </p>
                                                                     <c:choose>
                                                                     <c:when test="${CognomeError == null}">
-                                                                    <c:choose>
-                                                                    <c:when test="${CognomePrecedente == null}">
+
                                                                         <form:input type="text"
                                                                                     class="form-control form-control-user"
                                                                                     id="cognome"
                                                                                     placeholder="es. De Martino"
                                                                                     path="cognome"/>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <form:input type="text"
-                                                                                    value="${CognomePrecedente}"
-                                                                                    class="form-control form-control-user"
-                                                                                    id="cognome"
-                                                                                    placeholder="es. De Martino"
-                                                                                    path="cognome"/>
-                                                                    </c:otherwise>
-                                                                    </c:choose>
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         <form:input type="text"
@@ -128,7 +102,6 @@
                                                                                     placeholder="es. De Martino"
                                                                                     path="cognome"/>
 
-                                                                    <p>${CognomeError}</p>
                                                                     <span class="myError">${CognomeError}</span>
                                                                     </c:otherwise>
                                                                     </c:choose>
@@ -139,30 +112,18 @@
                                                                                        method="post"
                                                                                        modelAttribute="guestForm"
                                                                                        cssClass="user"
-                                                                                       enctype="application/x-www-form-urlencoded">
+                                                                                       enctype="application/x-www-form-urlencoded"/>
                                                                         <div class="form-group row">
                                                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                                                 <p style="color:#4e73df;">Inserisci il
                                                                                     telefono dell'utente Guest: </p>
                                                                                 <c:choose>
                                                                                     <c:when test="${TelefonoError == null}">
-                                                                                        <c:choose>
-                                                                                            <c:when test="${TelefonoPrecedente == null}">
                                                                                                 <form:input type="tel"
                                                                                                             class="form-control form-control-user"
                                                                                                             id="telefono"
                                                                                                             placeholder="es. 3456789123"
                                                                                                             path="telefono"/>
-                                                                                            </c:when>
-                                                                                            <c:otherwise>
-                                                                                                <form:input type="tel"
-                                                                                                            value="${TelefonoPrecedente}"
-                                                                                                            class="form-control form-control-user"
-                                                                                                            id="telefono"
-                                                                                                            placeholder="es. 3456789123"
-                                                                                                            path="telefono"/>
-                                                                                            </c:otherwise>
-                                                                                        </c:choose>
                                                                                     </c:when>
                                                                                     <c:otherwise>
                                                                                         <form:input type="tel"
@@ -170,8 +131,6 @@
                                                                                                     id="telefono"
                                                                                                     placeholder="es. 3456789123"
                                                                                                     path="telefono"/>
-
-                                                                                        <p>${TelefonoError}</p>
                                                                                         <span class="myError">${TelefonoError}</span>
                                                                                     </c:otherwise>
                                                                                 </c:choose>
@@ -184,7 +143,7 @@
                                                                                             method="post"
                                                                                             modelAttribute="guestForm"
                                                                                             cssClass="user"
-                                                                                            enctype="application/x-www-form-urlencoded">
+                                                                                            enctype="application/x-www-form-urlencoded"/>
                                                                                 <div class="form-group row">
                                                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                                                         <p style="color:#4e73df;">
@@ -192,25 +151,12 @@
                                                                                             dell'utente Guest: </p>
                                                                                         <c:choose>
                                                                                             <c:when test="${CodiceFiscaleError == null}">
-                                                                                                <c:choose>
-                                                                                                    <c:when test="${CodiceFiscalePrecedente == null}">
                                                                                                         <form:input
                                                                                                                 type="text"
                                                                                                                 class="form-control form-control-user"
                                                                                                                 id="codiceFiscale"
                                                                                                                 placeholder="es. MVYZZV65L56I556J"
                                                                                                                 path="codiceFiscale"/>
-                                                                                                    </c:when>
-                                                                                                    <c:otherwise>
-                                                                                                        <form:input
-                                                                                                                type="text"
-                                                                                                                value="${CodiceFiscalePrecedente}"
-                                                                                                                class="form-control form-control-user"
-                                                                                                                id="codiceFiscale"
-                                                                                                                placeholder="es. MVYZZV65L56I556J"
-                                                                                                                path="codiceFiscale"/>
-                                                                                                    </c:otherwise>
-                                                                                                </c:choose>
                                                                                             </c:when>
                                                                                             <c:otherwise>
                                                                                                 <form:input type="text"
@@ -218,8 +164,6 @@
                                                                                                             id="codiceFiscale"
                                                                                                             placeholder="es. MVYZZV65L56I556J"
                                                                                                             path="codiceFiscale"/>
-
-                                                                                                <p>${CodiceFiscaleError}</p>
                                                                                                 <span class="myError">${CodiceFiscaleError}</span>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
@@ -231,7 +175,7 @@
                                                                                                     method="post"
                                                                                                     modelAttribute="guestForm"
                                                                                                     cssClass="user"
-                                                                                                    enctype="application/x-www-form-urlencoded">
+                                                                                                    enctype="application/x-www-form-urlencoded"/>
                                                                                         <div class="form-group row">
                                                                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                                                                 <p style="color:#4e73df;">
@@ -241,25 +185,12 @@
                                                                                                     Guest: </p>
                                                                                                 <c:choose>
                                                                                                     <c:when test="${PatologieError == null}">
-                                                                                                        <c:choose>
-                                                                                                            <c:when test="${PatologiePrecedente == null}">
                                                                                                                 <form:input
                                                                                                                         type="text"
                                                                                                                         class="form-control form-control-user"
                                                                                                                         id="patologie"
                                                                                                                         placeholder="es. Nessuna"
                                                                                                                         path="patologie"/>
-                                                                                                            </c:when>
-                                                                                                            <c:otherwise>
-                                                                                                                <form:input
-                                                                                                                        type="text"
-                                                                                                                        value="${PatologiePrecedente}"
-                                                                                                                        class="form-control form-control-user"
-                                                                                                                        id="patologie"
-                                                                                                                        placeholder="es. Nessuna"
-                                                                                                                        path="patologie"/>
-                                                                                                            </c:otherwise>
-                                                                                                        </c:choose>
                                                                                                     </c:when>
                                                                                                     <c:otherwise>
                                                                                                         <form:input
@@ -268,7 +199,6 @@
                                                                                                                 id="patologie"
                                                                                                                 placeholder="es. Nessuna"
                                                                                                                 path="patologie"/>
-                                                                                                        <p>${PatologieError}</p>
                                                                                                         <span class="myError">${PatologieError}</span>
                                                                                                     </c:otherwise>
                                                                                                 </c:choose>
@@ -281,34 +211,33 @@
                                                                                                     il gruppo sanguigno
                                                                                                     dell'utente
                                                                                                     Guest: </label>
-                                                                                                <select name="gruppoSanguigno"
+                                                                                                <form:select name="gruppoSanguigno"
                                                                                                         id="gruppoSanguigno"
-                                                                                                        class="form-control gruppo-sanguigno">
-                                                                                                    <option selected
-                                                                                                            value="A+ ">
+                                                                                                        class="form-control gruppo-sanguigno" path="grupposanguigno"/>
+                                                                                                    <form:option selected="true" value="A+ ">
                                                                                                         A+
-                                                                                                    </option>
-                                                                                                    <option value="A-">
+                                                                                                    </form:option>
+                                                                                                    <form:option value="A-">
                                                                                                         A-
-                                                                                                    </option>
-                                                                                                    <option value="B+">
+                                                                                                    </form:option>
+                                                                                                    <form:option value="B+">
                                                                                                         B+
-                                                                                                    </option>
-                                                                                                    <option value="B-">
+                                                                                                    </form:option>
+                                                                                                    <form:option value="B-">
                                                                                                         B-
-                                                                                                    </option>
-                                                                                                    <option value="0+">
+                                                                                                    </form:option>
+                                                                                                    <form:option value="0+">
                                                                                                         0+
-                                                                                                    </option>
-                                                                                                    <option value="0-">
+                                                                                                    </form:option>
+                                                                                                    <form:option value="0-">
                                                                                                         0-
-                                                                                                    </option>
-                                                                                                    <option value="AB+">
+                                                                                                    </form:option>
+                                                                                                    <form:option value="AB+">
                                                                                                         AB+
-                                                                                                    </option>
-                                                                                                    <option value="AB-">
+                                                                                                    </form:option>
+                                                                                                    <form:option value="AB-">
                                                                                                         AB-
-                                                                                                    </option>
+                                                                                                    </form:option>
                                                                                                 </select>
                                                                                             </div>
 
@@ -318,15 +247,17 @@
                                                                                                    value="Aggiungi utente"
                                                                                                    class="btn btn-primary btn-user btn-block">
 
-                                            </form>
+                                            </form:form>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.container-fluid -->
                     </div>
+                      <!-- /.container -->
+                </div>
+                    <!-- End Page Content-->
                 </div>
                 <!-- End of Main Content -->
 
@@ -339,11 +270,9 @@
                     </div>
                 </footer>
                 <!-- End of Footer -->
-
-            </div>
+         </div>
             <!-- End of Content Wrapper -->
-
-        </div>
+    </div>
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->

@@ -50,7 +50,7 @@
                                                 <%--@elvariable id="SedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
                                             <form:form action="./schedulazioneSeduta" method="post"
                                                        modelAttribute="sedutaForm" cssClass="user"
-                                                       enctype="application/x-www-form-urlencoded">/////dqdwqdqwdwd
+                                                       enctype="application/x-www-form-urlencoded"/>
 
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -73,23 +73,12 @@
                                                     <p style="color:#4e73df;">Numero di partecipanti: </p>
                                                     <c:choose>
                                                         <c:when test="${NumeroPartecipantiError == null}">
-                                                            <c:choose>
-                                                                <c:when test="${NumeroPartecipantiPrecedente == null}">
                                                                     <form:input type="text"
                                                                                 class="form-control form-control-user"
                                                                                 id="numeroPartecipanti"
                                                                                 placeholder="es. 10"
                                                                                 path="numeroPartecipanti"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="text"
-                                                                                value="${NumeroPartecipantiPrecedente}"
-                                                                                class="form-control form-control-user"
-                                                                                id="numeroPartecipanti"
-                                                                                placeholder="es. 10"
-                                                                                path="numeroPartecipanti"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
+
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
@@ -97,8 +86,6 @@
                                                                         id="numeroPartecipanti"
                                                                         placeholder="data Seduta:"
                                                                         path="numeroPartecipanti"/>
-
-                                                            <p>${NumeroPartecipantiError}</p>
                                                             <span class="myError">${NumeroPartecipantiError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -110,22 +97,12 @@
                                                 <p style="color:#4e73df;">Indirizzo della seduta: </p>
                                                 <c:choose>
                                                     <c:when test="${IndirizzoError == null}">
-                                                        <c:choose>
-                                                            <c:when test="${IndirizzoPrecedente == null}">
                                                                 <form:input type="text"
                                                                             class="form-control form-control-user"
                                                                             id="indirizzo"
                                                                             placeholder="es. Via Giuseppe Verdi 1"
                                                                             path="indirizzo"/>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <form:input type="text" value="${IndirizzoPrecedente}"
-                                                                            class="form-control form-control-user"
-                                                                            id="indirizzo"
-                                                                            placeholder="es. Via Giuseppe Verdi 1"
-                                                                            path="indirizzo"/>
-                                                            </c:otherwise>
-                                                        </c:choose>
+
                                                     </c:when>
                                                     <c:otherwise>
                                                         <form:input type="text" class="form-control form-control-user"
@@ -133,7 +110,6 @@
                                                                     placeholder="es. Via Giuseppe Verdi 1"
                                                                     path="indirizzo"/>
 
-                                                        <p>${IndirizzoError}</p>
                                                         <span class="myError">${IndirizzoError}</span>
                                                     </c:otherwise>
                                                 </c:choose>
@@ -145,28 +121,17 @@
 
                                                     <c:choose>
                                                         <c:when test="${CittaError == null}">
-                                                            <c:choose>
-                                                                <c:when test="${CittaPrecedente == null}">
+
                                                                     <form:input type="text"
                                                                                 class="form-control form-control-user"
                                                                                 id="citta" placeholder="es. Salerno"
                                                                                 path="citta"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="text" value="${CittaPrecedente}"
-                                                                                class="form-control form-control-user"
-                                                                                id="citta" placeholder="es. Salerno"
-                                                                                path="citta"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
                                                                         class="form-control form-control-user"
                                                                         id="citta" placeholder="es. Salerno"
                                                                         path="citta"/>
-
-                                                            <p>${CittaError}</p>
                                                             <span class="myError">${CittaError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -176,27 +141,17 @@
                                                     <p style="color:#4e73df;">CAP: </p>
                                                     <c:choose>
                                                         <c:when test="${CAPError == null}">
-                                                            <c:choose>
-                                                                <c:when test="${CAPPrecedente == null}">
                                                                     <form:input type="text"
                                                                                 class="form-control form-control-user"
                                                                                 id="cap" placeholder="es. 84100"
                                                                                 path="cap"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="text" value="${CAPPrecedente}"
-                                                                                class="form-control form-control-user"
-                                                                                id="cap" placeholder="es. 84100"
-                                                                                path="cap"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
+
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
                                                                         class="form-control form-control-user" id="cap"
                                                                         placeholder="es. 84100" path="cap"/>
 
-                                                            <p>${CAPError}</p>
                                                             <span class="myError">${CAPError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -208,29 +163,16 @@
                                                     <p style="color:#4e73df;">Provincia: </p>
                                                     <c:choose>
                                                         <c:when test="${ProvinciaError == null}">
-                                                            <c:choose>
-                                                                <c:when test="${ProvinciaPrecedente == null}">
                                                                     <form:input type="text"
                                                                                 class="form-control form-control-user"
                                                                                 id="provincia" placeholder="es. Salerno"
                                                                                 path="provincia"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="text"
-                                                                                value="${ProvinciaPrecedente}"
-                                                                                class="form-control form-control-user"
-                                                                                id="provincia" placeholder="es. Salerno"
-                                                                                path="provincia"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
                                                                         class="form-control form-control-user"
                                                                         id="provincia" placeholder="es. Salerno"
                                                                         path="provincia"/>
-
-                                                            <p>${ProvinciaError}</p>
                                                             <span class="myError">${ProvinciaError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -243,31 +185,17 @@
                                                     <p style="color:#4e73df;">Orario di inizio: </p>
                                                     <c:choose>
                                                         <c:when test="${OraInizioError == null}">
-                                                            <c:choose>
-                                                                <c:when test="${OraInizioPrecedente == null}">
                                                                     <form:input type="time"
                                                                                 class="form-control form-control-user"
                                                                                 id="oraInizio"
                                                                                 placeholder="Orario inizio:"
                                                                                 path="oraInizio"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="time"
-                                                                                value="${OraInizioPrecedente}"
-                                                                                class="form-control form-control-user"
-                                                                                id="oraInizio"
-                                                                                placeholder="Orario inizio:"
-                                                                                path="oraInizio"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="time"
                                                                         class="form-control form-control-user"
                                                                         id="oraInizio" placeholder="Orario inizio:"
                                                                         path="oraInizio"/>
-
-                                                            <p>${OraInizioError}</p>
                                                             <span class="myError">${OraInizioError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -277,28 +205,17 @@
                                                     <p style="color:#4e73df;">Orario di fine: </p>
                                                     <c:choose>
                                                         <c:when test="${OraFineError == null}">
-                                                            <c:choose>
-                                                                <c:when test="${OraFinePrecedente == null}">
+
                                                                     <form:input type="time"
                                                                                 class="form-control form-control-user"
                                                                                 id="oraFine" placeholder="Orario fine:"
                                                                                 path="oraFine"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="time" value="${OraFinePrecedente}"
-                                                                                class="form-control form-control-user"
-                                                                                id="oraFine" placeholder="Orario fine:"
-                                                                                path="oraFine"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="time"
                                                                         class="form-control form-control-user"
                                                                         id="oraFine" placeholder="Orario fine:"
                                                                         path="oraFine"/>
-
-                                                            <p>${OraFineError}</p>
                                                             <span class="myError">${OraFineError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -310,23 +227,11 @@
                                                     <p style="color:#4e73df;">Data di inizio prenotazione: </p>
                                                     <c:choose>
                                                         <c:when test="${DataInizioError == null}">
-                                                            <c:choose>
-                                                                <c:when test="${DataInizioPrecedente == null}">
                                                                     <form:input type="date"
                                                                                 class="form-control form-control-user"
                                                                                 id="dataInizio"
                                                                                 placeholder="Data inizio Prenotazione:"
                                                                                 path="dataInizio"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="date"
-                                                                                value="${DataInizioPrecedente}"
-                                                                                class="form-control form-control-user"
-                                                                                id="dataInizio"
-                                                                                placeholder="Data inizio Prenotazione:"
-                                                                                path="dataInizio"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="date"
@@ -334,8 +239,6 @@
                                                                         id="dataInizio"
                                                                         placeholder="Data inizio Prenotazione:"
                                                                         path="dataInizio"/>
-
-                                                            <p>${DataInizioError}</p>
                                                             <span class="myError">${DataInizioError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -346,23 +249,11 @@
                                                     <p style="color:#4e73df;">Data fine prenotazione: </p>
                                                     <c:choose>
                                                         <c:when test="${DataFineError == null}">
-                                                            <c:choose>
-                                                                <c:when test="${DataFinePrecedente == null}">
                                                                     <form:input type="date"
                                                                                 class="form-control form-control-user"
                                                                                 id="dataFine"
                                                                                 placeholder="Data fine Prenotazione"
                                                                                 path="dataFine"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="date"
-                                                                                value="${DataFinePrecedente}"
-                                                                                class="form-control form-control-user"
-                                                                                id="dataFine"
-                                                                                placeholder="Data fine Prenotazione"
-                                                                                path="dataFine"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="date"
@@ -370,8 +261,6 @@
                                                                         id="dataFine"
                                                                         placeholder="Data fine Prenotazione"
                                                                         path="dataFine"/>
-
-                                                            <p>${DataFineError}</p>
                                                             <span class="myError">${DataFineError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -381,7 +270,6 @@
                                             <br>
                                             <input type="submit" value="Conferma"
                                                    class="btn btn-primary btn-user btn-block">
-
                                             </form>
 
                                         </div>
