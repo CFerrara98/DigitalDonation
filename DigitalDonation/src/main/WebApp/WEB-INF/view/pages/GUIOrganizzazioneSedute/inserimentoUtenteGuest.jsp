@@ -51,253 +51,226 @@
                                                 <h3 class="h4 text-gray-900 mb-4">Compila i campi per inserire un utente
                                                     Guest</h3>
                                             </div>
-                                                <form:form action="./inserimentoGuest" method="post"
-                                                           modelAttribute="guestForm" cssClass="user"
-                                                           enctype="application/x-www-form-urlencoded">
+                                            <form:form action="./inserimentoGuest" method="post"
+                                                       modelAttribute="guestForm" cssClass="user"
+                                                       enctype="application/x-www-form-urlencoded">
 
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                                            <p style="color:#4e73df;">Inserisci il nome dell'utente
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <p style="color:#4e73df;">Inserisci il nome dell'utente
+                                                        Guest: </p>
+                                                    <c:choose>
+                                                        <c:when test="${NomeError == null}">
+                                                            <form:input type="text"
+                                                                        class="form-control form-control-user"
+                                                                        id="nome"
+                                                                        placeholder="es. Angela"
+                                                                        path="nome"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <form:input type="text"
+                                                                        class="form-control form-control-user"
+                                                                        id="nome" placeholder="es. Angela"
+                                                                        path="nome"/>
+                                                            <span class="myError">${NomeError}</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <p style="color:#4e73df;">Inserisci il cognome
+                                                        dell'utente Guest: </p>
+                                                    <c:choose>
+                                                        <c:when test="${CognomeError == null}">
+
+                                                            <form:input type="text"
+                                                                        class="form-control form-control-user"
+                                                                        id="cognome"
+                                                                        placeholder="es. De Martino"
+                                                                        path="cognome"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <form:input type="text"
+                                                                        class="form-control form-control-user"
+                                                                        id="cognome"
+                                                                        placeholder="es. De Martino"
+                                                                        path="cognome"/>
+
+                                                            <span class="myError">${CognomeError}</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p style="color:#4e73df;">Inserisci il telefono dell'utente
+                                                        Guest: </p>
+                                                    <c:choose>
+                                                        <c:when test="${TelefonoError == null}">
+                                                            <form:input type="tel"
+                                                                        class="form-control form-control-user"
+                                                                        id="telefono"
+                                                                        placeholder="es. 3456789123"
+                                                                        path="telefono"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <form:input type="tel"
+                                                                        class="form-control form-control-user"
+                                                                        id="telefono"
+                                                                        placeholder="es. 3456789123"
+                                                                        path="telefono"/>
+                                                            <span class="myError">${TelefonoError}</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <p style="color:#4e73df;">
+                                                        Inserisci il codice fiscale
+                                                        dell'utente Guest: </p>
+                                                    <c:choose>
+                                                        <c:when test="${CodiceFiscaleError == null}">
+                                                            <form:input
+                                                                    type="text"
+                                                                    class="form-control form-control-user"
+                                                                    id="codiceFiscale"
+                                                                    placeholder="es. MVYZZV65L56I556J"
+                                                                    path="codiceFiscale"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <form:input type="text"
+                                                                        class="form-control form-control-user"
+                                                                        id="codiceFiscale"
+                                                                        placeholder="es. MVYZZV65L56I556J"
+                                                                        path="codiceFiscale"/>
+                                                            <span class="myError">${CodiceFiscaleError}</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+
+                                                <div class="form-group">
+                                                            <p style="color:#4e73df;">
+                                                                Inserisci le
+                                                                patologie
+                                                                dell'utente
                                                                 Guest: </p>
                                                             <c:choose>
-                                                                <c:when test="${NomeError == null}">
-                                                                            <form:input type="text"
-                                                                                        class="form-control form-control-user"
-                                                                                        id="nome"
-                                                                                        placeholder="es. Angela"
-                                                                                        path="nome"/>
+                                                                <c:when test="${PatologieError == null}">
+                                                                    <form:input
+                                                                            type="text"
+                                                                            class="form-control form-control-user"
+                                                                            id="patologie"
+                                                                            placeholder="es. Nessuna"
+                                                                            path="patologie"/>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    <form:input type="text"
-                                                                                class="form-control form-control-user"
-                                                                                id="nome" placeholder="es. Angela"
-                                                                                path="nome"/>
-                                                                    <span class="myError">${NomeError}</span>
+                                                                    <form:input
+                                                                            type="text"
+                                                                            class="form-control form-control-user"
+                                                                            id="patologie"
+                                                                            placeholder="es. Nessuna"
+                                                                            path="patologie"/>
+                                                                    <span class="myError">${PatologieError}</span>
                                                                 </c:otherwise>
                                                             </c:choose>
-                                                        </div>
 
-                                                        <div class="form-group">
+                                                </div>
 
-                                                                <form:form action="./inserimentoGuest" method="post"
-                                                                           modelAttribute="guestForm" cssClass="user"
-                                                                           enctype="application/x-www-form-urlencoded"/>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                    <p style="color:#4e73df;">Inserisci il cognome
-                                                                        dell'utente Guest: </p>
-                                                                    <c:choose>
-                                                                    <c:when test="${CognomeError == null}">
+                                                <div class="form-group">
+                                                            <label for="gruppoSanguigno"
+                                                                   style="color:#4e73df;">Inserisci
+                                                                il gruppo sanguigno
+                                                                dell'utente
+                                                                Guest: </label>
+                                                            <form:select name="gruppoSanguigno"
+                                                                         id="gruppoSanguigno"
+                                                                         class="form-control gruppo-sanguigno"
+                                                                         path="grupposanguigno"/>
+                                                            <form:option selected="true" value="A+ ">
+                                                                A+
+                                                            </form:option>
+                                                            <form:option value="A-">
+                                                                A-
+                                                            </form:option>
+                                                            <form:option value="B+">
+                                                                B+
+                                                            </form:option>
+                                                            <form:option value="B-">
+                                                                B-
+                                                            </form:option>
+                                                            <form:option value="0+">
+                                                                0+
+                                                            </form:option>
+                                                            <form:option value="0-">
+                                                                0-
+                                                            </form:option>
+                                                            <form:option value="AB+">
+                                                                AB+
+                                                            </form:option>
+                                                            <form:option value="AB-">
+                                                                AB-
+                                                            </form:option>
+                                                            </select>
+                                                </div>
 
-                                                                        <form:input type="text"
-                                                                                    class="form-control form-control-user"
-                                                                                    id="cognome"
-                                                                                    placeholder="es. De Martino"
-                                                                                    path="cognome"/>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <form:input type="text"
-                                                                                    class="form-control form-control-user"
-                                                                                    id="cognome"
-                                                                                    placeholder="es. De Martino"
-                                                                                    path="cognome"/>
+                                                        <br>
 
-                                                                    <span class="myError">${CognomeError}</span>
-                                                                    </c:otherwise>
-                                                                    </c:choose>
+                                                        <input type="submit"
+                                                               value="Aggiungi utente"
+                                                               class="btn btn-primary btn-user btn-block">
 
-                                                                    <div class="form-group">
+                                                        </form:form>
 
-                                                                            <form:form action="./inserimentoGuest"
-                                                                                       method="post"
-                                                                                       modelAttribute="guestForm"
-                                                                                       cssClass="user"
-                                                                                       enctype="application/x-www-form-urlencoded"/>
-                                                                        <div class="form-group row">
-                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                                <p style="color:#4e73df;">Inserisci il
-                                                                                    telefono dell'utente Guest: </p>
-                                                                                <c:choose>
-                                                                                    <c:when test="${TelefonoError == null}">
-                                                                                                <form:input type="tel"
-                                                                                                            class="form-control form-control-user"
-                                                                                                            id="telefono"
-                                                                                                            placeholder="es. 3456789123"
-                                                                                                            path="telefono"/>
-                                                                                    </c:when>
-                                                                                    <c:otherwise>
-                                                                                        <form:input type="tel"
-                                                                                                    class="form-control form-control-user"
-                                                                                                    id="telefono"
-                                                                                                    placeholder="es. 3456789123"
-                                                                                                    path="telefono"/>
-                                                                                        <span class="myError">${TelefonoError}</span>
-                                                                                    </c:otherwise>
-                                                                                </c:choose>
-
-                                                                            </div>
-
-                                                                            <div class="form-group">
-                                                                                    <form:form
-                                                                                            action="./inserimentoGuest"
-                                                                                            method="post"
-                                                                                            modelAttribute="guestForm"
-                                                                                            cssClass="user"
-                                                                                            enctype="application/x-www-form-urlencoded"/>
-                                                                                <div class="form-group row">
-                                                                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                                        <p style="color:#4e73df;">
-                                                                                            Inserisci il codice fiscale
-                                                                                            dell'utente Guest: </p>
-                                                                                        <c:choose>
-                                                                                            <c:when test="${CodiceFiscaleError == null}">
-                                                                                                        <form:input
-                                                                                                                type="text"
-                                                                                                                class="form-control form-control-user"
-                                                                                                                id="codiceFiscale"
-                                                                                                                placeholder="es. MVYZZV65L56I556J"
-                                                                                                                path="codiceFiscale"/>
-                                                                                            </c:when>
-                                                                                            <c:otherwise>
-                                                                                                <form:input type="text"
-                                                                                                            class="form-control form-control-user"
-                                                                                                            id="codiceFiscale"
-                                                                                                            placeholder="es. MVYZZV65L56I556J"
-                                                                                                            path="codiceFiscale"/>
-                                                                                                <span class="myError">${CodiceFiscaleError}</span>
-                                                                                            </c:otherwise>
-                                                                                        </c:choose>
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-                                                                                            <form:form
-                                                                                                    action="./inserimentoGuest"
-                                                                                                    method="post"
-                                                                                                    modelAttribute="guestForm"
-                                                                                                    cssClass="user"
-                                                                                                    enctype="application/x-www-form-urlencoded"/>
-                                                                                        <div class="form-group row">
-                                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                                                <p style="color:#4e73df;">
-                                                                                                    Inserisci le
-                                                                                                    patologie
-                                                                                                    dell'utente
-                                                                                                    Guest: </p>
-                                                                                                <c:choose>
-                                                                                                    <c:when test="${PatologieError == null}">
-                                                                                                                <form:input
-                                                                                                                        type="text"
-                                                                                                                        class="form-control form-control-user"
-                                                                                                                        id="patologie"
-                                                                                                                        placeholder="es. Nessuna"
-                                                                                                                        path="patologie"/>
-                                                                                                    </c:when>
-                                                                                                    <c:otherwise>
-                                                                                                        <form:input
-                                                                                                                type="text"
-                                                                                                                class="form-control form-control-user"
-                                                                                                                id="patologie"
-                                                                                                                placeholder="es. Nessuna"
-                                                                                                                path="patologie"/>
-                                                                                                        <span class="myError">${PatologieError}</span>
-                                                                                                    </c:otherwise>
-                                                                                                </c:choose>
-
-                                                                                            </div>
-
-                                                                                            <div class="form-group">
-                                                                                                <label for="gruppoSanguigno"
-                                                                                                       style="color:#4e73df;">Inserisci
-                                                                                                    il gruppo sanguigno
-                                                                                                    dell'utente
-                                                                                                    Guest: </label>
-                                                                                                <form:select name="gruppoSanguigno"
-                                                                                                        id="gruppoSanguigno"
-                                                                                                        class="form-control gruppo-sanguigno" path="grupposanguigno"/>
-                                                                                                    <form:option selected="true" value="A+ ">
-                                                                                                        A+
-                                                                                                    </form:option>
-                                                                                                    <form:option value="A-">
-                                                                                                        A-
-                                                                                                    </form:option>
-                                                                                                    <form:option value="B+">
-                                                                                                        B+
-                                                                                                    </form:option>
-                                                                                                    <form:option value="B-">
-                                                                                                        B-
-                                                                                                    </form:option>
-                                                                                                    <form:option value="0+">
-                                                                                                        0+
-                                                                                                    </form:option>
-                                                                                                    <form:option value="0-">
-                                                                                                        0-
-                                                                                                    </form:option>
-                                                                                                    <form:option value="AB+">
-                                                                                                        AB+
-                                                                                                    </form:option>
-                                                                                                    <form:option value="AB-">
-                                                                                                        AB-
-                                                                                                    </form:option>
-                                                                                                </select>
-                                                                                            </div>
-
-                                                                                            <br>
-
-                                                                                            <input type="submit"
-                                                                                                   value="Aggiungi utente"
-                                                                                                   class="btn btn-primary btn-user btn-block">
-
-                                            </form:form>
-
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- /.container -->
+                            </div>
+                            <!-- End Page Content-->
+                        </div>
+                        <!-- End of Main Content -->
+
+                        <!-- Footer -->
+                        <footer class="sticky-footer bg-white ">
+                            <div class="container my-auto ">
+                                <div class="copyright text-center my-auto ">
+                                    <span>Digital Donation 2021</span>
+                                </div>
+                            </div>
+                        </footer>
+                        <!-- End of Footer -->
+                    </div>
+                    <!-- End of Content Wrapper -->
+                </div>
+                <!-- End of Page Wrapper -->
+
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded " href="#page-top ">
+                    <i class="fas fa-angle-up "></i>
+                </a>
+
+                <!-- Logout Modal-->
+                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Select "Logout" below if you are ready to end your current
+                                session.
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" href="login.html">Logout</a>
                             </div>
                         </div>
                     </div>
-                      <!-- /.container -->
                 </div>
-                    <!-- End Page Content-->
-                </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white ">
-                    <div class="container my-auto ">
-                        <div class="copyright text-center my-auto ">
-                            <span>Digital Donation 2021</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-         </div>
-            <!-- End of Content Wrapper -->
-    </div>
-        <!-- End of Page Wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded " href="#page-top ">
-            <i class="fas fa-angle-up "></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 </z:layout>
