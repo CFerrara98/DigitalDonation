@@ -216,7 +216,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina.
      */
-    @RequestMapping(value ="/elencoPartecipanti", method = RequestMethod.GET)
+    @RequestMapping(value ="/goElencoPartecipanti", method = RequestMethod.GET)
     public String elencoPartecipanti(Model model) {
         return "GUIOrganizzazioneSedute/elencoPartecipanti";
     }
@@ -226,7 +226,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/inserimentoUtenteGuest", method = RequestMethod.GET)
+    @RequestMapping(value ="/goInserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(Model model) {
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
     }
@@ -236,7 +236,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina.
      */
-    @RequestMapping(value ="/monitoraggioSedute", method = RequestMethod.GET)
+    @RequestMapping(value ="/goMonitoraggioSedute", method = RequestMethod.GET)
     public String monitoraggioSedute(Model model) {
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
     }
@@ -246,7 +246,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/partecipaSeduta", method = RequestMethod.GET)
+    @RequestMapping(value ="/goPartecipaSeduta", method = RequestMethod.GET)
     public String partecipaSeduta(Model model) {
         return "GUIOrganizzazioneSedute/partecipaSeduta";
     }
@@ -266,7 +266,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/seduteDisponibili", method = RequestMethod.GET)
+    @RequestMapping(value ="/goSeduteDisponibili", method = RequestMethod.GET)
     public String seduteDisponibili(Model model) {
         return "GUIOrganizzazioneSedute/seduteDisponibili";
     }
