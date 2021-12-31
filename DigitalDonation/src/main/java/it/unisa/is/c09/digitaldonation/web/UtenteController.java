@@ -140,7 +140,7 @@ public class UtenteController {
     public String dashboardDonatore(HttpServletRequest request, Model model) {
         if(request.getSession().getAttribute("utente") instanceof Donatore){
             //TODO Caricare la img del donatore come da mock-up
-            return "GUIGestioneUtente/dashboardOperatore";
+            return "GUIGestioneUtente/dashboardDonatore";
         }
         request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
         return "redirect:/";

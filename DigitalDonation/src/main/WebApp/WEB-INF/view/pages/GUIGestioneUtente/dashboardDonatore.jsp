@@ -71,7 +71,7 @@
                                         <h1>&nbsp;</h1>
                                         <h1 align="center" class="h3 mb-2 text-gray-800">Visualizza le sedute
                                             disponibili per te:</h1>
-                                        <a class="btn btn-primary" href="./visualizzaElencoSedute"
+                                        <a class="btn btn-primary" href="./goSeduteDisponibili"
                                            role="button">Sedute</a>
                                         <h1>&nbsp;</h1>
                                         <h1>&nbsp;</h1>

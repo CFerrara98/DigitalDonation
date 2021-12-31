@@ -25,7 +25,7 @@
                     <!-- Page Heading -->
                     <h1>&nbsp;</h1>
                     <!-- indietro -->
-                    <a href="elencoPartecipanti.html" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
+                    <a href="./goSeduteDisponibili" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
                     <!-- Titolo -->
                     <h1 class=" mb-4" style="text-align: center">Seduta di donazione</h1>
 

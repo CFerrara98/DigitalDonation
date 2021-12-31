@@ -29,7 +29,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <div class="card-body">
                             <!-- indietro -->
-                            <a href="dashboardDonatore.html" role="button"> <i
+                            <a href="./dashboardDonatore" role="button"> <i
                                     class="fas fa-arrow-left float-left icone"></i></a>
                             <!-- Titolo -->
                             <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Elenco sedute ancora da
@@ -65,7 +65,7 @@
                                                             value="${listaSedutePrenotabili.getIndex(i).dataSeduta}"></c:out></h3>
                                                 <td scope="col"><span class=" float-right">
                                                 <a class="btn btn-primary botton-sm large"
-                                                   href="./visualizzaElencoSedute" role="button">Partecipa</a>
+                                                   href="./goPartecipaSeduta" role="button">Partecipa</a>
                                              </span>
                                                 </td>
                                             </tr>
