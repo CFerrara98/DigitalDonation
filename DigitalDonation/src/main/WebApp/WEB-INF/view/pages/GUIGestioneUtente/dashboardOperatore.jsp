@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="z" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
@@ -47,9 +47,11 @@
                                 <table class="table  ">
                                     <thead>
                                     <tr>
-                                        <td scope="col"><h3 class="small font-weight-bold"> Crea una nuova Seduta: </h3> </td>
-                                        <td scope="col"><span  class=" float-right">
-                                                <a class="btn btn-primary botton-sm large" href="schedulazioneSeduta.html" role="button">Crea seduta</a>
+                                        <td scope="col"><h3 class="small font-weight-bold"> Crea una nuova Seduta: </h3>
+                                        </td>
+                                        <td scope="col"><span class=" float-right">
+                                                <a class="btn btn-primary botton-sm large"
+                                                   href="schedulazioneSeduta.html" role="button">Crea seduta</a>
                                              </span>
                                         </td>
                                     </tr>
@@ -71,16 +73,17 @@
                                 <table class="table  ">
                                     <thead>
                                     <tr>
-                                        <td scope="col"><h3 class="small font-weight-bold"> Monitore una seduta:   </h3> </td>
-                                        <td scope="col"><span  class=" float-right">
-                                                <a class="btn btn-primary botton-sm large" href="monitoraggioSedute.html" role="button">Elenco sedute</a>
+                                        <td scope="col"><h3 class="small font-weight-bold"> Monitore una seduta: </h3>
+                                        </td>
+                                        <td scope="col"><span class=" float-right">
+                                                <a class="btn btn-primary botton-sm large"
+                                                   href="monitoraggioSedute.html" role="button">Elenco sedute</a>
                                              </span>
                                         </td>
                                     </tr>
                                     </thead>
                                 </table>
                             </div>
-
 
 
                         </div>
@@ -98,8 +101,9 @@
                                 <table class="table  ">
                                     <thead>
                                     <tr>
-                                        <td scope="col"><h3 class="small font-weight-bold"> Crea un nuovo tesserino:  </h3> </td>
-                                        <td scope="col"><span  class=" float-right">
+                                        <td scope="col"><h3 class="small font-weight-bold"> Crea un nuovo
+                                            tesserino: </h3></td>
+                                        <td scope="col"><span class=" float-right">
                                                 <a class="btn btn-primary botton-sm large" href=".html" role="button">Crea tesserino</a>
                                              </span>
                                         </td>
@@ -111,7 +115,6 @@
 
                         </div>
                     </div>
-
 
 
                     <!-- Per dividere a blocchi-->

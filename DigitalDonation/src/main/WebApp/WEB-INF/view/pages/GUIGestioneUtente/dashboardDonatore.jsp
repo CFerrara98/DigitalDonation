@@ -6,12 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="z" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <z:layout pageTitle="dashboardDonatore">
-
 
 
     <!-- Page Wrapper -->
@@ -25,11 +24,11 @@
 
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid" >
+                <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <h1>&nbsp;</h1>
-                    <h1 class=" mb-4" style="text-align: center" >Dashboard Donatore</h1>
+                    <h1 class=" mb-4" style="text-align: center">Dashboard Donatore</h1>
 
                     <!-- Content Row -->
                     <div class="row ">
@@ -45,12 +44,13 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 24rem;"  src="img/logo.png" alt="...">
-                                        <h1 align="center" class="h3 mb-2 text-gray-800" > %Nome Cognome%</h1>
+                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 24rem;"
+                                             src="img/logo.png" alt="...">
+                                        <h1 align="center" class="h3 mb-2 text-gray-800"> %Nome Cognome%</h1>
                                         <a class="btn btn-primary" href="#" role="button">Vai al tuo tesserino</a>
                                     </div>
                                 </div>
-                                <div class="mt-4 mb-4 text-center small" >
+                                <div class="mt-4 mb-4 text-center small">
 
                                 </div>
                             </div>
@@ -67,12 +67,16 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="mt-4 mb-4 text-center small" >
+                                    <div class="mt-4 mb-4 text-center small">
                                         <h1>&nbsp;</h1>
-                                        <h1 align="center" class="h3 mb-2 text-gray-800">Visualizza le sedute disponibili per te:</h1>
-                                        <a class="btn btn-primary" href="seduteDisponibili.html" role="button">Sedute</a>
-                                        <h1>&nbsp;</h1><h1>&nbsp;</h1>
-                                        <h1 align="center" class="h3 mb-2 text-gray-800">Compila la tua autodichiarazione di indisponibilità:</h1>
+                                        <h1 align="center" class="h3 mb-2 text-gray-800">Visualizza le sedute
+                                            disponibili per te:</h1>
+                                        <a class="btn btn-primary" href="seduteDisponibili.html"
+                                           role="button">Sedute</a>
+                                        <h1>&nbsp;</h1>
+                                        <h1>&nbsp;</h1>
+                                        <h1 align="center" class="h3 mb-2 text-gray-800">Compila la tua
+                                            autodichiarazione di indisponibilità:</h1>
                                         <a class="btn btn-primary" href="#" role="button">Compila</a>
                                         <h1>&nbsp;</h1>
                                     </div>
@@ -95,7 +99,10 @@
                                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                                              src="img/Blood donation.png" alt="...">
                                     </div>
-                                    <p>Non è sempre possibile donare il sangue o comunque non è possibile per tutti: oltre ai requisiti per donare il sangue, vi sono infatti anche alcuni criteri di sospensione che impediscono il prelievo per un certo periodo di tempo. Andiamo a scoprirli insieme:
+                                    <p>Non è sempre possibile donare il sangue o comunque non è possibile per tutti:
+                                        oltre ai requisiti per donare il sangue, vi sono infatti anche alcuni criteri di
+                                        sospensione che impediscono il prelievo per un certo periodo di tempo. Andiamo a
+                                        scoprirli insieme:
 
                                         Parto – sospensione per 6 mesi
                                         Interruzione di gravidanza – 6 mesi
@@ -167,16 +174,16 @@
 
     <!-- Che cos'è??? Lo lasciamo qua
     <div class="objects">
-        <img class="object_face_rocket" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="80px">
+    <img class="object_face_rocket" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="80px">
 
-        <div class="box_face">
-            <img class="object_face" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="140px">
-        </div>
-<<<<<<< HEAD
-         -->
-=======
+    <div class="box_face">
+    <img class="object_face" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="140px">
+    </div>
+    <<<<<<< HEAD
+    -->
+    =======
 
-        <p>CIAOOOOOOOOOO</p>
+    <p>CIAOOOOOOOOOO</p>
 
->>>>>>> 78f4025f5560648973d472feb28ac50d717030cf
+    >>>>>>> 78f4025f5560648973d472feb28ac50d717030cf
 </z:layout>

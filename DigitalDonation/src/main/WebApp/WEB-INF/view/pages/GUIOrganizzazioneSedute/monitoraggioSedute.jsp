@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="z" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
@@ -15,143 +15,150 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-    <!-- Main Content -->
-    <div id="content">
-
-
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <div class="card-body">
-
-    <!-- indietro -->
-    <a href="dashboardOperatore.html" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
-
-    <!-- titolo -->
-    <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Monitoraggio Sedute</h1>
-
-    </div>
-    </div>
-    <!-- Sezione Elenco monitoraggi -->
+            <!-- Main Content -->
+            <div id="content">
 
 
-    <div class="card shadow mb-4 ">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Elenco sedute da svolgersi:</h6>
-        </div>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <div class="card-body">
+
+                            <!-- indietro -->
+                            <a href="dashboardOperatore.html" role="button"> <i
+                                    class="fas fa-arrow-left float-left icone"></i></a>
+
+                            <!-- titolo -->
+                            <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Monitoraggio Sedute</h1>
+
+                        </div>
+                    </div>
+                    <!-- Sezione Elenco monitoraggi -->
 
 
-        <c:forEach begin="0" var="i" end="${listaSedute.size}"> <!-- controllare il dollaro -->
-    <!-- seduta %n% -->
-    <div class="card shadow mb-4">
-        <div class=" m-0 card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary h6">Seduta <c:out value="${i+1}"></c:out>:</h6>
-        </div>
-    <div class="card-body">
+                    <div class="card shadow mb-4 ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Elenco sedute da svolgersi:</h6>
+                        </div>
 
-    <!-- Tabella -->
 
-    <div class="table-container">
-        <table class="table  ">
-            <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Elenco partecipanti</th>
-                    <th scope="col">Modifica seduta</th>
-                    <th scope="col">Elimina seduta</th>
-                </tr>
-            </thead>
-        <tbody>
-                <tr>
-                    <th>
-                        <h4 class="small font-weight-bold">Data: <c:out value="${listaSedute.getIndex(i).dataSeduta}"></c:out></h4>
-                        <h4 class="small font-weight-bold">Luogo:<c:out value="${listaSedute.getIndex(i).luogo}"></c:out></h4>
-                    </th>
-                    <th scope="row">
-                        <!-- Bottom Elenco partecipanti -->
-                        <span  class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/monitoraggioSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>" role="button">
+                        <c:forEach begin="0" var="i" end="${listaSedute.size}"> <!-- controllare il dollaro -->
+                        <!-- seduta %n% -->
+                        <div class="card shadow mb-4">
+                            <div class=" m-0 card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary h6">Seduta <c:out
+                                        value="${i+1}"></c:out>:</h6>
+                            </div>
+                            <div class="card-body">
+
+                                <!-- Tabella -->
+
+                                <div class="table-container">
+                                    <table class="table  ">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Elenco partecipanti</th>
+                                            <th scope="col">Modifica seduta</th>
+                                            <th scope="col">Elimina seduta</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th>
+                                                <h4 class="small font-weight-bold">Data: <c:out
+                                                        value="${listaSedute.getIndex(i).dataSeduta}"></c:out></h4>
+                                                <h4 class="small font-weight-bold">Luogo:<c:out
+                                                        value="${listaSedute.getIndex(i).luogo}"></c:out></h4>
+                                            </th>
+                                            <th scope="row">
+                                                <!-- Bottom Elenco partecipanti -->
+                                                <span class="float-center col-xl-1 col-md-6 mb-2">
+                            <a href="/monitoraggioSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>"
+                               role="button">
                                 <i class="fas fa-user icone"></i>
                             </a>
                         </span>
-                     </th>
+                                            </th>
 
-                    <!-- Bottom modifica seduta -->
-                    <td>
-                        <span  class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/modicaSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>" role="button"> <i class="fas fa-cogs icone"></i></a>
+                                            <!-- Bottom modifica seduta -->
+                                            <td>
+                        <span class="float-center col-xl-1 col-md-6 mb-2">
+                            <a href="/modicaSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>"
+                               role="button"> <i class="fas fa-cogs icone"></i></a>
                         </span>
-                    </td>
+                                            </td>
 
-                    <!-- Bottom Elimina seduta -->
-                    <td>
-                        <span  class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/eliminaSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>" role="button"> <i class="fas fa-times icone"></i></a>
+                                            <!-- Bottom Elimina seduta -->
+                                            <td>
+                        <span class="float-center col-xl-1 col-md-6 mb-2">
+                            <a href="/eliminaSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>"
+                               role="button"> <i class="fas fa-times icone"></i></a>
                         </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-    <!--FINE Tabella -->
+                                <!--FINE Tabella -->
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- fine elenco monitoraggio -->
+                </div>
+                </c:forEach>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Digital Donation 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-    </div>
-
-    </div>
-    <!-- fine elenco monitoraggio -->
-    </div>
-        </c:forEach>
-    <!-- /.container-fluid -->
-
-    </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-    <span>Digital Donation 2021</span>
-    </div>
-    </div>
-    </footer>
-    <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
+        <i class="fas fa-angle-up"></i>
     </a>
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">×</span>
-    </button>
-    </div>
-    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-    <div class="modal-footer">
-    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-    <a class="btn btn-primary" href="login.html">Logout</a>
-    </div>
-    </div>
-    </div>
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
     </div>
 
 

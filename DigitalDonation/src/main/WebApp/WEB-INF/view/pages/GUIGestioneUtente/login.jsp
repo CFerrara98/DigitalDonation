@@ -1,8 +1,8 @@
 <%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Utente" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="../../resources/css/sb-admin-2.min.css" rel="stylesheet">
@@ -47,22 +48,30 @@
                                 </div>
 
                                 <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm"--%>
-                                <form:form action="./login" method="post" modelAttribute="loginForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+                                <form:form action="./login" method="post" modelAttribute="loginForm" cssClass="user"
+                                           enctype="application/x-www-form-urlencoded">
                                 <div class="form-group">
                                     <h6 class="h6 text-gray-900 mb-4">Inserisci Email:</h6>
                                     <c:choose>
                                         <c:when test="${EmailError == null}">
                                             <c:choose>
                                                 <c:when test="${EmailPrecedente == null}">
-                                                    <form:input type="text" class="form-control form-control-user" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
+                                                    <form:input type="text" class="form-control form-control-user"
+                                                                id="email" placeholder="Inserisci l'indirizzo email"
+                                                                path="email"/>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <form:input type="text" value="${EmailPrecedente}" class="form-control form-control-user is-invalid" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
+                                                    <form:input type="text" value="${EmailPrecedente}"
+                                                                class="form-control form-control-user is-invalid"
+                                                                id="email" placeholder="Inserisci l'indirizzo email"
+                                                                path="email"/>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:when>
                                         <c:otherwise>
-                                            <form:input type="text" class="form-control form-control-user is-invalid" id="email" placeholder="Inserisci l'indirizzo email" path="email"/>
+                                            <form:input type="text" class="form-control form-control-user is-invalid"
+                                                        id="email" placeholder="Inserisci l'indirizzo email"
+                                                        path="email"/>
                                             <span class="myError">${EmailError}</span>
                                         </c:otherwise>
                                     </c:choose>
@@ -72,11 +81,13 @@
                                     <h6 class="h6 text-gray-900 mb-4">Inserisci Password:</h6>
                                     <c:choose>
                                         <c:when test="${PasswordError == null}">
-                                            <input type="password" name="password" id="inputPassword" placeholder="Password" class="form-control">
+                                            <input type="password" name="password" id="inputPassword"
+                                                   placeholder="Password" class="form-control">
                                         </c:when>
                                         <c:otherwise>
-                                            <input type="password" name="password" id="inputPassword" placeholder="Password" class="form-control is-invalid">
-                                            <span class = "myError">${PasswordError}</span>
+                                            <input type="password" name="password" id="inputPassword"
+                                                   placeholder="Password" class="form-control is-invalid">
+                                            <span class="myError">${PasswordError}</span>
                                         </c:otherwise>
                                     </c:choose>
 
@@ -87,19 +98,18 @@
                             </form:form>
 
 
-
-                                <!-- Ipotetico Cambio Password
-                                <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                </div>
-                                -->
+                            <!-- Ipotetico Cambio Password
+                            <div class="text-center">
+                                <a class="small" href="forgot-password.html">Forgot Password?</a>
                             </div>
+                            -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
