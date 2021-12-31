@@ -1,6 +1,8 @@
 package it.unisa.is.c09.digitaldonation.UtenteManagement;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.AccessNotAuthorizedException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonEsistenteException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.MailNonValidaException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.UserNotLoggedException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
@@ -11,16 +13,21 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.when;
+
 import java.security.NoSuchAlgorithmException;
 
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 /**
  * Test di unità per la classe UtenteService; tipologia di test:
  * whitebox strategia: branch coverage.
  *
  * @author Mattia Sapere, Fabio Siepe, Marika Spagna Zito
- *
  */
 
 @RunWith(MockitoJUnitRunner.class)
@@ -120,6 +127,27 @@ public class UtenteServiceUT {
     }
 
     /**
+     * Testa il caso in cui l'utente riesce a loggarsi..
+     *
+     * @result Il test è superato se il messaggio generato dal sistema è uguale a quello
+     * previsto dall'oracolo.
+     */
+    @Test
+    public void controllaLoginSuccesso() {
+        Utente utente = new Utente();
+
+        when(utenteRepository.findByEmailAndPassword("fabio.siepe@gmail.com", "password123")).thenReturn(utente);
+
+        try {
+            utenteService.login("fabio.siepe@gmail.com", "password123");
+        } catch (UserNotLoggedException e) {
+            assertEquals("La password non è valida.", e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            fail("errore nel login! 2");
+        }
+    }
+
+    /**
      * Testa il caso in cui il logout è errato.
      *
      * @result Il test è superato se il messaggio generato dal sistema è uguale a quello
@@ -136,4 +164,111 @@ public class UtenteServiceUT {
             assertEquals(messaggio, e.getMessage());
         }
     }
+
+    /**
+     * Testa il caso in cui il logout è ha successo.
+     *
+     * @result Il test è superato se il messaggio generato dal sistema è uguale a quello
+     * previsto dall'oracolo.
+     */
+    @Test
+    public void controllaLogoutSuccesso() {
+
+        Utente utente = new Utente();
+
+        try {
+            utenteService.logout(utente);
+        } catch (AccessNotAuthorizedException e) {
+            fail(("Errore durante il logout"));
+        }
+    }
+
+
+    /**
+     * controllaValida nel caso in cui l'email è null
+     *
+     * @result Il test è superato se il messaggio generato dal sistema è uguale a quello
+     * previsto dall'oracolo.
+     */
+    @Test
+    public void controllaValidaEmailNull() {
+
+        String messaggio = "Email o password errati, per favore riprova.";
+        String eMail = null;
+
+        try {
+            utenteService.validaMail(eMail);
+        } catch (MailNonValidaException e) {
+            assertEquals(messaggio, e.getMessage());
+        } catch (MailNonEsistenteException e) {
+            assertEquals(messaggio, e.getMessage());
+        }
+    }
+
+    /**
+     * controllaValida nel caso in cui l'email non rispetta la regex
+     *
+     * @result Il test è superato se il messaggio generato dal sistema è uguale a quello
+     * previsto dall'oracolo.
+     */
+    @Test
+    public void controllaValidaEmailFormato() {
+
+        String messaggio = "Email o password errati, per favore riprova.";
+        String eMail = "....";
+
+        try {
+            utenteService.validaMail(eMail);
+        } catch (MailNonValidaException e) {
+            assertEquals(messaggio, e.getMessage());
+        } catch (MailNonEsistenteException e) {
+            assertEquals(messaggio, e.getMessage());
+        }
+    }
+
+    /**
+     * controllaValida nel caso in cui non esiste nessun utenten con questa mail
+     *
+     * @result Il test è superato se il messaggio generato dal sistema è uguale a quello
+     * previsto dall'oracolo.
+     */
+    @Test
+    public void controllaValidaEmailNonEsistente() {
+
+        String messaggio = "Email o password errati, per favore riprova.";
+        String email = "fabio.siepe@gmail.com";
+
+        when(utenteRepository.existsUtenteByEmail(email)).thenReturn(false);
+        try {
+            utenteService.validaMail(email);
+        } catch (MailNonValidaException e) {
+            assertEquals(messaggio, e.getMessage());
+        } catch (MailNonEsistenteException e) {
+            assertEquals(messaggio, e.getMessage());
+        }
+    }
+
+    /**
+     * controllaValida nel caso in cui la mail viene validata ed esite un utente
+     *
+     * @result Il test è superato se il messaggio generato dal sistema è uguale a quello
+     * previsto dall'oracolo.
+     */
+    @Test
+    public void controllaValidaEmailSuccesso() {
+
+        String messaggio = "Email o password errati, per favore riprova.";
+        String email = "fabio.siepe@gmail.com";
+        Utente utente = new Utente();
+         when(utenteRepository.existsUtenteByEmail(email)).thenReturn(true);
+        try {
+            assertEquals(email, utenteService.validaMail(email));
+        } catch (MailNonValidaException e) {
+            assertEquals(messaggio, e.getMessage());
+        } catch (MailNonEsistenteException e) {
+            assertEquals(messaggio, e.getMessage());
+        }
+    }
+
+
 }
