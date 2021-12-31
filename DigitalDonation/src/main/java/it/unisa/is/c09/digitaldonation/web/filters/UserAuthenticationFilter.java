@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet Filter, controlla le autenticazioni
  */
 
-@WebFilter(urlPatterns = {"/dashboardOperatore","/dashboardDonatore"})
+@WebFilter(urlPatterns = {"/feedback","/dashboardOperatore","/dashboardDonatore"})
 public class UserAuthenticationFilter implements Filter {
 
     private Logger logger = Logger.getLogger(String.valueOf(UtenteController.class));

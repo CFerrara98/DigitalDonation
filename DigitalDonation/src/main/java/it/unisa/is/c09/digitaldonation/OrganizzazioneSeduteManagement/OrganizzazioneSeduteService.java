@@ -47,7 +47,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         }
         if (feedback) {
             //Feedback positivo
-            Seduta seduta = new Seduta();
+            Seduta seduta;
             seduta = sedutaRepository.findByIdSeduta(idSeduta);
             if(seduta == null)
             {
@@ -55,9 +55,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
             }
             seduta.addPartecipante(donatore);
             sedutaRepository.save(seduta);
-        } else {
-            //Feedback negativo
-            return;
         }
     }
     /**

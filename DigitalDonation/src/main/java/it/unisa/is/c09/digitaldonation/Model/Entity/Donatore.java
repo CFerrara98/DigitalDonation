@@ -16,7 +16,7 @@ public class Donatore extends Utente{
     private Date dataDiNascita;
     private String luogoDiNascita;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tesserino", referencedColumnName = "idTessera")
+    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "donatore_utente_codice_fiscale")
     private Tesserino tesserino;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "donatore")

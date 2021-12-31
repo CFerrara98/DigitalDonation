@@ -27,17 +27,17 @@ public class Seduta {
     @ManyToOne
     @JoinColumn(name = "sede_locale_codice_identificativo")
     private SedeLocale sedeLocale;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "Seduta_Guest",
-            joinColumns = @JoinColumn(name = "codiceFiscaleGuest"),
-            inverseJoinColumns = @JoinColumn(name = "idSeduta")
+            name = "seduta_guest",
+            joinColumns = @JoinColumn(name = "id_Seduta"),
+            inverseJoinColumns = @JoinColumn(name = "codice_fiscale_guest")
     )
     private List<Guest> listaGuest;
     @ManyToMany @JoinTable(
-            name = "Seduta_Donatore",
-            joinColumns = @JoinColumn(name = "codiceFiscaleUtente"),
-            inverseJoinColumns = @JoinColumn(name = "idSeduta")
+            name = "seduta_donatore",
+            joinColumns = @JoinColumn(name = "id_seduta"),
+            inverseJoinColumns = @JoinColumn(name = "codice_fiscale_utente")
     )
     private List<Donatore> listaDonatore;
 

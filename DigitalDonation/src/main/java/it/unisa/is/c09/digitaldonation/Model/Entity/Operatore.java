@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Operatore extends Utente{
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "sede_locale_codice_identificativo")
     private SedeLocale sedeLocale;
 
     /**

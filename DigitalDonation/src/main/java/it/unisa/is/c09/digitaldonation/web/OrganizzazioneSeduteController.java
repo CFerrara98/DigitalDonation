@@ -11,6 +11,7 @@ import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestFormValidate;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaFormValidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,12 +20,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class OrganizzazioneSeduteController {
+
+    private Logger logger = Logger.getLogger(String.valueOf(OrganizzazioneSeduteController.class));
+
     @Autowired
     OrganizzazioneSeduteService organizzazioneSeduteService;
     @Autowired
@@ -41,17 +47,27 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
-    @RequestMapping(value = "/feedback", method = RequestMethod.POST)
-    public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
-        Boolean feedback = (Boolean) model.getAttribute("feedback");
-        Long idSeduta = (Long) model.getAttribute("idSeduta");
-        Donatore donatore = (Donatore) request.getSession().getAttribute("utente");
-        try {
-            organizzazioneSeduteService.feedbackDonatore(donatore, feedback, idSeduta);
-        } catch (CannotRelaseFeedbackException e) {
-            return "GUIGestioneUtente/dashboardDonatore";
+    @RequestMapping(value = "/feedback", method = RequestMethod.GET)
+    public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+        Boolean feedback;
+        Long idSeduta;
+        try{
+            feedback = Boolean.parseBoolean((String) request.getParameter("feedback"));
+            idSeduta = Long.valueOf(((String) request.getParameter("idSeduta")));
+        }catch (Exception e){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            return "redirect:/";
         }
-
+        Donatore utente = (Donatore) request.getSession().getAttribute("utente");
+        logger.info("Inserimento feedback. Id seduta: "+idSeduta+
+                " feedback: "+feedback + " utente: "+utente.toString());
+        if (utente != null && utente instanceof Donatore && feedback == true) {
+            try {
+                organizzazioneSeduteService.feedbackDonatore(utente, feedback, idSeduta);
+            } catch (CannotRelaseFeedbackException e) {
+                return "GUIGestioneUtente/dashboardDonatore";
+            }
+        }
         return "GUIGestioneUtente/dashboardDonatore";
     }
 

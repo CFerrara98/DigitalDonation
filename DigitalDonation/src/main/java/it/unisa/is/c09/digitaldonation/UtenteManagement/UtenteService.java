@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 
-import static it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword.cryptoByMD5.getMD5;
+import static it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword.CryptoByMD5.getMD5;
 
 @Service
 public class UtenteService implements UtenteServiceInterface {

@@ -1,15 +1,9 @@
-package it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class cryptoByMD5 {
-    /**
-     * Metodo che crypta la password
-     * @param cleanPassword la password in chiaro
-     * @return la password cryptata
-     * @throws NoSuchAlgorithmException
-     */
+public class testttt {
+
+
     public static String getMD5(String cleanPassword)
     {
         if(cleanPassword != null) {
@@ -30,5 +24,9 @@ public class cryptoByMD5 {
         }
         else
             return "";
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getMD5("pdT!nW&6kGSS"));
     }
 }

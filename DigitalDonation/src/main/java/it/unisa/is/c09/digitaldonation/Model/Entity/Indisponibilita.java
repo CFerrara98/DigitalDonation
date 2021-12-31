@@ -13,8 +13,8 @@ public class Indisponibilita {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idIndisponibilita;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "donatore_codice_fiscale_utente")
     private Donatore donatore;
     private Date dataProssimaDisponibilita;
     private String motivazioni;

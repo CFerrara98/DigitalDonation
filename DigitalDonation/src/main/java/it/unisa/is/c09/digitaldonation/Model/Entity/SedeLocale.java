@@ -3,6 +3,7 @@ package it.unisa.is.c09.digitaldonation.Model.Entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
