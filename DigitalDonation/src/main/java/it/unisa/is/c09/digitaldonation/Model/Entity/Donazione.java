@@ -102,14 +102,4 @@ public class Donazione {
 
     /** Espressioni regolare che definisce il formato del campo tipo donazione */
     public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)$ ";
-
-    @Override
-    public String toString() {
-        return "Donazione{" +
-                "idDonazione=" + idDonazione +
-                ", tesserino=" + tesserino +
-                ", dataDonazione=" + dataDonazione +
-                ", tipoDonazione='" + tipoDonazione + '\'' +
-                '}';
-    }
 }

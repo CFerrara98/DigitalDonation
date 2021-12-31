@@ -93,7 +93,7 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value = "/visualizzaElencoSedute", method = RequestMethod.GET)
     public String visualizzaElencoSedute(HttpServletRequest request, Model model){
-       // List<Seduta> listaSedutePrenotabili = organizzazioneSeduteService.getListaSedutePrenotabili();
+        // List<Seduta> listaSedutePrenotabili = organizzazioneSeduteService.getListaSedutePrenotabili();
         //model.addAttribute("listaSedutePrenotabili", listaSedutePrenotabili);
         Utente utente = (Utente) model.getAttribute("utente");
         if(utente instanceof Donatore){

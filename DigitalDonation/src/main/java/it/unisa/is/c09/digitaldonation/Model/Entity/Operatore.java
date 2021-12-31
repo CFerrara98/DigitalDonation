@@ -48,14 +48,4 @@ public class Operatore extends Utente{
     public void setSedeLocale(SedeLocale sedeLocale) {
         this.sedeLocale = sedeLocale;
     }
-
-
-    @Override
-    public String toString() {
-        return super.toString()+
-                "\n     "+
-                "Operatore{" +
-                "sedeLocale=" + sedeLocale +
-                '}';
-    }
 }

@@ -309,22 +309,4 @@ public class Seduta {
     public static final String DATA_INIZIO_PARTECIPAZIONE_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][2]{1}\\d{3}$";
     public static final String DATA_FINE_PARTECIPAZIONE_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][2]{1}\\d{3}$";
     public static final String NUMERO_PARTECIPANTI_REGEX = "^(?:[0-9][0-9]{3}|[0-9][0-9]{2}|[1-9][1-9]|[0-9])$";
-
-
-    @Override
-    public String toString() {
-        return "Seduta{" +
-                "idSeduta=" + idSeduta +
-                ", date=" + dataSeduta +
-                ", luogo='" + luogo + '\'' +
-                ", oraInizio=" + oraInizio +
-                ", oraFine=" + oraFine +
-                ", numeroPartecipanti=" + numeroPartecipanti +
-                ", dataInizioPrenotazione=" + dataInizioPrenotazione +
-                ", dataFinePrenotazione=" + dataFinePrenotazione +
-                ", sedeLocale=" + sedeLocale +
-                ", listaGuest=" + listaGuest +
-                ", listaDonatore=" + listaDonatore +
-                '}';
-    }
 }

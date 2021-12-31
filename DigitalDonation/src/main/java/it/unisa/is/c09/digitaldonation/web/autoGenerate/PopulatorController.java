@@ -19,19 +19,4 @@ public class PopulatorController {
 
     @Autowired
     UtilServicePopulator utilService;
-
-    @RequestMapping(value = "/generateEntity", method = RequestMethod.GET)
-    public String generateEntity(HttpSession session) throws NoSuchAlgorithmException {
-        /*utilService.doDonatori(200);
-        utilService.doGuests(500);
-        utilService.doOperatoriAndSedeLocale(10);
-        utilService.doSedute(10);
-        utilService.doDonazioni(80);
-        return "GUIGestioneUtente/homepage";*/
-        String password = utilService.getMD5("elpidio");
-        System.out.println(password);
-        System.out.println(password.length());
-        return "GUIGestioneUtente/homepage";
-    }
-
 }

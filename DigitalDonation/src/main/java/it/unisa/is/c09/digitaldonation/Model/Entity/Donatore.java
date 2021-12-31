@@ -153,18 +153,4 @@ public class Donatore extends Utente{
 
     /** Espressione regolare che definisce il formato del campo luogo di nascita. */
     public static final String LUOGONASCITA_REGEX = "^[a-zA-Zàòùèéìçê' -]{2,35}+$";
-
-
-    @Override
-    public String toString() {
-        return super.toString()+
-                "\n     "+
-                "Donatore{" +
-                "residenza='" + residenza + '\'' +
-                ", dataDiNascita=" + dataDiNascita +
-                ", luogoDiNascita='" + luogoDiNascita + '\'' +
-                ", tesserino=" + tesserino +
-                ", listaIndisponibilita=" + listaIndisponibilita +
-                '}';
-    }
 }
