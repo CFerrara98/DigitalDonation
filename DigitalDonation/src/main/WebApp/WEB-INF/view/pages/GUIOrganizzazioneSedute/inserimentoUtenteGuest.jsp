@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: abasi
+  User: angel
   Date: 30/12/2021
   Time: 13:04
   To change this template use File | Settings | File Templates.
@@ -51,28 +51,130 @@
     <form class="user">
 
     <div class="form-group">
-    <p style="color:#4e73df;">Inserisci il nome dell'utente Guest: </p>
-    <input type="text" class="form-control form-control-user" id="exampleNome" placeholder="es. Angela">
+            <form:form action="./inserimentoGuest" method="post" modelAttribute="guestForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <p style="color:#4e73df;">Inserisci il nome dell'utente Guest: </p>
+                <c:choose>
+                    <c:when test="${NomeError == null}">
+                        <c:choose>
+                            <c:when test="${NomePrecedente == null}">
+                                <form:input type="text" class="form-control form-control-user" id="nome" placeholder="es. Angela" path="nome"/>
+                            </c:when>
+                            <c:otherwise>
+                                <form:input type="text" value="${NomePrecedente}" class="form-control form-control-user" id="nome" placeholder="es. Angela" path="nome"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="text" class="form-control form-control-user" id="nome" placeholder="es. Angela" path="nome"/>
+
+                        <p>${NomeError}</p>
+                        <span class="myError">${NomeError}</span>
+                    </c:otherwise>
+                </c:choose>
     </div>
 
     <div class="form-group">
-    <p style="color:#4e73df;">Inserisci il cognome dell'utente Guest: </p>
-    <input type="text" class="form-control form-control-user" id="exampleCognome" placeholder="es. De Martino">
+
+            <form:form action="./inserimentoGuest" method="post" modelAttribute="guestForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <p style="color:#4e73df;">Inserisci il cognome dell'utente Guest: </p>
+                <c:choose>
+                    <c:when test="${CognomeError == null}">
+                        <c:choose>
+                            <c:when test="${CognomePrecedente == null}">
+                                <form:input type="text" class="form-control form-control-user" id="cognome" placeholder="es. De Martino" path="cognome"/>
+                            </c:when>
+                            <c:otherwise>
+                                <form:input type="text" value="${CognomePrecedente}" class="form-control form-control-user" id="cognome" placeholder="es. De Martino" path="cognome"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="text" class="form-control form-control-user" id="cognome" placeholder="es. De Martino" path="cognome"/>
+
+                        <p>${CognomeError}</p>
+                        <span class="myError">${CognomeError}</span>
+                    </c:otherwise>
+                </c:choose>
+
+    <div class="form-group">
+
+            <form:form action="./inserimentoGuest" method="post" modelAttribute="guestForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <p style="color:#4e73df;">Inserisci il telefono dell'utente Guest: </p>
+                <c:choose>
+                    <c:when test="${TelefonoError == null}">
+                        <c:choose>
+                            <c:when test="${TelefonoPrecedente == null}">
+                                <form:input type="tel" class="form-control form-control-user" id="telefono" placeholder="es. 3456789123" path="telefono"/>
+                            </c:when>
+                            <c:otherwise>
+                                <form:input type="tel" value="${TelefonoPrecedente}" class="form-control form-control-user" id="telefono" placeholder="es. 3456789123" path="telefono"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="tel" class="form-control form-control-user" id="telefono" placeholder="es. 3456789123" path="telefono"/>
+
+                        <p>${TelefonoError}</p>
+                        <span class="myError">${TelefonoError}</span>
+                    </c:otherwise>
+                </c:choose>
+
     </div>
 
     <div class="form-group">
-    <p style="color:#4e73df;">Inserisci il telefono dell'utente Guest: </p>
-    <input type="tel" class="form-control form-control-user" id="exampleTelefono" placeholder="es. 3456789123">
+            <form:form action="./inserimentoGuest" method="post" modelAttribute="guestForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <p style="color:#4e73df;">Inserisci il codice fiscale dell'utente Guest: </p>
+                <c:choose>
+                    <c:when test="${CodiceFiscaleError == null}">
+                        <c:choose>
+                            <c:when test="${CodiceFiscalePrecedente == null}">
+                                <form:input type="text" class="form-control form-control-user" id="codiceFiscale" placeholder="es. MVYZZV65L56I556J" path="codiceFiscale"/>
+                            </c:when>
+                            <c:otherwise>
+                                <form:input type="text" value="${CodiceFiscalePrecedente}" class="form-control form-control-user" id="codiceFiscale" placeholder="es. MVYZZV65L56I556J" path="codiceFiscale"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="text" class="form-control form-control-user" id="codiceFiscale" placeholder="es. MVYZZV65L56I556J" path="codiceFiscale"/>
+
+                        <p>${CodiceFiscaleError}</p>
+                        <span class="myError">${CodiceFiscaleError}</span>
+                    </c:otherwise>
+                </c:choose>
     </div>
 
     <div class="form-group">
-    <p style="color:#4e73df;">Inserisci il codice fiscale dell'utente Guest: </p>
-    <input type="text" class="form-control form-control-user" id="exampleCodiceFiscale" placeholder="es. MVYZZV65L56I556J">
-    </div>
+            <form:form action="./inserimentoGuest" method="post" modelAttribute="guestForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <p style="color:#4e73df;">Inserisci le patologie dell'utente Guest: </p>
+                <c:choose>
+                    <c:when test="${PatologieError == null}">
+                        <c:choose>
+                            <c:when test="${PatologiePrecedente == null}">
+                                <form:input type="text" class="form-control form-control-user" id="patologie" placeholder="es. Nessuna" path="patologie"/>
+                            </c:when>
+                            <c:otherwise>
+                                <form:input type="text" value="${PatologiePrecedente}" class="form-control form-control-user" id="patologie" placeholder="es. Nessuna" path="patologie"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input type="text" class="form-control form-control-user" id="patologie" placeholder="es. Nessuna" path="patologie"/>
+                        <p>${PatologieError}</p>
+                        <span class="myError">${PatologieError}</span>
+                    </c:otherwise>
+                </c:choose>
 
-    <div class="form-group">
-    <p style="color:#4e73df;">Inserisci le patologie dell'utente Guest: </p>
-    <input type="text" class="form-control form-control-user" id="examplePatologie" placeholder="es. Nessuna">
     </div>
 
     <div class="form-group">
