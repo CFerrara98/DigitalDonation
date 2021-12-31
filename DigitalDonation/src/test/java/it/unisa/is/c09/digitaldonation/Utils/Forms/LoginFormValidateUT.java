@@ -51,13 +51,13 @@ public class LoginFormValidateUT {
      */
     @Test
     public void validateEmailNull() {
-        loginForm = new LoginForm();
-        loginForm.setEmail("");
+        loginForm = new LoginForm("", "Password123");
+
+        loginFormValidate = new LoginFormValidate();
 
         loginFormValidate.validate(loginForm, errors);
 
         assertEquals("Data seduta non valida.", "", loginForm.getEmail());
-
     }
 
     /**
@@ -65,16 +65,13 @@ public class LoginFormValidateUT {
      */
     @Test
     public void validateEmailNonEsistente() throws MailNonValidaException, MailNonEsistenteException {
-
-        loginForm = new LoginForm();
-        String email = "fabio.siepe@gmail.com";
-        loginForm.setEmail(email);
+        loginForm = new LoginForm("fabio.siepe@gmail.com", "Password123");
         loginFormValidate = new LoginFormValidate();
-
-        utenteService.validaMail(email);
         loginFormValidate.validate(loginForm, errors);
 
-        assertEquals("Data seduta non valida.", email, loginForm.getEmail());
+        when(utenteRepository.existsUtenteByEmail(loginForm.getEmail())).thenReturn(false);
+
+        assertEquals("Data seduta non valida.", "", loginForm.getEmail());
     }
 
 
