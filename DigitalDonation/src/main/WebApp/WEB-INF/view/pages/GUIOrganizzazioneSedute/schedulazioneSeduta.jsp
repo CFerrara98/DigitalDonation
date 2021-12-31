@@ -5,11 +5,12 @@
   Time: 13:05
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<z:layout pageTitle="dashboardOperatore">
+<z:layout pageTitle="schedulazioneSeduta">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -32,9 +33,9 @@
 
                             <!-- titolo -->
                             <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Schedulazione seduta</h1>
-
                         </div>
                     </div>
+
                     <div class="container">
 
                         <div class="card o-hidden border-0 shadow-lg my-5">
@@ -47,22 +48,22 @@
                                                 <h3 class="h4 text-gray-900 mb-4">Compila i campi per schedulare una
                                                     seduta</h3>
                                             </div>
-                                                <%--@elvariable id="SedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
+
+                                            <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
                                             <form:form action="./schedulazioneSeduta" method="post"
                                                        modelAttribute="sedutaForm" cssClass="user"
-                                                       enctype="application/x-www-form-urlencoded"/>
-
-                                            <div class="form-group row">
+                                                       enctype="application/x-www-form-urlencoded">
+                                                <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <p style="color:#4e73df;">Data seduta: </p>
                                                     <c:choose>
                                                         <c:when test="${DataError == null}">
-                                                            <form:input type="date" class="form-control form-control-user" id="data" placeholder="Data Seduta:" path="data"/>
+                                                            <form:input type="date" class="form-control form-control-user" id="data" placeholder="Data Seduta:" path="dataSeduta"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="date"
-                                                                        class="form-control form-control-user" id="data"
-                                                                        placeholder="Data Seduta:" path="data"/>
+                                                                        class="form-control form-control-user is-invalid" id="data"
+                                                                        placeholder="Data Seduta:" path="dataSeduta"/>
                                                             <span class="myError">${DataError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -78,11 +79,10 @@
                                                                                 id="numeroPartecipanti"
                                                                                 placeholder="es. 10"
                                                                                 path="numeroPartecipanti"/>
-
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="numeroPartecipanti"
                                                                         placeholder="data Seduta:"
                                                                         path="numeroPartecipanti"/>
@@ -91,8 +91,8 @@
                                                     </c:choose>
 
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
+                                                </div>
+                                                <div class="form-group">
 
                                                 <p style="color:#4e73df;">Indirizzo della seduta: </p>
                                                 <c:choose>
@@ -102,10 +102,9 @@
                                                                             id="indirizzo"
                                                                             placeholder="es. Via Giuseppe Verdi 1"
                                                                             path="indirizzo"/>
-
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <form:input type="text" class="form-control form-control-user"
+                                                        <form:input type="text" class="form-control form-control-user is-invalid"
                                                                     id="indirizzo"
                                                                     placeholder="es. Via Giuseppe Verdi 1"
                                                                     path="indirizzo"/>
@@ -114,8 +113,8 @@
                                                     </c:otherwise>
                                                 </c:choose>
 
-                                            </div>
-                                            <div class="form-group row">
+                                                </div>
+                                                <div class="form-group row">
                                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                                     <p style="color:#4e73df;">Città: </p>
 
@@ -129,13 +128,12 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="citta" placeholder="es. Salerno"
                                                                         path="citta"/>
                                                             <span class="myError">${CittaError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
-
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <p style="color:#4e73df;">CAP: </p>
@@ -144,20 +142,15 @@
                                                                     <form:input type="text"
                                                                                 class="form-control form-control-user"
                                                                                 id="cap" placeholder="es. 84100"
-                                                                                path="cap"/>
-
+                                                                                path="CAP"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
-                                                                        class="form-control form-control-user" id="cap"
-                                                                        placeholder="es. 84100" path="cap"/>
-
+                                                                        class="form-control form-control-user is-invalid" id="cap"
+                                                                        placeholder="es. 84100" path="CAP"/>
                                                             <span class="myError">${CAPError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
-
-                                                    <input type="text" class="form-control form-control-user"
-                                                           id="exampleCAP" placeholder="es. 84100">
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <p style="color:#4e73df;">Provincia: </p>
@@ -170,7 +163,7 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="provincia" placeholder="es. Salerno"
                                                                         path="provincia"/>
                                                             <span class="myError">${ProvinciaError}</span>
@@ -178,9 +171,9 @@
                                                     </c:choose>
 
                                                 </div>
-                                            </div>
+                                                </div>
 
-                                            <div class="form-group row">
+                                                <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <p style="color:#4e73df;">Orario di inizio: </p>
                                                     <c:choose>
@@ -189,13 +182,13 @@
                                                                                 class="form-control form-control-user"
                                                                                 id="oraInizio"
                                                                                 placeholder="Orario inizio:"
-                                                                                path="oraInizio"/>
+                                                                                path="orarioInizio"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="time"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="oraInizio" placeholder="Orario inizio:"
-                                                                        path="oraInizio"/>
+                                                                        path="orarioInizio"/>
                                                             <span class="myError">${OraInizioError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -209,20 +202,20 @@
                                                                     <form:input type="time"
                                                                                 class="form-control form-control-user"
                                                                                 id="oraFine" placeholder="Orario fine:"
-                                                                                path="oraFine"/>
+                                                                                path="orarioFine"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="time"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="oraFine" placeholder="Orario fine:"
-                                                                        path="oraFine"/>
+                                                                        path="orarioFine"/>
                                                             <span class="myError">${OraFineError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
 
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
+                                                </div>
+                                                <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <p style="color:#4e73df;">Data di inizio prenotazione: </p>
                                                     <c:choose>
@@ -231,14 +224,14 @@
                                                                                 class="form-control form-control-user"
                                                                                 id="dataInizio"
                                                                                 placeholder="Data inizio Prenotazione:"
-                                                                                path="dataInizio"/>
+                                                                                path="dataInizioPrenotazione"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="date"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="dataInizio"
                                                                         placeholder="Data inizio Prenotazione:"
-                                                                        path="dataInizio"/>
+                                                                        path="dataInizioPrenotazione"/>
                                                             <span class="myError">${DataInizioError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -253,34 +246,33 @@
                                                                                 class="form-control form-control-user"
                                                                                 id="dataFine"
                                                                                 placeholder="Data fine Prenotazione"
-                                                                                path="dataFine"/>
+                                                                                path="dataFinePrenotazione"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="date"
-                                                                        class="form-control form-control-user"
+                                                                        class="form-control form-control-user is-invalid"
                                                                         id="dataFine"
                                                                         placeholder="Data fine Prenotazione"
-                                                                        path="dataFine"/>
+                                                                        path="dataFinePrenotazione"/>
                                                             <span class="myError">${DataFineError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
 
                                                 </div>
-                                            </div>
-                                            <br>
-                                            <input type="submit" value="Conferma"
+                                                </div>
+                                                <br>
+                                                <input type="submit" value="Conferma"
                                                    class="btn btn-primary btn-user btn-block">
-                                            </form>
-
-                                        </div>
+                                        </form:form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.container-fluid -->
                     </div>
+                    <!-- /.container-fluid -->
                 </div>
-                <!-- End of Main Content -->
+            </div>
+            <!-- End of Main Content -->
 
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">
@@ -291,12 +283,10 @@
                     </div>
                 </footer>
                 <!-- End of Footer -->
-
-            </div>
-            <!-- End of Content Wrapper -->
-
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">

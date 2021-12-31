@@ -21,11 +21,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class OrganizzazioneSeduteController {
+
+    private static Logger logger = Logger.getLogger(String.valueOf(OrganizzazioneSeduteController.class));
+
     @Autowired
     OrganizzazioneSeduteService organizzazioneSeduteService;
     @Autowired
@@ -183,41 +191,62 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
-    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model){
+    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        sedutaFormValidate.validate(sedutaForm, result);
-        if (result.hasErrors()) {
-            // se ci sono errori il metodo controller setta tutti i parametri
-            redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);
-            for (ObjectError x : result.getGlobalErrors()) {
-                redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
-                System.out.println(x.getCode());
-            }
-            return "redirect:/goSchedulazioneSeduta";
-        }
 
-        if(utente instanceof Operatore) {
-            Operatore operatore = (Operatore) utente;
-            SedeLocale sedeLocale = operatore.getSedeLocale();
-            Seduta seduta = new Seduta();
-            seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
-            seduta.setDataSeduta(sedutaForm.getDataSeduta());
-            seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
-            seduta.setNumeroPartecipanti(0);
-            seduta.setOraInizio(sedutaForm.getOrarioInizio());
-            seduta.setOraFine(sedutaForm.getOrarioFine());
-            seduta.setSedeLocale(sedeLocale);
-            String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
-            seduta.setLuogo(luogo);
-            try {
-                organizzazioneSeduteService.schedulazioneSeduta(seduta);
-                return "GUIGestioneUtente/dashboardOperatore";
-            } catch (CannotSaveDataRepositoryException e) {
+        String dataSeduta = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataSeduta());
+        String dataInizio = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataInizioPrenotazione());
+        String dataFine = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataFinePrenotazione());
+        try {
+            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date dataSedutaD = (Date) formatter.parse(dataSeduta);
+            Date dataInizioD = (Date) formatter.parse(dataInizio);
+            Date dataFineD = (Date) formatter.parse(dataFine);
+            sedutaForm.setDataSeduta(dataSedutaD);
+            sedutaForm.setDataInizioPrenotazione(dataInizioD);
+            sedutaForm.setDataFinePrenotazione(dataFineD);
+
+            sedutaFormValidate.validate(sedutaForm, result);
+            if (result.hasErrors()) {
+                // se ci sono errori il metodo controller setta tutti i parametri
+                redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);
+                for (ObjectError x : result.getGlobalErrors()) {
+                    redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
+                    System.out.println(x.getCode());
+                }
                 return "redirect:/goSchedulazioneSeduta";
             }
+
+            if (utente instanceof Operatore) {
+                DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+                Date data1 = (Date)formatter2.parse(dataSeduta);
+                Date data2 = (Date)formatter2.parse(dataInizio);
+                Date data3 = (Date)formatter2.parse(dataFine);
+
+                Operatore operatore = (Operatore) utente;
+                SedeLocale sedeLocale = operatore.getSedeLocale();
+                Seduta seduta = new Seduta();
+                seduta.setDataFinePrenotazione(data3);
+                seduta.setDataSeduta(data1);
+                seduta.setDataInizioPrenotazione(data2);
+                seduta.setNumeroPartecipanti(0);
+                seduta.setOraInizio(sedutaForm.getOrarioInizio());
+                seduta.setOraFine(sedutaForm.getOrarioFine());
+                seduta.setSedeLocale(sedeLocale);
+                String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
+                seduta.setLuogo(luogo);
+                try {
+                    organizzazioneSeduteService.schedulazioneSeduta(seduta);
+                    return "GUIGestioneUtente/dashboardOperatore";
+                } catch (CannotSaveDataRepositoryException e) {
+                    return "redirect:/goSchedulazioneSeduta";
+                }
+            } else
+                return "redirect:/";
+        }catch(ParseException e)
+        {
+            return "redirect:/goSchedulazioneSeduta";
         }
-        else
-            return "redirect:/";
     }
 
     /**
@@ -267,6 +296,8 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value ="/goSchedulazioneSeduta", method = RequestMethod.GET)
     public String schedulazioneSeduta(Model model) {
+        SedutaForm sedutaForm = new SedutaForm();
+        model.addAttribute("sedutaForm", sedutaForm);
         return "GUIOrganizzazioneSedute/schedulazioneSeduta";
     }
 }

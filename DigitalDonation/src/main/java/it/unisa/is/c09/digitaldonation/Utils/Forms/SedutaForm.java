@@ -18,6 +18,9 @@ public class SedutaForm {
         this.dataFinePrenotazione = dataFinePrenotazione;
     }
 
+    public SedutaForm() {
+
+    }
     /**
      * Metodo che ritorna la data della seduta.
      *

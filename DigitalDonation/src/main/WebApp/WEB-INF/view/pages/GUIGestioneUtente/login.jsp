@@ -81,12 +81,12 @@
                                     <h6 class="h6 text-gray-900 mb-4">Inserisci Password:</h6>
                                     <c:choose>
                                         <c:when test="${PasswordError == null}">
-                                            <input type="password" name="password" id="inputPassword"
-                                                   placeholder="Password" class="form-control">
+                                            <form:input type="password" name="password" id="inputPassword"
+                                                   placeholder="Password" class="form-control form-control-user" path="password"/>
                                         </c:when>
                                         <c:otherwise>
-                                            <input type="password" name="password" id="inputPassword"
-                                                   placeholder="Password" class="form-control is-invalid">
+                                            <form:input type="password" name="password" id="inputPassword"
+                                                   placeholder="Password" class="form-control form-control-user is-invalid" path="password"/>
                                             <span class="myError">${PasswordError}</span>
                                         </c:otherwise>
                                     </c:choose>

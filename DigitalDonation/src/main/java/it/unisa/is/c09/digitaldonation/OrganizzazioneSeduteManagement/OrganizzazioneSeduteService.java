@@ -520,6 +520,4 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         String date1 = format1.format(date);
         return date1;
     }
-
-
 }
