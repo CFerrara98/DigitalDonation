@@ -411,6 +411,33 @@ public class SedutaFormValidateUT {
         assertEquals("Data di fine prenotazione non valida.", sedutaForm, sedutaForm);
     }
 
+    /**
+     * Verifica che i set e get di time funzionano (branch coverage)
+     */
+    @Test
+    public void VerificaFromTime() {
+        Calendar myCalendar = new GregorianCalendar(2022, 4, 22);
+        dataSeduta = myCalendar.getTime();
+        indirizzo = "Via cesare 68";
+        citta = "Salerno";
+        provincia = "SA";
+        CAP = "82100";
+        numeroPartecipanti = 9999;
+        orarioInizio = new Time(22,11,11);
+        orarioFine = new Time(23,58,11);
+        Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
+        dataInizioPrenotazione = myCalendar1.getTime();
+        Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
+        dataFinePrenotazione = myCalendar2.getTime();
+
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm.setOrarioInizio(orarioInizio);
+        sedutaForm.getOrarioInizio();
+        sedutaForm.setOrarioFine(orarioFine);
+        sedutaForm.getOrarioFine();
+    }
+
+
     @Test
     public void VerificaSupports() {
 

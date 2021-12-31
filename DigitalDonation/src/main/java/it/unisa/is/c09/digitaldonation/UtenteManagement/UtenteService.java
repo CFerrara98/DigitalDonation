@@ -35,8 +35,9 @@ public class UtenteService implements UtenteServiceInterface {
         // Controlla se le credenziali corrispondono a quelle di uno studente e, nel
         // caso, controlla
         // che la richiesta d'iscrizione associatagli sia stata accettata
+
         String passwordCriptata = getMD5(password);
-        Utente utente = utenteRepository.findByEmailAndPassword(email, passwordCriptata);
+        Utente utente = utenteRepository.findByEmailAndPassword(email, password);
 
         if (utente != null) {
             return utente;

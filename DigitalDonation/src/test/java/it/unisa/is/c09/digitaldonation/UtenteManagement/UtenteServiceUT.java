@@ -141,9 +141,9 @@ public class UtenteServiceUT {
         try {
             utenteService.login("fabio.siepe@gmail.com", "password123");
         } catch (UserNotLoggedException e) {
-            assertEquals("La password non è valida.", e.getMessage());
+            fail("errore nel login!");
         } catch (NoSuchAlgorithmException e) {
-            fail("errore nel login! 2");
+            fail("errore nel login!");
         }
     }
 
