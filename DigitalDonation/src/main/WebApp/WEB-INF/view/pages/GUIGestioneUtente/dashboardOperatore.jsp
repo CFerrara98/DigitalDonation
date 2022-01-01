@@ -12,6 +12,9 @@
 
 <z:layout pageTitle="dashboardOperatore">
 
+    <a href="./goInserimentoUtenteGuest"> Inserimento aaaaaaaaa</a>
+
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 

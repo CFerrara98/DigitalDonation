@@ -166,6 +166,7 @@ public class OrganizzazioneSeduteController {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         guestFormValidate.validate(guestForm, result);
         Long idSeduta = (Long) model.getAttribute("idSeduta");
+        System.out.println(guestForm.toString());
         if (result.hasErrors()) {
             // se ci sono errori il metodo controller setta tutti i parametri
             redirectAttribute.addFlashAttribute("guestForm", guestForm);
@@ -280,8 +281,8 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value ="/goInserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(Model model) {
        //lo abbiamo messo provvisoriamente per provare il guestform nella jsp "inserimentoUtenteGuest"
-       // GuestForm guestForm = new GuestForm();
-      //  model.addAttribute("guestForm", guestForm);
+        GuestForm guestForm = new GuestForm();
+        model.addAttribute("guestForm", guestForm);
 
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
     }

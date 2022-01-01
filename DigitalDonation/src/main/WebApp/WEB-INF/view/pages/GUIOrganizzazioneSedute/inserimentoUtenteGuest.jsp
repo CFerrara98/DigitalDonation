@@ -52,16 +52,16 @@
                                         <div class="p-5">
 
                                             <div class="text-center">
-                                                <h3 class="h4 text-gray-900 mb-4">Compila i campi per inserire un utente
-                                                    Guest</h3>
+                                                <h3 class="h4 text-gray-900 mb-4">Compila i campi per inserire un Guest</h3>
                                             </div>
+
+                                             <%--@elvariable id="guestForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.GuestForm"--%>
                                             <form:form action="./inserimentoGuest" method="post"
                                                        modelAttribute="guestForm" cssClass="user"
                                                        enctype="application/x-www-form-urlencoded">
 
                                             <div class="form-group">
-                                                    <p style="color:#4e73df;">Inserisci il nome dell'utente
-                                                        Guest: </p>
+                                                    <p style="color:#4e73df;">Inserisci il nome </p>
                                                     <c:choose>
                                                         <c:when test="${NomeError == null}">
                                                             <form:input type="text"
@@ -81,8 +81,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <p style="color:#4e73df;">Inserisci il cognome
-                                                        dell'utente Guest: </p>
+                                                    <p style="color:#4e73df;">Inserisci il cognome: </p>
                                                     <c:choose>
                                                         <c:when test="${CognomeError == null}">
 
@@ -104,8 +103,7 @@
                                                     </c:choose>
                                                 </div>
                                                 <div class="form-group">
-                                                    <p style="color:#4e73df;">Inserisci il telefono dell'utente
-                                                        Guest: </p>
+                                                    <p style="color:#4e73df;">Inserisci il telefono: </p>
                                                     <c:choose>
                                                         <c:when test="${TelefonoError == null}">
                                                             <form:input type="tel"
@@ -128,8 +126,7 @@
 
                                                 <div class="form-group">
                                                     <p style="color:#4e73df;">
-                                                        Inserisci il codice fiscale
-                                                        dell'utente Guest: </p>
+                                                        Inserisci il codice fiscale: </p>
                                                     <c:choose>
                                                         <c:when test="${CodiceFiscaleError == null}">
                                                             <form:input
@@ -153,9 +150,7 @@
                                                 <div class="form-group">
                                                             <p style="color:#4e73df;">
                                                                 Inserisci le
-                                                                patologie
-                                                                dell'utente
-                                                                Guest: </p>
+                                                                patologie: </p>
                                                             <c:choose>
                                                                 <c:when test="${PatologieError == null}">
                                                                     <form:input
@@ -181,13 +176,12 @@
                                                 <div class="form-group">
                                                             <label for="gruppoSanguigno"
                                                                    style="color:#4e73df;">Inserisci
-                                                                il gruppo sanguigno
-                                                                dell'utente
-                                                                Guest: </label>
+                                                                il gruppo sanguigno:
+                                                                </label>
                                                             <form:select name="gruppoSanguigno"
                                                                          id="gruppoSanguigno"
                                                                          class="form-control gruppo-sanguigno"
-                                                                         path="gruppoSanguigno"/>
+                                                                         path="gruppoSanguigno">
                                                             <form:option selected="true" value="A+ ">
                                                                 A+
                                                             </form:option>
@@ -212,7 +206,8 @@
                                                             <form:option value="AB-">
                                                                 AB-
                                                             </form:option>
-                                                            </select>
+
+                                                            </form:select>
                                                 </div>
 
                                                         <br>
@@ -221,32 +216,32 @@
                                                                value="Aggiungi utente"
                                                                class="btn btn-primary btn-user btn-block">
 
-                                                        </form:form>
+                                            </form:form>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                       </div>
                                     </div>
                                 </div>
-                                <!-- /.container -->
                             </div>
-                            <!-- End Page Content-->
                         </div>
+                     </div>
+                                <!-- /.container -->
+                </div>
+                            <!-- End Page Content-->
+            </div>
                         <!-- End of Main Content -->
 
-                        <!-- Footer -->
-                        <footer class="sticky-footer bg-white ">
-                            <div class="container my-auto ">
-                                <div class="copyright text-center my-auto ">
-                                    <span>Digital Donation 2021</span>
-                                </div>
-                            </div>
-                        </footer>
-                        <!-- End of Footer -->
+            <!-- Footer -->
+             <footer class="sticky-footer bg-white ">
+                <div class="container my-auto ">
+                    <div class="copyright text-center my-auto ">
+                         <span>Digital Donation 2021</span>
                     </div>
+                 </div>
+             </footer>
+                        <!-- End of Footer -->
+            </div>
                     <!-- End of Content Wrapper -->
-                </div>
+        </div>
                 <!-- End of Page Wrapper -->
 
                 <!-- Scroll to Top Button-->

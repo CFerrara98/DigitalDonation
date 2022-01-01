@@ -152,15 +152,4 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-
-    <!-- Che cos'è??? Lo lasciamo qua
-    <div class="objects">
-    <img class="object_face_rocket" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="80px">
-
-    <div class="box_face">
-    <img class="object_face" src="${pageContext.request.contextPath}/resources/img/errorImg/triste.png" width="140px">
-    </div>
-    <<<<<<< HEAD
-    -->
-
 </z:layout>

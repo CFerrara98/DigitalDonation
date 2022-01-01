@@ -167,7 +167,7 @@
                                                         <c:otherwise>
                                                             <form:input type="text"
                                                                         class="form-control form-control-user is-invalid"
-                                                                        id="provincia" placeholder="es. Salerno"
+                                                                        id="provincia" placeholder="es. SA"
                                                                         path="provincia"/>
                                                             <span class="myError">${ProvinciaError}</span>
                                                         </c:otherwise>
@@ -242,7 +242,7 @@
 
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <p style="color:#4e73df;">Data fine prenotazione: </p>
+                                                    <p style="color:#4e73df;">Data di fine prenotazione: </p>
                                                     <c:choose>
                                                         <c:when test="${DataFineError == null}">
                                                                     <form:input type="date"

@@ -12,6 +12,21 @@ public class GuestForm {
         this.gruppoSanguigno = gruppoSanguigno;
     }
 
+    public GuestForm() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "GuestForm{" +
+                "codiceFiscale='" + codiceFiscale + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", patologie='" + patologie + '\'' +
+                ", gruppoSanguigno='" + gruppoSanguigno + '\'' +
+                '}';
+    }
 
     /**
      * Metodo che ritorna il codice fiscale del guest.

@@ -91,9 +91,13 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
-                            </div>
+
                             <br>
                             <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+
+                            </div>
+                            <br>
+
                             </form:form>
 
 
