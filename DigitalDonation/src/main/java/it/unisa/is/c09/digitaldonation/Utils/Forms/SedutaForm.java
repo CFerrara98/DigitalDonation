@@ -1,5 +1,7 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Time;
 import java.util.Date;
 
@@ -200,15 +202,22 @@ public class SedutaForm {
     public void setDataFinePrenotazione(Date dataFinePrenotazione) {
         this.dataFinePrenotazione = dataFinePrenotazione;
     }
-
+/*
+* TODO
+* */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dataSeduta;
     private String indirizzo;
     private String citta;
     private String provincia;
     private String CAP;
+    @DateTimeFormat(pattern = "HH:MM A")
     private Time orarioInizio;
+    @DateTimeFormat(pattern = "h:mm a")
     private Time orarioFine;
     private int numeroPartecipanti;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dataInizioPrenotazione;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dataFinePrenotazione;
 }

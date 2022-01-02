@@ -207,7 +207,6 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
     public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-
         String dataSeduta = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataSeduta());
         String dataInizio = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataInizioPrenotazione());
         String dataFine = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataFinePrenotazione());
@@ -219,7 +218,7 @@ public class OrganizzazioneSeduteController {
             sedutaForm.setDataSeduta(dataSedutaD);
             sedutaForm.setDataInizioPrenotazione(dataInizioD);
             sedutaForm.setDataFinePrenotazione(dataFineD);
-
+            System.out.println(sedutaForm.toString());
             sedutaFormValidate.validate(sedutaForm, result);
             if (result.hasErrors()) {
                 // se ci sono errori il metodo controller setta tutti i parametri
@@ -246,7 +245,7 @@ public class OrganizzazioneSeduteController {
                 seduta.setNumeroPartecipanti(0);
                 seduta.setOraInizio(sedutaForm.getOrarioInizio());
                 seduta.setOraFine(sedutaForm.getOrarioFine());
-                seduta.setSedeLocale(sedeLocale);
+                seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
                 String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
                 seduta.setLuogo(luogo);
                 try {
