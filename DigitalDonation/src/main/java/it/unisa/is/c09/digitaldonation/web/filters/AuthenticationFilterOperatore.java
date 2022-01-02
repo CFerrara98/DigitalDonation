@@ -1,32 +1,28 @@
 package it.unisa.is.c09.digitaldonation.web.filters;
 
+import it.unisa.is.c09.digitaldonation.Model.Entity.Operatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.web.UtenteController;
 
-import java.io.IOException;
-import java.util.logging.Logger;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
- * Servlet Filter, controlla le autenticazioni
+ * Servlet Filter, controlla le autenticazioni per le operazioni dell' operatore
  */
 
-@WebFilter(urlPatterns = {"/feedback","/dashboardOperatore","/dashboardDonatore"})
-public class UserAuthenticationFilter implements Filter {
+@WebFilter(urlPatterns = {"/dashboardOperatore"})
+public class AuthenticationFilterOperatore implements Filter {
 
-    private Logger logger = Logger.getLogger(String.valueOf(UtenteController.class));
+    private Logger logger = Logger.getLogger(String.valueOf(AuthenticationFilterOperatore.class));
     /**
      * Default constructor.
      */
-    public UserAuthenticationFilter() {
+    public AuthenticationFilterOperatore() {
         // TODO Auto-generated constructor stub
     }
 
@@ -46,7 +42,7 @@ public class UserAuthenticationFilter implements Filter {
         Utente utente = (Utente) httpReq.getSession().getAttribute("utente");
         String str = utente==null?"NO LOGGED USER": utente.getEmail() +" "+ utente.getPassword();
         logger.info(("Richiesta filtrata "+ " Uri: "+httpReq.getRequestURI()+ " Utente: "+str));
-        if(utente == null) {
+        if(utente == null && utente instanceof Operatore) {
             httpRes.sendError(401);
             return;
         } else {
@@ -61,5 +57,6 @@ public class UserAuthenticationFilter implements Filter {
     public void init(FilterConfig fConfig) throws ServletException {
         // TODO Auto-generated method stub
     }
+
 
 }

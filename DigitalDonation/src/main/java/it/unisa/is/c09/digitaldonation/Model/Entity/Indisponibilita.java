@@ -18,19 +18,16 @@ public class Indisponibilita implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_indisponibilita", nullable = false)
     private Long idIndisponibilita;
+    @Column(name = "codice_fiscale_donatore", nullable = false)
+    private String codiceFiscaleDonatore;
     @Column(name = "data_prossima_disponibilita")
     private Date dataProssimaDisponibilita;
     @Column(name = "motivazioni")
     private String motivazioni;
     @Column(name = "nome_medico")
     private String nomeMedico;
-
-    @ManyToOne
-    @JoinColumn(name = "codice_fiscale_donatore" , referencedColumnName = "codice_fiscale_utente")
-    private Donatore donatore;
 
     /**
      * Costruttore che crea un oggetto Donazione vuoto,
@@ -114,12 +111,5 @@ public class Indisponibilita implements Serializable {
         this.nomeMedico = nomeMedico;
     }
 
-    public Donatore getDonatore() {
-        return donatore;
-    }
-
-    public void setDonatore(Donatore donatore) {
-        this.donatore = donatore;
-    }
 
 }

@@ -63,7 +63,7 @@ public class OrganizzazioneSeduteController {
                     "")));
         }catch (Exception e){
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
-            return "redirect:/";
+            return "redirect:/error";
         }
         Donatore utente = (Donatore) request.getSession().getAttribute("utente");
         logger.info("Inserimento feedback. Id seduta: "+idSeduta+

@@ -28,11 +28,14 @@ public class Donatore extends Utente implements Serializable {
     private String residenza;
 
     @OneToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
-    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "id_tessera")
+    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "codice_fiscale_donatore")
     private Tesserino tesserino;
 
-    @OneToMany(mappedBy = "donatore", cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+    @JoinColumn(name = "codice_fiscale_donatore")
     private List<Indisponibilita> listaIndisponibilita = new ArrayList<>();
+
+
 
 
     /**
@@ -163,7 +166,6 @@ public class Donatore extends Utente implements Serializable {
 
     /** Espressione regolare che definisce il formato del campo luogo di nascita. */
     public static final String LUOGONASCITA_REGEX = "^[a-zA-Zàòùèéìçê' -]{2,35}+$";
-
 
 
 

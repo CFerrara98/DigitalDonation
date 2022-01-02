@@ -20,13 +20,13 @@ public class Tesserino implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id_tessera", nullable = false)
+    @Column(name = "codice_fiscale_donatore", nullable = false)
+    private String codiceFiscaleDonatore;
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idTessera;
     @Column(name = "data_rilascio")
     private Date dataRilascio;
-    @Column(name = "codice_fiscale_donatore", unique = true)
-    private String donatoreUtenteCodiceFiscale;
     @Column(name = "gruppo_sanguigno")
     private String gruppoSanguigno;
     @Column(name = "img_source")
@@ -36,8 +36,9 @@ public class Tesserino implements Serializable {
     @Column(name = "rh")
     private String rh;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tesserino")
-    private List<Donazione> listaDonazioni;
+    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+    @JoinColumn(name = "cf_tessera" , referencedColumnName = "codice_fiscale_donatore")
+    private List<Donazione> listaDonazioni = new ArrayList<>();
 
     /**
      * Costruttore che crea un oggetto Tesserino vuoto,
@@ -60,7 +61,7 @@ public class Tesserino implements Serializable {
     public Tesserino(int numeroMatricola, String donatoreUtenteCodiceFiscale,
                      Date dataRilascio, String gruppoSanguigno, String rh,
                      List<Donazione> listaDonazioni, String imgSource) {
-        this.donatoreUtenteCodiceFiscale = donatoreUtenteCodiceFiscale;
+        this.codiceFiscaleDonatore = donatoreUtenteCodiceFiscale;
         this.numeroMatricola = numeroMatricola;
         this.dataRilascio = dataRilascio;
         this.gruppoSanguigno = gruppoSanguigno;
@@ -130,7 +131,7 @@ public class Tesserino implements Serializable {
      * @return donatoreUtenteCodiceFiscale e' il codice fiscale del proprietario del tesserino.
      */
     public String getDonatoreUtenteCodiceFiscale() {
-        return donatoreUtenteCodiceFiscale;
+        return codiceFiscaleDonatore;
     }
 
     /**
@@ -138,7 +139,7 @@ public class Tesserino implements Serializable {
      * @param donatoreUtenteCodiceFiscale e' il codice fiscale del proprietario del tesserino.
      */
     public void setDonatoreUtenteCodiceFiscale(String donatoreUtenteCodiceFiscale) {
-        this.donatoreUtenteCodiceFiscale = donatoreUtenteCodiceFiscale;
+        this.codiceFiscaleDonatore = donatoreUtenteCodiceFiscale;
     }
 
     /**

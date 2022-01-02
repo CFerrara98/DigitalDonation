@@ -2,6 +2,7 @@ package it.unisa.is.c09.digitaldonation.Model.Repository;
 
 import it.unisa.is.c09.digitaldonation.Model.Entity.Indisponibilita;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @see Indisponibilita
  */
 @Repository
-public interface IndisponibilitaRepository extends JpaRepository<Indisponibilita, String> {
+public interface IndisponibilitaRepository extends JpaRepository<Indisponibilita, String>, JpaSpecificationExecutor<Indisponibilita> {
     /**
      * Permette di salvare o aggiornare le informazioni di un'indisponibilità a donare.
      *

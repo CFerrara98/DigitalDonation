@@ -4,6 +4,7 @@ import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donazione;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -18,7 +19,7 @@ import java.util.Collection;
  * @see Tesserino
  */
 @Repository
-public interface TesserinoRepository extends JpaRepository<Tesserino, Long> {
+public interface TesserinoRepository extends JpaRepository<Tesserino, Long>, JpaSpecificationExecutor<it.unisa.is.c09.digitaldonation.Model.Tesserino> {
 
     /**
      * Permette di ottenere un tesserino a partire dal codice id.

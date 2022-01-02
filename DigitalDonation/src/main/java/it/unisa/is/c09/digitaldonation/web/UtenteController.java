@@ -58,8 +58,12 @@ public class UtenteController {
     @RequestMapping(value ="/goLogin", method = RequestMethod.GET)
     public String goLogin(HttpServletRequest request,@ModelAttribute("loginModel")LoginForm loginForm,
                           BindingResult result, RedirectAttributes redirectAttribute, Model model){
-        model.addAttribute("loginForm",new LoginForm());
-        return "GUIGestioneUtente/login";
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente == null){
+            model.addAttribute("loginForm",new LoginForm());
+            return "GUIGestioneUtente/login";
+        }
+        return "redirect:/logout";
     }
 
     /**
@@ -75,11 +79,7 @@ public class UtenteController {
     public String login(HttpServletRequest request,@ModelAttribute("loginForm") LoginForm loginForm,
                         BindingResult result, RedirectAttributes redirectAttribute, Model model) {
 
-        logger.info(loginForm.getEmail() + "   " + loginForm.getPassword());
-        logger.info(("Path"+ request.getContextPath() + " Uri: "+request.getRequestURI()));
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if(utente != null) logger.info("Utente già loggato che tenta di loggare "+utente.toString());
-
         if (utente == null) {
             loginFormValidator.validate(loginForm, result);
             if (result.hasErrors()) {
@@ -110,7 +110,7 @@ public class UtenteController {
                 return "GUIGestioneUtente/dashboardDonatore";
             }
         }
-        return "redirect:/login";
+        return "redirect:/goLogin";
     }
 
     /**
@@ -125,7 +125,7 @@ public class UtenteController {
             utenteService.logout(utente);
         } catch (AccessNotAuthorizedException e) {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
-            return "redirect:/";
+            return "redirect:/error";
         }
         request.getSession().invalidate();
         return "GUIGestioneUtente/homepage";
@@ -143,7 +143,7 @@ public class UtenteController {
             return "GUIGestioneUtente/dashboardDonatore";
         }
         request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
-        return "redirect:/";
+        return "redirect:/error";
     }
 
     /**
@@ -157,6 +157,6 @@ public class UtenteController {
             return "GUIGestioneUtente/dashboardOperatore";
         }
         request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
-        return "redirect:/";
+        return "redirect:/error";
     }
 }
