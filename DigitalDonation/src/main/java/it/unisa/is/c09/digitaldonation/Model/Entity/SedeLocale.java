@@ -1,19 +1,26 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import lombok.Data;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella una sede locale della piattaforma.
  */
+@Data
 @Entity
-public class SedeLocale {
-    @Id @GeneratedValue
+@Table(name = "sede_locale")
+public class SedeLocale implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_sede", nullable = false)
     private Long codiceIdentificativo;
+    @Column(name = "via")
     private String via;
 
     /**

@@ -1,6 +1,9 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,20 +12,29 @@ import java.util.List;
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella un tesserino.
  */
+
+@Data
 @Entity
-public class Tesserino{
+@Table(name = "tesserino")
+public class Tesserino implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "id_tessera", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idTessera;
-    @Column(unique = true)
-    private int numeroMatricola;
-    @Column(unique = true)
-    private String donatoreUtenteCodiceFiscale;
+    @Column(name = "data_rilascio")
     private Date dataRilascio;
+    @Column(name = "codice_fiscale_donatore", unique = true)
+    private String donatoreUtenteCodiceFiscale;
+    @Column(name = "gruppo_sanguigno")
     private String gruppoSanguigno;
-    private String rh;
+    @Column(name = "img_source")
     private String imgSource;
+    @Column(name = "numero_matricola")
+    private Integer numeroMatricola;
+    @Column(name = "rh")
+    private String rh;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tesserino")
     private List<Donazione> listaDonazioni;

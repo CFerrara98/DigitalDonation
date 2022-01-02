@@ -1,5 +1,7 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 /**
@@ -7,15 +9,25 @@ import javax.persistence.*;
  * Classe che modella un guest che partecipèa a una seduta.
  */
 
+@Data
 @Entity
+@Table(name = "guest")
 public class Guest {
+    private static final long serialVersionUID = 1L;
+
     @Id
+    @Column(name = "codice_fiscale_guest", nullable = false)
     private String codiceFiscaleGuest;
-    private String nome;
+    @Column(name = "cognome")
     private String cognome;
-    private String telefono;
-    private String patologie;
+    @Column(name = "gruppo_sanguigno")
     private String gruppoSanguigno;
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "patologie")
+    private String patologie;
+    @Column(name = "telefono")
+    private String telefono;
 
     /**
      * Costruttore che crea un oggetto Guest vuoto,

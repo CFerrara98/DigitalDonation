@@ -1,6 +1,10 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,20 +13,26 @@ import java.util.List;
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella un donatore.
  */
+@Data
 @Entity
-public class Donatore extends Utente{
+@Table(name = "donatore")
+@EqualsAndHashCode(callSuper = true)
+public class Donatore extends Utente implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    private String residenza;
+    @Column(name = "data_di_nascita")
     private Date dataDiNascita;
+    @Column(name = "luogo_di_nascita")
     private String luogoDiNascita;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "donatore_utente_codice_fiscale")
+    @Column(name = "residenza")
+    private String residenza;
+
+    @OneToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "id_tessera")
     private Tesserino tesserino;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "donatore")
-    private List<Indisponibilita> listaIndisponibilita;
-
-
+    @OneToMany(mappedBy = "donatore", cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+    private List<Indisponibilita> listaIndisponibilita = new ArrayList<>();
 
 
     /**
@@ -30,7 +40,7 @@ public class Donatore extends Utente{
      * che verra' popolato con i metodi setters.
      */
     public Donatore() {
-        listaIndisponibilita = new ArrayList<Indisponibilita>();
+
     }
 
     /**
@@ -153,4 +163,8 @@ public class Donatore extends Utente{
 
     /** Espressione regolare che definisce il formato del campo luogo di nascita. */
     public static final String LUOGONASCITA_REGEX = "^[a-zA-Zàòùèéìçê' -]{2,35}+$";
+
+
+
+
 }

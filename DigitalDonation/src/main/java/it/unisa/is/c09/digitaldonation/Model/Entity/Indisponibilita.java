@@ -1,24 +1,36 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella l'indisponibilità a donare di un donatore.
  */
+
+@Data
 @Entity
-public class Indisponibilita {
+@Table(name = "indisponibilita")
+public class Indisponibilita implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_indisponibilita", nullable = false)
     private Long idIndisponibilita;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Donatore donatore;
+    @Column(name = "data_prossima_disponibilita")
     private Date dataProssimaDisponibilita;
+    @Column(name = "motivazioni")
     private String motivazioni;
+    @Column(name = "nome_medico")
     private String nomeMedico;
+
+    @ManyToOne
+    @JoinColumn(name = "codice_fiscale_donatore" , referencedColumnName = "codice_fiscale_utente")
+    private Donatore donatore;
 
     /**
      * Costruttore che crea un oggetto Donazione vuoto,
@@ -28,13 +40,11 @@ public class Indisponibilita {
 
     /**
      * Costruttore di un'Indisponibilita' con parametri utili nei casi di test.
-     * @param donatore è l'oggetto donatore.
      * @param dataProssimaDisponibilita è la data di fine indisponibilità.
      * @param motivazioni sono le motivazioni di indisponibilità.
      * @param nomeMedico è il nome del medico che ha effettuato la visita.
      */
-    public Indisponibilita(Donatore donatore, Date dataProssimaDisponibilita, String motivazioni, String nomeMedico) {
-        this.donatore = donatore;
+    public Indisponibilita(Date dataProssimaDisponibilita, String motivazioni, String nomeMedico) {
         this.dataProssimaDisponibilita = dataProssimaDisponibilita;
         this.motivazioni = motivazioni;
         this.nomeMedico = nomeMedico;
@@ -54,22 +64,6 @@ public class Indisponibilita {
      */
     public void setIdIndisponibilita(Long idIndisponibilita) {
         this.idIndisponibilita = idIndisponibilita;
-    }
-
-    /**
-     * Metodo che ritorna l'oggetto donatore.
-     * @return donatore e' l'oggetto donatore.
-     */
-    public Donatore getDonatore() {
-        return donatore;
-    }
-
-    /**
-     * Metodo che setta l'oggetto donatore.
-     * @param donatore e' l'oggetto donatore.
-     */
-    public void setDonatore(Donatore donatore) {
-        this.donatore = donatore;
     }
 
     /**
@@ -119,4 +113,13 @@ public class Indisponibilita {
     public void setNomeMedico(String nomeMedico) {
         this.nomeMedico = nomeMedico;
     }
+
+    public Donatore getDonatore() {
+        return donatore;
+    }
+
+    public void setDonatore(Donatore donatore) {
+        this.donatore = donatore;
+    }
+
 }

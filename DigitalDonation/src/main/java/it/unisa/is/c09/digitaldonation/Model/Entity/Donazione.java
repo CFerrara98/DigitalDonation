@@ -1,21 +1,35 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella una donazione effettuata da un donatore.
  */
+
+@Data
 @Entity
-public class Donazione {
+@Table(name = "donazione")
+public class Donazione implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_donazione", nullable = false)
     private Long idDonazione;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Tesserino tesserino;
+    @Column(name = "data_donazione")
     private Date dataDonazione;
+    @Column(name = "tipo_donazione")
     private String tipoDonazione;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_tessera", referencedColumnName = "id_tessera")
+    private Tesserino tesserino;
+
 
     /**
      * Costruttore che crea un oggetto Donazione vuoto,
@@ -26,12 +40,10 @@ public class Donazione {
 
     /**
      * Costruttore di una Donazione con parametri utili nei casi di test.
-     * @param tesserino è l'oggetto tesserino.
      * @param dataDonazione è la data della donazione effettuata.
      * @param tipoDonazione è il tipo di donazione effettuata.
      */
-    public Donazione(Tesserino tesserino, Date dataDonazione, String tipoDonazione) {
-        this.tesserino = tesserino;
+    public Donazione(Date dataDonazione, String tipoDonazione) {
         this.dataDonazione = dataDonazione;
         this.tipoDonazione = tipoDonazione;
     }
@@ -50,22 +62,6 @@ public class Donazione {
      */
     public void setIdDonazione(Long idDonazione) {
         this.idDonazione = idDonazione;
-    }
-
-    /**
-     * Metodo che ritorna l'oggetto tesserino.
-     * @return tesserino e' l'oggetto tesserino.
-     */
-    public Tesserino getTesserino() {
-        return tesserino;
-    }
-
-    /**
-     * Metodo che setta l'oggetto tesserino.
-     * @param tesserino e' l'oggetto tesserino.
-     */
-    public void setTesserino(Tesserino tesserino) {
-        this.tesserino = tesserino;
     }
 
     /**
@@ -102,4 +98,13 @@ public class Donazione {
 
     /** Espressioni regolare che definisce il formato del campo tipo donazione */
     public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)$ ";
+
+    public Tesserino getTesserino() {
+        return tesserino;
+    }
+
+    public void setTesserino(Tesserino tesserino) {
+       this.tesserino = tesserino;
+    }
+
 }

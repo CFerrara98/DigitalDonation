@@ -1,6 +1,9 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,34 +15,45 @@ import java.util.List;
  * Classe che modella una seduta di donazione.
  */
 
+@Data
 @Entity
-public class Seduta {
+@Table(name = "seduta")
+public class Seduta implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_seduta", nullable = false)
     private Long idSeduta;
-    private Date dataSeduta;
-    private String luogo;
-    private Time oraInizio;
-    private Time oraFine;
-    private int numeroPartecipanti;
-    private Date dataInizioPrenotazione;
+    @Column(name = "data_fine_prenotazione")
     private Date dataFinePrenotazione;
-    @ManyToOne
-    @JoinColumn(name = "sede_locale_codice_identificativo")
-    private SedeLocale sedeLocale;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "seduta_guest",
-            joinColumns = @JoinColumn(name = "id_Seduta"),
-            inverseJoinColumns = @JoinColumn(name = "codice_fiscale_guest")
-    )
-    private List<Guest> listaGuest;
-    @ManyToMany @JoinTable(
-            name = "seduta_donatore",
+    @Column(name = "data_inizio_prenotazione")
+    private Date dataInizioPrenotazione;
+    @Column(name = "data_seduta")
+    private Date dataSeduta;
+    @Column(name = "luogo")
+    private String luogo;
+    @Column(name = "numero_partecipanti", nullable = false)
+    private Integer numeroPartecipanti;
+    @Column(name = "ora_fine")
+    private Time oraFine;
+    @Column(name = "ora_inizio")
+    private Time oraInizio;
+    @Column(name = "id_sedeLocale")
+    private Long sedeLocaleCodiceIdentificativo;
+
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(name = "seduta_guest",
             joinColumns = @JoinColumn(name = "id_seduta"),
-            inverseJoinColumns = @JoinColumn(name = "codice_fiscale_utente")
-    )
-    private List<Donatore> listaDonatore;
+            inverseJoinColumns = @JoinColumn(name = "codice_fiscale_guest"))
+    private List<Guest> listaGuest = new ArrayList<>();
+
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(name = "seduta_donatore",
+            joinColumns = @JoinColumn(name = "id_seduta"),
+            inverseJoinColumns = @JoinColumn(name = "codice_fiscale_donatore"))
+    private List<Donatore> listaDonatore = new ArrayList<>();
+
 
     /**
      * Aggiunge il guest alla seduta di donazione.
@@ -82,14 +96,14 @@ public class Seduta {
      * @param numeroPartecipanti numero di partecipanti alla seduta
      * @param dataInizioPrenotazione data di inizio per le prenotazioni alla seduta
      * @param dataFinePrenotazione data di fine delle prenotazioni alla seduta
-     * @param sedeLocale sede che organizza la seduta di donazione
+     * @param sedeLocaleCodiceIdentificativo sede che organizza la seduta di donazione
      * @param listaGuest lista dei guet
      * @param listaDonatore lista dei donatori
      */
     public Seduta(Long idSeduta, Date date, String luogo,
                      Time oraInizio, Time oraFine, int numeroPartecipanti,
                      Date dataInizioPrenotazione, Date dataFinePrenotazione,
-                     SedeLocale sedeLocale, List<Guest> listaGuest,
+                     Long sedeLocaleCodiceIdentificativo, List<Guest> listaGuest,
                      List<Donatore> listaDonatore) {
 
         this.idSeduta = idSeduta;
@@ -100,7 +114,7 @@ public class Seduta {
         this.numeroPartecipanti = numeroPartecipanti;
         this.dataInizioPrenotazione = dataInizioPrenotazione;
         this.dataFinePrenotazione = dataFinePrenotazione;
-        this.sedeLocale = sedeLocale;
+        this.sedeLocaleCodiceIdentificativo = sedeLocaleCodiceIdentificativo;
         this.listaGuest = listaGuest;
         this.listaDonatore = listaDonatore;
     }
@@ -254,18 +268,18 @@ public class Seduta {
 
     /**
      * Metodo che ritorna la sede locale che organizza la seduta.
-     * @return sedeLocale la sede locale che organizza la seduta.
+     * @return sedeLocaleCodiceIdentificativo la sede locale che organizza la seduta.
      */
-    public SedeLocale getSedeLocale() {
-        return sedeLocale;
+    public Long getSedeLocale() {
+        return sedeLocaleCodiceIdentificativo;
     }
 
     /**
      * Metodo che setta la sede locale che organizza la seduta.
-     * @param  sedeLocale la sede locale che organizza la seduta.
+     * @param  sedeLocaleCodiceIdentificativo la sede locale che organizza la seduta.
      */
-    public void setSedeLocale(SedeLocale sedeLocale) {
-        this.sedeLocale = sedeLocale;
+    public void setSedeLocale(Long sedeLocaleCodiceIdentificativo) {
+        this.sedeLocaleCodiceIdentificativo = sedeLocaleCodiceIdentificativo;
     }
 
     /**
@@ -309,4 +323,6 @@ public class Seduta {
     public static final String DATA_INIZIO_PARTECIPAZIONE_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][2]{1}\\d{3}$";
     public static final String DATA_FINE_PARTECIPAZIONE_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][2]{1}\\d{3}$";
     public static final String NUMERO_PARTECIPANTI_REGEX = "^(?:[0-9][0-9]{3}|[0-9][0-9]{2}|[1-9][1-9]|[0-9])$";
+
+
 }

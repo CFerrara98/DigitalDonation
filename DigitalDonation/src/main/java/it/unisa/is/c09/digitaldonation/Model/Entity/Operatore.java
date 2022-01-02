@@ -1,16 +1,24 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella un operatore.
  */
+@Data
 @Entity
-public class Operatore extends Utente{
+@Table(name = "operatore")
+@EqualsAndHashCode(callSuper = true)
+public class Operatore extends Utente implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "sede_locale_codice_identificativo")
+    @JoinColumn(name = "sede_locale_codice_identificativo", referencedColumnName = "id_sede")
     private SedeLocale sedeLocale;
 
     /**

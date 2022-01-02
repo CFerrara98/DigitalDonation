@@ -1,22 +1,33 @@
 package it.unisa.is.c09.digitaldonation.Model.Entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe astratta che modella un utente generico registrato alla piattaforma.
  */
+@Data
 @Entity
+@Table(name = "utente")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Utente {
+public class Utente implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "codice_fiscale_utente", nullable = false)
     private String codiceFiscaleUtente;
-    private String nome;
+    @Column(name = "cognome")
     private String cognome;
-    @Column(unique = true)
+    @Column(name = "email", unique = true)
     private String email;
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "password")
     private String password;
 
     /**
