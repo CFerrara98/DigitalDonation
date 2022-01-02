@@ -5,9 +5,6 @@
 
 
 <z:layout pageTitle="homepage">
-   
-    <a href="./goLogin">Login</a>
-
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -15,11 +12,8 @@
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
-
-
-
             <!-- Header-->
-            <header class="bg-dark py-5">
+            <header class=" py-5" style="background: #7ABBFF;">
                 <div class="container px-5">
                     <div class="row gx-5 align-items-center justify-content-center">
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -41,7 +35,7 @@
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                                 <div class="col mb-5 h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                                    <div class="feature bg-primary bg-gradient rounded-3 mb-3"><i class="bi bi-building"></i></div>
 
                                     <p class="mb-0">Il sangue è una risorsa importantissima, non riproducibile in laboratorio, fondamentale per la vita di tutti ma essenziale per la sopravvivenza di chi ne ha bisogno.</p>
                                 </div>
@@ -64,7 +58,7 @@
                 </div>
             </section>
             <!-- Testimonial section-->
-            <div class="py-5 bg-light">
+            <div class="py-5 " style="background: #D8EBFF">
                 <div class="container px-5 my-5">
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-10 col-xl-7">
@@ -86,7 +80,7 @@
                             <div class="text-center">
                                 <h2 class="fw-bolder">Testimonianze</h2>
                                 <p class="lead fw-normal text-muted mb-5">"Ho deciso di diventare donatore quando un mio carissimo amico si è ammalato di leucemia. Ho realizzato in quel momento quanto fosse importante un piccolo gesto per salvare delle persone. Da allora ho iniziato a guardare
-                                    la vita in modo diverso ed apprezzare tutti coloro che rendono ciò possibile." -Raffaele, 46 anni. </p>
+                                    la vita in modo diverso ed apprezzare tutti coloro che rendono ciò possibile." <br> -Raffaele, 46 anni. </p>
                             </div>
                         </div>
                     </div>
@@ -131,30 +125,6 @@
 
     </div>
     <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded " href="#page-top ">
-        <i class="fas fa-angle-up "></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 </z:layout>
