@@ -40,10 +40,22 @@
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                      aria-labelledby="userDropdown">
 
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Dashboard
-                    </a>
+                    <c:choose>
+                        <c:when test="${utente.class.simpleName == 'Donatore'}">
+                            <a class="dropdown-item" href="./dashboardDonatore">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Dashboard
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="dropdown-item" href="./dashboardOperatore">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Dashboard
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+
+
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

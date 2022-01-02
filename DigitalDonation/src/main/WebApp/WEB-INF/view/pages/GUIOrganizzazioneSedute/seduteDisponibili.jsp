@@ -44,7 +44,8 @@
                         </div>
                         <h6>&nbsp;</h6>
 
-                        <c:forEach begin="0" var="i" end="${listaSedutePrenotabili.size}">
+                        <c:forEach begin="0" end="${listaSedutePrenotabili.size()-1}" step="1"
+                                   var="i">
                             <!-- prima seduta-->
                             <div class="card shadow mb-4">
 
@@ -60,9 +61,9 @@
                                             <thead>
                                             <tr>
                                                 <td scope="col"><h3 class="small font-weight-bold"> Luogo:<c:out
-                                                        value="${listaSedutePrenotabili.getIndex(i).luogo}"></c:out></h3>
+                                                        value="${listaSedutePrenotabili.get(i).luogo}"></c:out></h3>
                                                     <h3 class="small font-weight-bold"> Data:<c:out
-                                                            value="${listaSedutePrenotabili.getIndex(i).dataSeduta}"></c:out></h3>
+                                                            value="${listaSedutePrenotabili.get(i).dataSeduta}"></c:out></h3>
                                                 <td scope="col"><span class=" float-right">
                                                 <a class="btn btn-primary botton-sm large"
                                                    href="./goPartecipaSeduta" role="button">Partecipa</a>

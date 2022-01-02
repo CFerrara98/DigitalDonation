@@ -69,14 +69,15 @@
                             </div>
                         </div>
 
-                        <c:forEach begin="0" var="i" end="${listaPartecipanti.size}">
+                        <c:forEach begin="0" end="${listaPartecipante.size()-1}" step="1"
+                                   var="i">
 
                             <!-- pRTECIPANTE -->
                             <div class="card shadow mb-4">
                                 <div class=" m-0 card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary h6">
-                                        <c:out value="${listaPartecipante.getIndex(i).nome}"></c:out>
-                                        <c:out value="${listaPartecipante.getIndex(i).cognome}"></c:out></h6>
+                                        <c:out value="${listaPartecipante.get(i).nome}"></c:out>
+                                        <c:out value="${listaPartecipante.get(i).cognome}"></c:out></h6>
                                 </div>
                                 <div class="card-body">
                                     <!-- tabella -->
@@ -93,11 +94,11 @@
                                             <tr>
                                                 <th>
                                                     <h4 class="small font-weight-bold ">Telefono: <c:out
-                                                            value="${listaPartecipante.getIndex(i).telefono}"></c:out></h4>
+                                                            value="${listaPartecipante.get(i).telefono}"></c:out></h4>
                                                     <h4 class="small font-weight-bold ">Codice Fiscale<c:out
-                                                            value="${listaPartecipante.getIndex(i).CF}"></c:out></h4>
+                                                            value="${listaPartecipante.get(i).CF}"></c:out></h4>
                                                     <h4 class="small font-weight-bold ">Gruppo sanguigno:<c:out
-                                                            value="${listaPartecipante.getIndex(i).gruppoSanguigno}"></c:out></h4>
+                                                            value="${listaPartecipante.get(i).gruppoSanguigno}"></c:out></h4>
                                                 </th>
                                                 <!-- Bottom indisponibilità seduta -->
                                                 <th scope="row">

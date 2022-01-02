@@ -65,16 +65,24 @@
                                     </div>
                                     <h1>&nbsp;</h1>
                                     <!-- Checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label"><h6 class=" mb-4" style="text-align: left">Se
-                                            vuole partecipare alla seduta spunti la casella e prema il tasto conferma.
+
+
+
+                                     <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
+                                    <form:form action="./schedulazioneSeduta" method="get"
+                                               modelAttribute="sedutaForm" cssClass="user"
+                                               enctype="application/x-www-form-urlencoded">
+
+
+                                        <form:input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                                        <label class="form-check-label"><h6 class=" mb-4" style="text-align: left">
+                                            Se vuole partecipare alla seduta spunti la casella e prema il tasto conferma.
                                             <br>
                                             Se non vuole partecipare alla seduta lasci la casella bianca e prema il
                                             tasto conferma.
                                         </h6>
                                         </label>
-                                    </div>
+                                    </form:form>
                                     <h1>&nbsp;</h1>
                                     <input type="submit" value="Conferma" class="btn btn-primary">
                                 </div>
