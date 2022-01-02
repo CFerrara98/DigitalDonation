@@ -3,6 +3,7 @@ package it.unisa.is.c09.digitaldonation.Utils.Forms;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class SedutaForm {
@@ -13,8 +14,8 @@ public class SedutaForm {
         this.citta = citta;
         this.provincia = provincia;
         this.CAP = CAP;
-        this.orarioInizio = orarioInizio;
-        this.orarioFine = orarioFine;
+        this.orarioInizio = orarioInizio.toLocalTime();
+        this.orarioFine = orarioFine.toLocalTime();
         this.numeroPartecipanti = numeroPartecipanti;
         this.dataInizioPrenotazione = dataInizioPrenotazione;
         this.dataFinePrenotazione = dataFinePrenotazione;
@@ -118,7 +119,7 @@ public class SedutaForm {
      *
      * @return orarioInizio e' l'ora di inizio della seduta.
      */
-    public Time getOrarioInizio() {
+    public LocalTime getOrarioInizio() {
         return orarioInizio;
     }
 
@@ -127,7 +128,7 @@ public class SedutaForm {
      *
      * @param orarioInizio e' l'ora di inizio della seduta.
      */
-    public void setOrarioInizio(Time orarioInizio) {
+    public void setOrarioInizio(LocalTime orarioInizio) {
         this.orarioInizio = orarioInizio;
     }
 
@@ -136,7 +137,7 @@ public class SedutaForm {
      *
      * @return orarioFine e' l'ora di fine della seduta.
      */
-    public Time getOrarioFine() {
+    public LocalTime getOrarioFine() {
         return orarioFine;
     }
 
@@ -145,7 +146,7 @@ public class SedutaForm {
      *
      * @param orarioFine e' l'ora di fine della seduta.
      */
-    public void setOrarioFine(Time orarioFine) {
+    public void setOrarioFine(LocalTime orarioFine) {
         this.orarioFine = orarioFine;
     }
 
@@ -211,10 +212,10 @@ public class SedutaForm {
     private String citta;
     private String provincia;
     private String CAP;
-    @DateTimeFormat(pattern = "HH:MM A")
-    private Time orarioInizio;
-    @DateTimeFormat(pattern = "h:mm a")
-    private Time orarioFine;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime orarioInizio;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime orarioFine;
     private int numeroPartecipanti;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dataInizioPrenotazione;

@@ -431,9 +431,9 @@ public class SedutaFormValidateUT {
         dataFinePrenotazione = myCalendar2.getTime();
 
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        sedutaForm.setOrarioInizio(orarioInizio);
+        sedutaForm.setOrarioInizio(orarioInizio.toLocalTime());
         sedutaForm.getOrarioInizio();
-        sedutaForm.setOrarioFine(orarioFine);
+        sedutaForm.setOrarioFine(orarioFine.toLocalTime());
         sedutaForm.getOrarioFine();
     }
 

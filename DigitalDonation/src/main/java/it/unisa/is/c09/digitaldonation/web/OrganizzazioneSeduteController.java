@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -225,7 +226,7 @@ public class OrganizzazioneSeduteController {
                 redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);
                 for (ObjectError x : result.getGlobalErrors()) {
                     redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
-                    System.out.println(x.getCode());
+                    logger.info("Prova", x.getCode());
                 }
                 return "redirect:/goSchedulazioneSeduta";
             }
@@ -243,8 +244,8 @@ public class OrganizzazioneSeduteController {
                 seduta.setDataSeduta(data1);
                 seduta.setDataInizioPrenotazione(data2);
                 seduta.setNumeroPartecipanti(0);
-                seduta.setOraInizio(sedutaForm.getOrarioInizio());
-                seduta.setOraFine(sedutaForm.getOrarioFine());
+                seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
+                seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
                 seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
                 String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
                 seduta.setLuogo(luogo);
