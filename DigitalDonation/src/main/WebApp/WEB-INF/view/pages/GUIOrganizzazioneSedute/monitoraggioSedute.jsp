@@ -47,74 +47,77 @@
                         </div>
 
 
-                        <c:forEach begin="0" var="i" end="${listaSedute.size}"> <!-- controllare il dollaro -->
-                        <!-- seduta %n% -->
-                        <div class="card shadow mb-4">
-                            <div class=" m-0 card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary h6">Seduta <c:out
-                                        value="${i+1}"></c:out>:</h6>
-                            </div>
-                            <div class="card-body">
+                        <c:forEach begin="0" end="${listaSedute.size()-1}" step="1"
+                                   var="i"> <!-- controllare il dollaro -->
 
-                                <!-- Tabella -->
+                            <!-- seduta %n% -->
+                            <div class="card shadow mb-4">
+                                <div class=" m-0 card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary h6">Seduta <c:out
+                                            value="${i+1}"></c:out>:</h6>
+                                </div>
+                                <div class="card-body">
 
-                                <div class="table-container">
-                                    <table class="table  ">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col">Elenco partecipanti</th>
-                                            <th scope="col">Modifica seduta</th>
-                                            <th scope="col">Elimina seduta</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th>
-                                                <h4 class="small font-weight-bold">Data: <c:out
-                                                        value="${listaSedute.getIndex(i).dataSeduta}"></c:out></h4>
-                                                <h4 class="small font-weight-bold">Luogo:<c:out
-                                                        value="${listaSedute.getIndex(i).luogo}"></c:out></h4>
-                                            </th>
-                                            <th scope="row">
-                                                <!-- Bottom Elenco partecipanti -->
-                                                <span class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/monitoraggioSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>"
+                                    <!-- Tabella -->
+
+                                    <div class="table-container">
+                                        <table class="table  ">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Elenco partecipanti</th>
+                                                <th scope="col">Modifica seduta</th>
+                                                <th scope="col">Elimina seduta</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th>
+                                                    <h4 class="small font-weight-bold">Data: <c:out
+                                                            value="${listaSedute.get(i).dataSeduta}"></c:out></h4>
+                                                    <h4 class="small font-weight-bold">Luogo:<c:out
+                                                            value="${listaSedute.get(i).luogo}"></c:out></h4>
+                                                </th>
+                                                <th scope="row">
+                                                    <!-- Bottom Elenco partecipanti -->
+                                                    <span class="float-center col-xl-1 col-md-6 mb-2">
+                            <a href="/monitoraggioSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
                                role="button">
                                 <i class="fas fa-user icone"></i>
                             </a>
                         </span>
-                                            </th>
+                                                </th>
 
-                                            <!-- Bottom modifica seduta -->
-                                            <td>
+                                                <!-- Bottom modifica seduta -->
+                                                <td>
                         <span class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/modicaSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>"
+                            <a href="/modicaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
                                role="button"> <i class="fas fa-cogs icone"></i></a>
                         </span>
-                                            </td>
+                                                </td>
 
-                                            <!-- Bottom Elimina seduta -->
-                                            <td>
+                                                <!-- Bottom Elimina seduta -->
+                                                <td>
                         <span class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/eliminaSeduta?idSeduta=<c:out value="${listaSedute.getIndex(i).idSeduta}"></c:out>"
+                            <a href="/eliminaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
                                role="button"> <i class="fas fa-times icone"></i></a>
                         </span>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!--FINE Tabella -->
+
                                 </div>
 
-                                <!--FINE Tabella -->
-
+                                <!-- fine elenco monitoraggio -->
                             </div>
-                        </div>
-
+                        </c:forEach>
                     </div>
-                    <!-- fine elenco monitoraggio -->
+
                 </div>
-                </c:forEach>
                 <!-- /.container-fluid -->
 
             </div>

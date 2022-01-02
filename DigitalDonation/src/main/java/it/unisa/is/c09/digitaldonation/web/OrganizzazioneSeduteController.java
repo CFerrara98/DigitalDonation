@@ -48,26 +48,27 @@ public class OrganizzazioneSeduteController {
 
     /**
      * Metodo che permette al donatore di poter inviare un feedback.
-     * @param request è la richiesta dalla sessione.
+     *
+     * @param request           è la richiesta dalla sessione.
      * @param redirectAttribute è l'attributo di ridirezione.
-     * @param model è l'oggetto Model.
+     * @param model             è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
     public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
         Boolean feedback;
         Long idSeduta;
-        try{
+        try {
             feedback = Boolean.parseBoolean((String) request.getParameter("feedback"));
             idSeduta = Long.valueOf(((String) request.getParameter("" +
                     "")));
-        }catch (Exception e){
+        } catch (Exception e) {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
             return "redirect:/";
         }
         Donatore utente = (Donatore) request.getSession().getAttribute("utente");
-        logger.info("Inserimento feedback. Id seduta: "+idSeduta+
-                " feedback: "+feedback + " utente: "+utente.toString());
+        logger.info("Inserimento feedback. Id seduta: " + idSeduta +
+                " feedback: " + feedback + " utente: " + utente.toString());
         if (utente != null && utente instanceof Donatore && feedback == true) {
             try {
                 organizzazioneSeduteService.feedbackDonatore(utente, feedback, idSeduta);
@@ -80,21 +81,22 @@ public class OrganizzazioneSeduteController {
 
     /**
      * Metodo che permette all'operatore di poter visualizzare una seduta con l'elenco dei partecipanti.
-     * @param request è la richiesta dalla sessione.
+     *
+     * @param request           è la richiesta dalla sessione.
      * @param redirectAttribute è l'attributo di ridirezione.
-     * @param model è l'oggetto Model.
+     * @param model             è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/monitoraggioSeduta", method = RequestMethod.GET)
-    public String monitoraggioSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
+    public String monitoraggioSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) model.getAttribute("utente");
         Long idSeduta = (Long) model.getAttribute("idSeduta");
-        if(utente instanceof Operatore) {
+        if (utente instanceof Operatore) {
             try {
                 ArrayList<Object> listaPartecipanti = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
                 model.addAttribute("listaPartecipanti", listaPartecipanti);
                 List<Seduta> listaSedute = (List<Seduta>) model.getAttribute("listaSedutePrenotabili");
-                for (int i=0; i < listaSedute.size(); i++) {
+                for (int i = 0; i < listaSedute.size(); i++) {
                     if (listaSedute.get(i).getIdSeduta() == idSeduta) {
                         model.addAttribute("sedutaScelta", listaSedute.get(i));
                     }
@@ -103,42 +105,55 @@ public class OrganizzazioneSeduteController {
             } catch (CannotLoadDataRepositoryException e) {
                 return "errorsPages/error503";
             }
-        }
-        else
+        } else
             return "redirect:/";
     }
 
     /**
      * Metodo che permette all'operatore di poter visualizzare l'elenco delle sedute.
+     *
      * @param request è la richiesta dalla sessione.
-     * @param model è l'oggetto Model.
+     * @param model   è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/visualizzaElencoSedute", method = RequestMethod.GET)
-    public String visualizzaElencoSedute(HttpServletRequest request, Model model){
+    public String visualizzaElencoSedute(HttpServletRequest request, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente instanceof Operatore) {
+            try {
+                List<Seduta> lista = organizzazioneSeduteService.visualizzaElencoSedute();
+                model.addAttribute("listaSedute", lista);
+            } catch (CannotLoadDataRepositoryException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return "redirect:/";
+        }
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
     }
 
     /**
      * Metodo che permette di andare alla pagina dell'elenco dei partecipanti.
+     *
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/goSeduteDisponibili", method = RequestMethod.GET)
+    @RequestMapping(value = "/goSeduteDisponibili", method = RequestMethod.GET)
     public String seduteDisponibili(Model model) {
         return "GUIOrganizzazioneSedute/seduteDisponibili";
     }
 
     /**
      * Metodo che permette al donatore di poter visualizzare una seduta.
+     *
      * @param request è la richiesta dalla sessione.
-     * @param model è l'oggetto Model.
+     * @param model   è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/visualizzaSeduta", method = RequestMethod.GET)
-    public String visualizzaSeduta(HttpServletRequest request, Model model){
+    public String visualizzaSeduta(HttpServletRequest request, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if(utente instanceof Donatore) {
+        if (utente instanceof Donatore) {
             Long idSeduta = (Long) model.getAttribute("idSeduta");
             List<Seduta> lista = (List<Seduta>) model.getAttribute("listaSedutePrenotabili");
             for (int i = 0; i < lista.size(); i++) {
@@ -147,24 +162,24 @@ public class OrganizzazioneSeduteController {
                 }
             }
             return "GUIOrganizzazioneSedute/partecipaSeduta";
-        }
-
-        else{
+        } else {
             return "redirect:/\"";
         }
     }
 
     /**
      * Metodo che permette all'operatore di poter inserire un utente guest all'interno di una seduta.
-     * @param request è la richiesta dalla sessione.
-     * @param guestForm è l'oggetto form dell'utente guest.
+     *
+     * @param request           è la richiesta dalla sessione.
+     * @param guestForm         è l'oggetto form dell'utente guest.
      * @param redirectAttribute è l'attributo di ridirezione.
-     * @param model è l'oggetto Model.
-     * @param result è la variabile di binding.
+     * @param model             è l'oggetto Model.
+     * @param result            è la variabile di binding.
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/inserimentoGuest", method = RequestMethod.POST)
-    public String inserimentoGuest(HttpServletRequest request, @ModelAttribute GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model){
+    public String inserimentoGuest(HttpServletRequest request, @ModelAttribute GuestForm guestForm, BindingResult
+            result, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         guestFormValidate.validate(guestForm, result);
         Long idSeduta = (Long) model.getAttribute("idSeduta");
@@ -178,7 +193,7 @@ public class OrganizzazioneSeduteController {
             }
             return "redirect:/goInserimentoUtenteGuest";
         }
-        if(utente instanceof Operatore) {
+        if (utente instanceof Operatore) {
             Guest guest = new Guest();
             guest.setNome(guestForm.getNome());
             guest.setCognome(guestForm.getCognome());
@@ -192,35 +207,27 @@ public class OrganizzazioneSeduteController {
             } catch (CannotSaveDataRepositoryException e) {
                 return "redirect:/error";
             }
-        }
-        else
+        } else
             return "redirect:/error";
 
     }
 
     /**
      * Metodo che permette all'operatore di poter creare una nuova seduta.
-     * @param request è la richiesta dalla sessione.
-     * @param sedutaForm è l'oggetto form della seduta.
+     *
+     * @param request           è la richiesta dalla sessione.
+     * @param sedutaForm        è l'oggetto form della seduta.
      * @param redirectAttribute è l'attributo di ridirezione.
-     * @param model è l'oggetto Model.
+     * @param model             è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
-    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm
+            sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        //String dataSeduta = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataSeduta());
-        //String dataInizio = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataInizioPrenotazione());
-        //String dataFine = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataFinePrenotazione());
+
         try {
-//            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-//            Date dataSedutaD = (Date) formatter.parse(dataSeduta);
-//            Date dataInizioD = (Date) formatter.parse(dataInizio);
-//            Date dataFineD = (Date) formatter.parse(dataFine);
-//            sedutaForm.setDataSeduta(dataSedutaD);
-//            sedutaForm.setDataInizioPrenotazione(dataInizioD);
-//            sedutaForm.setDataFinePrenotazione(dataFineD);
-//            System.out.println(sedutaForm.toString());
+
             sedutaFormValidate.validate(sedutaForm, result);
             if (result.hasErrors()) {
                 // se ci sono errori il metodo controller setta tutti i parametri
@@ -234,9 +241,6 @@ public class OrganizzazioneSeduteController {
 
             if (utente instanceof Operatore) {
                 DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
-//                Date data1 = (Date)formatter2.parse(dataSeduta);
-//                Date data2 = (Date)formatter2.parse(dataInizio);
-//                Date data3 = (Date)formatter2.parse(dataFine);
 
                 Operatore operatore = (Operatore) utente;
                 SedeLocale sedeLocale = operatore.getSedeLocale();
@@ -261,7 +265,7 @@ public class OrganizzazioneSeduteController {
                 //TODO SET ERROR CODE NOT AUTORIZATE http status
                 return "redirect:/error";
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //TODO da controllare
             return "redirect:/error";
         }
@@ -269,22 +273,24 @@ public class OrganizzazioneSeduteController {
 
     /**
      * Metodo che permette di andare alla pagina dell'elenco dei partecipanti.
+     *
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina.
      */
-    @RequestMapping(value ="/goElencoPartecipanti", method = RequestMethod.GET)
+    @RequestMapping(value = "/goElencoPartecipanti", method = RequestMethod.GET)
     public String elencoPartecipanti(Model model) {
         return "GUIOrganizzazioneSedute/elencoPartecipanti";
     }
 
     /**
      * Metodo che permette di andare alla pagina di inserimento utente guest.
+     *
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/goInserimentoUtenteGuest", method = RequestMethod.GET)
+    @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(Model model) {
-       //lo abbiamo messo provvisoriamente per provare il guestform nella jsp "inserimentoUtenteGuest"
+        //lo abbiamo messo provvisoriamente per provare il guestform nella jsp "inserimentoUtenteGuest"
         GuestForm guestForm = new GuestForm();
         model.addAttribute("guestForm", guestForm);
 
@@ -293,32 +299,35 @@ public class OrganizzazioneSeduteController {
 
     /**
      * Metodo che permette di andare alla pagina dell'elenco delle sedute.
+     *
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina.
      */
-    @RequestMapping(value ="/goMonitoraggioSedute", method = RequestMethod.GET)
+    @RequestMapping(value = "/goMonitoraggioSedute", method = RequestMethod.GET)
     public String monitoraggioSedute(Model model) {
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
     }
 
     /**
      * Metodo che permette di andare alla pagina di feedback della seduta.
+     *
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/goPartecipaSeduta", method = RequestMethod.GET)
+    @RequestMapping(value = "/goPartecipaSeduta", method = RequestMethod.GET)
     public String partecipaSeduta(Model model) {
         return "GUIOrganizzazioneSedute/partecipaSeduta";
     }
 
     /**
      * Metodo che permette di andare alla pagina di schedulazione di una nuova seduta.
+     *
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    @RequestMapping(value ="/goSchedulazioneSeduta", method = RequestMethod.GET)
+    @RequestMapping(value = "/goSchedulazioneSeduta", method = RequestMethod.GET)
     public String schedulazioneSeduta(Model model) {
-        if(model.getAttribute("sedutaForm") != null) {
+        if (model.getAttribute("sedutaForm") != null) {
             return "GUIOrganizzazioneSedute/schedulazioneSeduta";
         }
         SedutaForm sedutaForm = new SedutaForm();
