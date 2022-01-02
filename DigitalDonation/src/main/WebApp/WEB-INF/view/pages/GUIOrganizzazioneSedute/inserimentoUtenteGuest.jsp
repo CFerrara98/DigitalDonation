@@ -153,20 +153,16 @@
                                                                 patologie: </p>
                                                             <c:choose>
                                                                 <c:when test="${PatologieError == null}">
-                                                                    <form:input
-                                                                            type="text"
-                                                                            class="form-control form-control-user"
-                                                                            id="patologie"
-                                                                            placeholder="es. Nessuna"
-                                                                            path="patologie"/>
+                                                                    <form: textarea class="textarea form-control"
+                                                                                   id="exampleCodiceFiscale"
+                                                                                   placeholder="es. Nessuna"
+                                                                                   rows="4"/>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    <form:input
-                                                                            type="text"
-                                                                            class="form-control form-control-user is-invalid"
-                                                                            id="patologie"
-                                                                            placeholder="es. Nessuna"
-                                                                            path="patologie"/>
+                                                                    <form: textarea class="textarea form-control"
+                                                                           id="exampleCodiceFiscale"
+                                                                           placeholder="es. Nessuna"
+                                                                           rows="4"/>
                                                                     <span class="myError">${PatologieError}</span>
                                                                 </c:otherwise>
                                                             </c:choose>
