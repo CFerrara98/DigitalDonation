@@ -61,7 +61,7 @@
                                     <!-- Tabella -->
 
                                     <div class="table-container">
-                                        <table class="table  ">
+                                        <table class="table spazio-table ">
                                             <thead>
                                             <tr>
                                                 <th scope="col"></th>
