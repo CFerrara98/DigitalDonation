@@ -122,13 +122,18 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Seduta schedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException {
-        if (seduta.getIdSeduta() == null) {
+        if(seduta.getIdSeduta() == null){
             throw new CannotSaveDataRepositoryException("sedutaError", "Il campo id della seduta non può essere null.");
         }
+        if(seduta.getIdSeduta() == -1){
+            seduta.setIdSeduta(null);
+        }
+            sedutaRepository.save(seduta);
+            return seduta;
+        }
 
-        sedutaRepository.save(seduta);
-        return seduta;
-    }
+
+
 
     /**
      * Questo metodo permette di modificare una seduta
@@ -436,14 +441,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      *                             {@link Seduta#NUMERO_PARTECIPANTI_REGEX}
      */
     public int validaNumeroPartecipanti(int numeroPartecipanti) throws SedutaFormException {
-        if (numeroPartecipanti < 0) {
+        if (numeroPartecipanti < 0 ) {
             throw new SedutaFormException("SedutaPartecipantiError", "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999");
-        } else {
-            if (!Integer.toString(numeroPartecipanti).matches(Seduta.NUMERO_PARTECIPANTI_REGEX)) {
-                throw new SedutaFormException("SedutaPartecipantiError", "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999");
-            }
-            return numeroPartecipanti;
         }
+            return numeroPartecipanti;
     }
 
     /**

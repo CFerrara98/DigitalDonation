@@ -51,7 +51,7 @@ public class SedutaFormValidate implements Validator {
             errors.reject("Data non valida.", e1.getMessage());
             Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
             sedutaForm.setDataSeduta(myCalendar.getTime());
-            return;
+
         }
 
         //Validazione del campo indirizzo
@@ -60,7 +60,6 @@ public class SedutaFormValidate implements Validator {
         } catch (SedutaFormException e1) {
             errors.reject("Indirizzo non valido.", e1.getMessage());
             sedutaForm.setIndirizzo("");
-            return;
 
         }
 
@@ -70,7 +69,6 @@ public class SedutaFormValidate implements Validator {
         } catch (SedutaFormException e1) {
             errors.reject("Citta non valida.", e1.getMessage());
             sedutaForm.setCitta("");
-            return;
         }
 
         //Validazione del campo provincia
@@ -79,7 +77,6 @@ public class SedutaFormValidate implements Validator {
         } catch (SedutaFormException e1) {
             errors.reject("Provincia non valida.", e1.getMessage());
             sedutaForm.setProvincia("");
-            return;
         }
 
         //Validazione del campo CAP
@@ -88,16 +85,17 @@ public class SedutaFormValidate implements Validator {
         } catch (SedutaFormException e1) {
             errors.reject("CAP non valido.", e1.getMessage());
             sedutaForm.setCAP("");
-            return;
         }
 
         //Validazione del campo numeroPartecipanti
         try {
             organizzazioneSeduteService.validaNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
-        } catch (SedutaFormException e1) {
-            errors.reject("Numero partecipanti non valido. cià", e1.getMessage());
+        }catch (NumberFormatException e1) {
+            errors.reject("Numero partecipanti non valido.", e1.getMessage());
             sedutaForm.setNumeroPartecipanti(0);
-            return;
+        }catch (SedutaFormException e2){
+            errors.reject("Numero partecipanti non valido.", e2.getMessage());
+            sedutaForm.setNumeroPartecipanti(0);
         }
 
         //Validazione del campo dataInizioPrenotazione
@@ -107,7 +105,6 @@ public class SedutaFormValidate implements Validator {
             errors.reject("Errore nella data dell'inizio.", e1.getMessage());
             Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
             sedutaForm.setDataInizioPrenotazione(myCalendar.getTime());
-            return;
         }
         //Validazione del campo dataFinePrenotazione
         try {
@@ -116,8 +113,8 @@ public class SedutaFormValidate implements Validator {
             errors.reject("Data di fine prenotazione non valida.", e1.getMessage());
             Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
             sedutaForm.setDataFinePrenotazione(myCalendar.getTime());
-            return;
         }
+      return;
     }
 
 }

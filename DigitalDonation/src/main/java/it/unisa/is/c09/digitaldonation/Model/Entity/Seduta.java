@@ -81,6 +81,7 @@ public class Seduta implements Serializable {
      * che verrà popolato con i metodi setters.
      */
     public Seduta(){
+        idSeduta = -1L;
         listaDonatore = new ArrayList<Donatore>();
         listaGuest = new ArrayList<Guest>();
         numeroPartecipanti = 0;

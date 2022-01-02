@@ -59,7 +59,8 @@ public class OrganizzazioneSeduteController {
         Long idSeduta;
         try{
             feedback = Boolean.parseBoolean((String) request.getParameter("feedback"));
-            idSeduta = Long.valueOf(((String) request.getParameter("idSeduta")));
+            idSeduta = Long.valueOf(((String) request.getParameter("" +
+                    "")));
         }catch (Exception e){
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
             return "redirect:/";
@@ -208,42 +209,42 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
     public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        String dataSeduta = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataSeduta());
-        String dataInizio = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataInizioPrenotazione());
-        String dataFine = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataFinePrenotazione());
+        //String dataSeduta = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataSeduta());
+        //String dataInizio = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataInizioPrenotazione());
+        //String dataFine = organizzazioneSeduteService.parsDateToString(sedutaForm.getDataFinePrenotazione());
         try {
-            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            Date dataSedutaD = (Date) formatter.parse(dataSeduta);
-            Date dataInizioD = (Date) formatter.parse(dataInizio);
-            Date dataFineD = (Date) formatter.parse(dataFine);
-            sedutaForm.setDataSeduta(dataSedutaD);
-            sedutaForm.setDataInizioPrenotazione(dataInizioD);
-            sedutaForm.setDataFinePrenotazione(dataFineD);
-            System.out.println(sedutaForm.toString());
+//            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+//            Date dataSedutaD = (Date) formatter.parse(dataSeduta);
+//            Date dataInizioD = (Date) formatter.parse(dataInizio);
+//            Date dataFineD = (Date) formatter.parse(dataFine);
+//            sedutaForm.setDataSeduta(dataSedutaD);
+//            sedutaForm.setDataInizioPrenotazione(dataInizioD);
+//            sedutaForm.setDataFinePrenotazione(dataFineD);
+//            System.out.println(sedutaForm.toString());
             sedutaFormValidate.validate(sedutaForm, result);
             if (result.hasErrors()) {
                 // se ci sono errori il metodo controller setta tutti i parametri
                 redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);
                 for (ObjectError x : result.getGlobalErrors()) {
                     redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
-                    logger.info("Prova", x.getCode());
+                    logger.info("Prova" + x.getCode().toString());
                 }
                 return "redirect:/goSchedulazioneSeduta";
             }
 
             if (utente instanceof Operatore) {
                 DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date data1 = (Date)formatter2.parse(dataSeduta);
-                Date data2 = (Date)formatter2.parse(dataInizio);
-                Date data3 = (Date)formatter2.parse(dataFine);
+//                Date data1 = (Date)formatter2.parse(dataSeduta);
+//                Date data2 = (Date)formatter2.parse(dataInizio);
+//                Date data3 = (Date)formatter2.parse(dataFine);
 
                 Operatore operatore = (Operatore) utente;
                 SedeLocale sedeLocale = operatore.getSedeLocale();
                 Seduta seduta = new Seduta();
-                seduta.setDataFinePrenotazione(data3);
-                seduta.setDataSeduta(data1);
-                seduta.setDataInizioPrenotazione(data2);
-                seduta.setNumeroPartecipanti(0);
+                seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
+                seduta.setDataSeduta(sedutaForm.getDataSeduta());
+                seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
+                seduta.setNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
                 seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
                 seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
                 seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
@@ -253,13 +254,16 @@ public class OrganizzazioneSeduteController {
                     organizzazioneSeduteService.schedulazioneSeduta(seduta);
                     return "GUIGestioneUtente/dashboardOperatore";
                 } catch (CannotSaveDataRepositoryException e) {
-                    return "redirect:/goSchedulazioneSeduta";
+                    //TODO SET ERROR CODE PROBLEMI COL SERVER
+                    return "redirect:/error";
                 }
             } else
-                return "redirect:/";
-        }catch(ParseException e)
-        {
-            return "redirect:/goSchedulazioneSeduta";
+                //TODO SET ERROR CODE NOT AUTORIZATE http status
+                return "redirect:/error";
+
+        }catch (Exception e){
+            //TODO da controllare
+            return "redirect:/error";
         }
     }
 
@@ -314,6 +318,9 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value ="/goSchedulazioneSeduta", method = RequestMethod.GET)
     public String schedulazioneSeduta(Model model) {
+        if(model.getAttribute("sedutaForm") != null) {
+            return "GUIOrganizzazioneSedute/schedulazioneSeduta";
+        }
         SedutaForm sedutaForm = new SedutaForm();
         model.addAttribute("sedutaForm", sedutaForm);
         return "GUIOrganizzazioneSedute/schedulazioneSeduta";
