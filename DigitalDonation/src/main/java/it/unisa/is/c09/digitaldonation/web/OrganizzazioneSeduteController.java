@@ -190,11 +190,11 @@ public class OrganizzazioneSeduteController {
                 organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
                 return "redirect:/monitoraggioSeduta";
             } catch (CannotSaveDataRepositoryException e) {
-                return "redirect:/goInserimentoUtenteGuest";
+                return "redirect:/error";
             }
         }
         else
-            return "redirect:/";
+            return "redirect:/error";
 
     }
 
