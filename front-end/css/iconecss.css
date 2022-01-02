@@ -1,120 +1,139 @@
-.icone{
-    font-size:50px;
+.icone {
+    font-size: 50px;
+}
 
-  }
-  
-  /* On screens that are 992px or less, set the background color to blue */
-  @media screen and (max-width: 992px) {
+
+/* On screens that are 992px or less, set the background color to blue */
+
+@media screen and (max-width: 992px) {
     .icone {
-      font-size:30px;
+        font-size: 30px;
     }
-  }
-  
-  /* On screens that are 600px or less, set the background color to olive */
-  @media screen and (max-width: 600px) {
+}
+
+
+/* On screens that are 600px or less, set the background color to olive */
+
+@media screen and (max-width: 600px) {
     .icone {
-        font-size:20px;
-  }
-
+        font-size: 20px;
+    }
 }
 
-.scrittalogo{
-  font-size:28px;
-
+.scrittalogo {
+    font-size: 28px;
 }
+
 
 /* On screens that are 992px or less, set la scritta digial donation */
+
 @media screen and (max-width: 992px) {
-  .scrittalogo {
-    font-size:28px;
-  }
+    .scrittalogo {
+        font-size: 28px;
+    }
 }
+
 
 /* On screens that are 600px or less, elimina la scritta digital donation */
+
 @media screen and (max-width: 600px) {
-  .scrittalogo {
-      font-size:0px;
+    .scrittalogo {
+        font-size: 0px;
+    }
 }
-
-}
-
-
-
 
 .table-container {
     width: 100%;
     overflow-x: auto
-  }
-
-  
-  /* On screens that are 992px or less, set the table with scroll*/
-  @media screen and (max-width: 992px) {
-    .table-container {
-        width: 100%;
-        overflow-x: scroll
-    }
-  }
-  
-  /* On screens that are 600px or less, set the table with scroll */
-  @media screen and (max-width: 600px) {
-    .table-container {
-        width: 100%;
-    overflow-x: scroll
-
-    }
-}
-
-
-
-
-
-.table-botton {
-  width: 100%;
-  overflow-x: auto
 }
 
 
 /* On screens that are 992px or less, set the table with scroll*/
+
 @media screen and (max-width: 992px) {
-  .large {
-    padding: .5rem 1rem;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    border-radius: .3rem
-}
-  .table-botton {
-      width: 100%;
-      overflow-x: scroll
-  }
+    .table-container {
+        width: 100%;
+        overflow-x: scroll
+    }
 }
 
+
 /* On screens that are 600px or less, set the table with scroll */
+
+@media screen and (max-width: 600px) {
+    .table-container {
+        width: 100%;
+        overflow-x: scroll
+    }
+}
+
+.table-botton {
+    width: 100%;
+    overflow-x: auto
+}
+
+
+/* On screens that are 992px or less, set the table with scroll*/
+
+@media screen and (max-width: 992px) {
+    .large {
+        padding: .5rem 1rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: .3rem
+    }
+    .table-botton {
+        width: 100%;
+        overflow-x: scroll
+    }
+}
+
+
+/* On screens that are 600px or less, set the table with scroll */
+
 @media screen and (max-width: 426px) {
-  .botton-sm {
-    padding: .25rem .9rem;
-    font-size: .750rem;
-    line-height: 1.0;
-    border-radius: .2rem
-  }
-  
-  .table-botton {
-  
-      width: 100%;
-  overflow-x: scroll
-  }
-  
+    .botton-sm {
+        padding: .25rem .9rem;
+        font-size: .750rem;
+        line-height: 1.0;
+        border-radius: .2rem
+    }
+    .table-botton {
+        width: 100%;
+        overflow-x: scroll
+    }
 }
 
 @media screen and (max-width: 350px) {
-  table, thead, tbody, th, td, tr {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+    /* potremmo nascondere l'header, ma lo spostiamo solo, per questioni di accessibilità */
+    /* i campi di ogni riga diventano la colonna destra */
+    td {
+        position: relative;
+        padding-right: 30% !important;
+    }
+}
+
+.textarea {
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+    padding: 0rem 0rem;
     display: block;
-  }
-  /* potremmo nascondere l'header, ma lo spostiamo solo, per questioni di accessibilità */
- 
-  /* i campi di ogni riga diventano la colonna destra */
-  td {
-    position: relative;
-    padding-right: 30% !important;
-  }
-  
+    width: 100%;
+    height: $input-height;
+    font-family: $input-font-family;
+    @include font-size($input-font-size);
+    font-weight: $input-font-weight;
+    line-height: $input-line-height;
+    color: $input-color;
+    background-color: $input-bg;
+    background-clip: padding-box;
+    border: $input-border-width solid $input-border-color;
 }
