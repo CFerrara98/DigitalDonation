@@ -128,7 +128,7 @@ public class Seduta implements Serializable {
      * @param provincia è la provincia della seduta.
      */
     public static String parseToLuogo(String indirizzo, String citta, String CAP, String provincia){
-        return indirizzo+"&"+citta+"&"+CAP+"&"+provincia;
+        return indirizzo+" "+citta+" "+CAP+" "+provincia;
     }
 
     /**

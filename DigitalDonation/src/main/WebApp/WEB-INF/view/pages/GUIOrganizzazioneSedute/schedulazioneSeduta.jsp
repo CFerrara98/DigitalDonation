@@ -76,7 +76,7 @@
                                                 <div class="col-sm-6">
                                                     <p style="color:#4e73df;">Numero di partecipanti: </p>
                                                     <c:choose>
-                                                        <c:when test="${NumeroPartecipantiError == null}">
+                                                        <c:when test="${NumPartecipantiError == null}">
                                                                     <form:input type="text"
                                                                                 class="form-control form-control-user"
                                                                                 id="numeroPartecipanti"
@@ -89,7 +89,7 @@
                                                                         id="numeroPartecipanti"
                                                                         placeholder="data Seduta:"
                                                                         path="numeroPartecipanti"/>
-                                                            <span class="myError">${NumeroPartecipantiError}</span>
+                                                            <span class="myError">${NumPartecipantiError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
 
@@ -290,10 +290,5 @@
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
 
 </z:layout>

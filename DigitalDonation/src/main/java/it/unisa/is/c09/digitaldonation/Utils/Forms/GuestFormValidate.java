@@ -44,55 +44,50 @@ public class GuestFormValidate implements Validator {
         try{
             organizzazioneSeduteService.validaNome(guestForm.getNome());
         } catch(GuestFormException e1) {
-            errors.reject("errore", e1.getMessage());
+            errors.reject("NomeError", e1.getMessage());
             guestForm.setNome("");
-            return;
         }
 
         //Validazione del campo cognome
         try{
             organizzazioneSeduteService.validaCognome(guestForm.getCognome());
         } catch(GuestFormException e1) {
-            errors.reject("errore", e1.getMessage());
+            errors.reject("CognomeError", e1.getMessage());
             guestForm.setCognome("");
-            return;
         }
 
         //Validazione del campo telefono
         try{
             organizzazioneSeduteService.validaTelefono(guestForm.getTelefono());
         } catch(GuestFormException e1) {
-            errors.reject("errore", e1.getMessage());
+            errors.reject("TelefonoError", e1.getMessage());
             guestForm.setTelefono("");
-            return;
         }
 
         //Validazione del campo codice fiscale
         try{
             organizzazioneSeduteService.validaCodiceFiscaleGuest(guestForm.getCodiceFiscale());
         } catch(GuestFormException e1) {
-            errors.reject("errore", e1.getMessage());
+            errors.reject("CodiceFiscaleError", e1.getMessage());
             guestForm.setCodiceFiscale("");
-            return;
         }
 
         //Validazione del campo patologie
         try{
             organizzazioneSeduteService.validaPatologie(guestForm.getPatologie());
         } catch(GuestFormException e1) {
-            errors.reject("errore", e1.getMessage());
+            errors.reject("PatologieError", e1.getMessage());
             guestForm.setPatologie("");
-            return;
         }
 
         //Validazione del campo gruppo sanguigno
         try{
             organizzazioneSeduteService.validaGruppoSanguigno(guestForm.getGruppoSanguigno());
         } catch(GuestFormException e1) {
-            errors.reject("errore", e1.getMessage());
+            errors.reject("GruppoSanguignoError", e1.getMessage());
             guestForm.setGruppoSanguigno("");
-            return;
         }
+        return;
     }
 }
 

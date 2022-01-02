@@ -17,6 +17,9 @@
 	<link href="../../resources/css/sb-admin-2.min.css" rel="stylesheet">
 	<link href="../../resources/css/iconecss.css" rel="stylesheet">
 
+
+	<!--Bootstrap-->
+
     <!--
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="http://fonts.cdnfonts.com/css/playlist" rel="stylesheet">

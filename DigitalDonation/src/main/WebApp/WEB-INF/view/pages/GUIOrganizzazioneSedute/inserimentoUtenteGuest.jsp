@@ -32,7 +32,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <div class="card-body">
                             <!-- indietro -->
-                            <a href="monitoraggioSedute.html" role="button"> <i
+                            <a href="./dashboardOperatore" role="button"> <i
                                     class="fas fa-arrow-left float-left icone"></i></a>
 
                             <!-- titolo -->
@@ -84,7 +84,6 @@
                                                     <p style="color:#4e73df;">Inserisci il cognome: </p>
                                                     <c:choose>
                                                         <c:when test="${CognomeError == null}">
-
                                                             <form:input type="text"
                                                                         class="form-control form-control-user"
                                                                         id="cognome"
@@ -239,11 +238,6 @@
                     <!-- End of Content Wrapper -->
         </div>
                 <!-- End of Page Wrapper -->
-
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded " href="#page-top ">
-                    <i class="fas fa-angle-up "></i>
-                </a>
 
 
 </z:layout>

@@ -138,3 +138,7 @@
    border: input-border-width solid input-border-color;*/
 }
 /*fine css textarea*/
+
+.spazio-table {
+  table-layout: fixed;
+}

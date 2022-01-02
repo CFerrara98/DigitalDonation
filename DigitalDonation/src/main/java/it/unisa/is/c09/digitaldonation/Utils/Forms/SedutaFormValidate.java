@@ -48,7 +48,7 @@ public class SedutaFormValidate implements Validator {
         try {
             organizzazioneSeduteService.validaDataSeduta(sedutaForm.getDataSeduta());
         } catch (SedutaFormException e1) {
-            errors.reject("Data non valida.", e1.getMessage());
+            errors.reject("DataError", e1.getMessage());
             Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
             sedutaForm.setDataSeduta(myCalendar.getTime());
 
@@ -58,7 +58,7 @@ public class SedutaFormValidate implements Validator {
         try {
             organizzazioneSeduteService.validaIndirizzo(sedutaForm.getIndirizzo());
         } catch (SedutaFormException e1) {
-            errors.reject("Indirizzo non valido.", e1.getMessage());
+            errors.reject("IndirizzoError", e1.getMessage());
             sedutaForm.setIndirizzo("");
 
         }
@@ -67,7 +67,7 @@ public class SedutaFormValidate implements Validator {
         try {
             organizzazioneSeduteService.validaCitta(sedutaForm.getCitta());
         } catch (SedutaFormException e1) {
-            errors.reject("Citta non valida.", e1.getMessage());
+            errors.reject("CittaError", e1.getMessage());
             sedutaForm.setCitta("");
         }
 
@@ -75,7 +75,7 @@ public class SedutaFormValidate implements Validator {
         try {
             organizzazioneSeduteService.validaProvincia(sedutaForm.getProvincia());
         } catch (SedutaFormException e1) {
-            errors.reject("Provincia non valida.", e1.getMessage());
+            errors.reject("ProvinciaError", e1.getMessage());
             sedutaForm.setProvincia("");
         }
 
@@ -83,7 +83,7 @@ public class SedutaFormValidate implements Validator {
         try {
             organizzazioneSeduteService.validaCAP(sedutaForm.getCAP());
         } catch (SedutaFormException e1) {
-            errors.reject("CAP non valido.", e1.getMessage());
+            errors.reject("CAPError", e1.getMessage());
             sedutaForm.setCAP("");
         }
 
@@ -91,10 +91,10 @@ public class SedutaFormValidate implements Validator {
         try {
             organizzazioneSeduteService.validaNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
         }catch (NumberFormatException e1) {
-            errors.reject("Numero partecipanti non valido.", e1.getMessage());
+            errors.reject("NumPartecipantiError", e1.getMessage());
             sedutaForm.setNumeroPartecipanti(0);
         }catch (SedutaFormException e2){
-            errors.reject("Numero partecipanti non valido.", e2.getMessage());
+            errors.reject("NumPartecipantiError", e2.getMessage());
             sedutaForm.setNumeroPartecipanti(0);
         }
 
@@ -102,7 +102,7 @@ public class SedutaFormValidate implements Validator {
         try {
             organizzazioneSeduteService.validaDataInizioPrenotazioni(sedutaForm);
         } catch (SedutaFormException e1) {
-            errors.reject("Errore nella data dell'inizio.", e1.getMessage());
+            errors.reject("DataInizioError", e1.getMessage());
             Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
             sedutaForm.setDataInizioPrenotazione(myCalendar.getTime());
         }
@@ -110,7 +110,7 @@ public class SedutaFormValidate implements Validator {
         try {
             organizzazioneSeduteService.validaDataFinePrenotazioni(sedutaForm);
         } catch (SedutaFormException e1) {
-            errors.reject("Data di fine prenotazione non valida.", e1.getMessage());
+            errors.reject("DataFineError", e1.getMessage());
             Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
             sedutaForm.setDataFinePrenotazione(myCalendar.getTime());
         }
