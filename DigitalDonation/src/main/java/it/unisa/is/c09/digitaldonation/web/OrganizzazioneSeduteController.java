@@ -279,6 +279,7 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value = "/goElencoPartecipanti", method = RequestMethod.GET)
     public String elencoPartecipanti(Model model) {
+
         return "GUIOrganizzazioneSedute/elencoPartecipanti";
     }
 
