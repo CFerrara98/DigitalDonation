@@ -153,16 +153,16 @@
                                                                 patologie: </p>
                                                             <c:choose>
                                                                 <c:when test="${PatologieError == null}">
-                                                                    <form: textarea class="textarea form-control"
+                                                                    <form:textarea class="textarea form-control"
                                                                                    id="exampleCodiceFiscale"
                                                                                    placeholder="es. Nessuna"
-                                                                                   rows="4"/>
+                                                                                   rows="4" path="patologie"/>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    <form: textarea class="textarea form-control"
+                                                                    <form:textarea class="textarea form-control"
                                                                            id="exampleCodiceFiscale"
                                                                            placeholder="es. Nessuna"
-                                                                           rows="4"/>
+                                                                           rows="4" path="patologie"/>
                                                                     <span class="myError">${PatologieError}</span>
                                                                 </c:otherwise>
                                                             </c:choose>

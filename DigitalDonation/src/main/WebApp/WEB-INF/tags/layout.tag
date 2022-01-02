@@ -50,19 +50,13 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://kit.fontawesome.com/442bbb4090.js" crossorigin="anonymous"></script>
-	<!-- Navbar -->
-	
-	<div id="navbar" class="main-bar">
-        <nav>
 
-        </nav>
-    </div>
 
-	<!-- Navbar -->
+	<!-- Navbar-->
 	<main>
-		<div class="container">
+
 			<jsp:doBody />
-		</div>
+
 	</main>
 
 
