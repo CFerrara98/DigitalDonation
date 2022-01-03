@@ -5,9 +5,11 @@
   Time: 13:05
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <z:layout pageTitle="partecipa Seduta">
     <!-- Page Wrapper -->
@@ -66,18 +68,19 @@
                                     <h1>&nbsp;</h1>
 
                                     <!-- Checkbox -->
-                                        <%--@elvariable id="feedbackForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.FeedbackForm"--%>
+                                    <%--@elvariable id="feedbackForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.FeedbackForm"--%>
                                     <form:form action="./feedback" method="get"
                                                modelAttribute="feedbackForm" cssClass="user"
                                                enctype="application/x-www-form-urlencoded">
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label"> <h6 class=" mb-4" style="text-align: left">Se vuole partecipare alla seduta spunti la casella e prema il tasto conferma. <br>
-                                            Se non vuole partecipare alla seduta lasci la casella bianca e prema il tasto conferma.
-                                        </h6>
-                                        </label>
-                                    </div></form:form>
+                                        <div class="form-check">
+                                            <form:input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" path="feedback"/>
+                                            <label class="form-check-label"> <h6 class="mb-4" style="text-align: left">Se vuole partecipare alla seduta spunti la casella e prema il tasto conferma. <br>
+                                                Se non vuole partecipare alla seduta lasci la casella bianca e prema il tasto conferma.
+                                            </h6>
+                                            </label>
+                                        </div>
+                                    </form:form>
 
                                     <input type="submit" value="Conferma" class="btn btn-primary">
                                 </div>
