@@ -72,7 +72,6 @@
                         </div>
 
                         <c:choose>
-
                             <c:when test="${listaPartecipanti.get(0) != null}">
                                 <c:forEach begin="0" end="${listaUtenti.size()-1}" step="1"
                                            var="i">
@@ -95,7 +94,7 @@
                                                             <c:choose>
                                                                 <c:when test="${listaPartecipanti.get(i)}">
                                                                     <div class="alert alert-primary" role="alert" style="width: 150px" align="center">
-                                                                        <i class="fas fa-angry"></i>
+                                                                        <i class="fas fa-user" style="font-size: 36px"></i>
                                                                         <span class="m-0 font-weight-bold text-primary h6"> Donatore </span>
                                                                     </div>
 
@@ -103,7 +102,7 @@
                                                                  </c:when>
                                                                 <c:otherwise>
                                                                     <div class="alert alert-dark" role="alert" style="width: 150px" align="center">
-                                                                        <i class="fab fa-alipay"></i>
+                                                                        <i class="fas fa-user-plus" style="font-size: 36px"></i>
                                                                         <span class="m-0 font-weight-bold text-primary h6"> Guest </span>
                                                                     </div>
                                                                 </c:otherwise>

@@ -330,54 +330,38 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
-    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm
-            sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
 
         try {
-
             sedutaFormValidate.validate(sedutaForm, result);
-
             if (result.hasErrors()) {
                 // se ci sono errori il metodo controller setta tutti i parametri
                 redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);
                 for (ObjectError x : result.getGlobalErrors()) {
                     redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
-                    logger.info("Prova" + x.getCode().toString());
                 }
                 return "redirect:/goSchedulazioneSeduta";
             }
-
-            if (utente instanceof Operatore) {
-                DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
-
-                Operatore operatore = (Operatore) utente;
-                SedeLocale sedeLocale = operatore.getSedeLocale();
-                Seduta seduta = new Seduta();
-                seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
-                seduta.setDataSeduta(sedutaForm.getDataSeduta());
-                seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
-                seduta.setNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
-                seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
-                seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
-                seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
-                String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
-                seduta.setLuogo(luogo);
-                try {
-                    organizzazioneSeduteService.schedulazioneSeduta(seduta);
-                    return "GUIGestioneUtente/dashboardOperatore";
-                } catch (CannotSaveDataRepositoryException e) {
-                    //TODO SET ERROR CODE PROBLEMI COL SERVER
-                    return "redirect:/error";
-                }
-            } else
-                //TODO SET ERROR CODE NOT AUTORIZATE http status
-                return "redirect:/error";
-
-        } catch (Exception e) {
-            //TODO da controllare
-            return "redirect:/error";
+            DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+            Operatore operatore = (Operatore) utente;
+            SedeLocale sedeLocale = operatore.getSedeLocale();
+            Seduta seduta = new Seduta();
+            seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
+            seduta.setDataSeduta(sedutaForm.getDataSeduta());
+            seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
+            seduta.setNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
+            seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
+            seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
+            seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
+            String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
+            seduta.setLuogo(luogo);
+            organizzazioneSeduteService.schedulazioneSeduta(seduta);
+        } catch (CannotSaveDataRepositoryException e) {
+            redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
         }
+        model.addAttribute("success", "Seduta schedulata con successo!");
+        return "GUIGestioneUtente/dashboardOperatore";
     }
 
 
