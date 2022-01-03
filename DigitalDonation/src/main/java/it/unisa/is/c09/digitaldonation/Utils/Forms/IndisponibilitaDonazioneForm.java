@@ -6,9 +6,27 @@ import java.util.Date;
 
 public class IndisponibilitaDonazioneForm {
 
-    public IndisponibilitaDonazioneForm(Date dataProssimaDisponibilita, String motivazioni) {
+    public IndisponibilitaDonazioneForm(Date dataProssimaDisponibilita, String motivazioni, String nomeMedico) {
         this.dataProssimaDisponibilita = dataProssimaDisponibilita;
         this.motivazioni = motivazioni;
+        this.nomeMedico = nomeMedico;
+    }
+
+    /**
+     * Metodo che ritorna il nome del medico.
+     *
+     * @return nomeMedico e' il nome del medico.
+     */
+    public String getNomeMedico() {
+        return nomeMedico;
+    }
+    /**
+     * Metodo che setta il nome del medico.
+     *
+     * @param nomeMedico è il nome del medico.
+     */
+    public void setNomeMedico(String nomeMedico) {
+        this.nomeMedico = nomeMedico;
     }
 
     /**
@@ -48,4 +66,5 @@ public class IndisponibilitaDonazioneForm {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dataProssimaDisponibilita;
     private String motivazioni;
+    private String nomeMedico;
 }

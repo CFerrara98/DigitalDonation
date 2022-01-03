@@ -18,6 +18,7 @@ public class Indisponibilita implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_indisponibilita", nullable = false)
     private Long idIndisponibilita;
     @Column(name = "codice_fiscale_donatore", nullable = false)
@@ -110,6 +111,5 @@ public class Indisponibilita implements Serializable {
     public void setNomeMedico(String nomeMedico) {
         this.nomeMedico = nomeMedico;
     }
-
 
 }

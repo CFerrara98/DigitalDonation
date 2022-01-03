@@ -9,7 +9,7 @@ public class ConfermaDonazioneForm {
     /**
      * Metodo che ritorna il tipo di donazione per la conferma della donazione.
      *
-     * @return tipoDonazione e' il tipo di donazione per la conferma della donazione.
+     * @return tipoDonazione è il tipo di donazione per la conferma della donazione.
      */
     public String getTipoDonazione() {
         return tipoDonazione;

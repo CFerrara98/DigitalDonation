@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class AutodichiarazioneIndisponibilitaForm {
 
-    
+
     public AutodichiarazioneIndisponibilitaForm(Date dataProssimaDisponibilita, String motivazioni, String nomeMedico){
         this.dataProssimaDisponibilita = dataProssimaDisponibilita;
         this.motivazioni = motivazioni;
