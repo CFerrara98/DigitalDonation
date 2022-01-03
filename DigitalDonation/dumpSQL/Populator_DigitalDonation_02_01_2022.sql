@@ -15,7 +15,6 @@
 -- Dump dei dati della tabella digitaldonation.donatore: ~0 rows (circa)
 /*!40000 ALTER TABLE `donatore` DISABLE KEYS */;
 INSERT INTO `donatore` (`data_di_nascita`, `luogo_di_nascita`, `residenza`, `codice_fiscale_utente`) VALUES
-	('2022-01-02 17:07:26.000000', 'rabello', 'vietri sulla terra', 'ABRBAK53R70D887T'),
 	('1950-04-29 00:00:00.000000', 'Casanova Lerrone', 'San Giovanni in Galdo', 'ABRBAK53R70D887V'),
 	('1934-10-09 00:00:00.000000', 'Breia', 'Buttigliera d\'Asti', 'ACNCZY45X38I793C'),
 	('1908-01-13 00:00:00.000000', 'San Paolo Solbrito', 'Capriglio', 'AFCLCW22Z02F362J'),
