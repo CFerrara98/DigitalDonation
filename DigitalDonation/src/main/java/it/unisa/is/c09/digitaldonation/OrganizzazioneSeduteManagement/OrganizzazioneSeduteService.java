@@ -123,7 +123,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Transactional(rollbackFor = Exception.class)
     public Seduta schedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException {
         if(seduta.getIdSeduta() == null){
-            throw new CannotSaveDataRepositoryException("sedutaError", "Il campo id della seduta non può essere null.");
+            throw new CannotSaveDataRepositoryException("SedutaError", "Il campo id della seduta non può essere null.");
         }
         if(seduta.getIdSeduta() == -1){
             seduta.setIdSeduta(null);

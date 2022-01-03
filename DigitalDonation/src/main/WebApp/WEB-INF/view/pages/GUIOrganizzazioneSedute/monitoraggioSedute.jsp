@@ -74,7 +74,18 @@
                                             <tr>
                                                 <th width="1000">
                                                     <h4 class="small font-weight-bold">Data: <c:out
-                                                            value="${listaSedute.get(i).dataSeduta}"></c:out></h4>
+                                                            value="${listaSedute.get(i).dataSeduta.date}"></c:out>
+                                                        /
+                                                        <c:out
+                                                                value="${listaSedute.get(i).dataSeduta.month + 1}"></c:out>
+                                                        /
+                                                        <c:out
+                                                                value="${listaSedute.get(i).dataSeduta.year + 1900}"></c:out>
+                                                    </h4>
+                                                    <h4 class="small font-weight-bold">Ora di inizio: <c:out
+                                                            value="${listaSedute.get(i).oraInizio}"></c:out></h4>
+                                                    <h4 class="small font-weight-bold">Ora di fine: <c:out
+                                                            value="${listaSedute.get(i).oraFine}"></c:out></h4>
                                                     <h4 class="small font-weight-bold">Luogo:<c:out
                                                             value="${listaSedute.get(i).luogo}"></c:out></h4>
                                                 </th>

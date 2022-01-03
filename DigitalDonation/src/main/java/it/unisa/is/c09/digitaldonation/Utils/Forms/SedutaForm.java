@@ -203,9 +203,7 @@ public class SedutaForm {
     public void setDataFinePrenotazione(Date dataFinePrenotazione) {
         this.dataFinePrenotazione = dataFinePrenotazione;
     }
-/*
-* TODO
-* */
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dataSeduta;
     private String indirizzo;

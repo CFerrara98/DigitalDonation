@@ -58,12 +58,25 @@ public class UtenteController {
     @RequestMapping(value ="/goLogin", method = RequestMethod.GET)
     public String goLogin(HttpServletRequest request,@ModelAttribute("loginModel")LoginForm loginForm,
                           BindingResult result, RedirectAttributes redirectAttribute, Model model){
+        //TODO controllare la sessione
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente == null){
             model.addAttribute("loginForm",new LoginForm());
             return "GUIGestioneUtente/login";
         }
-        return "redirect:/logout";
+        if (utente != null) {
+            //Se è un operatore
+            if (utente instanceof Operatore) {
+                request.getSession().setAttribute("utente", utente);
+                return "GUIGestioneUtente/dashboardOperatore";
+            }
+            //Se è un donatore
+            else if (utente instanceof Donatore) {
+                request.getSession().setAttribute("utente", utente);
+                return "GUIGestioneUtente/dashboardDonatore";
+            }
+        }
+        return "redirect:/goLogin";
     }
 
     /**
@@ -153,6 +166,8 @@ public class UtenteController {
      */
     @RequestMapping(value ="/dashboardOperatore", method = RequestMethod.GET)
     public String dashboardOperatore(HttpServletRequest request, Model model) {
+        String successo =   request.getParameter("success");
+        model.addAttribute("success", successo);
         if(request.getSession().getAttribute("utente") instanceof Operatore){
             return "GUIGestioneUtente/dashboardOperatore";
         }

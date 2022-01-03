@@ -29,12 +29,22 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <div class="card-body">
                             <!-- indietro -->
-                            <a href="monitoraggioSedute.html" role="button"> <i
+                            <a href="./visualizzaElencoSedute" role="button"> <i
                                     class="fas fa-arrow-left float-left icone"></i></a>
 
                             <!-- titolo -->
                             <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Elenco partecipanti</h1>
 
+                            <c:choose>
+                                <c:when test="${success != null}">
+                                    <br>
+                                    <div class="alert alert-success" role="alert">
+                                        <h4 class="alert-heading"><i class="fas fa-calendar-check"
+                                                                     style="font-size: 36px"> </i> &nbsp <b>Complimenti!</b>  ${success}
+                                        </h4>
+                                    </div>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
 
@@ -72,7 +82,6 @@
                         </div>
 
                         <c:choose>
-
                             <c:when test="${listaPartecipanti.get(0) != null}">
                                 <c:forEach begin="0" end="${listaUtenti.size()-1}" step="1"
                                            var="i">
@@ -94,17 +103,15 @@
                                                         <th scope="col">
                                                             <c:choose>
                                                                 <c:when test="${listaPartecipanti.get(i)}">
-                                                                    <div class="alert alert-primary" role="alert" style="width: 150px" align="center">
-                                                                        <i class="fas fa-angry"></i>
-                                                                        <span class="m-0 font-weight-bold text-primary h6"> Donatore </span>
+                                                                    <div class="alert alert-primary" role="alert" style="width: 175px">
+                                                                        <i class="fas fa-user" style="font-size: 30px"> </i>
+                                                                        <span class="m-0 font-weight-bold text-primary h5"> &nbsp Donatore </span>
                                                                     </div>
-
-
                                                                  </c:when>
                                                                 <c:otherwise>
-                                                                    <div class="alert alert-dark" role="alert" style="width: 150px" align="center">
-                                                                        <i class="fab fa-alipay"></i>
-                                                                        <span class="m-0 font-weight-bold text-primary h6"> Guest </span>
+                                                                    <div class="alert alert-dark" role="alert" style="width: 175px">
+                                                                        <i class="fas fa-user-plus" style="font-size: 30px"></i>
+                                                                        <span class="m-0 font-weight-bold text-primary h5"> &nbsp Guest </span>
                                                                     </div>
                                                                 </c:otherwise>
                                                             </c:choose>

@@ -12,10 +12,6 @@ public class GuestForm {
         this.gruppoSanguigno = gruppoSanguigno;
     }
 
-    public GuestForm() {
-
-    }
-
     @Override
     public String toString() {
         return "GuestForm{" +

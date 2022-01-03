@@ -13,8 +13,6 @@
 <z:layout pageTitle="dashboardOperatore">
 
 
-
-
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -32,6 +30,15 @@
                         <div class="card-body">
                             <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Dashboard Operatore</h1>
 
+                            <c:choose>
+                                <c:when test="${success != null}">
+                                    <div class="alert alert-success" role="alert">
+                                        <h4 class="alert-heading"><i class="fas fa-calendar-check"
+                                                                     style="font-size: 36px"> </i> &nbsp <b>Complimenti!</b>  ${success}
+                                        </h4>
+                                    </div>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                     <!-- Sezione Crea seduta -->

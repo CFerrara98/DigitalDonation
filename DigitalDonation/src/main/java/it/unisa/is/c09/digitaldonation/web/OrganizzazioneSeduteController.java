@@ -6,7 +6,10 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.*;
+import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestForm;
+import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestFormValidate;
+import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
+import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaFormValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -43,6 +46,27 @@ public class OrganizzazioneSeduteController {
     SedutaFormValidate sedutaFormValidate;
 
 
+
+
+
+    @RequestMapping(value = "/goIndisponibilita", method = RequestMethod.GET)
+    public String indisponibilitaByOperatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        String codiceFiscale = request.getParameter("codiceFiscale");
+        try{
+            if(utente == null) new IllegalArgumentException();
+            if(codiceFiscale.matches(Utente.CF_REGEX));
+        }catch (Exception e){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            return "redirect:/error";
+        }
+        //TODO Vanno fatti prima i form
+        //Aggiungi al model il form indisponibilità
+        //redirect su servlet /indisponibilita
+        return "redirect:/error";
+    }
+
+
     /**
      * Metodo che permette al donatore di poter inviare un feedback.
      *
@@ -51,6 +75,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
+    /*
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
     public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model,
                                    @RequestParam(name= "feedbackSeduta") String feedbackSeduta, @RequestParam(name="idSeduta") Long idSeduta) {
@@ -176,6 +201,7 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/goElencoPartecipanti", method = RequestMethod.GET)
     public String elencoPartecipanti(Model model, HttpServletRequest request) {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
+        String successo = request.getParameter("successo");
             model.addAttribute("idSeduta" , idSeduta);
         try {
             ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
@@ -194,6 +220,7 @@ public class OrganizzazioneSeduteController {
             } else {
                 partecipanti.add(0, null);
             }
+            model.addAttribute("success", successo);
             model.addAttribute("listaPartecipanti", partecipanti);
         } catch (CannotLoadDataRepositoryException e) {
             e.printStackTrace();
@@ -220,6 +247,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
+    /*
     @RequestMapping(value = "/goPartecipaSeduta", method = RequestMethod.GET)
     public String partecipaSeduta(HttpServletRequest request, Model model) {
         Long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
@@ -262,6 +290,7 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(HttpServletRequest request, @ModelAttribute("guestForm")
         GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         model.addAttribute("idSeduta", idSeduta);
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
@@ -301,7 +330,7 @@ public class OrganizzazioneSeduteController {
             guest.setGruppoSanguigno(guestForm.getGruppoSanguigno());
             try {
                 organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
-                return  "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta;
+                return  "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo=" + "Utente guest inserito correttamente";
             } catch (CannotSaveDataRepositoryException e) {
                 redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
                 return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
@@ -322,55 +351,38 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
-    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm
-            sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
 
         try {
-
             sedutaFormValidate.validate(sedutaForm, result);
-
             if (result.hasErrors()) {
                 // se ci sono errori il metodo controller setta tutti i parametri
                 redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);
                 for (ObjectError x : result.getGlobalErrors()) {
                     redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
-                    logger.info("Prova" + x.getCode().toString());
                 }
                 return "redirect:/goSchedulazioneSeduta";
             }
-
-            if (utente instanceof Operatore) {
-                DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
-
-                Operatore operatore = (Operatore) utente;
-                SedeLocale sedeLocale = operatore.getSedeLocale();
-                Seduta seduta = new Seduta();
-                seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
-                seduta.setDataSeduta(sedutaForm.getDataSeduta());
-                seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
-                seduta.setNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
-                seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
-                seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
-                seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
-                String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
-                seduta.setLuogo(luogo);
-                try {
-                    organizzazioneSeduteService.schedulazioneSeduta(seduta);
-                    return "GUIGestioneUtente/dashboardOperatore";
-                } catch (CannotSaveDataRepositoryException e) {
-                    //TODO SET ERROR CODE PROBLEMI COL SERVER
-                    return "redirect:/error";
-                }
-            } else
-                //TODO SET ERROR CODE NOT AUTORIZATE http status
-                return "redirect:/error";
-
-        } catch (Exception e) {
-            //TODO da controllare
-            return "redirect:/error";
+            DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+            Operatore operatore = (Operatore) utente;
+            SedeLocale sedeLocale = operatore.getSedeLocale();
+            Seduta seduta = new Seduta();
+            seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
+            seduta.setDataSeduta(sedutaForm.getDataSeduta());
+            seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
+            seduta.setNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
+            seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
+            seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
+            seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
+            String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
+            seduta.setLuogo(luogo);
+            organizzazioneSeduteService.schedulazioneSeduta(seduta);
+        } catch (CannotSaveDataRepositoryException e) {
+            redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
         }
+        model.addAttribute("success", "Seduta schedulata con successo!");
+        return "GUIGestioneUtente/dashboardOperatore";
     }
-
 
 }

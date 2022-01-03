@@ -49,7 +49,7 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaDataSeduta(sedutaForm.getDataSeduta());
         } catch (SedutaFormException e1) {
             errors.reject("DataError", e1.getMessage());
-            Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
+            Calendar myCalendar = new GregorianCalendar(2022, 1, 1);
             sedutaForm.setDataSeduta(myCalendar.getTime());
 
         }
@@ -103,7 +103,7 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaDataInizioPrenotazioni(sedutaForm);
         } catch (SedutaFormException e1) {
             errors.reject("DataInizioError", e1.getMessage());
-            Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
+            Calendar myCalendar = new GregorianCalendar(2022, 1, 1);
             sedutaForm.setDataInizioPrenotazione(myCalendar.getTime());
         }
         //Validazione del campo dataFinePrenotazione
@@ -111,7 +111,7 @@ public class SedutaFormValidate implements Validator {
             organizzazioneSeduteService.validaDataFinePrenotazioni(sedutaForm);
         } catch (SedutaFormException e1) {
             errors.reject("DataFineError", e1.getMessage());
-            Calendar myCalendar = new GregorianCalendar(1939, 9, 1);
+            Calendar myCalendar = new GregorianCalendar(2022, 1, 1);
             sedutaForm.setDataFinePrenotazione(myCalendar.getTime());
         }
       return;
