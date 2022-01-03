@@ -61,10 +61,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         }
     }
     /**
-     * Questo metodo permette di recuperare i dettagli della seduta
+     * Questo metodo permette di recuperare i donatori appartenenti alla seduta partendo dall'id
      *
      * @param idSeduta L'id della seduta che si vuole monitorare
-     * @return Una seduta
+     * @return Una lista di Utenti che appartengon a quella seduta
      */
     @Override
     public ArrayList<Object> monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException {
