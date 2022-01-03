@@ -65,8 +65,7 @@
                                                     <h3 class="small font-weight-bold"> Data:<c:out
                                                             value="${listaSedutePrenotabili.get(i).dataSeduta}"></c:out></h3>
                                                 <td scope="col"><span class=" float-right">
-                                                <a class="btn btn-primary botton-sm large"
-                                                   href="./goPartecipaSeduta" role="button">Partecipa</a>
+                                                <a class="btn btn-primary botton-sm large" href="/goPartecipaSeduta?idSeduta=<c:out value="${listaSedutePrenotabili.get(i).idSeduta}"></c:out>" role="button">Partecipa</a>
                                              </span>
                                                 </td>
                                             </tr>

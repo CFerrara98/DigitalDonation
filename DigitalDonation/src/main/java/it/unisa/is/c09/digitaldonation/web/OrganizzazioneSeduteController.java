@@ -138,9 +138,20 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
     @RequestMapping(value = "/goSeduteDisponibili", method = RequestMethod.GET)
-    public String seduteDisponibili(Model model) {
+    public String seduteDisponibili(HttpServletRequest request,Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente instanceof Donatore){
+            try{
+                List<Seduta> lista = organizzazioneSeduteService.visualizzaElencoSedute();
+                model.addAttribute("listaSedutePrenotabili", lista);
+            } catch (CannotLoadDataRepositoryException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return "redirect:/";
+            }
         return "GUIOrganizzazioneSedute/seduteDisponibili";
-    }
+        }
 
     /**
      * Metodo che permette al donatore di poter visualizzare una seduta.
@@ -175,8 +186,6 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/goElencoPartecipanti", method = RequestMethod.GET)
     public String elencoPartecipanti(Model model, HttpServletRequest request) {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
-            String donatore = "Donatore";
-            model.addAttribute("Donatore", donatore);
             model.addAttribute("idSeduta" , idSeduta);
         try {
             ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
@@ -242,7 +251,16 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
     @RequestMapping(value = "/goPartecipaSeduta", method = RequestMethod.GET)
-    public String partecipaSeduta(Model model) {
+    public String partecipaSeduta(HttpServletRequest request,Model model) {
+        long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
+        model.addAttribute("idSeduta" , idSeduta);
+        try {
+            Seduta seduta = organizzazioneSeduteService.visualizzaSeduta(idSeduta);
+            model.addAttribute("seduta", seduta);
+
+        } catch (CannotLoadDataRepositoryException e) {
+            e.printStackTrace();
+        }
         return "GUIOrganizzazioneSedute/partecipaSeduta";
     }
 

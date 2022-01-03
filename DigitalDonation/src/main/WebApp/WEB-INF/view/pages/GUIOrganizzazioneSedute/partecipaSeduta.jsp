@@ -55,8 +55,8 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    <td>gg/mm/aaaa</td>
-                                                    <td>Via Garibaldi, 44 Salerno (SA)</td>
+                                                    <td><c:out value="${seduta.dataSeduta}"></c:out></td>
+                                                    <td><c:out value="${seduta.luogo}"></c:out></td>
                                                 </tr>
                                                 <tr>
                                                 </tbody>
@@ -64,26 +64,21 @@
                                         </div>
                                     </div>
                                     <h1>&nbsp;</h1>
+
                                     <!-- Checkbox -->
-
-
-
-                                     <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
-                                    <form:form action="./schedulazioneSeduta" method="get"
-                                               modelAttribute="sedutaForm" cssClass="user"
+                                        <%--@elvariable id="feedbackForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.FeedbackForm"--%>
+                                    <form:form action="./feedback" method="get"
+                                               modelAttribute="feedbackForm" cssClass="user"
                                                enctype="application/x-www-form-urlencoded">
 
-
-                                        <form:input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                                        <label class="form-check-label"><h6 class=" mb-4" style="text-align: left">
-                                            Se vuole partecipare alla seduta spunti la casella e prema il tasto conferma.
-                                            <br>
-                                            Se non vuole partecipare alla seduta lasci la casella bianca e prema il
-                                            tasto conferma.
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label"> <h6 class=" mb-4" style="text-align: left">Se vuole partecipare alla seduta spunti la casella e prema il tasto conferma. <br>
+                                            Se non vuole partecipare alla seduta lasci la casella bianca e prema il tasto conferma.
                                         </h6>
                                         </label>
-                                    </form:form>
-                                    <h1>&nbsp;</h1>
+                                    </div></form:form>
+
                                     <input type="submit" value="Conferma" class="btn btn-primary">
                                 </div>
 

@@ -81,7 +81,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         lista.addAll(seduta.getListaDonatore());
         lista.addAll(seduta.getListaGuest());
         return lista;
-
     }
 
     /**
