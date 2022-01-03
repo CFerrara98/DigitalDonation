@@ -1,9 +1,15 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: angel
+  Date: 03/01/22
+  Time: 16:00
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<z:layout pageTitle="dashboardDonatore">
+<z:layout pageTitle="autodichiarazioneIndisponibilita">
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -12,47 +18,6 @@
 
         <!-- Main Content -->
         <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-
-                <!-- Logo -->
-                <a class="navbar-brand" href="#"><img class="rounded-circle" src="img/logo.png" alt="..." style="width:50px"></a>
-
-                <div>
-                    <a>
-                        <h1 class="h3 mb-0 text-gray-800 scrittalogo">DIGITAL DONATION</h1>
-                    </a>
-                </div>
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Ciao, %Utente% </span>
-                            <img class="img-profile rounded-circle icone" src="img/undraw_profile.svg">
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Dashboard
-                            </a>
-                            <div class="dropdown-divider"></div>
-
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
-                            </a>
-                        </div>
-                    </li>
-
-                </ul>
-            </nav>
-            <!-- End of Topbar -->
-
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -80,18 +45,18 @@
                                         <div class="text-center">
                                             <h3 class="h4 text-gray-900 mb-4">Compila il form per l'autodichiarazione d'indisponibilità</h3>
                                         </div>
-
+                                            <%--@elvariable id="autodichiarazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
                                         <form:form action="./autodichiarazioneIndisponibilita" method="post" modelAttribute="autodichiarazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <p style="color:#4e73df;">Data prossima disponibilità: </p>
                                                 <c:choose>
-                                                    <c:when test="${DataIndisponibilitaError == null}">
-                                                        <form:input type="date" class="form-control form-control-user" id="dataIndisponibilita" placeholder="Data indisponibilità:" path="dataIndisponibilita"/>
+                                                    <c:when test="${DataDisponibilitaError == null}">
+                                                        <form:input type="date" class="form-control form-control-user" id="dataDisponibilita" placeholder="Data prossima disponibilità:" path="dataProssimaDisponibilita"/>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <form:input type="date" class="form-control form-control-user is-invalid" id="dataIndisponibilita" placeholder="Data indisponibilità:" path="dataIndisponibilita"/>
-                                                        <span class="myError">${DataIndisponibilitaError}</span>
+                                                        <form:input type="date" class="form-control form-control-user is-invalid" id="dataDisponibilita" placeholder="Data prossima disponibilità:" path="dataProssimaDisponibilita"/>
+                                                        <span class="myError">${DataDisponibilitaError}</span>
                                                     </c:otherwise>
                                                 </c:choose>
 
@@ -100,10 +65,10 @@
                                                 <p style="color:#4e73df;">Motivazione di indisponibilità: </p>
                                                 <c:choose>
                                                     <c:when test="${MotivazioneError == null}">
-                                                        <form:textarea class="textarea form-control" id="exampleMotivazione" placeholder="es. Abuso di sostanze stupefacenti" rows="4" path="motivazione"/>
+                                                        <form:textarea class="textarea form-control" id="exampleMotivazione" placeholder="es. Abuso di sostanze stupefacenti" rows="4" path="motivazioni"/>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <form:textarea class="textarea form-control" id="exampleMotivazione" placeholder="es. Abuso di sostanze stupefacenti" rows="4" path="motivazione"/>
+                                                        <form:textarea class="textarea form-control" id="exampleMotivazione" placeholder="es. Abuso di sostanze stupefacenti" rows="4" path="motivazioni"/>
                                                         <span class="myError">${MotivazioneError}</span>
                                                     </c:otherwise>
                                                 </c:choose>
@@ -111,11 +76,9 @@
                                             </div>
                                         <form class="user">
                                             <br>
-
                                             <input type="submit" value="Conferma" class="btn btn-primary btn-user btn-block">
-
                                         </form>
-
+                                            </form:form>
                                     </div>
                                 </div>
                             </div>
@@ -141,6 +104,4 @@
 
     </div>
     <!-- End of Page Wrapper -->
-
-</html>
 </z:layout>
