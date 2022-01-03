@@ -13,7 +13,7 @@ import java.util.List;
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella un donatore.
  */
-@Data
+// Rimosso @Data per problemi con il toString
 @Entity
 @Table(name = "donatore")
 @EqualsAndHashCode(callSuper = true)

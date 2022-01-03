@@ -59,25 +59,26 @@
 
                                 <!-- Bottom indisponibilità seduta -->
                                 <span class="float-left col-xl-1 col-md-6 mb-2">
-                                    <a href="./inserimentoGuest" role="button"> <i class="fas fa-plus icone"></i> </a>
+                                    <a href="./goInserimentoUtenteGuest" role="button"> <i class="fas fa-plus icone"></i> </a>
 
                                 </span>
                                 <h2>
-                                    <a href="./inserimentoGuest" role="button"> Inserimento utente Guest </a>
+                                    <a href="./goInserimentoUtenteGuest"> Inserimento Utente Guest</a>
                                 </h2>
 
                             </div>
                         </div>
 
-                        <c:forEach begin="0" end="${listaPartecipante.size()-1}" step="1"
+                        <c:forEach begin="0" end="${listaUtenti.size()-1}" step="1"
                                    var="i">
+
 
                             <!-- pRTECIPANTE -->
                             <div class="card shadow mb-4">
                                 <div class=" m-0 card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary h6">
-                                        <c:out value="${listaPartecipante.get(i).nome}"></c:out>
-                                        <c:out value="${listaPartecipante.get(i).cognome}"></c:out></h6>
+                                        <c:out value="${listaUtenti.get(i).nome}"></c:out>
+                                        <c:out value="${listaUtenti.get(i).cognome}"></c:out></h6>
                                 </div>
                                 <div class="card-body">
                                     <!-- tabella -->
@@ -92,13 +93,23 @@
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <th>
-                                                    <h4 class="small font-weight-bold ">Telefono: <c:out
-                                                            value="${listaPartecipante.get(i).telefono}"></c:out></h4>
-                                                    <h4 class="small font-weight-bold ">Codice Fiscale<c:out
-                                                            value="${listaPartecipante.get(i).CF}"></c:out></h4>
-                                                    <h4 class="small font-weight-bold ">Gruppo sanguigno:<c:out
-                                                            value="${listaPartecipante.get(i).gruppoSanguigno}"></c:out></h4>
+                                                <th width="1000">
+                                                    <c:choose>
+                                                        <c:when test="${listaPartecipanti.get(i)}">
+                                                        <h4 class="small font-weight-bold ">Codice Fiscale Utente:  <c:out
+                                                                value="${listaUtenti.get(i).codiceFiscale}"></c:out></h4>
+                                                        <h4 class="small font-weight-bold ">Email:  <c:out
+                                                                value="${listaUtenti.get(i).email}"></c:out></h4>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <h4 class="small font-weight-bold ">Telefono: <c:out
+                                                                    value="${listaUtenti.get(i).telefono}"></c:out></h4>
+                                                            <h4 class="small font-weight-bold ">Codice Fiscale Guest:  <c:out
+                                                                    value="${listaUtenti.get(i).codiceFiscaleGuest}"></c:out></h4>
+                                                            <h4 class="small font-weight-bold ">Gruppo sanguigno:  <c:out
+                                                                    value="${listaUtenti.get(i).gruppoSanguigno}"></c:out></h4>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </th>
                                                 <!-- Bottom indisponibilità seduta -->
                                                 <th scope="row">

@@ -176,7 +176,31 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione alla pagina.
      */
     @RequestMapping(value = "/goElencoPartecipanti", method = RequestMethod.GET)
-    public String elencoPartecipanti(Model model) {
+    public String elencoPartecipanti(Model model, HttpServletRequest request) {
+        long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
+            String donatore = "Donatore";
+            model.addAttribute("Donatore", donatore);
+        try {
+            ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
+            model.addAttribute("listaUtenti", list);
+
+            //Array list per le instanza della lista 1/true = Donatore 0/false= Guest
+            ArrayList<Boolean> Partecipanti = new ArrayList<>();
+            for(Object o: list)
+            {
+                if(o instanceof Donatore)
+                {
+                    Partecipanti.add(true);
+                }
+                else
+                {
+                    Partecipanti.add(false);
+                }
+            }
+            model.addAttribute("listaPartecipanti", Partecipanti);
+        } catch (CannotLoadDataRepositoryException e) {
+            e.printStackTrace();
+        }
 
         return "GUIOrganizzazioneSedute/elencoPartecipanti";
     }

@@ -81,7 +81,7 @@
                                                 <td scope="row">
                                                     <!-- Bottom Elenco partecipanti -->
                                                     <span class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/elencoPartecipanti?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
+                            <a href="/goElencoPartecipanti?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
                                role="button">
                                 <i class="fas fa-user icone"></i>
                             </a>

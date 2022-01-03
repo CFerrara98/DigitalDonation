@@ -15,7 +15,7 @@ import java.util.List;
  * Classe che modella una seduta di donazione.
  */
 
-@Data
+// romosso @Data per problemi con il toString
 @Entity
 @Table(name = "seduta")
 public class Seduta implements Serializable {
