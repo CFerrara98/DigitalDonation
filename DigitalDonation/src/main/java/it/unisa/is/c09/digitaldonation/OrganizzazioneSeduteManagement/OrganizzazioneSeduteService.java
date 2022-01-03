@@ -103,7 +103,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         }
 
         if (sedutaRepository.existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(idSeduta, guest.getcodiceFiscaleGuest())) {
-            throw new CannotSaveDataRepositoryException("SedutaError", "il guest è gia presente nella seduta");
+            throw new CannotSaveDataRepositoryException("SedutaError", "Il guest è gia presente nella seduta");
         }
         if (guest.getPatologie()=="") guest.setPatologie("Nessuna");
         Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);

@@ -318,7 +318,7 @@ public class OrganizzazioneSeduteController {
             for (ObjectError x : result.getGlobalErrors()) {
                 redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
             }
-            return "redirect:/goInserimentoUtenteGuest";
+            return "redirect:/goInserimentoUtenteGuest?idSeduta=" + idSeduta ;
         }
         if (utente instanceof Operatore) {
             Guest guest = new Guest();
@@ -333,7 +333,7 @@ public class OrganizzazioneSeduteController {
                 return  "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo=" + "Utente guest inserito correttamente";
             } catch (CannotSaveDataRepositoryException e) {
                 redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
-                return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
+                return "redirect:/goInserimentoUtenteGuest?idSeduta=" + idSeduta;
             }
         } else
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
