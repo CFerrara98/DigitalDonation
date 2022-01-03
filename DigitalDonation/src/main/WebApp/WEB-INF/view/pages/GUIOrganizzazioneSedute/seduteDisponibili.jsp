@@ -62,8 +62,14 @@
                                             <tr>
                                                 <td scope="col"><h3 class="small font-weight-bold"> Luogo:<c:out
                                                         value="${listaSedutePrenotabili.get(i).luogo}"></c:out></h3>
-                                                    <h3 class="small font-weight-bold"> Data:<c:out
-                                                            value="${listaSedutePrenotabili.get(i).dataSeduta}"></c:out></h3>
+                                                    <h3 class="small font-weight-bold"> Data: <c:out
+                                                            value="${listaSedutePrenotabili.get(i).dataSeduta.date}"></c:out>
+                                                        /
+                                                        <c:out
+                                                                value="${listaSedutePrenotabili.get(i).dataSeduta.month + 1}"></c:out>
+                                                        /
+                                                        <c:out
+                                                                value="${listaSedutePrenotabili.get(i).dataSeduta.year + 1900}"></c:out></h3>
                                                 <td scope="col"><span class=" float-right">
                                                 <a class="btn btn-primary botton-sm large" href="/goPartecipaSeduta?idSeduta=<c:out value="${listaSedutePrenotabili.get(i).idSeduta}"></c:out>" role="button">Partecipa</a>
                                              </span>

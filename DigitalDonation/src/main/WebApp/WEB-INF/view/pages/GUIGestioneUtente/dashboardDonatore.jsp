@@ -94,29 +94,47 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Requisiti per donare</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                             src="img/Blood donation.png" alt="...">
+                                    <div class="text-center" style="background: #dcebf4">
+                                        <img class="img-fluid px-sm-4 mt-3 mb-4"
+                                             src="../../resources/img/requisiti.svg" alt="..." width="1000" height="600">
                                     </div>
-                                    <p>Non è sempre possibile donare il sangue o comunque non è possibile per tutti:
-                                        oltre ai requisiti per donare il sangue, vi sono infatti anche alcuni criteri di
-                                        sospensione che impediscono il prelievo per un certo periodo di tempo. Andiamo a
-                                        scoprirli insieme:
+                                    <br>
+                                    <h4 style="text-align: center"><b>Chi non può donare il sangue? </b></h4>
+                                    <h5><p> Criteri di esclusione temporanea del donatore</p></h5>
+                                    <p>
 
-                                        Parto – sospensione per 6 mesi
-                                        Interruzione di gravidanza – 6 mesi
-                                        Ciclo mestruale in atto – da valutare
-                                        Allergie in atto
-                                        Ulcera gastrica e/o duodenale in atto
-                                        Alcune malattie infettive (da valutare alla guarigione)
-                                        Tatuaggi – 4 mesi
-                                        Agopuntura – 4 mesi (Se eseguiti con strumenti monouso)
-                                        Foratura orecchie*/Piercing – 4 mesi
-                                        Alcune tipologie di vaccinazioni
-                                        Trasfusione di emocomponenti o emoderivati (immunoglobuline) – 4 mesi
-                                        Assunzione di alcune tipologie di farmaci
-                                        Rapporti sessuali a rischio – 4 mesi
-                                        Viaggi (da valutare)</p>
+                                    <ul>
+                                        <li>Parto – sospensione per 6 mesi</li>
+                                        <li>Ciclo mestruale in atto – da valutare</li>
+                                        <li>Allergie in atto</li>
+                                        <li>Ulcera gastrica e/o duodenale in atto</li>
+                                        <li> Alcune malattie infettive (da valutare alla guarigione)</li>
+                                        <li> Agopuntura – 4 mesi (Se eseguiti con strumenti monouso)</li>
+                                        <li> Foratura orecchie*/Piercing – 4 mesi</li>
+                                        <li>Trasfusione di emocomponenti o emoderivati (immunoglobuline) – 4 mesi</li>
+                                        <li> Assunzione di alcune tipologie di farmaci</li>
+                                        <li> Rapporti sessuali a rischio – 4 mesi</li>
+                                        <li>  Viaggi (da valutare)</li>
+
+                                    </ul>
+                                    </p>
+
+                                    <h5><p> Criteri di esclusione permanente del donatore</p></h5>
+                                    <p>
+
+                                    <ul>
+                                        <li>Alcolismo cronico</li>
+                                        <li>Assunzione di sostanze stupefacenti, steroidi o ormoni a scopo di culturismo fisico</li>
+                                        <li>Epatite B, C o ad eziologia indeterminata</li>
+                                        <li>Infezione da HIV 1-2, da HTLV1-2</li>
+                                        <li>Sifilide</li>
+                                        <li>Trapianto cornea/dura madre</li>
+                                        <li>Diabete insulino dipendente</li>
+                                        <li>Ipertensione grave o in trattamento con B-bloccanti</li>
+                                        <li>Nefropatie croniche</li>
+                                        <li>Neoplasie maligne</li>
+                                    </ul>
+                                    </p>
 
                                 </div>
                             </div>
