@@ -75,36 +75,33 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
-    public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
-        Boolean feedback;
-        Long idSeduta;
-        try {
-            feedback = Boolean.parseBoolean((String) request.getParameter("feedback"));
-            idSeduta = Long.valueOf(((String) request.getParameter("" +
-                    "")));
-        } catch (Exception e) {
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
-            return "redirect:/error";
-        }
-        Donatore utente = (Donatore) request.getSession().getAttribute("utente");
-        logger.info("Inserimento feedback. Id seduta: " + idSeduta +
-                " feedback: " + feedback + " utente: " + utente.toString());
-        if (utente != null && utente instanceof Donatore && feedback == true) {
+    public String feedbackDonatore(HttpServletRequest request, @ModelAttribute FeedbackForm feedbackForm, RedirectAttributes redirectAttribute, Model model) {
+        if(feedbackForm.isFeedback()) {
+            Long idSeduta;
             try {
-                organizzazioneSeduteService.feedbackDonatore(utente, feedback, idSeduta);
-            } catch (CannotRelaseFeedbackException e) {
-                return "GUIGestioneUtente/dashboardDonatore";
+                idSeduta = Long.valueOf(((String) request.getParameter("" + "")));
+            } catch (Exception e) {
+                request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+                return "redirect:/error";
+            }
+            Donatore utente = (Donatore) request.getSession().getAttribute("utente");
+            if (utente != null && utente instanceof Donatore) {
+                try {
+                    organizzazioneSeduteService.feedbackDonatore(utente, true, idSeduta);
+                } catch (CannotRelaseFeedbackException e) {
+                    return "GUIGestioneUtente/dashboardDonatore";
+                }
             }
         }
-        return "GUIGestioneUtente/dashboardDonatore";
+        return "redirect:/goDashboardDonatore";
     }
 
     /**
      * Metodo che permette all'operatore di poter visualizzare una seduta con l'elenco dei partecipanti.
      *
-     * @param request           è la richiesta dalla sessione.
+     * @param request è la richiesta dalla sessione.
      * @param redirectAttribute è l'attributo di ridirezione.
-     * @param model             è l'oggetto Model.
+     * @param model è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/monitoraggioSeduta", method = RequestMethod.GET)
@@ -255,9 +252,12 @@ public class OrganizzazioneSeduteController {
     public String partecipaSeduta(HttpServletRequest request,Model model) {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         model.addAttribute("idSeduta" , idSeduta);
+
         try {
             Seduta seduta = organizzazioneSeduteService.visualizzaSeduta(idSeduta);
             model.addAttribute("seduta", seduta);
+            FeedbackForm feedbackForm = new FeedbackForm();
+            model.addAttribute("feedbackForm", feedbackForm);
 
         } catch (CannotLoadDataRepositoryException e) {
             e.printStackTrace();
@@ -290,8 +290,7 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(HttpServletRequest request, @ModelAttribute("guestForm")
-            GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model) {
-
+        GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model) {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         model.addAttribute("idSeduta", idSeduta);
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
@@ -382,7 +381,7 @@ public class OrganizzazioneSeduteController {
         } catch (CannotSaveDataRepositoryException e) {
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
         }
-        model.addAttribute("Success", "Inserimento avvenuto con successo!");
+        model.addAttribute("success", "Seduta schedulata con successo!");
         return "GUIGestioneUtente/dashboardOperatore";
     }
 

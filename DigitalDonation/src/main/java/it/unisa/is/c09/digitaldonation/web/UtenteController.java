@@ -166,6 +166,8 @@ public class UtenteController {
      */
     @RequestMapping(value ="/dashboardOperatore", method = RequestMethod.GET)
     public String dashboardOperatore(HttpServletRequest request, Model model) {
+        String successo =   request.getParameter("success");
+        model.addAttribute("success", successo);
         if(request.getSession().getAttribute("utente") instanceof Operatore){
             return "GUIGestioneUtente/dashboardOperatore";
         }
