@@ -109,8 +109,7 @@ INSERT INTO `operatore` (`codice_fiscale_utente`, `sede_locale_codice_identifica
 	('CJRWOS59E43S947J', 678),
 	('CNGJWF51U60J369V', 678),
 	('AFCLCW22Z02F362J', 679),
-	('CPQHVR51M18L075S', 679),
-	'(''AFCLCW22Z02F362J'', 1);
+	('CPQHVR51M18L075S', 679);
 /*!40000 ALTER TABLE `operatore` ENABLE KEYS */;
 
 -- Dump dei dati della tabella digitaldonation.sede_locale: ~0 rows (circa)
