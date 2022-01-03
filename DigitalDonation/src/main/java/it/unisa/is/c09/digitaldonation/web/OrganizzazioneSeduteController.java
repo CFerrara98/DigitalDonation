@@ -74,8 +74,9 @@ public class OrganizzazioneSeduteController {
      * @param model             è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
+    /*
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
-    public String feedbackDonatore(HttpServletRequest request, @ModelAttribute FeedbackForm feedbackForm, RedirectAttributes redirectAttribute, Model model) {
+   public String feedbackDonatore(HttpServletRequest request, @ModelAttribute FeedbackForm feedbackForm, RedirectAttributes redirectAttribute, Model model) {
         if(feedbackForm.isFeedback()) {
             Long idSeduta;
             try {
@@ -94,7 +95,7 @@ public class OrganizzazioneSeduteController {
             }
         }
         return "redirect:/goDashboardDonatore";
-    }
+    }*/
 
     /**
      * Metodo che permette all'operatore di poter visualizzare una seduta con l'elenco dei partecipanti.
@@ -204,6 +205,7 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/goElencoPartecipanti", method = RequestMethod.GET)
     public String elencoPartecipanti(Model model, HttpServletRequest request) {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
+        String successo = request.getParameter("successo");
             model.addAttribute("idSeduta" , idSeduta);
         try {
             ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
@@ -222,6 +224,7 @@ public class OrganizzazioneSeduteController {
             } else {
                 partecipanti.add(0, null);
             }
+            model.addAttribute("success", successo);
             model.addAttribute("listaPartecipanti", partecipanti);
         } catch (CannotLoadDataRepositoryException e) {
             e.printStackTrace();
@@ -248,6 +251,7 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
+    /*
     @RequestMapping(value = "/goPartecipaSeduta", method = RequestMethod.GET)
     public String partecipaSeduta(HttpServletRequest request,Model model) {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
@@ -263,7 +267,7 @@ public class OrganizzazioneSeduteController {
             e.printStackTrace();
         }
         return "GUIOrganizzazioneSedute/partecipaSeduta";
-    }
+    }*/
 
     /**
      * Metodo che permette di andare alla pagina di schedulazione di una nuova seduta.
@@ -291,6 +295,7 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(HttpServletRequest request, @ModelAttribute("guestForm")
         GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         model.addAttribute("idSeduta", idSeduta);
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
@@ -330,7 +335,7 @@ public class OrganizzazioneSeduteController {
             guest.setGruppoSanguigno(guestForm.getGruppoSanguigno());
             try {
                 organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
-                return  "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta;
+                return  "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo=" + "Utente guest inserito correttamente";
             } catch (CannotSaveDataRepositoryException e) {
                 redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
                 return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
