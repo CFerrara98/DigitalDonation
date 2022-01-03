@@ -64,80 +64,109 @@
                                          <i class="fas fa-plus icone"></i> </a>
                                 </span>
                                 <h2>
-                                    <a href="/goInserimentoUtenteGuest?idSeduta=<c:out value="${idSeduta}"></c:out>"> Inserimento Utente Guest</a>
+                                    <a href="/goInserimentoUtenteGuest?idSeduta=<c:out value="${idSeduta}"></c:out>">
+                                        Inserimento Utente Guest</a>
                                 </h2>
 
                             </div>
                         </div>
 
-                        <c:forEach begin="0" end="${listaUtenti.size()-1}" step="1"
-                                   var="i">
+                        <c:choose>
+
+                            <c:when test="${listaPartecipanti.get(0) != null}">
+                                <c:forEach begin="0" end="${listaUtenti.size()-1}" step="1"
+                                           var="i">
 
 
-                            <!-- pRTECIPANTE -->
-                            <div class="card shadow mb-4">
-                                <div class=" m-0 card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary h6">
-                                        <c:out value="${listaUtenti.get(i).nome}"></c:out>
-                                        <c:out value="${listaUtenti.get(i).cognome}"></c:out></h6>
-                                </div>
-                                <div class="card-body">
-                                    <!-- tabella -->
-                                    <div class="table-container">
-                                        <table class="table  ">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col"></th>
-                                                <th scope="col">Indisponibilità</th>
-                                                <th scope="col">Conferma donazione</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <th width="1000">
-                                                    <c:choose>
+                                    <!-- pRTECIPANTE -->
+                                    <div class="card shadow mb-4">
+                                        <div class=" m-0 card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary h6">
+                                                <c:out value="${listaUtenti.get(i).nome}"></c:out>
+                                                <c:out value="${listaUtenti.get(i).cognome}"></c:out></h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- tabella -->
+                                            <div class="table-container">
+                                                <table class="table  ">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">
+                                                            <c:choose>
+                                                                <c:when test="${listaPartecipanti.get(i)}">
+                                                                    <div class="alert alert-primary" role="alert" style="width: 150px" align="center">
+                                                                        <i class="fas fa-angry"></i>
+                                                                        <span class="m-0 font-weight-bold text-primary h6"> Donatore </span>
+                                                                    </div>
 
-                                                        <c:when test="${listaPartecipanti.get(i)}">
-                                                            <h6> QUSTO è UN UTENTE</h6>
-                                                        <h4 class="small font-weight-bold ">Codice Fiscale Utente:  <c:out
-                                                                value="${listaUtenti.get(i).codiceFiscale}"></c:out></h4>
-                                                        <h4 class="small font-weight-bold ">Email:  <c:out
-                                                                value="${listaUtenti.get(i).email}"></c:out></h4>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <h6> QUSTO è UN GUEST</h6>
-                                                            <h4 class="small font-weight-bold ">Telefono: <c:out
-                                                                    value="${listaUtenti.get(i).telefono}"></c:out></h4>
-                                                            <h4 class="small font-weight-bold ">Codice Fiscale Guest:  <c:out
-                                                                    value="${listaUtenti.get(i).codiceFiscaleGuest}"></c:out></h4>
-                                                            <h4 class="small font-weight-bold ">Gruppo sanguigno:  <c:out
-                                                                    value="${listaUtenti.get(i).gruppoSanguigno}"></c:out></h4>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </th>
-                                                <!-- Bottom indisponibilità seduta -->
-                                                <th scope="row">
+
+                                                                 </c:when>
+                                                                <c:otherwise>
+                                                                    <div class="alert alert-dark" role="alert" style="width: 150px" align="center">
+                                                                        <i class="fab fa-alipay"></i>
+                                                                        <span class="m-0 font-weight-bold text-primary h6"> Guest </span>
+                                                                    </div>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </th>
+                                                        <th scope="col">Indisponibilità</th>
+                                                        <th scope="col">Conferma donazione</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <th width="1000">
+                                                            <c:choose>
+
+                                                                <c:when test="${listaPartecipanti.get(i)}">
+                                                                    <h4 class="small font-weight-bold ">Codice Fiscale
+                                                                        Utente: <c:out
+                                                                                value="${listaUtenti.get(i).codiceFiscale}"></c:out></h4>
+                                                                    <h4 class="small font-weight-bold ">Email: <c:out
+                                                                            value="${listaUtenti.get(i).email}"></c:out></h4>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <h4 class="small font-weight-bold ">Telefono: <c:out
+                                                                            value="${listaUtenti.get(i).telefono}"></c:out></h4>
+                                                                    <h4 class="small font-weight-bold ">Codice Fiscale
+                                                                        Guest: <c:out
+                                                                                value="${listaUtenti.get(i).codiceFiscaleGuest}"></c:out></h4>
+                                                                    <h4 class="small font-weight-bold ">Gruppo
+                                                                        sanguigno:
+                                                                        <c:out
+                                                                                value="${listaUtenti.get(i).gruppoSanguigno}"></c:out></h4>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </th>
+                                                        <!-- Bottom indisponibilità seduta -->
+                                                        <th scope="row">
                                                         <span class="float-center col-xl-1 col-md-6 mb-2">
                                                         <a href=".html" role="button"> <i
                                                                 class="far fa-times-circle icone"></i></a>
                                                     </span></th>
-                                                <!-- Bottom conferma donazione partecipanti -->
-                                                <td>
+                                                        <!-- Bottom conferma donazione partecipanti -->
+                                                        <td>
                                                         <span class="float-center col-xl-1 col-md-6 mb-2">
                                                                 <a href=".html" role="button">
                                                                     <i class="far fa-check-circle icone"></i>
                                                                 </a>
                                                         </span>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                        </c:forEach>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
 
+                                <h6 align="center"> Nessun partecipante all'interno della seduta </h6>
+
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <!-- fine elenco monitoraggio -->
                 </div>

@@ -66,7 +66,7 @@
                                             <form:form action="./inserimentoGuest" method="post"
                                                        modelAttribute="guestForm" cssClass="user"
                                                        enctype="application/x-www-form-urlencoded">
-                                            
+                                                <input type="hidden" name="idSeduta" value=${idSeduta} />
                                             <div class="form-group">
                                                     <p style="color:#4e73df;">Inserisci il nome </p>
                                                     <c:choose>

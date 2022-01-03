@@ -44,7 +44,6 @@ public class OrganizzazioneSeduteController {
     SedutaFormValidate sedutaFormValidate;
 
 
-
     /**
      * Metodo che permette al donatore di poter inviare un feedback.
      *
@@ -173,7 +172,7 @@ public class OrganizzazioneSeduteController {
             }
             return "GUIOrganizzazioneSedute/partecipaSeduta";
         } else {
-            return "redirect:/\"";
+            return "redirect:/";
         }
     }
 
@@ -190,21 +189,21 @@ public class OrganizzazioneSeduteController {
         try {
             ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
             model.addAttribute("listaUtenti", list);
-
             //Array list per le instanza della lista 1/true = Donatore 0/false= Guest
-            ArrayList<Boolean> Partecipanti = new ArrayList<>();
-            for(Object o: list)
-            {
-                if(o instanceof Donatore)
-                {
-                    Partecipanti.add(true);
+            ArrayList<Boolean> partecipanti = new ArrayList<>();
+            if (list.size() > 0) {
+
+                for (Object o : list) {
+                    if (o instanceof Donatore) {
+                        partecipanti.add(true);
+                    } else {
+                        partecipanti.add(false);
+                    }
                 }
-                else
-                {
-                    Partecipanti.add(false);
-                }
+            } else {
+                partecipanti.add(0, null);
             }
-            model.addAttribute("listaPartecipanti", Partecipanti);
+            model.addAttribute("listaPartecipanti", partecipanti);
         } catch (CannotLoadDataRepositoryException e) {
             e.printStackTrace();
         }
@@ -212,26 +211,6 @@ public class OrganizzazioneSeduteController {
         return "GUIOrganizzazioneSedute/elencoPartecipanti";
     }
 
-    /**
-     * Metodo che permette di andare alla pagina di inserimento utente guest.
-     *
-     * @param model è l'oggetto model.
-     * @return String ridirezione alla pagina delle sedute disponibile.
-     */
-    @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
-    public String inserimentoUtenteGuest(HttpServletRequest request,@ModelAttribute("guestForm")
-            GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model){
-        model.addAttribute("guestForm", new GuestForm());
-        long idSeduta;
-        try{
-            idSeduta = Long.parseLong(request.getParameter("idSeduta"));
-        }catch (NumberFormatException e){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.NOT_FOUND);
-            return "redirect:/error";
-        }
-        request.getSession().setAttribute("idSeduta",idSeduta);
-        return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
-    }
 
     /**
      * Metodo che permette di andare alla pagina dell'elenco delle sedute.
@@ -281,7 +260,20 @@ public class OrganizzazioneSeduteController {
     }
 
 
+    /**
+     * Metodo che permette di andare alla pagina di inserimento utente guest.
+     *
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
+    @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
+    public String inserimentoUtenteGuest(HttpServletRequest request, @ModelAttribute("guestForm")
+            GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model) {
 
+        long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
+        model.addAttribute("idSeduta", idSeduta);
+        return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
+    }
 
 
     /**
@@ -298,12 +290,7 @@ public class OrganizzazioneSeduteController {
     public String inserimentoGuest(HttpServletRequest request, @ModelAttribute GuestForm guestForm, BindingResult
             result, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
-        if (idSeduta == null){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.NOT_FOUND);
-            return "redirect:/error";
-        }
-
+        long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         guestFormValidate.validate(guestForm, result);
         if (result.hasErrors()) {
             redirectAttribute.addFlashAttribute("guestForm", guestForm);
@@ -322,13 +309,13 @@ public class OrganizzazioneSeduteController {
             guest.setGruppoSanguigno(guestForm.getGruppoSanguigno());
             try {
                 organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
-                return "redirect:/monitoraggioSeduta";
+                return  "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta;
             } catch (CannotSaveDataRepositoryException e) {
                 redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
                 return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
             }
         } else
-        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
         return "redirect:/error";
 
     }
