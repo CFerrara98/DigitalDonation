@@ -68,23 +68,22 @@
                                     <h1>&nbsp;</h1>
 
                                     <!-- Checkbox -->
-                                    <%--@elvariable id="feedbackForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.FeedbackForm"--%>
-                                    <form:form action="./feedback" method="get"
-                                               modelAttribute="feedbackForm" cssClass="user"
-                                               enctype="application/x-www-form-urlencoded">
-
+                                    <form action="./feedback" method="get" id="form">
+                                        <input type="hidden" name="idSeduta" value="${seduta.idSeduta}"/>
                                         <div class="form-check">
-                                            <form:input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" path="feedback"/>
-                                            <label class="form-check-label"> <h6 class="mb-4" style="text-align: left">Se vuole partecipare alla seduta spunti la casella e prema il tasto conferma. <br>
-                                                Se non vuole partecipare alla seduta lasci la casella bianca e prema il tasto conferma.
-                                            </h6>
+                                            <select name="feedbackSeduta"
+                                                         id="feedbackSeduta"
+                                                         class="form-control gruppo-sanguigno">
+                                            <option selected="true" value="positivo"> Voglio partecipare alla seduta</option>
+                                            <option value="negativo">Non voglio partecipare alla seduta </option>
+                                            </select>
+                                            <label class="form-check-label"> <h6 class="mb-4" style="text-align: left">Dichiarando di voler partecipare alla seduta verrai registrato
+                                                nella lista dei donatori della relativa sede locale. </h6>
                                             </label>
                                         </div>
-                                    </form:form>
-
-                                    <input type="submit" value="Conferma" class="btn btn-primary">
+                                        <input type="submit" value="Conferma" class="btn btn-primary">
+                                    </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -110,6 +109,5 @@
 
     </div>
     <!-- End of Page Wrapper -->
-
 
 </z:layout>

@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface OrganizzazioneSeduteServiceInterface {
 
-    public void feedbackDonatore(Donatore donatore, boolean feedback,Long idSeduta) throws CannotRelaseFeedbackException;
+    public void feedbackDonatore(Donatore donatore, Long idSeduta) throws CannotRelaseFeedbackException;
 
     public ArrayList<Object> monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException;
 

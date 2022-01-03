@@ -10,6 +10,7 @@ import it.unisa.is.c09.digitaldonation.Model.Repository.GuestRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
 
 import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
+import it.unisa.is.c09.digitaldonation.web.OrganizzazioneSeduteController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,12 +20,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Guest + Seduta
  */
 @Service
 public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceInterface {
+
+    private static Logger logger = Logger.getLogger(String.valueOf(OrganizzazioneSeduteService.class));
 
     @Autowired
     private DonatoreRepository donatoreRepository;
@@ -39,27 +43,24 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * Questo metodo permette al donatore di comunicare la partecipazione o meno alla seduta di donazione.
      *
      * @param donatore Il donatore
-     * @param feedback Il feedback del donatore
      * @param idSeduta La seudta alla quale
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void feedbackDonatore(Donatore donatore, boolean feedback, Long idSeduta) throws CannotRelaseFeedbackException {
+    public void feedbackDonatore(Donatore donatore, Long idSeduta) throws CannotRelaseFeedbackException {
         if (donatore.getCodiceFiscale() == null) {
             throw new CannotRelaseFeedbackException("feedbackError", "Il campo id non può essere null.");
         }
-        if (feedback) {
-            //Feedback positivo
-            Seduta seduta;
-            seduta = sedutaRepository.findByIdSeduta(idSeduta);
-            if(seduta == null)
-            {
-                throw new CannotRelaseFeedbackException("feedbackError", "Errore! Seduta non trovata.");
-            }
-            seduta.addPartecipante(donatore);
-            sedutaRepository.save(seduta);
+
+        Seduta seduta;
+        seduta = sedutaRepository.findByIdSeduta(idSeduta);
+        if(seduta == null) {
+            throw new CannotRelaseFeedbackException("feedbackError", "Errore! Seduta non trovata.");
         }
+        seduta.addPartecipante(donatore);
+        sedutaRepository.save(seduta);
     }
+
     /**
      * Questo metodo permette di recuperare i donatori appartenenti alla seduta partendo dall'id
      *
@@ -193,6 +194,21 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         return sedutaRepository.findAll();
     }
 
+    public List<Seduta> visualizzaElencoSeduteDisponibili(String codiceFiscale) throws CannotLoadDataRepositoryException {
+        List<Seduta> seduteDisponibili = sedutaRepository.findAll();
+
+        for(int i=0; i<seduteDisponibili.size(); i++){
+            Seduta s = seduteDisponibili.get(i);
+            List<Donatore> listaDonatori = s.getListaDonatore();
+            for(Donatore d: listaDonatori){
+                if(d.getCodiceFiscale().equals(codiceFiscale)){
+                    seduteDisponibili.remove(i);
+                    i--;
+                }
+            }
+        }
+        return seduteDisponibili;
+    }
 
     /**
      * Controlla che il nome di un guest sia specificato e che rispetti il formato

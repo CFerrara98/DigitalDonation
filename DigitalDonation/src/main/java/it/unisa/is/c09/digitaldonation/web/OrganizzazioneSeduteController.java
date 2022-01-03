@@ -16,16 +16,15 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Time;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -47,31 +46,26 @@ public class OrganizzazioneSeduteController {
     /**
      * Metodo che permette al donatore di poter inviare un feedback.
      *
-     * @param request           è la richiesta dalla sessione.
+     * @param request è la richiesta dalla sessione.
      * @param redirectAttribute è l'attributo di ridirezione.
-     * @param model             è l'oggetto Model.
+     * @param model è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
-    public String feedbackDonatore(HttpServletRequest request, @ModelAttribute FeedbackForm feedbackForm, RedirectAttributes redirectAttribute, Model model) {
-        if(feedbackForm.isFeedback()) {
-            Long idSeduta;
-            try {
-                idSeduta = Long.valueOf(((String) request.getParameter("" + "")));
-            } catch (Exception e) {
-                request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
-                return "redirect:/error";
-            }
+    public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model,
+                                   @RequestParam(name= "feedbackSeduta") String feedbackSeduta, @RequestParam(name="idSeduta") Long idSeduta) {
+        if(feedbackSeduta.equals("positivo")) {
             Donatore utente = (Donatore) request.getSession().getAttribute("utente");
-            if (utente != null && utente instanceof Donatore) {
+            if (utente != null) {
                 try {
-                    organizzazioneSeduteService.feedbackDonatore(utente, true, idSeduta);
+                    organizzazioneSeduteService.feedbackDonatore(utente, idSeduta);
+                    return "redirect:/dashboardDonatore";
                 } catch (CannotRelaseFeedbackException e) {
                     return "GUIGestioneUtente/dashboardDonatore";
                 }
             }
         }
-        return "redirect:/goDashboardDonatore";
+        return "redirect:/goSeduteDisponibili";
     }
 
     /**
@@ -138,7 +132,7 @@ public class OrganizzazioneSeduteController {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente instanceof Donatore){
             try{
-                List<Seduta> lista = organizzazioneSeduteService.visualizzaElencoSedute();
+                List<Seduta> lista = organizzazioneSeduteService.visualizzaElencoSeduteDisponibili(utente.getCodiceFiscale());
                 model.addAttribute("listaSedutePrenotabili", lista);
             } catch (CannotLoadDataRepositoryException e) {
                 e.printStackTrace();
@@ -227,20 +221,19 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
     @RequestMapping(value = "/goPartecipaSeduta", method = RequestMethod.GET)
-    public String partecipaSeduta(HttpServletRequest request,Model model) {
-        long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
+    public String partecipaSeduta(HttpServletRequest request, Model model) {
+        Long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         model.addAttribute("idSeduta" , idSeduta);
 
         try {
             Seduta seduta = organizzazioneSeduteService.visualizzaSeduta(idSeduta);
             model.addAttribute("seduta", seduta);
-            FeedbackForm feedbackForm = new FeedbackForm();
-            model.addAttribute("feedbackForm", feedbackForm);
+            return "GUIOrganizzazioneSedute/partecipaSeduta";
 
         } catch (CannotLoadDataRepositoryException e) {
-            e.printStackTrace();
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            return "redirect:/error";
         }
-        return "GUIOrganizzazioneSedute/partecipaSeduta";
     }
 
     /**
