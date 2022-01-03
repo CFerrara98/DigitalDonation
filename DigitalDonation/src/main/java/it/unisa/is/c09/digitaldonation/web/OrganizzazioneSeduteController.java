@@ -6,10 +6,7 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestForm;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestFormValidate;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaFormValidate;
+import it.unisa.is.c09.digitaldonation.Utils.Forms.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -188,11 +185,17 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
     @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
-    public String inserimentoUtenteGuest(Model model) {
-        //lo abbiamo messo provvisoriamente per provare il guestform nella jsp "inserimentoUtenteGuest"
-        GuestForm guestForm = new GuestForm();
-        model.addAttribute("guestForm", guestForm);
-
+    public String inserimentoUtenteGuest(HttpServletRequest request,@ModelAttribute("guestForm")
+            GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model){
+        model.addAttribute("guestForm", new GuestForm());
+        long idSeduta;
+        try{
+            idSeduta = Long.parseLong(request.getParameter("idSeduta"));
+        }catch (NumberFormatException e){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.NOT_FOUND);
+            return "redirect:/error";
+        }
+        request.getSession().setAttribute("idSeduta",idSeduta);
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
     }
 
@@ -252,15 +255,17 @@ public class OrganizzazioneSeduteController {
     public String inserimentoGuest(HttpServletRequest request, @ModelAttribute GuestForm guestForm, BindingResult
             result, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
+        if (idSeduta == null){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.NOT_FOUND);
+            return "redirect:/error";
+        }
+
         guestFormValidate.validate(guestForm, result);
-        Long idSeduta = (Long) model.getAttribute("idSeduta");
-        System.out.println(guestForm.toString());
         if (result.hasErrors()) {
-            // se ci sono errori il metodo controller setta tutti i parametri
             redirectAttribute.addFlashAttribute("guestForm", guestForm);
             for (ObjectError x : result.getGlobalErrors()) {
                 redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
-                System.out.println(x.getCode());
             }
             return "redirect:/goInserimentoUtenteGuest";
         }
@@ -276,10 +281,12 @@ public class OrganizzazioneSeduteController {
                 organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
                 return "redirect:/monitoraggioSeduta";
             } catch (CannotSaveDataRepositoryException e) {
-                return "redirect:/error";
+                redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
+                return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
             }
         } else
-            return "redirect:/error";
+        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+        return "redirect:/error";
 
     }
 

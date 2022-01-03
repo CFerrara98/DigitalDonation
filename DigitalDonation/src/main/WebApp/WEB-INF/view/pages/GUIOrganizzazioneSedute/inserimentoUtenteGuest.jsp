@@ -16,6 +16,7 @@
 
 <z:layout pageTitle="inserimento Utente Guest">
 
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -54,12 +55,18 @@
                                             <div class="text-center">
                                                 <h3 class="h4 text-gray-900 mb-4">Compila i campi per inserire un Guest</h3>
                                             </div>
+                                            <c:if test="${SedutaError!=null}">
+                                                <span class="myError">${SedutaError}</span>
+                                            </c:if>
+                                            <c:if test="${GuestError!=null}">
+                                                <span class="myError">${GuestError}</span>
+                                            </c:if>
 
                                              <%--@elvariable id="guestForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.GuestForm"--%>
                                             <form:form action="./inserimentoGuest" method="post"
                                                        modelAttribute="guestForm" cssClass="user"
                                                        enctype="application/x-www-form-urlencoded">
-
+                                            
                                             <div class="form-group">
                                                     <p style="color:#4e73df;">Inserisci il nome </p>
                                                     <c:choose>

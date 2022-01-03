@@ -95,7 +95,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     @Transactional(rollbackFor = Exception.class)
     public Guest inserimentoGuest(Long idSeduta, Guest guest) throws CannotSaveDataRepositoryException {
         if (idSeduta == null) {
-            throw new CannotSaveDataRepositoryException("sedutaError", "Il campo id della seduta non può essere null.");
+            throw new CannotSaveDataRepositoryException("SedutaError", "Il campo id della seduta non può essere null.");
         }
 
         if (guest.getcodiceFiscaleGuest() == null) {
@@ -105,7 +105,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         if (sedutaRepository.existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(idSeduta, guest.getcodiceFiscaleGuest())) {
             throw new CannotSaveDataRepositoryException("SedutaError", "il guest è gia presente nella seduta");
         }
-
+        if (guest.getPatologie()=="") guest.setPatologie("Nessuna");
         Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
         seduta.addPartecipante(guest);
         sedutaRepository.save(seduta);
