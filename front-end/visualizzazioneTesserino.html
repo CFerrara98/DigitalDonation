@@ -86,14 +86,18 @@
                     
 
                     <!-- Page Heading -->
-                    
-                    <h1>&nbsp;</h1>
-                        <h1 class=" mb-4" style="text-align: center" > Il mio Tesserino: </h1>
-                    
+                   
+                    <div class="card-body">
+                        <!-- indietro -->
+                        <a href="dashboardDonatore.html" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a> 
 
+                   
+                        <h1 class=" mb-4 " style="text-align: center" > Il mio Tesserino: </h1>
+                    </div>
                     
-                      <!-- Content Row -->
-                      <div class="row ">
+                    
+                    <!-- Content Row -->
+                    <div class="row ">
                         
                         <!-- Profilo -->
                         <div class="col-xl-6 col-lg-12">
@@ -184,24 +188,19 @@
                                         </table>
                                     </div>
 
-
-                                   
-                                   
-
-                                    
-                                    
                                 </div>
-                                </div>
-                                    <div class="mt-4 mb-4 text-center small" >
-                                        
-                                    </div>
-                                </div>
+                                <!--Fine card body -->
                             </div>
+                                <div class="mt-4 mb-4 text-center small" >
+                                        
+                                </div>
+                        </div>
+                            
                        
                         
-                       <!--Dpnazopno compiute -->
+                       <!--Donazioni compiute -->
                        <div class="col-xl-6 col-lg-12">
-                        <div class="card shadow mb-4">
+                          <div class="card shadow mb-4">
                             <!-- Card Header -->
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -210,12 +209,41 @@
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div class="mt-4 mb-4 text-center small" >
+
                                   <!-- tabella lista donazioni effettuate -->
+
+                                  <div class="table-container">
+                                    <table class="table  ">
+
+                                        <thead> 
+                                            <tr>
+                                                <th>
+                                                    <h3 align="left" class="h6 mb-2 text-gray-800" >Data  </h3>
+                                                </th>
+                                                <th>
+                                                    <h3 align="left" class="h6 mb-2 text-gray-800" >Tipo donazione  </h3>
+                                                </th>
+                                            </tr>
+                                       </thead>
+                                       <!-- ciclo di righe con tutte le donazioni effettuate dal donatore-->
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    <h3 align="left" class="h6 mb-2 text-gray-800" > %DataDonazioneeffettuata%  </h3>
+                                                </th>
+                                                <th>
+                                                    <h3 align="left" class="h6 mb-2 text-gray-800" > %TipodonazioneEffettuata%  </h3>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                  </div> 
+
                                 </div>
                             </div>
+                          </div>
                         </div>
                     </div>
-                      </div>
             
             
                     <div class="row">
