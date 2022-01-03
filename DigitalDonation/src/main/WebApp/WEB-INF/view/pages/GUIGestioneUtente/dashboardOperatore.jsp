@@ -12,7 +12,8 @@
 
 <z:layout pageTitle="dashboardOperatore">
 
-    <a th:href=@{/goInserimentoUtenteGuest(idSeduta=${1})}></a>
+
+
 
     <!-- Page Wrapper -->
     <div id="wrapper">

@@ -177,6 +177,7 @@ public class OrganizzazioneSeduteController {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
             String donatore = "Donatore";
             model.addAttribute("Donatore", donatore);
+            model.addAttribute("idSeduta" , idSeduta);
         try {
             ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
             model.addAttribute("listaUtenti", list);
@@ -331,6 +332,7 @@ public class OrganizzazioneSeduteController {
         try {
 
             sedutaFormValidate.validate(sedutaForm, result);
+
             if (result.hasErrors()) {
                 // se ci sono errori il metodo controller setta tutti i parametri
                 redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);

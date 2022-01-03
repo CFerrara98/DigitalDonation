@@ -59,11 +59,12 @@
 
                                 <!-- Bottom indisponibilità seduta -->
                                 <span class="float-left col-xl-1 col-md-6 mb-2">
-                                    <a href="./goInserimentoUtenteGuest" role="button"> <i class="fas fa-plus icone"></i> </a>
 
+                                    <a href="/goInserimentoUtenteGuest?idSeduta=<c:out value="${idSeduta}"></c:out>"
+                                         <i class="fas fa-plus icone"></i> </a>
                                 </span>
                                 <h2>
-                                    <a href="./goInserimentoUtenteGuest"> Inserimento Utente Guest</a>
+                                    <a href="/goInserimentoUtenteGuest?idSeduta=<c:out value="${idSeduta}"></c:out>"> Inserimento Utente Guest</a>
                                 </h2>
 
                             </div>
@@ -95,13 +96,16 @@
                                             <tr>
                                                 <th width="1000">
                                                     <c:choose>
+
                                                         <c:when test="${listaPartecipanti.get(i)}">
+                                                            <h6> QUSTO è UN UTENTE</h6>
                                                         <h4 class="small font-weight-bold ">Codice Fiscale Utente:  <c:out
                                                                 value="${listaUtenti.get(i).codiceFiscale}"></c:out></h4>
                                                         <h4 class="small font-weight-bold ">Email:  <c:out
                                                                 value="${listaUtenti.get(i).email}"></c:out></h4>
                                                         </c:when>
                                                         <c:otherwise>
+                                                            <h6> QUSTO è UN GUEST</h6>
                                                             <h4 class="small font-weight-bold ">Telefono: <c:out
                                                                     value="${listaUtenti.get(i).telefono}"></c:out></h4>
                                                             <h4 class="small font-weight-bold ">Codice Fiscale Guest:  <c:out
