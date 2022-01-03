@@ -79,6 +79,6 @@ public interface SedutaRepository extends JpaRepository<Seduta, Long> {
      * Metodo che che ritorna solo le sedute a cui si puo fare la prenotazione
      * @return lista sedute prenotabili ATTENZIONE le liste sono null!
      */
-    @Query(value = "SELECT idSeduta, data_fine_prenotazione, data_inizio_prenotazione, dataSeduta, luogo, numero_partecipanti, sede_locale_codice_identificativo from seduta where dataSeduta > current_date", nativeQuery = true)
+    @Query(value = "SELECT id_seduta, data_fine_prenotazione, data_inizio_prenotazione, data_seduta, luogo, numero_partecipanti, id_sede_locale from seduta where data_seduta > current_date", nativeQuery = true)
     List<Seduta> findSedutePrenotabiliNoList();
 }
