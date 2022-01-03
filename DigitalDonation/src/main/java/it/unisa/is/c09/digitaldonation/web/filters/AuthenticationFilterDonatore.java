@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet Filter, controlla le autenticazioni del donatore
  */
 
-@WebFilter(urlPatterns = {"/feedback","/dashboardDonatore"})
+@WebFilter(urlPatterns = {"/logout","/feedback","/dashboardDonatore"})
 public class AuthenticationFilterDonatore implements Filter {
 
     private Logger logger = Logger.getLogger(String.valueOf(UtenteController.class));

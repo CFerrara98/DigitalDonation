@@ -62,7 +62,7 @@ public class IndisponibilitaRepositoryIT {
         indisponibilita.setIdIndisponibilita(2l);
         //indisponibilita.setDonatore(new Donatore());
         //indisponibilita.setDataProssimaDisponibilita(new Date());
-        indisponibilita.setDonatore(null);
+        //indisponibilita.setDonatore(null);
         indisponibilita.setDataProssimaDisponibilita(null);
         indisponibilita.setMotivazioni("Febbre");
         indisponibilita.setNomeMedico("Fabio");

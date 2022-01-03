@@ -72,7 +72,7 @@ public class BuildRandEntity {
         indisponibilita.setDataProssimaDisponibilita(dataProssimaDisponibilita);
         indisponibilita.setMotivazioni(motivazioni);
         indisponibilita.setNomeMedico(nomeMedico);
-        indisponibilita.setDonatore(null);
+        //indisponibilita.setDonatore(null);
 
         return indisponibilita;
     }

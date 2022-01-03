@@ -19,7 +19,7 @@ import java.util.Collection;
  * @see Tesserino
  */
 @Repository
-public interface TesserinoRepository extends JpaRepository<Tesserino, Long>, JpaSpecificationExecutor<it.unisa.is.c09.digitaldonation.Model.Tesserino> {
+public interface TesserinoRepository extends JpaRepository<Tesserino, Long> {
 
     /**
      * Permette di ottenere un tesserino a partire dal codice id.

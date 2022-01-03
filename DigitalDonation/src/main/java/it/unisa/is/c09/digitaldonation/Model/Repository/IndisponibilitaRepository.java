@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @see Indisponibilita
  */
 @Repository
-public interface IndisponibilitaRepository extends JpaRepository<Indisponibilita, String>, JpaSpecificationExecutor<Indisponibilita> {
+public interface IndisponibilitaRepository extends JpaRepository<Indisponibilita, String> {
     /**
      * Permette di salvare o aggiornare le informazioni di un'indisponibilità a donare.
      *

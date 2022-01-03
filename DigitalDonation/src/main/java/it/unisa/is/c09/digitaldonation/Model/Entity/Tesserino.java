@@ -21,7 +21,7 @@ public class Tesserino implements Serializable {
 
     @Id
     @Column(name = "codice_fiscale_donatore", nullable = false)
-    private String codiceFiscaleDonatore;
+    private String donatoreUtenteCodiceFiscale;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idTessera;
@@ -61,7 +61,7 @@ public class Tesserino implements Serializable {
     public Tesserino(int numeroMatricola, String donatoreUtenteCodiceFiscale,
                      Date dataRilascio, String gruppoSanguigno, String rh,
                      List<Donazione> listaDonazioni, String imgSource) {
-        this.codiceFiscaleDonatore = donatoreUtenteCodiceFiscale;
+        this.donatoreUtenteCodiceFiscale = donatoreUtenteCodiceFiscale;
         this.numeroMatricola = numeroMatricola;
         this.dataRilascio = dataRilascio;
         this.gruppoSanguigno = gruppoSanguigno;
@@ -131,7 +131,7 @@ public class Tesserino implements Serializable {
      * @return donatoreUtenteCodiceFiscale e' il codice fiscale del proprietario del tesserino.
      */
     public String getDonatoreUtenteCodiceFiscale() {
-        return codiceFiscaleDonatore;
+        return donatoreUtenteCodiceFiscale;
     }
 
     /**
@@ -139,7 +139,7 @@ public class Tesserino implements Serializable {
      * @param donatoreUtenteCodiceFiscale e' il codice fiscale del proprietario del tesserino.
      */
     public void setDonatoreUtenteCodiceFiscale(String donatoreUtenteCodiceFiscale) {
-        this.codiceFiscaleDonatore = donatoreUtenteCodiceFiscale;
+        this.donatoreUtenteCodiceFiscale = donatoreUtenteCodiceFiscale;
     }
 
     /**

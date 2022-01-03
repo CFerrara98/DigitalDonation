@@ -54,7 +54,7 @@ public class LoginFormValidate implements Validator {
         }*/
 
         //Validazione del campo email
-
+    //TODO DA VALIDARE LA PASSWORD!
         try {
             utenteService.validaMail(loginForm.getEmail());
         } catch (MailNonValidaException e1) {

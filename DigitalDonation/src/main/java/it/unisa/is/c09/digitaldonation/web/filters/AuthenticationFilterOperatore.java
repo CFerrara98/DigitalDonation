@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  * Servlet Filter, controlla le autenticazioni per le operazioni dell' operatore
  */
 
-@WebFilter(urlPatterns = {"/dashboardOperatore"})
+@WebFilter(urlPatterns = {"/dashboardOperatore","/logout","/goSchedulazioneSeduta",
+                            "/inserimentoGuest","/schedulazioneSeduta"})
 public class AuthenticationFilterOperatore implements Filter {
 
     private Logger logger = Logger.getLogger(String.valueOf(AuthenticationFilterOperatore.class));

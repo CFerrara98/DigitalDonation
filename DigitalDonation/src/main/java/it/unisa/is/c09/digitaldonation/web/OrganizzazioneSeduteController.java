@@ -46,6 +46,8 @@ public class OrganizzazioneSeduteController {
     @Autowired
     SedutaFormValidate sedutaFormValidate;
 
+
+
     /**
      * Metodo che permette al donatore di poter inviare un feedback.
      *
@@ -168,6 +170,75 @@ public class OrganizzazioneSeduteController {
     }
 
     /**
+     * Metodo che permette di andare alla pagina dell'elenco dei partecipanti.
+     *
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina.
+     */
+    @RequestMapping(value = "/goElencoPartecipanti", method = RequestMethod.GET)
+    public String elencoPartecipanti(Model model) {
+
+        return "GUIOrganizzazioneSedute/elencoPartecipanti";
+    }
+
+    /**
+     * Metodo che permette di andare alla pagina di inserimento utente guest.
+     *
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
+    @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
+    public String inserimentoUtenteGuest(Model model) {
+        //lo abbiamo messo provvisoriamente per provare il guestform nella jsp "inserimentoUtenteGuest"
+        GuestForm guestForm = new GuestForm();
+        model.addAttribute("guestForm", guestForm);
+
+        return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
+    }
+
+    /**
+     * Metodo che permette di andare alla pagina dell'elenco delle sedute.
+     *
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina.
+     */
+    @RequestMapping(value = "/goMonitoraggioSedute", method = RequestMethod.GET)
+    public String monitoraggioSedute(Model model) {
+        return "GUIOrganizzazioneSedute/monitoraggioSedute";
+    }
+
+    /**
+     * Metodo che permette di andare alla pagina di feedback della seduta.
+     *
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
+    @RequestMapping(value = "/goPartecipaSeduta", method = RequestMethod.GET)
+    public String partecipaSeduta(Model model) {
+        return "GUIOrganizzazioneSedute/partecipaSeduta";
+    }
+
+    /**
+     * Metodo che permette di andare alla pagina di schedulazione di una nuova seduta.
+     *
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
+    @RequestMapping(value = "/goSchedulazioneSeduta", method = RequestMethod.GET)
+    public String schedulazioneSeduta(Model model) {
+        if (model.getAttribute("sedutaForm") != null) {
+            return "GUIOrganizzazioneSedute/schedulazioneSeduta";
+        }
+        SedutaForm sedutaForm = new SedutaForm();
+        model.addAttribute("sedutaForm", sedutaForm);
+        return "GUIOrganizzazioneSedute/schedulazioneSeduta";
+    }
+
+
+
+
+
+    /**
      * Metodo che permette all'operatore di poter inserire un utente guest all'interno di una seduta.
      *
      * @param request           è la richiesta dalla sessione.
@@ -271,68 +342,5 @@ public class OrganizzazioneSeduteController {
         }
     }
 
-    /**
-     * Metodo che permette di andare alla pagina dell'elenco dei partecipanti.
-     *
-     * @param model è l'oggetto model.
-     * @return String ridirezione alla pagina.
-     */
-    @RequestMapping(value = "/goElencoPartecipanti", method = RequestMethod.GET)
-    public String elencoPartecipanti(Model model) {
 
-        return "GUIOrganizzazioneSedute/elencoPartecipanti";
-    }
-
-    /**
-     * Metodo che permette di andare alla pagina di inserimento utente guest.
-     *
-     * @param model è l'oggetto model.
-     * @return String ridirezione alla pagina delle sedute disponibile.
-     */
-    @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
-    public String inserimentoUtenteGuest(Model model) {
-        //lo abbiamo messo provvisoriamente per provare il guestform nella jsp "inserimentoUtenteGuest"
-        GuestForm guestForm = new GuestForm();
-        model.addAttribute("guestForm", guestForm);
-
-        return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
-    }
-
-    /**
-     * Metodo che permette di andare alla pagina dell'elenco delle sedute.
-     *
-     * @param model è l'oggetto model.
-     * @return String ridirezione alla pagina.
-     */
-    @RequestMapping(value = "/goMonitoraggioSedute", method = RequestMethod.GET)
-    public String monitoraggioSedute(Model model) {
-        return "GUIOrganizzazioneSedute/monitoraggioSedute";
-    }
-
-    /**
-     * Metodo che permette di andare alla pagina di feedback della seduta.
-     *
-     * @param model è l'oggetto model.
-     * @return String ridirezione alla pagina delle sedute disponibile.
-     */
-    @RequestMapping(value = "/goPartecipaSeduta", method = RequestMethod.GET)
-    public String partecipaSeduta(Model model) {
-        return "GUIOrganizzazioneSedute/partecipaSeduta";
-    }
-
-    /**
-     * Metodo che permette di andare alla pagina di schedulazione di una nuova seduta.
-     *
-     * @param model è l'oggetto model.
-     * @return String ridirezione alla pagina delle sedute disponibile.
-     */
-    @RequestMapping(value = "/goSchedulazioneSeduta", method = RequestMethod.GET)
-    public String schedulazioneSeduta(Model model) {
-        if (model.getAttribute("sedutaForm") != null) {
-            return "GUIOrganizzazioneSedute/schedulazioneSeduta";
-        }
-        SedutaForm sedutaForm = new SedutaForm();
-        model.addAttribute("sedutaForm", sedutaForm);
-        return "GUIOrganizzazioneSedute/schedulazioneSeduta";
-    }
 }

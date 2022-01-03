@@ -34,14 +34,14 @@ CREATE TABLE IF NOT EXISTS `donatore` (
 -- Dump della struttura di tabella digitaldonation.donazione
 DROP TABLE IF EXISTS `donazione`;
 CREATE TABLE IF NOT EXISTS `donazione` (
-  `id_donazione` bigint NOT NULL,
+  `id_donazione` bigint NOT NULL AUTO_INCREMENT,
+  `cf_tessera` varchar(50) NOT NULL,
   `data_donazione` datetime(6) DEFAULT NULL,
   `tipo_donazione` varchar(255) DEFAULT NULL,
-  `id_tessera` bigint DEFAULT NULL,
-  PRIMARY KEY (`id_donazione`),
-  KEY `FK1ubqg88yg76r02tv0chigiw0g` (`id_tessera`),
-  CONSTRAINT `FK1ubqg88yg76r02tv0chigiw0g` FOREIGN KEY (`id_tessera`) REFERENCES `tesserino` (`id_tessera`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id_donazione`,`cf_tessera`),
+  KEY `cf_tessera` (`cf_tessera`),
+  CONSTRAINT `FK_donazione_tesserino` FOREIGN KEY (`cf_tessera`) REFERENCES `tesserino` (`codice_fiscale_donatore`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=735 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- L’esportazione dei dati non era selezionata.
 
@@ -70,15 +70,15 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
 -- Dump della struttura di tabella digitaldonation.indisponibilita
 DROP TABLE IF EXISTS `indisponibilita`;
 CREATE TABLE IF NOT EXISTS `indisponibilita` (
-  `id_indisponibilita` bigint NOT NULL,
+  `id_indisponibilita` bigint NOT NULL AUTO_INCREMENT,
   `data_prossima_disponibilita` datetime(6) DEFAULT NULL,
   `motivazioni` varchar(255) DEFAULT NULL,
   `nome_medico` varchar(255) DEFAULT NULL,
-  `codice_fiscale_donatore` varchar(255) DEFAULT NULL,
+  `codice_fiscale_donatore` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id_indisponibilita`),
   KEY `FKap1s57tlbruhmts92d2p64apr` (`codice_fiscale_donatore`),
   CONSTRAINT `FKap1s57tlbruhmts92d2p64apr` FOREIGN KEY (`codice_fiscale_donatore`) REFERENCES `donatore` (`codice_fiscale_utente`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- L’esportazione dei dati non era selezionata.
 
@@ -151,15 +151,15 @@ CREATE TABLE IF NOT EXISTS `seduta_guest` (
 -- Dump della struttura di tabella digitaldonation.tesserino
 DROP TABLE IF EXISTS `tesserino`;
 CREATE TABLE IF NOT EXISTS `tesserino` (
-  `id_tessera` bigint NOT NULL,
-  `data_rilascio` datetime(6) DEFAULT NULL,
-  `codice_fiscale_donatore` varchar(255) DEFAULT NULL,
-  `gruppo_sanguigno` varchar(255) DEFAULT NULL,
+  `codice_fiscale_donatore` varchar(255) NOT NULL,
+  `numero_matricola` int DEFAULT '0',
+  `data_rilascio` date DEFAULT NULL,
+  `gruppo_sanguigno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `rh` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `img_source` varchar(255) DEFAULT NULL,
-  `numero_matricola` int DEFAULT NULL,
-  `rh` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_tessera`),
-  UNIQUE KEY `UK_in4w6e2quoskt6ev6sqvxceio` (`codice_fiscale_donatore`)
+  PRIMARY KEY (`codice_fiscale_donatore`),
+  UNIQUE KEY `codice_fiscale_donatore` (`codice_fiscale_donatore`),
+  CONSTRAINT `FK_tesserino_donatore` FOREIGN KEY (`codice_fiscale_donatore`) REFERENCES `donatore` (`codice_fiscale_utente`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- L’esportazione dei dati non era selezionata.
