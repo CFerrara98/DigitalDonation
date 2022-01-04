@@ -102,7 +102,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     @Transactional(rollbackFor = Exception.class)
     public Tesserino aggiornaTesserino(Tesserino tesserino) throws CannotUpdateDataRepositoryException {
 
-
+ return tesserino;
 
     }
 
@@ -120,11 +120,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String generaPassword(Tesserino tesserino) throws CannotSaveDataRepositoryException {
-
+      String password =null;
         if(tesserino == null){
             throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
         }
 
+        return password;
     }
 
 

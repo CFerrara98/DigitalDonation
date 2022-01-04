@@ -57,7 +57,14 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    <td><c:out value="${seduta.dataSeduta}"></c:out></td>
+                                                    <td><c:out
+                                                            value="${seduta.dataSeduta.date}"></c:out>
+                                                        /
+                                                        <c:out
+                                                                value="${seduta.dataSeduta.month + 1}"></c:out>
+                                                        /
+                                                        <c:out
+                                                                value="${seduta.dataSeduta.year + 1900}"></c:out></td>
                                                     <td><c:out value="${seduta.luogo}"></c:out></td>
                                                 </tr>
                                                 <tr>
