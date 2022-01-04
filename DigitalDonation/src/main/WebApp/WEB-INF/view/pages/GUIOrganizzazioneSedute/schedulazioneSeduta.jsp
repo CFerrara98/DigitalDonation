@@ -136,6 +136,7 @@
                                                                 <form:input type="text"
                                                                             class="form-control form-control-user is-invalid"
                                                                             id="cap"
+                                                                            maxlength="5"
                                                                             placeholder="es. 84100" path="CAP"/>
                                                                 <span class="myError">${CAPError}</span>
                                                             </c:otherwise>
@@ -156,6 +157,7 @@
                                                                 <form:input type="text"
                                                                             class="form-control form-control-user is-invalid"
                                                                             id="provincia" placeholder="es. SA"
+                                                                            maxlength="2"
                                                                             path="provincia"/>
                                                                 <span class="myError">${ProvinciaError}</span>
                                                             </c:otherwise>
