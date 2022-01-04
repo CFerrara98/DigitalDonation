@@ -180,6 +180,7 @@ public class OrganizzazioneSeduteController {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         String successo = request.getParameter("successo");
             model.addAttribute("idSeduta" , idSeduta);
+            request.getSession().setAttribute("idSeduta" , idSeduta);
         try {
             ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
             model.addAttribute("listaUtenti", list);

@@ -2,9 +2,8 @@ package it.unisa.is.c09.digitaldonation.web;
 
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.IndisponibilitaDonazioneFormException;
 import it.unisa.is.c09.digitaldonation.GestioneSeduteManagement.GestioneSeduteService;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Indisponibilita;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Donazione;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,12 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.logging.Logger;
 
 @Controller
@@ -110,6 +111,7 @@ public class GestioneSeduteController {
     public String confermaDonazioneGET(HttpServletRequest request, @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
                                              RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+
         String codiceFiscale = request.getParameter("codiceFiscale");
         try{
             if(utente == null) new IllegalArgumentException();
@@ -118,10 +120,16 @@ public class GestioneSeduteController {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
             return "redirect:/error";
         }
-        if(confermaDonazioneForm == null) confermaDonazioneForm= new ConfermaDonazioneForm();
+        /*if(confermaDonazioneForm == null) confermaDonazioneForm= new ConfermaDonazioneForm();
         model.addAttribute("confermaDonazioneForm",confermaDonazioneForm);
+        request.getSession().setAttribute("confermaDonazioneForm" , confermaDonazioneForm);*/
+
         model.addAttribute("codiceFiscale",codiceFiscale);
-        return "/errorsPages/workingInProgress";//TODO jsp per la indisponibilita inserita dall'operatore
+        request.getSession().setAttribute("codiceFiscale" , codiceFiscale);
+
+        model.addAttribute("idSeduta",request.getSession().getAttribute("idSeduta"));
+        request.getSession().setAttribute("idSeduta" , request.getSession().getAttribute("idSeduta"));
+        return "/GUIGestioneSedute/confermaDonazione";
     }
 
     /**
@@ -133,10 +141,11 @@ public class GestioneSeduteController {
      */
     @RequestMapping(value = "/SalvataggioDonazione", method = RequestMethod.POST)
     public String indisponibilitaByOperatorePost(HttpServletRequest request, @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
-                                                 RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+                                                 RedirectAttributes redirectAttribute, BindingResult result, Model model, @RequestParam(name = "gruppoSanguigno")String gruppoSanguigno) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        String codiceFiscale = (String)  model.getAttribute("codiceFiscale");
-        Long idSeduta = (Long) model.getAttribute("idSeduta");
+        String codiceFiscale = (String)  request.getSession().getAttribute("codiceFiscale");
+
+        Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
         try{
             if(utente == null) new IllegalArgumentException();
             if(codiceFiscale.matches(Utente.CF_REGEX));
@@ -150,10 +159,20 @@ public class GestioneSeduteController {
             for(ObjectError x : result.getGlobalErrors()){
                 redirectAttribute.addFlashAttribute(x.getCode(),x.getDefaultMessage());
             }
-            return "/errorsPages/workingInProgress";//TODO JSP conferma donazione  inserita dall'operatore
+            return "/GUIGestioneSedute/confermaDonazione";
         }
+
+        String tipoDonazione = null;//TODO il bottone in conferma donazione non funziona
+        if(gruppoSanguigno.equals("plasma")){
+            tipoDonazione = "plasma";
+        }else if(gruppoSanguigno.equals("cito")){
+            tipoDonazione = "cito";
+        }else if(gruppoSanguigno.equals("sangue")){
+            tipoDonazione = "sangue";
+        }
+
         try {
-            gestioneSeduteService.salvataggioDonazione(codiceFiscale,idSeduta,confermaDonazioneForm.getTipoDonazione());
+            gestioneSeduteService.salvataggioDonazione(codiceFiscale,idSeduta,tipoDonazione);
         } catch (CannotSaveDataRepositoryException e) {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
             return "redirect:/error";
@@ -161,15 +180,4 @@ public class GestioneSeduteController {
         model.addAttribute("success","Salvataggio donazione avvenuto con successo!");
         return "redirect:/goElencoPartecipanti?idSeduta="+model.getAttribute("idSeduta");
     }
-
-
-
-
-
-
-
-
-
-
-
 }
