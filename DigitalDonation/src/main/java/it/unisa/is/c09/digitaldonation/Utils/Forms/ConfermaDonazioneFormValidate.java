@@ -1,6 +1,8 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
+import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.ConfermaDonazioneFormException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.GuestFormException;
+import it.unisa.is.c09.digitaldonation.GestioneSeduteManagement.GestioneSeduteService;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,11 +18,10 @@ import org.springframework.validation.Validator;
  */
 
 @Component
-public class ConfermaDonazioneFormValidate implements Validator {
+public class ConfermaDonazioneFormValidate implements Validator{
 
-    //TODO da cambiare
     @Autowired
-    private OrganizzazioneSeduteService organizzazioneSeduteService;
+    private GestioneSeduteService gestioneSeduteService;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -37,16 +38,15 @@ public class ConfermaDonazioneFormValidate implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 
-        GuestForm guestForm = (GuestForm) target;
-        organizzazioneSeduteService = new OrganizzazioneSeduteService();
+        ConfermaDonazioneForm confermaDonazioneForm = (ConfermaDonazioneForm) target;
+        gestioneSeduteService = new GestioneSeduteService();
 
-
-        //Validazione del campo nome
+        //Validazione del campo tipoDonazione
         try {
-            organizzazioneSeduteService.validaNome(guestForm.getNome());
-        } catch (GuestFormException e1) {
-            errors.reject("NomeError", e1.getMessage());
-            guestForm.setNome("");
+            gestioneSeduteService.validaTipoDonazione(confermaDonazioneForm.getTipoDonazione());
+        } catch (ConfermaDonazioneFormException e) {
+            errors.reject("TipoDonazioneError", e.getMessage());
+            confermaDonazioneForm.setTipoDonazione("");
         }
     }
 }
