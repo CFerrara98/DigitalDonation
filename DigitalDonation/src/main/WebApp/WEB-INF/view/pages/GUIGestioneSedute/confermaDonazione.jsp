@@ -28,7 +28,7 @@
                 <!-- Page Heading -->
                 <h1>&nbsp;</h1>
                 <!-- indietro -->
-                <a href="./goElencoPartecipanti" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
+                <a href="./goElencoPartecipanti?idSeduta=${idSeduta}" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
                 <!-- Titolo -->
                 <h1 class=" mb-4" style="text-align: center">Conferma donazione</h1>
 
@@ -43,7 +43,7 @@
                         <div class="card-body">
                             <div class="text-center">
                                 <h1>&nbsp;</h1>
-                                <h4 class=" mb-4" style="text-align: center">Confermi l'avvenuta donazione di <br> %Nome Cognome% ?</h4>
+                                <h4 class=" mb-4" style="text-align: center">Confermi l'avvenuta donazione?</h4>
                                 <h1>&nbsp;</h1>
 
 
@@ -51,7 +51,7 @@
                                 <div class="container">
 
                                         <%--@elvariable id="confermaDonazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.ConfermaDonazioneForm"--%>
-                                    <form:form action="./autodichiarazioneIndisponibilita" method="post" modelAttribute="confermaDonazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+                                    <form:form action="./SalvataggioDonazione" method="post" modelAttribute="confermaDonazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
 
                                         <div class="form-group row">
                                             <div class="col-sm-4 mb-3 mb-sm-0">
@@ -65,39 +65,26 @@
                                                              id="gruppoSanguigno"
                                                              class="form-control gruppo-sanguigno"
                                                              path="tipoDonazione">
-                                                    <form:option selected="true" value="A+ ">
-                                                        A+
+
+                                                    <form:option value="plasma">
+                                                        Plasma
                                                     </form:option>
-                                                    <form:option value="A-">
-                                                        A-
+                                                    <form:option value="cito">
+                                                        Cito
                                                     </form:option>
-                                                    <form:option value="B+">
-                                                        B+
-                                                    </form:option>
-                                                    <form:option value="B-">
-                                                        B-
-                                                    </form:option>
-                                                    <form:option value="0+">
-                                                        0+
-                                                    </form:option>
-                                                    <form:option value="0-">
-                                                        0-
-                                                    </form:option>
-                                                    <form:option value="AB+">
-                                                        AB+
-                                                    </form:option>
-                                                    <form:option value="AB-">
-                                                        AB-
+                                                    <form:option value="sangue">
+                                                        Sangue
                                                     </form:option>
 
                                                 </form:select>
                                             </div>
                                         </div>
-                                    </form:form>
+
                                 </div>
                                 <input type="submit" value="Conferma" class="btn btn-primary">
                             </div>
 
+                                    </form:form>
                         </div>
                     </div>
                 </div>

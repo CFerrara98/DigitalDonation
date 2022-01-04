@@ -24,7 +24,7 @@
                                 <h1 class="display-5 fw-bolder text-white mb-2">"Donare il sangue è un gesto volontario, gratuito e può salvare la vita delle persone."</h1>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="../../resources/img/immagine homepage.png" alt="..." /></div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="../../resources/img/homepage.png" alt="..." /></div>
                     </div>
                 </div>
             </header>
@@ -90,17 +90,17 @@
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5">
                             <div class="card h-80 shadow border-0">
-                                <img class="card-img-top" src="../../resources/img/blood4.png" alt="..." />
+                                <img class="card-img-top" src="../../resources/img/mani.png" alt="..." />
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-80 shadow border-0">
-                                <img class="card-img-top" src="../../resources/img/blood5.png" alt="..." />
+                                <img class="card-img-top" src="../../resources/img/lettino.png" alt="..." />
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-80 shadow border-0">
-                                <img class="card-img-top" src="../../resources/img/blood3.png" alt="..." />
+                                <img class="card-img-top" src="../../resources/img/operatori.png" alt="..." />
                             </div>
                         </div>
                     </div>

@@ -70,7 +70,7 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
         }
 
         indisponibilita.setCodiceFiscaleDonatore(codiceFiscaleDonatore);
-        //La data deve essere calcolata nel segente modo: 5 mesi dopo la data attuale.
+        //La data deve essere calcolata nel seguente modo: 5 mesi dopo la data attuale.
         indisponibilita.setDataProssimaDisponibilita(new Date());
         indisponibilita.setMotivazioni("donazione");
         indisponibilitaRepository.save(indisponibilita);

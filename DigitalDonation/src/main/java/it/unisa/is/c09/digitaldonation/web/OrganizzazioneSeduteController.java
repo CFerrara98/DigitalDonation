@@ -182,6 +182,7 @@ public class OrganizzazioneSeduteController {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         String successo = request.getParameter("successo");
             model.addAttribute("idSeduta" , idSeduta);
+            request.getSession().setAttribute("idSeduta" , idSeduta);
         try {
             ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
             model.addAttribute("listaUtenti", list);
@@ -327,7 +328,8 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
-    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm,
+                                      RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
 
         try {
