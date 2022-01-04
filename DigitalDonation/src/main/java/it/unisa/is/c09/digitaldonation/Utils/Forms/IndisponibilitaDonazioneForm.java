@@ -12,6 +12,10 @@ public class IndisponibilitaDonazioneForm {
         this.nomeMedico = nomeMedico;
     }
 
+    public IndisponibilitaDonazioneForm() {
+
+    }
+
     /**
      * Metodo che ritorna il nome del medico.
      *

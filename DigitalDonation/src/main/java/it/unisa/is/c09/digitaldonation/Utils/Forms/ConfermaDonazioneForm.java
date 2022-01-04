@@ -6,6 +6,10 @@ public class ConfermaDonazioneForm {
         this.tipoDonazione = tipoDonazione;
     }
 
+    public ConfermaDonazioneForm() {
+
+    }
+
     /**
      * Metodo che ritorna il tipo di donazione per la conferma della donazione.
      *

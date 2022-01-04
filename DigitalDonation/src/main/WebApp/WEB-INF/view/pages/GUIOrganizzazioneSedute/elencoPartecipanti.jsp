@@ -40,7 +40,8 @@
                                     <br>
                                     <div class="alert alert-success" role="alert">
                                         <h4 class="alert-heading"><i class="fas fa-calendar-check"
-                                                                     style="font-size: 36px"> </i> &nbsp <b>Complimenti!</b>  ${success}
+                                                                     style="font-size: 36px"> </i> &nbsp
+                                            <b>Complimenti!</b> ${success}
                                         </h4>
                                     </div>
                                 </c:when>
@@ -103,21 +104,30 @@
                                                         <th scope="col">
                                                             <c:choose>
                                                                 <c:when test="${listaPartecipanti.get(i)}">
-                                                                    <div class="alert alert-primary" role="alert" style="width: 175px">
-                                                                        <i class="fas fa-user" style="font-size: 30px"> </i>
+                                                                    <div class="alert alert-primary" role="alert"
+                                                                         style="width: 175px">
+                                                                        <i class="fas fa-user"
+                                                                           style="font-size: 30px"> </i>
                                                                         <span class="m-0 font-weight-bold text-primary h5"> &nbsp Donatore </span>
                                                                     </div>
-                                                                 </c:when>
+                                                                </c:when>
                                                                 <c:otherwise>
-                                                                    <div class="alert alert-dark" role="alert" style="width: 175px">
-                                                                        <i class="fas fa-user-plus" style="font-size: 30px"></i>
+                                                                    <div class="alert alert-dark" role="alert"
+                                                                         style="width: 175px">
+                                                                        <i class="fas fa-user-plus"
+                                                                           style="font-size: 30px"></i>
                                                                         <span class="m-0 font-weight-bold text-primary h5"> &nbsp Guest </span>
                                                                     </div>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </th>
+                                                        <c:choose>
+
+                                                        <c:when test="${listaPartecipanti.get(i)}">
                                                         <th scope="col">Indisponibilità</th>
                                                         <th scope="col">Conferma donazione</th>
+                                                        </c:when>
+                                                        </c:choose>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -144,21 +154,26 @@
                                                                                 value="${listaUtenti.get(i).gruppoSanguigno}"></c:out></h4>
                                                                 </c:otherwise>
                                                             </c:choose>
+                                                            <c:choose>
+
+                                                            <c:when test="${listaPartecipanti.get(i)}">
                                                         </th>
                                                         <!-- Bottom indisponibilità seduta -->
                                                         <th scope="row">
                                                         <span class="float-center col-xl-1 col-md-6 mb-2">
-                                                        <a href=".html" role="button"> <i
+                                                        <a href="./goIndisponibilitaByOperatore?codiceFiscale=${listaUtenti.get(i).codiceFiscale}" role="button"> <i
                                                                 class="far fa-times-circle icone"></i></a>
                                                     </span></th>
                                                         <!-- Bottom conferma donazione partecipanti -->
                                                         <td>
                                                         <span class="float-center col-xl-1 col-md-6 mb-2">
-                                                                <a href=".html" role="button">
+                                                                <a href="./goSalvataggioDonazione?codiceFiscale=${listaUtenti.get(i).codiceFiscale}" role="button">
                                                                     <i class="far fa-check-circle icone"></i>
                                                                 </a>
                                                         </span>
                                                         </td>
+                                                        </c:when>
+                                                        </c:choose>
                                                     </tr>
                                                     </tbody>
                                                 </table>

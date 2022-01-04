@@ -349,7 +349,8 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
-    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+    public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm,
+                                      RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
 
         try {

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,4 +63,6 @@ public interface DonatoreRepository extends JpaRepository<Donatore, String> {
      */
     @Query(value = "select * from donatore where (codice_fiscale_utente not in (select codice_fiscale_donatore from indisponibilita)) or (codice_fiscale_utente in (select codice_fiscale_utente from indisponibilita where data_prossima_disponibilita < current_date()))", nativeQuery = true)
     List<Donatore> findDonatoriDisponibili();
+    
+
 }
