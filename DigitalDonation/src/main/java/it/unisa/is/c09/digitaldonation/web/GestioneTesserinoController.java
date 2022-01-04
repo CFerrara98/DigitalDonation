@@ -53,4 +53,15 @@ public class GestioneTesserinoController {
 
         return "GUIGestioneTesserinoDigitale/autodichiarazioneIndisponibilita";
     }
+
+    @RequestMapping(value = "/goTesserino", method = RequestMethod.GET)
+    public String goVisualizzaTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+        return "GUIOrganizzazioneSedute/visualizzaTesserino";
+    }
+
+    @RequestMapping(value = "/goCreazioneTesserino", method = RequestMethod.GET)
+    public String gocreazioneTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
+
+        return "GUIOrganizzazioneSedute/creazioneTesserino";
+    }
 }

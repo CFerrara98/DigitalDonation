@@ -1,5 +1,6 @@
 package it.unisa.is.c09.digitaldonation.web;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -7,6 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Controller
 public class GestioneSeduteController {
 
     @RequestMapping(value = "/goConfermaDonazione", method = RequestMethod.GET)
