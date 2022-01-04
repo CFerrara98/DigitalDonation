@@ -1,5 +1,6 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
+import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneTesserinoError.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.ConfermaDonazioneFormException;
 import it.unisa.is.c09.digitaldonation.GestioneSeduteManagement.GestioneSeduteService;
 import it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement.GestioneTesserinoService;
@@ -46,7 +47,7 @@ public class AutodichiarazioneIndisponibilitaFormValidate implements Validator {
         try {
             gestioneTesserinoService.validaMotivazioni(autodichiarazioneIndisponibilitaForm.getMotivazioni());
         } catch (TesserinoFormException e) {
-            errors.reject("MOtivazioneError", e.getMessage());
+            errors.reject("MotivazioneError", e.getMessage());
             autodichiarazioneIndisponibilitaForm.setMotivazioni("");
         }
 

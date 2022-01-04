@@ -220,4 +220,11 @@ public class Tesserino implements Serializable {
 
     /** Espressione regolare che definisce il formato del campo gruppo sanguigno. */
     public static final String GRUPPOSANGUIGNO_REGEX = "^(0-|0\\+|A-|A\\+|B-|B\\+|AB-|AB\\+)";
+
+    /** Espressione regolare che definisce il formato del campo altre Indicazioni. */
+    public static final String ALTREINDICAZIONI_REGEX = "[A-Za-z0-9 _.,!\"'\\/$\\n]{2,500} ";
+
+
+    /** Espressione regolare che definisce il formato del campo motivazioni. */
+    public static final String MOTIVAZIONI_REGEX = "[A-Za-z0-9 _.,!\"'\\/$\\n]{2,500} ";
 }
