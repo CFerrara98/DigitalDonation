@@ -45,28 +45,6 @@ public class OrganizzazioneSeduteController {
     @Autowired
     SedutaFormValidate sedutaFormValidate;
 
-
-
-
-
-    @RequestMapping(value = "/goIndisponibilita", method = RequestMethod.GET)
-    public String indisponibilitaByOperatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
-        String codiceFiscale = request.getParameter("codiceFiscale");
-        try{
-            if(utente == null) new IllegalArgumentException();
-            if(codiceFiscale.matches(Utente.CF_REGEX));
-        }catch (Exception e){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
-            return "redirect:/error";
-        }
-        //TODO Vanno fatti prima i form
-        //Aggiungi al model il form indisponibilità
-        //redirect su servlet /indisponibilita
-        return "redirect:/error";
-    }
-
-
     /**
      * Metodo che permette al donatore di poter inviare un feedback.
      *
@@ -381,6 +359,39 @@ public class OrganizzazioneSeduteController {
         }
         model.addAttribute("success", "Seduta schedulata con successo!");
         return "GUIGestioneUtente/dashboardOperatore";
+    }
+
+    @RequestMapping(value = "/goEliminaSeduta", method = RequestMethod.GET)
+    public String goEliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+
+        long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
+        model.addAttribute("idSeduta", idSeduta);
+        return "GUIOrganizzazioneSedute/eliminaSeduta";
+    }
+
+    @RequestMapping(value = "/goModificaSeduta", method = RequestMethod.GET)
+    public String goModificaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+
+        long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
+        model.addAttribute("idSeduta", idSeduta);
+        return "GUIOrganizzazioneSedute/modificaSeduta";
+    }
+
+    @RequestMapping(value = "/goIndisponibilita", method = RequestMethod.GET)
+    public String indisponibilitaByOperatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        String codiceFiscale = request.getParameter("codiceFiscale");
+        try{
+            if(utente == null) new IllegalArgumentException();
+            if(codiceFiscale.matches(Utente.CF_REGEX));
+        }catch (Exception e){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            return "redirect:/error";
+        }
+        //TODO Vanno fatti prima i form
+        //Aggiungi al model il form indisponibilità
+        //redirect su servlet /indisponibilita
+        return "redirect:/error";
     }
 
 }
