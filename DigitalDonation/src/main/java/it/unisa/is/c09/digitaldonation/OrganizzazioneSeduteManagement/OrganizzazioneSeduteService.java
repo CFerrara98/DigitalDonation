@@ -3,12 +3,15 @@ package it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Indisponibilita;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.GuestRepository;
+import it.unisa.is.c09.digitaldonation.Model.Repository.IndisponibilitaRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +25,13 @@ import java.util.List;
  */
 @Service
 public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceInterface {
+    private static Logger logger = Logger.getLogger(OrganizzazioneSeduteService.class);
+
     @Autowired
     private MailSingletonSender mailSingletonSender;
+
+    @Autowired
+    private IndisponibilitaRepository indisponibilitaRepository;
 
     @Autowired
     private SedutaRepository sedutaRepository;
@@ -46,7 +54,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         if (donatore.getCodiceFiscale() == null) {
             throw new CannotRelaseFeedbackException("feedbackError", "Il campo id non può essere null.");
         }
-
         Seduta seduta;
         seduta = sedutaRepository.findByIdSeduta(idSeduta);
         if(seduta == null) {
@@ -125,8 +132,13 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
             seduta.setIdSeduta(null);
         }
             sedutaRepository.save(seduta);
-            List<Donatore> listaDonatoriDisponibili = donatoreRepository.findDonatoriDisponibili();
-            mailSingletonSender.sendEmailSchedulazioneSeduta(seduta, listaDonatoriDisponibili);
+            List<Donatore> donatori = donatoreRepository.findAll();
+            for(int i=0; i<donatori.size(); i++){
+                List<Indisponibilita> indisponibilitaLista = indisponibilitaRepository.findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter(donatori.get(i).getCodiceFiscale(), seduta.getDataSeduta());
+                if(indisponibilitaLista.isEmpty()){
+                    mailSingletonSender.sendEmailSchedulazioneSeduta(seduta, donatori.get(i));
+                }
+            }
             return seduta;
         }
 
@@ -196,18 +208,31 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @return la lista delle sedute disponibili.
      */
     public List<Seduta> visualizzaElencoSeduteDisponibili(String codiceFiscale) throws CannotLoadDataRepositoryException {
-        List<Seduta> seduteDisponibili = sedutaRepository.findAll();
+        List<Indisponibilita> listaIndisponibilitaDonatore = indisponibilitaRepository.findIndisponibilitaByCodiceFiscaleDonatore(codiceFiscale);
+        List<Seduta> seduteDisponibili = new ArrayList<>();
+        if(listaIndisponibilitaDonatore.isEmpty()){
+            seduteDisponibili = sedutaRepository.findAll();
+        }
+        else{
+            for(int j=0; j<listaIndisponibilitaDonatore.size(); j++){
+                Indisponibilita i = listaIndisponibilitaDonatore.get(j);
+                Date dataFineIndisponibilita = i.getDataProssimaDisponibilita();
+                seduteDisponibili = sedutaRepository.findAllByDataSedutaAfter(dataFineIndisponibilita);
+                logger.info("Size lista sedute"+seduteDisponibili.size());
+            }
+        }
 
-        for(int i=0; i<seduteDisponibili.size(); i++){
+        for (int i=0; i < seduteDisponibili.size(); i++) {
             Seduta s = seduteDisponibili.get(i);
             List<Donatore> listaDonatori = s.getListaDonatore();
-            for(Donatore d: listaDonatori){
-                if(d.getCodiceFiscale().equals(codiceFiscale)){
+            for (Donatore d : listaDonatori) {
+                if (d.getCodiceFiscale().equals(codiceFiscale)) {
                     seduteDisponibili.remove(i);
                     i--;
                 }
             }
         }
+
         return seduteDisponibili;
     }
 

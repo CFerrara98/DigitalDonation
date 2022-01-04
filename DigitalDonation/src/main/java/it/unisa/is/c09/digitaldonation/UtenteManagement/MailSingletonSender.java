@@ -28,37 +28,45 @@ public class MailSingletonSender {
      * Metodo che permette di inviare un email per avvisare un donatore che si è prenotato.
      *
      * @param donatore Oggetto donatore che si è prenotato.
-     * @param seduta Oggetto seduta a cui il donatore si è prenotato.
+     * @param seduta   Oggetto seduta a cui il donatore si è prenotato.
      */
-    public void sendEmailPrenotazione(Donatore donatore, Seduta seduta){
+    public void sendEmailPrenotazione(Donatore donatore, Seduta seduta) {
 
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(donatore.getCodiceFiscale());
+        msg.setTo(donatore.getEmail());
         msg.setSubject("Prenotazione ad una nuova seduta di donazione");
-        String messaggio = ("Gentile "+ donatore.getNome()+" "+donatore.getCognome()+" utente delle piattaforma Digital Donation,\n"+
-                "le comunichiamo che la prenotazione alla seduta di donazione in via: "+seduta.getLuogo()+" in data: "+
-                seduta.getDataSeduta()+" dalle ore: "+seduta.getOraInizio()+" alle ore: "+seduta.getOraFine()+
+        String messaggio = ("Gentile " + donatore.getNome() + " " + donatore.getCognome() + " utente delle piattaforma Digital Donation,\n" +
+                "le comunichiamo che la prenotazione alla seduta di donazione in via: " + seduta.getLuogo() + " in data: " +
+                seduta.getDataSeduta() + " dalle ore: " + seduta.getOraInizio() + " alle ore: " + seduta.getOraFine() +
                 "\nè avvenuta con successo, la attendiamo.\nCordiali saluti da Digital Donation");
 
         msg.setText(messaggio);
         javaMailSender.send(msg);
     }
 
-    public void sendEmailSchedulazioneSeduta(Seduta seduta, List<Donatore> listaDonatoriDisponibili){
+    public void sendEmailSchedulazioneSeduta(Seduta seduta, Donatore donatore) {
 
-        for(int i=0; i<listaDonatoriDisponibili.size(); i++){
-            SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setTo(listaDonatoriDisponibili.get(i).getCodiceFiscale());
-            msg.setSubject("Nuova seduta disponibile");
-            String messaggio = ("Gentile "+ listaDonatoriDisponibili.get(i).getNome()+" "+listaDonatoriDisponibili.get(i).getCognome()+" utente delle piattaforma Digital Donation,\n"+
-                    "le comunichiamo che è disponibile una nuova seduta di donazione in via: "+seduta.getLuogo()+" in data: "+
-                    seduta.getDataSeduta()+" dalle ore: "+seduta.getOraInizio()+" alle ore: "+seduta.getOraFine()+
-                    "\nse intende prenotarsi esegua l'apposita procedura sulla piattaforma.\nCordiali saluti da Digital Donation");
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(donatore.getEmail());
+        msg.setSubject("Nuova seduta disponibile");
+        String messaggio = ("Gentile " + donatore.getNome() + " " + donatore.getCognome() + " utente delle piattaforma Digital Donation,\n" +
+                "le comunichiamo che è disponibile una nuova seduta di donazione in via: " + seduta.getLuogo() + " in data: " +
+                seduta.getDataSeduta() + " dalle ore: " + seduta.getOraInizio() + " alle ore: " + seduta.getOraFine() +
+                "\nse intende prenotarsi esegua l'apposita procedura sulla piattaforma.\nCordiali saluti da Digital Donation");
+        msg.setText(messaggio);
+        javaMailSender.send(msg);
+    }
 
-            msg.setText(messaggio);
+    /*public void spammaCarmine(){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo("abatefrancesco98@gmail.com");
+        msg.setSubject("Piattaforma Digital Donation");
+        String messaggio = "\nGentile Francesco Abate,\n siamo della piattaforma di Digital Donation, a seguito della sua richiesta di utilizzare Node.js " +
+                "volevamo informarla che le tecnologie di back-end sono cambiare.\nLA ASPETTIAMO SULLA NOSTRA PIATTAFORMA\nCordiali Saluti, Digital Donation";
+        msg.setText(messaggio);
+        for(int i=0; i<75; i++){
             javaMailSender.send(msg);
         }
-    }
+    }*/
 }
-
 

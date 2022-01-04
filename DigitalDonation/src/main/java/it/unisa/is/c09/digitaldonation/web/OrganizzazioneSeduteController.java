@@ -5,6 +5,7 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
+import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestFormValidate;
@@ -61,13 +62,14 @@ public class OrganizzazioneSeduteController {
             if (utente != null) {
                 try {
                     organizzazioneSeduteService.feedbackDonatore(utente, idSeduta);
-                    return "redirect:/dashboardDonatore";
+                    model.addAttribute("success", "Ti sei prenotato alla seduta, controlla la tua email.");
+                    return "GUIGestioneUtente/dashboardDonatore";
                 } catch (CannotRelaseFeedbackException e) {
                     return "GUIGestioneUtente/dashboardDonatore";
                 }
             }
         }
-        return "redirect:/goSeduteDisponibili";
+        return "redirect:/dashboardDonatore";
     }
 
     /**
@@ -341,6 +343,7 @@ public class OrganizzazioneSeduteController {
             DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
             Operatore operatore = (Operatore) utente;
             SedeLocale sedeLocale = operatore.getSedeLocale();
+
             Seduta seduta = new Seduta();
             seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
             seduta.setDataSeduta(sedutaForm.getDataSeduta());
