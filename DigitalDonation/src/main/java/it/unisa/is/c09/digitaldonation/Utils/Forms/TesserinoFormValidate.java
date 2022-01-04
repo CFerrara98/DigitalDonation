@@ -74,7 +74,7 @@ public class TesserinoFormValidate implements Validator {
         try {
             gestioneTesserinoService.validaDataDiNascita(tesserinoForm.getDataNascita());
         } catch (TesserinoFormException e1) {
-            errors.reject("TesserinoDataNscitaError", e1.getMessage());
+            errors.reject("TesserinoDataNascitaError", e1.getMessage());
             Calendar myCalendar = new GregorianCalendar(2022, 1, 1);
             tesserinoForm.setDataNascita(myCalendar.getTime());
         }
