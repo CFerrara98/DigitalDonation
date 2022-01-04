@@ -6,6 +6,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
@@ -47,8 +48,7 @@
                                         </div>
                                             <%--@elvariable id="autodichiarazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
                                         <form:form action="./autodichiarazioneIndisponibilita" method="post" modelAttribute="autodichiarazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <div class="form-group">
                                                 <p style="color:#4e73df;">Data prossima disponibilità: </p>
                                                 <c:choose>
                                                     <c:when test="${DataDisponibilitaError == null}">
@@ -74,12 +74,10 @@
                                                 </c:choose>
 
                                             </div>
-                                        <form class="user">
                                             <br>
                                             <input type="submit" value="Conferma" class="btn btn-primary btn-user btn-block">
-                                        </form>
                                             </form:form>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

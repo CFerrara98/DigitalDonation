@@ -76,7 +76,7 @@
                                         <h1>&nbsp;</h1>
                                         <h1 align="center" class="h3 mb-2 text-gray-800">Compila la tua
                                             autodichiarazione di indisponibilità:</h1>
-                                        <a class="btn btn-primary" href="#" role="button">Compila</a>
+                                        <a class="btn btn-primary" href="./goAutodichiarazioneIndisponibilita" role="button">Compila</a>
                                         <h1>&nbsp;</h1>
                                     </div>
                                 </div>
