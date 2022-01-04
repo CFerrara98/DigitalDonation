@@ -32,7 +32,7 @@
 
                 <div class="card-body">
                     <!-- indietro -->
-                    <a href="dashboardDonatore.html" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
+                    <a href="./dashboardDonatore" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
 
 
                     <h1 class=" mb-4 " style="text-align: center" > Il mio Tesserino: </h1>

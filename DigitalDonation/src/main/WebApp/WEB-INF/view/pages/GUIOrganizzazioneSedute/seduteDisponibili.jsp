@@ -44,6 +44,9 @@
                         </div>
                         <h6>&nbsp;</h6>
 
+
+                        <c:choose>
+                        <c:when test="${listaSedutePrenotabili.get(0) != null}">
                         <c:forEach begin="0" end="${listaSedutePrenotabili.size()-1}" step="1"
                                    var="i">
                             <!-- prima seduta-->
@@ -83,7 +86,13 @@
                             </div>
 
                         </c:forEach>
+                        </c:when>
+                            <c:otherwise>
 
+                                <h6 align="center"> Nessuna seduta disponibile per te </h6>
+
+                            </c:otherwise>
+                        </c:choose>
                     </div>
 
                 </div>
