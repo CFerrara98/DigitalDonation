@@ -50,7 +50,8 @@
                                 <!-- menu tendina -->
                                 <div class="container">
 
-                                    <form class="user">
+                                        <%--@elvariable id="confermaDonazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.ConfermaDonazioneForm"--%>
+                                    <form:form action="./autodichiarazioneIndisponibilita" method="post" modelAttribute="confermaDonazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
 
                                         <div class="form-group row">
                                             <div class="col-sm-4 mb-3 mb-sm-0">
@@ -60,22 +61,40 @@
 
                                             <div class="col-sm-6">
 
-                                                <select name="gruppoSanguigno" id="gruppoSanguigno" class="form-control gruppo-sanguigno">
-                                                    <option selected value="A+ ">A+</option>
-                                                    <option value="A-">A-</option>
-                                                    <option value="B+">B+</option>
-                                                    <option value="B-">B-</option>
-                                                    <option value="0+">0+</option>
-                                                    <option value="0-">0-</option>
-                                                    <option value="AB+">AB+</option>
-                                                    <option value="AB-">AB-</option>
-                                                </select>
+                                                <form:select name="gruppoSanguigno"
+                                                             id="gruppoSanguigno"
+                                                             class="form-control gruppo-sanguigno"
+                                                             path="tipoDonazione">
+                                                    <form:option selected="true" value="A+ ">
+                                                        A+
+                                                    </form:option>
+                                                    <form:option value="A-">
+                                                        A-
+                                                    </form:option>
+                                                    <form:option value="B+">
+                                                        B+
+                                                    </form:option>
+                                                    <form:option value="B-">
+                                                        B-
+                                                    </form:option>
+                                                    <form:option value="0+">
+                                                        0+
+                                                    </form:option>
+                                                    <form:option value="0-">
+                                                        0-
+                                                    </form:option>
+                                                    <form:option value="AB+">
+                                                        AB+
+                                                    </form:option>
+                                                    <form:option value="AB-">
+                                                        AB-
+                                                    </form:option>
+
+                                                </form:select>
                                             </div>
                                         </div>
-                                    </form>
+                                    </form:form>
                                 </div>
-
-                                <h1>&nbsp;</h1>
                                 <input type="submit" value="Conferma" class="btn btn-primary">
                             </div>
 
