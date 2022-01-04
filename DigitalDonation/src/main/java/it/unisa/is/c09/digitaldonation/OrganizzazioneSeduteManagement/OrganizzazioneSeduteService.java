@@ -4,37 +4,32 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
-
 import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.GuestRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
-
+import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
-import it.unisa.is.c09.digitaldonation.web.OrganizzazioneSeduteController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Guest + Seduta
  */
 @Service
 public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceInterface {
-
-    private static Logger logger = Logger.getLogger(String.valueOf(OrganizzazioneSeduteService.class));
-
     @Autowired
-    private DonatoreRepository donatoreRepository;
+    private MailSingletonSender mailSingletonSender;
 
     @Autowired
     private SedutaRepository sedutaRepository;
+
+    @Autowired
+    private DonatoreRepository donatoreRepository;
 
     @Autowired
     private GuestRepository guestRepository;
@@ -59,13 +54,14 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         }
         seduta.addPartecipante(donatore);
         sedutaRepository.save(seduta);
+        mailSingletonSender.sendEmailPrenotazione(donatore, seduta);
     }
 
     /**
      * Questo metodo permette di recuperare i donatori appartenenti alla seduta partendo dall'id
      *
      * @param idSeduta L'id della seduta che si vuole monitorare
-     * @return Una lista di Utenti che appartengon a quella seduta
+     * @return Una lista di Utenti che appartengono a quella seduta
      */
     @Override
     public ArrayList<Object> monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException {
@@ -129,11 +125,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
             seduta.setIdSeduta(null);
         }
             sedutaRepository.save(seduta);
+            List<Donatore> listaDonatoriDisponibili = donatoreRepository.findDonatoriDisponibili();
+            mailSingletonSender.sendEmailSchedulazioneSeduta(seduta, listaDonatoriDisponibili);
             return seduta;
         }
-
-
-
 
     /**
      * Questo metodo permette di modificare una seduta
@@ -185,7 +180,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     }
 
     /**
-     * Questo metodo permette di recuperare le sedute
+     * Questo metodo permette di recuperare la lista delle sedute per l'operatore.
      *
      * @return Un elenco delle sedute
      */
@@ -194,6 +189,12 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         return sedutaRepository.findAll();
     }
 
+    /**
+     * Questo metodo permette di recuperare la lista delle sedute disponibili per il donatore.
+     *
+     * @param codiceFiscale String che rappresenta il codice fiscale del donatore.
+     * @return la lista delle sedute disponibili.
+     */
     public List<Seduta> visualizzaElencoSeduteDisponibili(String codiceFiscale) throws CannotLoadDataRepositoryException {
         List<Seduta> seduteDisponibili = sedutaRepository.findAll();
 

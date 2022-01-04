@@ -3,6 +3,7 @@ package it.unisa.is.c09.digitaldonation.Model.Repository;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,10 +47,19 @@ public interface DonatoreRepository extends JpaRepository<Donatore, String> {
 
 
     /**
-     * Permette di fare retrive di tutti i donatori.
+     * Permette di restituire tutti i donatori.
      *
      * @return Oggetto {@link Donatore} che rappresenta il donatore. Può essere
      *         null se nel database non è possibile aggiornare le informazioni del donatore.
      */
     List<Donatore> findAll();
+
+    /**
+     * Permette di restituire tutti i donatori disponibili.
+     *
+     * @return Oggetto {@link Donatore} che rappresenta il donatore. Può essere
+     *         null se nel database non è possibile aggiornare le informazioni del donatore.
+     */
+    @Query(value = "select * from donatore where (codice_fiscale_utente not in (select codice_fiscale_donatore from indisponibilita)) or (codice_fiscale_utente in (select codice_fiscale_utente from indisponibilita where data_prossima_disponibilita < current_date()))", nativeQuery = true)
+    List<Donatore> findDonatoriDisponibili();
 }
