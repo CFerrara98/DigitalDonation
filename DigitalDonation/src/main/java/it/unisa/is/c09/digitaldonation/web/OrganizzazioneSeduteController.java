@@ -75,7 +75,6 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
-    /*
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
     public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model,
                                    @RequestParam(name= "feedbackSeduta") String feedbackSeduta, @RequestParam(name="idSeduta") Long idSeduta) {
@@ -247,7 +246,6 @@ public class OrganizzazioneSeduteController {
      * @param model è l'oggetto model.
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
-    /*
     @RequestMapping(value = "/goPartecipaSeduta", method = RequestMethod.GET)
     public String partecipaSeduta(HttpServletRequest request, Model model) {
         Long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
