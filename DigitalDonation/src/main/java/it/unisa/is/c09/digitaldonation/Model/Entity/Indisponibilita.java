@@ -112,7 +112,12 @@ public class Indisponibilita implements Serializable {
         this.nomeMedico = nomeMedico;
     }
 
+    /** Espressione regolare che definisce il formato del campo motivazioni.*/
     public static final String MOTIVAZIONI_REGEX = "[A-Za-z0-9 _.,!\"'\\/$]{0,500}";
+
+    /** Espressione regolare che definisce il formato del campo nome medico. */
     public static final String NOME_MEDICO_REGEX = "[A-Za-z]{2,35}";
+
+    /** Espressione regolare che definisce il formato del campo data prossima disponibilità. */
     public static final String DATA_PROSSIMA_DISPONIBILITA_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$";
 }

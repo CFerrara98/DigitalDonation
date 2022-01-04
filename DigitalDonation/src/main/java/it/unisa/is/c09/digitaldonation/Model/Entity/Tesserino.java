@@ -206,18 +206,18 @@ public class Tesserino implements Serializable {
         this.listaDonazioni = listaDonazioni;
     }
 
-    /** Espressione regolare che definisce il formato del campo residenza. */
+    /** Espressione regolare che definisce il formato del campo codice fiscale */
     public static final String CODICEFISCALE_REGEX = "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$";
 
-    /** Espressione regolare che definisce il formato del campo di data di nascita. */
+    /** Espressione regolare che definisce il formato del campo numro matricola */
     public static final String NUMEROMATRICOLA_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][12]{1}\\d{3}$";
 
-    /** Espressione regolare che definisce il formato del campo luogo di nascita. */
+    /** Espressione regolare che definisce il formato del campo data rialscio. */
     public static final String DATARILASCIO_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$";
 
-    /** Espressione regolare che definisce il formato del campo luogo di nascita. */
+    /** Espressione regolare che definisce il formato del campo rh. */
     public static final String RH_REGEX = "^(POS|NEG)";
 
-    /** Espressione regolare che definisce il formato del campo luogo di nascita. */
+    /** Espressione regolare che definisce il formato del campo gruppo sanguigno. */
     public static final String GRUPPOSANGUIGNO_REGEX = "^(0-|0\\+|A-|A\\+|B-|B\\+|AB-|AB\\+)";
 }

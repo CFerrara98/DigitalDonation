@@ -5,11 +5,9 @@ import java.util.Date;
 
 public class AutodichiarazioneIndisponibilitaForm {
 
-
-    public AutodichiarazioneIndisponibilitaForm(Date dataProssimaDisponibilita, String motivazioni, String nomeMedico){
+    public AutodichiarazioneIndisponibilitaForm(Date dataProssimaDisponibilita, String motivazioni){
         this.dataProssimaDisponibilita = dataProssimaDisponibilita;
         this.motivazioni = motivazioni;
-        this.nomeMedico = nomeMedico;
     }
 
     /**
@@ -51,20 +49,8 @@ public class AutodichiarazioneIndisponibilitaForm {
      *
      * @return nomeMedico è il nome del medico dell'autodichiarazione di indisponibilità.
      */
-    public String getNomeMedico() {
-        return nomeMedico;
-    }
-    /**
-     * Metodo che setta il nome del medico dell'autodichiarazione di indisponibilità.
-     *
-     * @param nomeMedico è il nome del medico dell'autodichiarazione di indisponibilità.
-     */
-    public void setNomeMedico(String nomeMedico) {
-        this.nomeMedico = nomeMedico;
-    }
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dataProssimaDisponibilita;
     private String motivazioni;
-    private String nomeMedico;
 }
