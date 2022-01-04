@@ -38,20 +38,29 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
     /**
      * Questo metodo permette di registrare una nuova donazione da parte di un donatore e aggiorna il tesserino del donatore.
      *
-     * @param donatore Il donatore
-     * @param seduta La seduta
+     * @param codiceFiscaleDonatore Il codice fiscale del donatore
+     * @param idSeduta L'id della seduta
+     * @param tipoDonazione Il tipo d donazione
+     * @return donazione La donazione
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Donazione salvataggioDonazione(Donatore donatore, Seduta seduta, String tipoDonazione) throws CannotSaveDataRepositoryException {
+    public Donazione salvataggioDonazione(String codiceFiscaleDonatore, Long idSeduta, String tipoDonazione) throws CannotSaveDataRepositoryException {
         Donazione donazione = new Donazione();
         Tesserino tesserino;
+        List<Seduta> listaSedute;
+        Indisponibilita indisponibilita = new Indisponibilita();
+
+        Donatore donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore);
+        Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
+
         if (donatore == null){
             throw new CannotSaveDataRepositoryException("donatoreError", "Errore, il donatore è null");
         }
         else if(seduta == null){
             throw new CannotSaveDataRepositoryException("sedutaError", "Errore, la seduta è null");
         }
+
         else if(sedutaRepository.existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(seduta.getIdSeduta(), donatore.getCodiceFiscale())){
             donazione = new Donazione(seduta.getDataSeduta(), tipoDonazione);
             donazioneRepository.save(donazione);
@@ -59,6 +68,26 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
             tesserino.addDonazione(donazione);
             tesserinoRepository.save(tesserino);
         }
+
+        indisponibilita.setCodiceFiscaleDonatore(codiceFiscaleDonatore);
+        //La data deve essere calcolata nel segente modo: 5 mesi dopo la data attuale.
+        indisponibilita.setDataProssimaDisponibilita(new Date());
+        indisponibilita.setMotivazioni("donazione");
+        indisponibilitaRepository.save(indisponibilita);
+
+        listaSedute = sedutaRepository.findAll();
+        for(Seduta s: listaSedute){
+            if(s.getDataSeduta().before(indisponibilita.getDataProssimaDisponibilita())){
+                for(int i = 0; i < s.getListaDonatore().size(); i++){
+                    if(s.getListaDonatore().get(i).getCodiceFiscale().equals(codiceFiscaleDonatore)){
+                        s.getListaDonatore().remove(i);
+                        i--;
+                    }
+                }
+                sedutaRepository.save(s);
+            }
+        }
+
         return donazione;
     }
 
@@ -68,6 +97,7 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
      * @param codiceFiscaleDonatore è il codice fiscale del donatore
      * @param idSeduta è l'id della seduta
      * @param indisponibilitaDonazioneForm è il form dell'indisponibilità della donazione
+     * @return indisponibilita L'indisponiblità
      */
     @Override
     @Transactional(rollbackFor = Exception.class)

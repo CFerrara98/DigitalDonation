@@ -12,7 +12,7 @@ import java.util.Date;
 
 public interface GestioneSeduteServiceInterface {
 
-    public Donazione salvataggioDonazione(Donatore donatore, Seduta seduta, String tipoDonazione) throws CannotSaveDataRepositoryException;
+    public Donazione salvataggioDonazione(String codiceFiscaleDonatore, Long idSeduta, String tipoDonazione) throws CannotSaveDataRepositoryException;
 
     public Indisponibilita salvataggioIndisponibilita(String codiceFiscaleDonatore, Long idSeduta, IndisponibilitaDonazioneForm indisponibilitaDonazioneForm) throws CannotSaveDataRepositoryException;
 
