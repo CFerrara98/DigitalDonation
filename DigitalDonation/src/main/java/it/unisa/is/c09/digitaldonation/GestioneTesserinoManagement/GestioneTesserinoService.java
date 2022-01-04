@@ -448,21 +448,14 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      *
      * @param motivazioni Stringa che rappresenta il nome da controllare
      * @return nome La stringa che rappresenta il nome da controllare validato
-     * @throws GuestFormException se il nome non è specificato oppure se non
-     *                            rispetta il formato {@link Guest#NOME_COGNOME_REGEX}
+     * @throws TesserinoFormException se il nome non è specificato oppure se non
+     *                            rispetta il formato {@link Tesserino#MOTIVAZIONI_REGEX}
      */
     public String validaMotivazioni(String motivazioni) throws TesserinoFormException {
-        if (motivazioni == null) {
-            logger.info("Motivazioni nulle");
-            throw new TesserinoFormException("MotivazioneError", "Le motivazioni di indisponibilità non rispettano il formato ");
-        } else {
-            if (!motivazioni.matches(Tesserino.MOTIVAZIONI_REGEX)) {
-                logger.info("Regex non matcha");
+        /*if (!motivazioni.matches(Tesserino.MOTIVAZIONI_REGEX)) {
                 throw new TesserinoFormException("MotivazioneError", "Le motivazioni di indisponibilità non rispettano il formato ");
-            } else {
-                return motivazioni;
-            }
-        }
+            }*/
+        return motivazioni;
     }
 
     /**

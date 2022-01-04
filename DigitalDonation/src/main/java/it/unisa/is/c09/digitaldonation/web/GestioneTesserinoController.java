@@ -45,10 +45,11 @@ public class GestioneTesserinoController {
     public String autodichiarazioneDiIndisponibilita(HttpServletRequest request, @ModelAttribute AutodichiarazioneIndisponibilitaForm autodichiarazioneForm,
                   BindingResult result, RedirectAttributes redirectAttribute, Model model){
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-
+        logger.info("Motivazioni appena arrivato nella servlet"+autodichiarazioneForm.getMotivazioni());
         autodichiarazioneFormValidate.validate(autodichiarazioneForm, result);
         if(result.hasErrors()){
             redirectAttribute.addFlashAttribute("autodichiarazioneForm", autodichiarazioneForm);
+            logger.info("Errore nel matching");
             for (ObjectError x : result.getGlobalErrors()) {
                 redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
             }
@@ -62,8 +63,6 @@ public class GestioneTesserinoController {
 
             try {
                 gestioneTesserinoService.autodichiarazioneIndisponibilita(indisponibilita);
-                model.addAttribute("success", "Autodichiarazione compilata con successo");
-                return "GUIGestioneUtente/dasboardDonatore";
             } catch (CannotSaveDataRepositoryException e) {
                 redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
                 return "redirect:/goAutodichiarazioneIndisponibilita";
@@ -73,6 +72,8 @@ public class GestioneTesserinoController {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
             return "redirect:/error";
         }
+        model.addAttribute("success", "Autodichiarazione compilata con successo");
+        return "GUIGestioneUtente/dashboardDonatore";
     }
 
     /**
