@@ -11,6 +11,7 @@ import org.springframework.validation.Validator;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Logger;
 
 /**
  * Classe che definisce un validatore per {@link AutodichiarazioneIndisponibilitaForm}.
@@ -22,6 +23,7 @@ import java.util.GregorianCalendar;
 @Component
 public class AutodichiarazioneIndisponibilitaFormValidate implements Validator {
 
+    private static Logger logger = Logger.getLogger(String.valueOf(AutodichiarazioneIndisponibilitaFormValidate.class));
     @Autowired
     private GestioneTesserinoService gestioneTesserinoService;
 

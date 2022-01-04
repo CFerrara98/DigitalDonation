@@ -10,6 +10,7 @@ public class AutodichiarazioneIndisponibilitaForm {
         this.motivazioni = motivazioni;
     }
 
+    public AutodichiarazioneIndisponibilitaForm(){}
     /**
      * Metodo che ritorna la data di disponbilità dell'autodichiarazione di indisponibilità.
      *

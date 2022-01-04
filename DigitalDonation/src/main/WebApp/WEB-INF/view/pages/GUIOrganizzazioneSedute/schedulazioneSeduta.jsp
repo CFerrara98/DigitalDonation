@@ -10,8 +10,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
-
-
 <z:layout pageTitle="schedulazione Seduta">
 
     <!-- Page Wrapper -->
@@ -136,6 +134,7 @@
                                                                 <form:input type="text"
                                                                             class="form-control form-control-user is-invalid"
                                                                             id="cap"
+                                                                            maxlength="5"
                                                                             placeholder="es. 84100" path="CAP"/>
                                                                 <span class="myError">${CAPError}</span>
                                                             </c:otherwise>
@@ -156,6 +155,7 @@
                                                                 <form:input type="text"
                                                                             class="form-control form-control-user is-invalid"
                                                                             id="provincia" placeholder="es. SA"
+                                                                            maxlength="2"
                                                                             path="provincia"/>
                                                                 <span class="myError">${ProvinciaError}</span>
                                                             </c:otherwise>
