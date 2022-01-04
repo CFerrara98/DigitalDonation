@@ -29,6 +29,16 @@
                     <h1>&nbsp;</h1>
                     <h1 class=" mb-4" style="text-align: center">Dashboard Donatore</h1>
 
+                    <c:choose>
+                        <c:when test="${success != null}">
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading"><i class="fas fa-calendar-check"
+                                                             style="font-size: 36px"> </i> &nbsp <b>Complimenti!</b>  ${success}
+                                </h4>
+                            </div>
+                        </c:when>
+                    </c:choose>
+
                     <!-- Content Row -->
                     <div class="row ">
 

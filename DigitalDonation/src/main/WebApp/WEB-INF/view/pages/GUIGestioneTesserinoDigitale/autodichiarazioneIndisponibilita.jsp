@@ -4,15 +4,15 @@
   Date: 03/01/22
   Time: 16:00
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
 
 <z:layout pageTitle="autodichiarazioneIndisponibilita">
 <!-- Page Wrapper -->
-<div id="wrapper">
+ <div id="wrapper">
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -46,7 +46,7 @@
                                         <div class="text-center">
                                             <h3 class="h4 text-gray-900 mb-4">Compila il form per l'autodichiarazione d'indisponibilità</h3>
                                         </div>
-                                            <%--@elvariable id="autodichiarazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
+                                            <%--@elvariable id="autodichiarazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.AutodichiarazioneIndisponibilitaForm"--%>
                                         <form:form action="./autodichiarazioneIndisponibilita" method="post" modelAttribute="autodichiarazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
                                         <div class="form-group">
                                                 <p style="color:#4e73df;">Data prossima disponibilità: </p>
@@ -77,15 +77,16 @@
                                             <br>
                                             <input type="submit" value="Conferma" class="btn btn-primary btn-user btn-block">
                                             </form:form>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /.container-fluid -->
                 </div>
+                <!-- /.container-fluid -->
             </div>
-            <!-- End of Main Content -->
+        </div>
+        <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white ">
@@ -97,9 +98,9 @@
             </footer>
             <!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
-
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
+
+ </div>
+ <!-- End of Page Wrapper -->
 </z:layout>

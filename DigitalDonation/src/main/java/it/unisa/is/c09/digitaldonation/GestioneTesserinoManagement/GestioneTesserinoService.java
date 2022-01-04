@@ -11,6 +11,7 @@ import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.IndisponibilitaRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.TesserinoRepository;
+import it.unisa.is.c09.digitaldonation.web.OrganizzazioneSeduteController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +20,12 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class GestioneTesserinoService implements GestioneTesserinoServiceInterface {
 
-
+    private static Logger logger = Logger.getLogger(String.valueOf(GestioneTesserinoService.class));
 
     @Autowired
     private TesserinoRepository tesserinoRepository;
@@ -60,33 +62,28 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     /**
      * Questo metodo permette di dichiarare l'indisponibilità di un donatore a donare
      *
-     * @param data la data di disponibilità
-     * @param motivazione motivazione di indisponibilità
+     * @param indisponibilita è l'oggetto che rappresenta l'indisponibilità.
      * @return l'indisponibilità
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Indisponibilita autodichiarazioneIndisponibilita(Date data, String motivazione, String codiceFiscaleDonatore) throws CannotSaveDataRepositoryException {
+    public Indisponibilita autodichiarazioneIndisponibilita(Indisponibilita indisponibilita) throws CannotSaveDataRepositoryException {
 
         List<Seduta> listaSedute;
-        Indisponibilita indisponibilita = new Indisponibilita();
-        if (data == null){
+        if (indisponibilita.getDataProssimaDisponibilita() == null){
             throw new CannotSaveDataRepositoryException("autodichiarazioneError", "Errore, la data è null");
         }
-        else if(motivazione == null){
+        else if(indisponibilita.getDataProssimaDisponibilita() == null){
             throw new CannotSaveDataRepositoryException("autodichiarazioneError", "Errore, la motivazione è null");
         }
 
-        indisponibilita.setDataProssimaDisponibilita(data);
-        indisponibilita.setMotivazioni(motivazione);
-        indisponibilita.setCodiceFiscaleDonatore(codiceFiscaleDonatore);
         indisponibilitaRepository.save(indisponibilita);
 
         listaSedute = sedutaRepository.findAll();
         for(Seduta s: listaSedute){
             if(s.getDataSeduta().before(indisponibilita.getDataProssimaDisponibilita())){
                 for(int i = 0; i < s.getListaDonatore().size(); i++){
-                    if(s.getListaDonatore().get(i).getCodiceFiscale().equals(codiceFiscaleDonatore)){
+                    if(s.getListaDonatore().get(i).getCodiceFiscale().equals(indisponibilita.getCodiceFiscaleDonatore())){
                         s.getListaDonatore().remove(i);
                         i--;
                     }
@@ -94,10 +91,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
                 sedutaRepository.save(s);
             }
         }
-
-
         return indisponibilita;
-
     }
 
 
@@ -459,17 +453,17 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     public String validaMotivazioni(String motivazioni) throws TesserinoFormException {
         if (motivazioni == null) {
+            logger.info("Motivazioni nulle");
             throw new TesserinoFormException("MotivazioneError", "Le motivazioni di indisponibilità non rispettano il formato ");
         } else {
             if (!motivazioni.matches(Tesserino.MOTIVAZIONI_REGEX)) {
+                logger.info("Regex non matcha");
                 throw new TesserinoFormException("MotivazioneError", "Le motivazioni di indisponibilità non rispettano il formato ");
             } else {
                 return motivazioni;
             }
         }
     }
-
-
 
     /**
      * Controlla che il la data di nascita di un tesserino sia specificato e che rispetti il formato

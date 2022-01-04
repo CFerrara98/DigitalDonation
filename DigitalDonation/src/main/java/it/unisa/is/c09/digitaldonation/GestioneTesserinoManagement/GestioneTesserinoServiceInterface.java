@@ -11,7 +11,7 @@ public interface GestioneTesserinoServiceInterface {
 
     public Tesserino creazioneTesserino(Tesserino tesserino) throws CannotSaveDataRepositoryException;
 
-    public Indisponibilita autodichiarazioneIndisponibilita(Date data, String motivazione, String codiceFiscaleDonatore) throws CannotSaveDataRepositoryException;
+    public Indisponibilita autodichiarazioneIndisponibilita(Indisponibilita indisponibilita) throws CannotSaveDataRepositoryException;
 
     public Tesserino aggiornaTesserino(Tesserino tesserino) throws CannotUpdateDataRepositoryException;
 

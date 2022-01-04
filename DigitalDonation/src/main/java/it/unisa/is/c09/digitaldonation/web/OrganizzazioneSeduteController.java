@@ -256,7 +256,6 @@ public class OrganizzazioneSeduteController {
         return "GUIOrganizzazioneSedute/schedulazioneSeduta";
     }
 
-
     /**
      * Metodo che permette di andare alla pagina di inserimento utente guest.
      *
@@ -271,7 +270,6 @@ public class OrganizzazioneSeduteController {
         model.addAttribute("idSeduta", idSeduta);
         return "GUIOrganizzazioneSedute/inserimentoUtenteGuest";
     }
-
 
     /**
      * Metodo che permette all'operatore di poter inserire un utente guest all'interno di una seduta.
