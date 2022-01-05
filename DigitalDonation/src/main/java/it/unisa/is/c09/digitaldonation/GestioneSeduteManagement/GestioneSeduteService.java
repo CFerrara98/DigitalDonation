@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -63,15 +65,21 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
 
         else if(sedutaRepository.existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(seduta.getIdSeduta(), donatore.getCodiceFiscale())){
             donazione = new Donazione(seduta.getDataSeduta(), tipoDonazione);
-            donazioneRepository.save(donazione);
+
+
             tesserino = tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale());
+            donazione.setTesserino(tesserino);
+            donazioneRepository.save(donazione);
             tesserino.addDonazione(donazione);
             tesserinoRepository.save(tesserino);
         }
 
         indisponibilita.setCodiceFiscaleDonatore(codiceFiscaleDonatore);
         //La data deve essere calcolata nel seguente modo: 5 mesi dopo la data attuale.
-        indisponibilita.setDataProssimaDisponibilita(new Date());
+
+        Calendar myCalendar = new GregorianCalendar(2023, 1, 1);
+
+        indisponibilita.setDataProssimaDisponibilita(myCalendar.getTime());
         indisponibilita.setMotivazioni("donazione");
         indisponibilitaRepository.save(indisponibilita);
 
@@ -87,7 +95,6 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
                 sedutaRepository.save(s);
             }
         }
-
         return donazione;
     }
 
@@ -148,10 +155,12 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
      *                            rispetta il formato {@link Donazione#TIPODONAZIONE_REGEX}
      */
     public String validaTipoDonazione(String tipoDonazione) throws ConfermaDonazioneFormException {
+        System.err.println("Prova donazione"+tipoDonazione);
         if (tipoDonazione == null) {
             throw new ConfermaDonazioneFormException("TipoDonazioneError", "Il formato del tipo di donazione è errato.");
         } else {
             if (!tipoDonazione.matches(Donazione.TIPODONAZIONE_REGEX)) {
+                System.err.println("ECCEZIONE FANTASTICA");
                 throw new ConfermaDonazioneFormException("TipoDonazioneError", "Il formato del tipo di donazione è errato.");
             } else {
                 return tipoDonazione;

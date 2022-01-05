@@ -50,8 +50,9 @@
                                 <!-- menu tendina -->
                                 <div class="container">
 
+                                    <!--
                                         <%--@elvariable id="confermaDonazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.ConfermaDonazioneForm"--%>
-                                    <form:form action="./SalvataggioDonazione" method="post" modelAttribute="confermaDonazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
+                                    <form:form action="./salvataggioDonazione" method="post" modelAttribute="confermaDonazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
 
                                         <div class="form-group row">
                                             <div class="col-sm-4 mb-3 mb-sm-0">
@@ -60,6 +61,7 @@
                                             </div>
 
                                             <div class="col-sm-6">
+
 
                                                 <form:select name="gruppoSanguigno"
                                                              id="gruppoSanguigno"
@@ -85,29 +87,49 @@
                             </div>
 
                                     </form:form>
+                                    -->
+
+                                    <form action="./salvataggioDonazione" method="post" id="form">
+                                        <div class="form-check">
+                                            <div class="col-sm-8 mb-3 mb-sm-0">
+                                            <select name="gruppoSanguigno"
+                                                    id="gruppoSanguigno"
+                                                    class="form-control gruppo-sanguigno">
+                                                <option selected="true" value="plasma">Plasma</option>
+                                                <option value="cito">Cito</option>
+                                                <option value="sangue">Sangue</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <input type="submit" value="Conferma" class="btn btn-primary">
+                                    </form>
+
+                                </div>
+                            </div>
                         </div>
+
                     </div>
+                    <!-- /.container-fluid -->
+
                 </div>
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
         <!-- End of Main Content -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Digital Donation 2021</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Digital Donation 2021</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
-    </div>
+            </div>
     <!-- End of Content Wrapper -->
 
+        </div>
+    </div>
 </div>
 <!-- End of Page Wrapper -->
 

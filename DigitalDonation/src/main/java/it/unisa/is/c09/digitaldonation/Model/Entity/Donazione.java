@@ -97,7 +97,7 @@ public class Donazione implements Serializable {
     }
 
     /** Espressioni regolare che definisce il formato del campo tipo donazione */
-    public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)$ ";
+    public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)$";
 
     public Tesserino getTesserino() {
         return tesserino;

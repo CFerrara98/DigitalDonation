@@ -129,13 +129,14 @@ public class GestioneSeduteController {
      * @param model è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
-    @RequestMapping(value = "/SalvataggioDonazione", method = RequestMethod.POST)
+    @RequestMapping(value = "/salvataggioDonazione", method = RequestMethod.POST)
     public String indisponibilitaByOperatorePost(HttpServletRequest request, @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
                                                  RedirectAttributes redirectAttribute, BindingResult result, Model model, @RequestParam(name = "gruppoSanguigno")String gruppoSanguigno) {
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
-        String codiceFiscale = (String)  request.getSession().getAttribute("codiceFiscale");
 
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        String codiceFiscale = (String) request.getSession().getAttribute("codiceFiscale");
         Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
+
         try{
             if(utente == null) new IllegalArgumentException();
             if(codiceFiscale.matches(Utente.CF_REGEX));
@@ -143,6 +144,7 @@ public class GestioneSeduteController {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
             return "redirect:/error";
         }
+        confermaDonazioneForm.setTipoDonazione(gruppoSanguigno);
         confermaDonazioneFormValidate.validate(confermaDonazioneForm,result);
         if(result.hasErrors()){
             redirectAttribute.addFlashAttribute("confermaDonazioneForm",confermaDonazioneForm);
@@ -152,7 +154,7 @@ public class GestioneSeduteController {
             return "/GUIGestioneSedute/confermaDonazione";
         }
 
-        String tipoDonazione = null;//TODO il bottone in conferma donazione non funziona
+        String tipoDonazione = null;
         if(gruppoSanguigno.equals("plasma")){
             tipoDonazione = "plasma";
         }else if(gruppoSanguigno.equals("cito")){
@@ -160,6 +162,7 @@ public class GestioneSeduteController {
         }else if(gruppoSanguigno.equals("sangue")){
             tipoDonazione = "sangue";
         }
+        System.err.println(tipoDonazione);
 
         try {
             gestioneSeduteService.salvataggioDonazione(codiceFiscale,idSeduta,tipoDonazione);
@@ -168,6 +171,6 @@ public class GestioneSeduteController {
             return "redirect:/error";
         }
         model.addAttribute("success","Salvataggio donazione avvenuto con successo!");
-        return "redirect:/goElencoPartecipanti?idSeduta="+model.getAttribute("idSeduta");
+        return "redirect:/goElencoPartecipanti?idSeduta="+idSeduta;
     }
 }
