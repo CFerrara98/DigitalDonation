@@ -432,6 +432,52 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     }
 
     /**
+     * Controlla che il la data di donazione di un tesserino sia specificato e che rispetti il formato
+     * prestabilito.
+     *
+     * @param dataDonazione Stringa che rappresenta la data di donazione da controllare
+     * @return dataDonazione La stringa che rappresenta la data di donazione da controllare validata
+     * @throws TesserinoFormException se la data di donazione non è specificata oppure se non
+     *                            rispetta il formato {@link Tesserino#DATARILASCIO_REGEX}
+     */
+    public Date validaDataDonazione(Date dataDonazione) throws TesserinoFormException {
+        Date date = new Date();
+        if (dataDonazione == null) {
+            throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa ");
+        } else {
+            if (!(parsDateToString(dataDonazione).matches(Tesserino.DATARILASCIO_REGEX))) {
+                throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa ");
+            } else if (dataDonazione.after(date)) {
+                throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non può superare la data attuale. ");
+            }
+            return dataDonazione;
+        }
+    }
+
+    /**
+     * Controlla che il tipo di donazione di un tesserino sia specificato e che rispetti il formato
+     * prestabilito.
+     *
+     * @param tipoDonazione Stringa che rappresenta l'rh da controllare
+     * @return tipoDonazione La stringa che rappresenta l'rh da controllare validato
+     * @throws TesserinoFormException se il tipo donazione non è specificato oppure se non
+     *                            rispetta il formato {@link Tesserino#TIPODONAZIONE_REGEX}
+     */
+    public String validaTipoDonazione(String tipoDonazione) throws TesserinoFormException {
+        if (tipoDonazione == null) {
+            throw new TesserinoFormException("TesserinoTipoDonazioneError", "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue” ");
+        } else {
+            if (!tipoDonazione.matches(Tesserino.TIPODONAZIONE_REGEX)) {
+                throw new TesserinoFormException("TesserinoTipoDonazioneError", "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue” ");
+            } else {
+                return tipoDonazione;
+            }
+        }
+    }
+
+
+
+    /**
      * Controlla che le motivazioni di una indisponibilità siano specificato e che rispetti il formato
      * prestabilito.
      *

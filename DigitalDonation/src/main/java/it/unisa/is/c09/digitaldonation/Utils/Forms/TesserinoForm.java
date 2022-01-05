@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TesserinoForm {
 
-    public TesserinoForm(String nome, String cognome, String codiceFiscale, Image image, Date dataNascita, String luogoNascita, String residenza, String email, String gruppoSanguigno, String rh, String altreIndicazioni, int numeroMatricola, int numeroTessera, Date dataRilascio, List<it.unisa.is.c09.digitaldonation.Utils.Forms.ConfermaDonazioneForm> confermaDonazioneForm) {
+    public TesserinoForm(String nome, String cognome, String codiceFiscale, Image image, Date dataNascita, String luogoNascita, String residenza, String email, String gruppoSanguigno, String rh, String altreIndicazioni, int numeroMatricola, int numeroTessera, Date dataRilascio, Date dataDonazione, String tipoDonazione) {
         this.nome = nome;
         this.cognome = cognome;
         this.codiceFiscale = codiceFiscale;
@@ -23,7 +23,8 @@ public class TesserinoForm {
         this.numeroMatricola = numeroMatricola;
         this.numeroTessera = numeroTessera;
         this.dataRilascio = dataRilascio;
-        ConfermaDonazioneForm = confermaDonazioneForm;
+        this.dataDonazione=dataDonazione;
+        this.tipoDonazione=tipoDonazione;
     }
 
     /**
@@ -265,20 +266,39 @@ public class TesserinoForm {
     }
 
     /**
-     * Metodo che ritorna la lista delle donazioni confermate con successo.
+     * Metodo che ritorna la data di una donazione.
      *
-     * @return ConfermaDonazioneForm è la lista delle donazioni confermate con successo.
+     * @return dataDonazione la data di una donazione
      */
-    public List<it.unisa.is.c09.digitaldonation.Utils.Forms.ConfermaDonazioneForm> getConfermaDonazioneForm() {
-        return ConfermaDonazioneForm;
+    public Date getDataDonazione() {
+        return dataDonazione;
     }
+
     /**
-     * Metodo che setta la lista delle donazioni confermate con successo.
+     * Metodo che setta la data di una donazione.
      *
-     * @param confermaDonazioneForm è la lista delle donazioni confermate con successo.
+     * @param dataDonazione la data di una donazione.
      */
-    public void setConfermaDonazioneForm(List<it.unisa.is.c09.digitaldonation.Utils.Forms.ConfermaDonazioneForm> confermaDonazioneForm) {
-        ConfermaDonazioneForm = confermaDonazioneForm;
+    public void setDataDonazione(Date dataDonazione) {
+        this.dataDonazione = dataDonazione;
+    }
+
+    /**
+     * Metodo che ritorna il tipo di donazione.
+     *
+     * @return tipoDonazione il tipo di donazione.
+     */
+    public String getTipoDonazione() {
+        return tipoDonazione;
+    }
+
+    /**
+     * Metodo che setta la data di una donazione.
+     *
+     * @param tipoDonazione il tipo di donazione.
+     */
+    public void setTipoDonazione(String tipoDonazione) {
+        this.tipoDonazione = tipoDonazione;
     }
 
     private String nome;
@@ -297,6 +317,8 @@ public class TesserinoForm {
     private int numeroTessera;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dataRilascio;
-    private List<it.unisa.is.c09.digitaldonation.Utils.Forms.ConfermaDonazioneForm> ConfermaDonazioneForm;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date dataDonazione;
+    private String tipoDonazione;
 
 }

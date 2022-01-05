@@ -27,7 +27,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <div class="card-body">
                             <!-- indietro -->
-                            <a href="./dashboardOperatore" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
+                            <a href="./dashboardDonatore" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
 
                             <!-- titolo -->
                             <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Creazione Tesserino</h1>
@@ -55,7 +55,7 @@
                                                 <div class="card-body">
 
                                                 <div class="form-group row">
-                                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                                         <p style="color:#4e73df;">Nome: </p>
                                                         <c:choose>
                                                             <c:when test="${TesserinoNomeError == null}">
@@ -81,15 +81,15 @@
                                                             </c:choose>
                                                     </div>
 
-                                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                                        <p style="color:#4e73df;">Codice Fiscale: </p>
+                                                    <div class="col-sm-5 mb-3 mb-sm-0">
+                                                        <p style="color:#4e73df;">Data di nascita: </p>
                                                         <c:choose>
-                                                            <c:when test="${TesserinoCodiceFiscaleError == null}">
-                                                                <form:input type="text" class="form-control form-control-user" id="codiceFiscaleTesserino" placeholder="es. MVYZZV65L56I556J" path="codiceFiscale"/>
+                                                            <c:when test="${TesserinoDataNascitaError == null}">
+                                                                <form:input type="date" class="form-control form-control-user" id="data" placeholder="es. 03/01/1998" path="dataNascita"/>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <form:input type="text" class="form-control form-control-user is-invalid" id="codiceFiscaleTesserino" placeholder="es. MVYZZV65L56I556J" path="codiceFiscale"/>
-                                                                <span class="myError">${TesserinoCodiceFiscaleError}</span>
+                                                                <form:input type="date" class="form-control form-control-user is-invalid" id="data" placeholder="es. 03/01/1998" path="dataNascita"/>
+                                                                <span class="myError">${TesserinoDataNascitaError}</span>
                                                             </c:otherwise>
                                                         </c:choose>
 
@@ -99,20 +99,20 @@
                                                 <div class="form-group">
 
                                                     <div class="form-group row">
-                                                        <div class="col-sm-4 mb-3 mb-sm-0">
-                                                            <p style="color:#4e73df;">Data di nascita: </p>
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <p style="color:#4e73df;">Codice Fiscale: </p>
                                                             <c:choose>
-                                                                <c:when test="${TesserinoDataNascitaError == null}">
-                                                                    <form:input type="date" class="form-control form-control-user" id="data" placeholder="es. 03/01/1998" path="dataNascita"/>
+                                                                <c:when test="${TesserinoCodiceFiscaleError == null}">
+                                                                    <form:input type="text" class="form-control form-control-user" id="codiceFiscaleTesserino" placeholder="es. MVYZZV65L56I556J" path="codiceFiscale"/>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    <form:input type="date" class="form-control form-control-user is-invalid" id="data" placeholder="es. 03/01/1998" path="dataNascita"/>
-                                                                    <span class="myError">${TesserinoDataNascitaError}</span>
+                                                                    <form:input type="text" class="form-control form-control-user is-invalid" id="codiceFiscaleTesserino" placeholder="es. MVYZZV65L56I556J" path="codiceFiscale"/>
+                                                                    <span class="myError">${TesserinoCodiceFiscaleError}</span>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </div>
 
-                                                        <div class="col-sm-4 mb-3 mb-sm-0">
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
                                                             <p style="color:#4e73df;">Luogo di nascita: </p>
                                                             <c:choose>
                                                                 <c:when test="${TesserinoLuogoNascitaError == null}">
@@ -125,20 +125,21 @@
                                                             </c:choose>
                                                         </div>
 
-                                                        <div class="col-sm-4">
-                                                            <p style="color:#4e73df;">Residenza: </p>
-                                                            <c:choose>
-                                                                <c:when test="${TesserinoResidenzaError == null}">
-                                                                    <form:input type="text" class="form-control form-control-user" id="residenza" placeholder="es. Salerno" path="residenza"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <form:input type="text" class="form-control form-control-user is-invalid" id="residenza" placeholder="es. Salerno" path="residenza"/>
-                                                                    <span class="myError">${TesserinoResidenzaError}</span>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </div>
                                                     </div>
                                                 </div>
+
+                                                    <p style="color:#4e73df;">Residenza: </p>
+                                                    <c:choose>
+                                                        <c:when test="${TesserinoResidenzaError == null}">
+                                                            <form:input type="text" class="form-control form-control-user" id="residenza" placeholder="es. Via Garibaldi, 45, Cava de' Tirreni, Salerno" path="residenza"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <form:input type="text" class="form-control form-control-user is-invalid" id="residenza" placeholder="es. Via Garibaldi, 45, Cava de' Tirreni, Salerno" path="residenza"/>
+                                                            <span class="myError">${TesserinoResidenzaError}</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <br>
+
 
 
                                                 <p style="color:#4e73df;">Email: </p>
@@ -158,7 +159,7 @@
                                                         <div class="col-sm-5 mb-3 mb-sm-0">
 
                                                             <!--Menu' a tendina per l'inserimento del gruppo sanguigno-->
-                                                                <label for="gruppoSanguigno" style="color:#4e73df;">Inserisci  il gruppo sanguigno:
+                                                                <label for="gruppoSanguigno" style="color:#4e73df;">Gruppo sanguigno:
                                                                 </label>
                                                                 <form:select name="gruppoSanguigno" id="gruppoSanguigno" class="form-control gruppo-sanguigno" path="gruppoSanguigno">
                                                                     <form:option selected="true" value="A ">A
@@ -249,7 +250,7 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </div>
-
+                                                    <br>
                                                 </div>
                                             </div>
 
@@ -260,7 +261,7 @@
 
                                             <div class="card shadow mb-4">
                                                 <div class=" m-0 card-header py-3">
-                                                    <h6 class="m-0 font-weight-bold text-primary h6">Dati donazioni compiute:</h6>
+                                                    <h6 class="m-0 font-weight-bold text-primary h6">Inserisci l'ultima donazione:</h6>
                                                 </div>
                                                 <div class="card-body">
 
@@ -274,26 +275,26 @@
                                                                 <form:input type="date" class="form-control form-control-user is-invalid" id="data" placeholder="es. 04/01/2022" path="dataDonazione"/>
                                                                 <span class="myError">${TesserinoDataNascitaError}</span>
                                                             </c:otherwise>
-                                                        </c:choose>04/01/2022
+                                                        </c:choose>
                                                     </div>
-
+                                                        <br>
 
                                                     <div class="col-sm-12 mb-3 mb-sm-0">
 
                                                         <!--Menu' a tendina per l'inserimento del gruppo sanguigno-->
 
                                                         <label for="gruppoSanguigno" style="color:#4e73df;">Tipo donazione: </label>
-                                                        <form:select name="gruppoSanguigno" id="gruppoSanguigno" class="form-control gruppo-sanguigno" path="tipodonazione">
-                                                            <form:option selected="true" value="Donazione tradizionale ">Donazione tradizionale
+                                                        <form:select name="gruppoSanguigno" id="gruppoSanguigno" class="form-control gruppo-sanguigno" path="tipoDonazione">
+                                                            <form:option selected="true" value="plasma ">plasma
                                                             </form:option>
-                                                            <form:option value="Plasmaferesi"> Plasmaferesi
+                                                            <form:option value="cito"> cito
                                                             </form:option>
-                                                            <form:option value="Citoaferesi"> Citoaferesi
+                                                            <form:option value="sangue"> sangue
                                                             </form:option>
                                                         </form:select>
                                                     </div>
 
-
+                                                <br>
                                                 </div>
                                             </div>
 

@@ -95,7 +95,7 @@ public class GestioneTesserinoController {
     }
 
     @RequestMapping(value = "/goCreazioneTesserino", method = RequestMethod.GET)
-    public String gocreazioneTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
+    public String gocreazioneTesserino(  HttpServletRequest request, @ModelAttribute("tesserinoForm") TesserinoForm tesserinoForm, BindingResult result,  RedirectAttributes redirectAttribute, Model model){
 
         return "GUIGestioneTesserinoDigitale/creazioneTesserino";
     }

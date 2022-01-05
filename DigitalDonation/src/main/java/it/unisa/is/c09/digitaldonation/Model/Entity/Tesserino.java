@@ -224,6 +224,8 @@ public class Tesserino implements Serializable {
     /** Espressione regolare che definisce il formato del campo altre Indicazioni. */
     public static final String ALTREINDICAZIONI_REGEX = "[A-Za-z0-9 _.,!\"'\\/$\\n]{2,500} ";
 
+    /** Espressione regolare che definisce il formato del campo rh. */
+    public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)";
 
     /** Espressione regolare che definisce il formato del campo motivazioni. */
     public static final String MOTIVAZIONI_REGEX = "[A-Za-z0-9 _.,!\"'\\/$\\n]{2,500} ";

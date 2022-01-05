@@ -151,6 +151,25 @@ public class TesserinoFormValidate implements Validator {
             Calendar myCalendar = new GregorianCalendar(2022, 1, 1);
             tesserinoForm.setDataRilascio(myCalendar.getTime());
         }
+
+
+        //Valida Campo Data Donazione
+        try {
+            gestioneTesserinoService.validaDataDonazione(tesserinoForm.getDataDonazione());
+        } catch (TesserinoFormException e1) {
+            errors.reject("TesserinoDataDonazioneError", e1.getMessage());
+            Calendar myCalendar = new GregorianCalendar(2022, 1, 1);
+            tesserinoForm.setDataDonazione(myCalendar.getTime());
+        }
+
+        //Valida tipo di donazione
+        try {
+            gestioneTesserinoService.validaTipoDonazione(tesserinoForm.getTipoDonazione());
+        } catch (TesserinoFormException e1) {
+            errors.reject("TesserinoTipoDonazioneError", e1.getMessage());
+            tesserinoForm.setTipoDonazione("");
+        }
+
         return;
     }
 }
