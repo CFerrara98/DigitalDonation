@@ -76,10 +76,10 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
 
         indisponibilita.setCodiceFiscaleDonatore(codiceFiscaleDonatore);
         //La data deve essere calcolata nel seguente modo: 5 mesi dopo la data attuale.
+        Date data = new Date();
+        data.setMonth(data.getMonth()+5);
 
-        Calendar myCalendar = new GregorianCalendar(2023, 1, 1);
-
-        indisponibilita.setDataProssimaDisponibilita(myCalendar.getTime());
+        indisponibilita.setDataProssimaDisponibilita(data);
         indisponibilita.setMotivazioni("donazione");
         indisponibilitaRepository.save(indisponibilita);
 
@@ -155,12 +155,11 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
      *                            rispetta il formato {@link Donazione#TIPODONAZIONE_REGEX}
      */
     public String validaTipoDonazione(String tipoDonazione) throws ConfermaDonazioneFormException {
-        System.err.println("Prova donazione"+tipoDonazione);
+
         if (tipoDonazione == null) {
             throw new ConfermaDonazioneFormException("TipoDonazioneError", "Il formato del tipo di donazione è errato.");
         } else {
             if (!tipoDonazione.matches(Donazione.TIPODONAZIONE_REGEX)) {
-                System.err.println("ECCEZIONE FANTASTICA");
                 throw new ConfermaDonazioneFormException("TipoDonazioneError", "Il formato del tipo di donazione è errato.");
             } else {
                 return tipoDonazione;

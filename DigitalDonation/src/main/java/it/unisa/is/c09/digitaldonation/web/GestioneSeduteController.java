@@ -162,7 +162,6 @@ public class GestioneSeduteController {
         }else if(gruppoSanguigno.equals("sangue")){
             tipoDonazione = "sangue";
         }
-        System.err.println(tipoDonazione);
 
         try {
             gestioneSeduteService.salvataggioDonazione(codiceFiscale,idSeduta,tipoDonazione);
@@ -170,7 +169,6 @@ public class GestioneSeduteController {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
             return "redirect:/error";
         }
-        model.addAttribute("success","Salvataggio donazione avvenuto con successo!");
-        return "redirect:/goElencoPartecipanti?idSeduta="+idSeduta;
+        return "redirect:/goElencoPartecipanti?idSeduta="+idSeduta + "&successo=" + "Donazione avvenuta con successo!";
     }
 }
