@@ -1,8 +1,28 @@
 <%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Utente" %>
+<%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Donatore" %>
+<%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Operatore" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+Created by IntelliJ IDEA.
+User: angel
+Date: 02/01/2022
+Time: 14:58
+To change this template use File | Settings | File Templates.
+--%>
+
+<!--Gestione della sessione-->
+
+<%
+    Utente utente=(Utente)session.getAttribute("utente");
+    
+    if(utente instanceof Donatore) response.sendRedirect("GUIGestioneUtente/dashboardDonatore");
+    else if(utente instanceof Operatore) response.sendRedirect("GUIGestioneUtente/dashboardOperatore");
+
+%>
+
+<!--Fine gestione della sessione-->
 
 <!DOCTYPE html>
 <html lang="en">
