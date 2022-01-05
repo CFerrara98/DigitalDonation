@@ -36,28 +36,18 @@ public class GestioneSeduteController {
     ConfermaDonazioneFormValidate confermaDonazioneFormValidate;
 
     /**
-     * Metodo GET per inserire l'indisponibilità di un donatore a seguito della visita medica
+     * Metodo GET per inserire l'indisponibilità di un donatore a seguito della visita medica.
      * @param request è la richiesta dalla sessione.
-     * @param redirectAttribute è l'attributo di ridirezione.
      * @param model è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
     @RequestMapping(value = "/goIndisponibilitaByOperatore", method = RequestMethod.GET)
-    public String indisponibilitaByOperatoreGET(HttpServletRequest request, @ModelAttribute IndisponibilitaDonazioneForm indisponibilitaDonazioneForm,
-                                             RedirectAttributes redirectAttribute, BindingResult result, Model model) {
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
-        String codiceFiscale = request.getParameter("codiceFiscale");
-        try{
-            if(utente == null) new IllegalArgumentException();
-            if(codiceFiscale.matches(Utente.CF_REGEX));
-        }catch (Exception e){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
-            return "redirect:/error";
-        }
-        if(indisponibilitaDonazioneForm == null) indisponibilitaDonazioneForm = new IndisponibilitaDonazioneForm();
-        model.addAttribute("indisponibilitaDonazioneForm",indisponibilitaDonazioneForm);
+    public String indisponibilitaByOperatoreGET(HttpServletRequest request, Model model, @RequestParam("codiceFiscale") String codiceFiscale) {
+
+        IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = new IndisponibilitaDonazioneForm();
+        model.addAttribute("indisponibilitaDonazioneForm", indisponibilitaDonazioneForm);
         model.addAttribute("codiceFiscale",codiceFiscale);
-        return "/errorsPages/workingInProgress";//TODO jsp per la indisponibilita inserita dall'operatore
+        return "GUIGestioneSedute/salvataggioIndisponibilitaDonare";
     }
 
     /**
@@ -67,7 +57,7 @@ public class GestioneSeduteController {
      * @param model è l'oggetto Model.
      * @return String ridirezione ad una pagina.
      */
-    @RequestMapping(value = "/IndisponibilitaByOperatore", method = RequestMethod.POST)
+    @RequestMapping(value = "/indisponibilitaByOperatore", method = RequestMethod.POST)
     public String indisponibilitaByOperatorePOST(HttpServletRequest request, @ModelAttribute IndisponibilitaDonazioneForm indisponibilitaDonazioneForm,
                                                  RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
@@ -86,7 +76,7 @@ public class GestioneSeduteController {
             for(ObjectError x : result.getGlobalErrors()){
                 redirectAttribute.addFlashAttribute(x.getCode(),x.getDefaultMessage());
             }
-            return "/errorsPages/workingInProgress";//TODO JSP  indisponibilita inserita dall'operatore
+            return "redirect:/goIndisponibilitaByOperatore";
         }
         try {
             gestioneSeduteService.salvataggioIndisponibilita(codiceFiscale,idSeduta,indisponibilitaDonazioneForm);
