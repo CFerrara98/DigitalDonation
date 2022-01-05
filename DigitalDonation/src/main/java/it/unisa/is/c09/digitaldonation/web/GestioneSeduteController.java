@@ -84,7 +84,7 @@ public class GestioneSeduteController {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
             return "redirect:/error";
         }
-        model.addAttribute("success","Indisponibilità aggiunta con successo!");
+        model.addAttribute("success","Indisponibilita' aggiunta con successo!");
         return "redirect:/goElencoPartecipanti?idSeduta="+idSeduta+"&successo=Indisponibilità aggiunta con successo!";
     }
 
