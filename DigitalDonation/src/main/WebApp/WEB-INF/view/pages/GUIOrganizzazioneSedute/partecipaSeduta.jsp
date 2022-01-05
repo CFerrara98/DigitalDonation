@@ -27,7 +27,8 @@
                     <!-- Page Heading -->
                     <h1>&nbsp;</h1>
                     <!-- indietro -->
-                    <a href="./goSeduteDisponibili" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
+                    <a href="./goSeduteDisponibili" role="button"> <i
+                            class="fas fa-arrow-left float-left icone"></i></a>
                     <!-- Titolo -->
                     <h1 class=" mb-4" style="text-align: center">Seduta di donazione</h1>
 
@@ -74,22 +75,33 @@
                                     </div>
                                     <h1>&nbsp;</h1>
 
-                                    <!-- Checkbox -->
+
+                                    <!-- Menu a tendina -->
                                     <form action="./feedback" method="get" id="form">
                                         <input type="hidden" name="idSeduta" value="${seduta.idSeduta}"/>
+
                                         <div class="form-check">
-                                            <select name="feedbackSeduta"
-                                                         id="feedbackSeduta"
-                                                         class="form-control gruppo-sanguigno">
-                                            <option selected="true" value="positivo"> Voglio partecipare alla seduta</option>
-                                            <option value="negativo">Non voglio partecipare alla seduta </option>
-                                            </select>
-                                            <label class="form-check-label"> <h6 class="mb-4" style="text-align: left">Dichiarando di voler partecipare alla seduta verrai registrato
+                                                <div class="col-sm-8 mb-3 mb-sm-0">
+                                                    <select name="feedbackSeduta"
+                                                            id="feedbackSeduta"
+                                                            class="form-control gruppo-sanguigno" aling="center">
+                                                        <option selected="true" value="positivo"> Voglio partecipare
+                                                            alla seduta
+                                                        </option>
+                                                        <option value="negativo">Non voglio partecipare alla seduta
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            <br>
+                                            <label class="form-check-label"><h6 class="mb-4" style="text-align: left">
+                                                Dichiarando di voler partecipare alla seduta verrai registrato
                                                 nella lista dei donatori della relativa sede locale. </h6>
                                             </label>
                                         </div>
+
                                         <input type="submit" value="Conferma" class="btn btn-primary">
                                     </form>
+                                    <!-- Fine menu tendina-->
                                 </div>
                             </div>
                         </div>

@@ -97,6 +97,6 @@ public class GestioneTesserinoController {
     @RequestMapping(value = "/goCreazioneTesserino", method = RequestMethod.GET)
     public String gocreazioneTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
 
-        return "GUIOrganizzazioneSedute/creazioneTesserino";
+        return "GUIGestioneTesserinoDigitale/creazioneTesserino";
     }
 }

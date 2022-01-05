@@ -56,7 +56,7 @@
                                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 24rem;"
                                              src="img/logo.png" alt="...">
                                         <h1 align="center" class="h3 mb-2 text-gray-800"> %Nome Cognome%</h1>
-                                        <a class="btn btn-primary" href="#" role="button">Vai al tuo tesserino</a>
+                                        <a class="btn btn-primary" href="./goCreazioneTesserino" role="button">Vai al tuo tesserino</a>
                                     </div>
                                 </div>
                                 <div class="mt-4 mb-4 text-center small">
