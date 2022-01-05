@@ -84,6 +84,7 @@ public class OrganizzazioneSeduteController {
     public String monitoraggioSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) model.getAttribute("utente");
         Long idSeduta = (Long) model.getAttribute("idSeduta");
+        request.getSession().setAttribute("idSeduta",idSeduta);
         if (utente instanceof Operatore) {
             try {
                 ArrayList<Object> listaPartecipanti = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);

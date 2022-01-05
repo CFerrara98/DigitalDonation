@@ -46,7 +46,7 @@ public class GestioneSeduteController {
 
         IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = new IndisponibilitaDonazioneForm();
         model.addAttribute("indisponibilitaDonazioneForm", indisponibilitaDonazioneForm);
-        model.addAttribute("codiceFiscale",codiceFiscale);
+        request.getSession().setAttribute("codiceFiscale",codiceFiscale);
         return "GUIGestioneSedute/salvataggioIndisponibilitaDonare";
     }
 
@@ -61,8 +61,8 @@ public class GestioneSeduteController {
     public String indisponibilitaByOperatorePOST(HttpServletRequest request, @ModelAttribute IndisponibilitaDonazioneForm indisponibilitaDonazioneForm,
                                                  RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        String codiceFiscale = (String)  model.getAttribute("codiceFiscale");
-        Long idSeduta = (Long) model.getAttribute("idSeduta");
+        String codiceFiscale = (String)  request.getSession().getAttribute("codiceFiscale");
+        Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
         try{
             if(utente == null) new IllegalArgumentException();
             if(codiceFiscale.matches(Utente.CF_REGEX));
@@ -76,7 +76,7 @@ public class GestioneSeduteController {
             for(ObjectError x : result.getGlobalErrors()){
                 redirectAttribute.addFlashAttribute(x.getCode(),x.getDefaultMessage());
             }
-            return "redirect:/goIndisponibilitaByOperatore";
+            return "redirect:/goIndisponibilitaByOperatore?codiceFiscale="+codiceFiscale;
         }
         try {
             gestioneSeduteService.salvataggioIndisponibilita(codiceFiscale,idSeduta,indisponibilitaDonazioneForm);
@@ -85,7 +85,7 @@ public class GestioneSeduteController {
             return "redirect:/error";
         }
         model.addAttribute("success","Indisponibilità aggiunta con successo!");
-        return "redirect:/goElencoPartecipanti?idSeduta="+model.getAttribute("idSeduta");
+        return "redirect:/goElencoPartecipanti?idSeduta="+idSeduta;
     }
 
 

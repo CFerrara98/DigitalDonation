@@ -16,8 +16,9 @@ import java.util.logging.Logger;
  */
 
 @WebFilter(urlPatterns = {"/dashboardOperatore","/logout","/goSchedulazioneSeduta",
-                            "/inserimentoGuest","/schedulazioneSeduta","/goIndisponibilita" +
-                            "/feedback"})
+                            "/inserimentoGuest","/schedulazioneSeduta","/goIndisponibilita",
+                            "/feedback","goSalvataggioDonazione","/salvataggioDonazione"
+                            ,"/indisponibilitaByOperatore","/goIndisponibilitaByOperatore",""})
 public class AuthenticationFilterOperatore implements Filter {
 
     private Logger logger = Logger.getLogger(String.valueOf(AuthenticationFilterOperatore.class));
