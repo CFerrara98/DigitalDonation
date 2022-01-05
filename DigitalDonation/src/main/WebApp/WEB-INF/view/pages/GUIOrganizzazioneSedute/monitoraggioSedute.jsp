@@ -118,8 +118,7 @@
                                                 <!-- Bottom Elimina seduta -->
                                                 <td>
                         <span class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/eliminaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
-                               role="button"> <i class="fas fa-times icone"></i></a>
+                            <a href="#" data-target="#eliminaModal" data-toggle="modal" role="button"> <i class="fas fa-times icone"></i></a>
                         </span>
                                                 </td>
                                             </tr>
@@ -157,5 +156,25 @@
 
     </div>
     <!-- End of Page Wrapper -->
+
+    <!-- Elimina seduta modal -->
+    <div class="modal fade" id="eliminaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Vuoi eliminare la seduta?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleziona elimina per cancellare la seduta.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annulla</button>
+                    <a class="btn btn-primary" href="/eliminaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>">Elimina</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </z:layout>
