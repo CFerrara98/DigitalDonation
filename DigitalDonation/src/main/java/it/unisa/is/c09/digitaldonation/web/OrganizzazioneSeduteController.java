@@ -3,6 +3,7 @@ package it.unisa.is.c09.digitaldonation.web;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotLoadDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotRelaseFeedbackException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotUpdateDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
@@ -260,6 +261,17 @@ public class OrganizzazioneSeduteController {
         return "GUIOrganizzazioneSedute/schedulazioneSeduta";
     }
 
+    @RequestMapping(value = "/goModificaSeduta", method = RequestMethod.GET)
+    public String goModificaSeduta(@RequestParam(name="idSeduta") String idSeduta, Model model) {
+        if (model.getAttribute("sedutaForm") != null) {
+            return "GUIOrganizzazioneSedute/modificaSeduta";
+        }
+        SedutaForm sedutaForm = new SedutaForm();
+        model.addAttribute("idSeduta", idSeduta);
+        model.addAttribute("sedutaForm", sedutaForm);
+        return "GUIOrganizzazioneSedute/modificaSeduta";
+    }
+
     /**
      * Metodo che permette di andare alla pagina di inserimento utente guest.
      *
@@ -365,20 +377,50 @@ public class OrganizzazioneSeduteController {
         return "GUIGestioneUtente/dashboardOperatore";
     }
 
+    @RequestMapping(value = "/modificaSeduta", method = RequestMethod.POST)
+    public String modificaSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, @ModelAttribute(name="idSeduta") Long idSeduta,
+                                      RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+
+        sedutaFormValidate.validate(sedutaForm, result);
+        if (result.hasErrors()) {
+            // se ci sono errori il metodo controller setta tutti i parametri
+            redirectAttribute.addFlashAttribute("sedutaForm", sedutaForm);
+            for (ObjectError x : result.getGlobalErrors()) {
+                redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
+            }
+            return "redirect:/goModificaSeduta";
+        }
+        DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+        Operatore operatore = (Operatore) utente;
+        SedeLocale sedeLocale = operatore.getSedeLocale();
+
+        Seduta seduta = new Seduta();
+        seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
+        seduta.setDataSeduta(sedutaForm.getDataSeduta());
+        seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
+        seduta.setNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
+        seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
+        seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
+        seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
+        String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
+        seduta.setLuogo(luogo);
+        try {
+            organizzazioneSeduteService.modificaSeduta(seduta, idSeduta);
+        } catch (CannotUpdateDataRepositoryException e) {
+            redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
+        }
+        model.addAttribute("success", "Seduta schedulata con successo!");
+        return "GUIGestioneUtente/monitoraggioSedute";
+    }
+
+
     @RequestMapping(value = "/goEliminaSeduta", method = RequestMethod.GET)
     public String goEliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
 
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         model.addAttribute("idSeduta", idSeduta);
         return "GUIOrganizzazioneSedute/eliminaSeduta";
-    }
-
-    @RequestMapping(value = "/goModificaSeduta", method = RequestMethod.GET)
-    public String goModificaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
-
-        long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
-        model.addAttribute("idSeduta", idSeduta);
-        return "GUIOrganizzazioneSedute/modificaSeduta";
     }
 
     @RequestMapping(value = "/goIndisponibilita", method = RequestMethod.GET)

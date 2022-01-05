@@ -22,9 +22,10 @@
                 <!-- Page Heading -->
                 <div class="card-body">
                     <!-- indietro -->
-                    <a href="./goMonitoraggioSedute" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
-                    <h1 class=" mb-4 " style="text-align: center" > Salvataggio Indisponibilità: </h1>
+                    <a href="./goElencoPartecipanti?idSeduta=${idSeduta}" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
                 </div>
+                <!-- Titolo -->
+                <h1 class=" mb-4" style="text-align: center">Salvataggio indisponibilita'</h1>
 
                 <!-- Content Row -->
                 <div class="row ">

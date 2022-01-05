@@ -5,7 +5,8 @@
   Time: 18:32
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
@@ -47,8 +48,8 @@
                                             <h3 class="h4 text-gray-900 mb-4">Modifica i campi e clicca su conferma per aggiornare la seduta</h3>
                                         </div>
 
-                                            <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
-                                        <form:form action="./schedulazioneSeduta" method="post"
+                                        <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
+                                        <form:form action="./modificaSeduta" method="post"
                                                    modelAttribute="sedutaForm" cssClass="user"
                                                    enctype="application/x-www-form-urlencoded">
                                             <div class="form-group row">

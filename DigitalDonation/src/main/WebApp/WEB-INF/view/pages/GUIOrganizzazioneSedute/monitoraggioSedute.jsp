@@ -35,7 +35,15 @@
 
                             <!-- titolo -->
                             <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Monitoraggio Sedute</h1>
-
+                            <c:choose>
+                                <c:when test="${success != null}">
+                                    <div class="alert alert-success" role="alert">
+                                        <h4 class="alert-heading"><i class="fas fa-calendar-check"
+                                                                     style="font-size: 36px"> </i> &nbsp <b>Complimenti!</b>  ${success}
+                                        </h4>
+                                    </div>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                     <!-- Sezione Elenco monitoraggi -->
@@ -102,7 +110,7 @@
                                                 <!-- Bottom modifica seduta -->
                                                 <td>
                         <span class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/modicaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
+                            <a href="/goModicaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
                                role="button"> <i class="fas fa-cogs icone"></i></a>
                         </span>
                                                 </td>
