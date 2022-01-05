@@ -13,21 +13,37 @@
     <div id="wrapper">
 
     <!-- Content Wrapper -->
+        <!-- Inizio del carosello-->
     <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Header-->
-            <header class=" py-5" style="background: #7ABBFF;">
-                <div class="container px-5">
-                    <div class="row gx-5 align-items-center justify-content-center">
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class="my-5 text-center text-xl-start">
-                                <h1 class="display-5 fw-bolder text-white mb-2">"Donare il sangue è un gesto volontario, gratuito e può salvare la vita delle persone."</h1>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="../../resources/img/homepage.png" alt="..." /></div>
-                    </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="../../resources/img/carosello1.png" alt="First slide">
                 </div>
-            </header>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="../../resources/img/carosello2.png" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="../../resources/img/carosello3.png" alt="Third slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <!-- Fine del carosello -->
+
             <!-- Features section-->
             <section class="py-5" id="features">
                 <div class="container px-5 my-5">
