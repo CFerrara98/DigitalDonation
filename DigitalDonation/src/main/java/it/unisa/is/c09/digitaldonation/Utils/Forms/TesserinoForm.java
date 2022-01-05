@@ -27,6 +27,10 @@ public class TesserinoForm {
         this.tipoDonazione=tipoDonazione;
     }
 
+    public TesserinoForm() {
+
+    }
+
     /**
      * Metodo che ritorna il nome del tesserino.
      *

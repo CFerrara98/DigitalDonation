@@ -40,7 +40,19 @@ public class GestioneTesserinoController {
     GuestFormValidate guestFormValidate;
     @Autowired
     SedutaFormValidate sedutaFormValidate;
+    @Autowired
+    TesserinoFormValidate tesserinoFormValidate;
 
+    /**
+     * Metodo che permette al donatore di compilare un autodichiarazione di indisponibilità.
+     *
+     * @param request           è la richiesta dalla sessione.
+     * @param autodichiarazioneForm         è l'oggetto form dell'utente guest.
+     * @param redirectAttribute è l'attributo di ridirezione.
+     * @param model             è l'oggetto Model.
+     * @param result            è la variabile di binding.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/autodichiarazioneIndisponibilita", method = RequestMethod.POST)
     public String autodichiarazioneDiIndisponibilita(HttpServletRequest request, @ModelAttribute AutodichiarazioneIndisponibilitaForm autodichiarazioneForm,
                   BindingResult result, RedirectAttributes redirectAttribute, Model model){
@@ -89,14 +101,68 @@ public class GestioneTesserinoController {
         return "GUIGestioneTesserinoDigitale/autodichiarazioneIndisponibilita";
     }
 
+    /**
+     * Metodo che permette al donatore di visualizzare il proprio tesserino.
+     *
+     * @param request è la richiesta dalla sessione.
+     * @param model   è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/goTesserino", method = RequestMethod.GET)
     public String goVisualizzaTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
         return "GUIOrganizzazioneSedute/visualizzaTesserino";
     }
 
+    /**
+     * Metodo che permette di andare alla pagine creazione nuovo tesserino.
+     *
+     * @param request è la richiesta dalla sessione.
+     * @param model   è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/goCreazioneTesserino", method = RequestMethod.GET)
-    public String gocreazioneTesserino(  HttpServletRequest request, @ModelAttribute("tesserinoForm") TesserinoForm tesserinoForm, BindingResult result,  RedirectAttributes redirectAttribute, Model model){
-
+    public String goCreazioneTesserino(HttpServletRequest request, Model model){
+        TesserinoForm tesserinoForm = new TesserinoForm();
+        model.addAttribute("tesserinoForm", tesserinoForm);
         return "GUIGestioneTesserinoDigitale/creazioneTesserino";
+    }
+
+    /**
+     * Metodo che permette al donatore di compilare un autodichiarazione di indisponibilità.
+     *
+     * @param request           è la richiesta dalla sessione.
+     * @param tesserinoForm     è l'oggetto form dell'utente guest.
+     * @param redirectAttribute è l'attributo di ridirezione.
+     * @param model             è l'oggetto Model.
+     * @param result            è la variabile di binding.
+     * @return String ridirezione ad una pagina.
+     */
+    @RequestMapping(value = "/creazioneTesserino", method = RequestMethod.POST)
+    public String creazioneTesserino(HttpServletRequest request, @ModelAttribute TesserinoForm tesserinoForm,
+                                                     BindingResult result, RedirectAttributes redirectAttribute, Model model){
+        tesserinoFormValidate.validate(tesserinoForm, result);
+        if(result.hasErrors()){
+            redirectAttribute.addFlashAttribute("tesserinoForm", tesserinoForm);
+            for (ObjectError x : result.getGlobalErrors()) {
+                redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
+            }
+            return "redirect:/goCreazioneTesserino";
+        }
+
+        Tesserino tesserino = new Tesserino();
+        tesserino.setDataRilascio(tesserinoForm.getDataRilascio());
+        tesserino.setGruppoSanguigno(tesserinoForm.getGruppoSanguigno());
+        //immagine
+        tesserino.setNumeroMatricola(tesserinoForm.getNumeroMatricola());
+        tesserino.setRh(tesserinoForm.getRh());
+
+        try {
+            gestioneTesserinoService.creazioneTesserino(tesserino);
+        } catch (CannotSaveDataRepositoryException e) {
+            redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
+            return "redirect:/goCreazioneTesserino";
+        }
+        model.addAttribute("success", "Tesserino creato con successo");
+        return "GUIGestioneUtente/dashboardDonatore";
     }
 }

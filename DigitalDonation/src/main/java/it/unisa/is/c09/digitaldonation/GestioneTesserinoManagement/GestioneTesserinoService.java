@@ -28,16 +28,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
 
     @Autowired
     private TesserinoRepository tesserinoRepository;
-
     @Autowired
     private DonatoreRepository donatoreRepository;
-
     @Autowired
     private IndisponibilitaRepository indisponibilitaRepository;
-
     @Autowired
     private SedutaRepository sedutaRepository;
-
 
     /**
      * Questo metodo permette all'operatore di creare un nuovo tesserino.

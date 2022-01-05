@@ -5,11 +5,13 @@
   Time: 14:58
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<z:layout pageTitle="creazioneTesserino">
+<%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
+
+<z:layout pageTitle="Creazione Tesserino">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -46,7 +48,7 @@
                                                 <h3 class="h4 text-gray-900 mb-4">Nella seguente sezione è possibile creare un nuovo tesserino compilando il form sottostante</h3>
                                             </div>
 
-                                                <%--@elvariable id="tesserinoForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.TesserinoForm"--%>
+                                            <%--@elvariable id="tesserinoForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.TesserinoForm"--%>
                                             <form:form action="./creazioneTesserino" method="post" modelAttribute="tesserinoForm" cssClass="user" enctype="application/x-www-form-urlencoded">
                                             <div class="card shadow mb-4">
                                                 <div class=" m-0 card-header py-3">
