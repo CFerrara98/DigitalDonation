@@ -26,7 +26,6 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1>&nbsp;</h1>
                     <h1 class=" mb-4" style="text-align: center">Dashboard Donatore</h1>
 
                     <c:choose>

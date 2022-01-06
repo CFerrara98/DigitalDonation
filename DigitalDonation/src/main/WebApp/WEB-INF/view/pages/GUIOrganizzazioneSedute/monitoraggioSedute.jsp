@@ -110,7 +110,7 @@
                                                 <!-- Bottom modifica seduta -->
                                                 <td>
                         <span class="float-center col-xl-1 col-md-6 mb-2">
-                            <a href="/goModicaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
+                            <a href="/goModificaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>"
                                role="button"> <i class="fas fa-cogs icone"></i></a>
                         </span>
                                                 </td>
