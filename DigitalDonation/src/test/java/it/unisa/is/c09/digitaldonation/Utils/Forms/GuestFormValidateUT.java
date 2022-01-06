@@ -51,10 +51,10 @@ public class GuestFormValidateUT {
         guestForm = new GuestForm(codiceFiscale, nome, cognome, telefono, patologie, gruppoSanguigno);
         guestFormValidate.validate(guestForm, errors);
 
-        assertEquals("errore", "", guestForm.getNome());
+        assertEquals("", "", guestForm.getNome());
     }
 
-    /**
+    /**errore
      * Verifica che il campo cognome sia corretto
      */
     @Test
