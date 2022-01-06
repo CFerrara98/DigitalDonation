@@ -81,7 +81,7 @@
                                 <table class="table  ">
                                     <thead>
                                     <tr>
-                                        <td scope="col"><h3 class="small font-weight-bold"> Monitore una seduta: </h3>
+                                        <td scope="col"><h3 class="small font-weight-bold"> Monitora una seduta: </h3>
                                         </td>
                                         <td scope="col"><span class=" float-right">
                                                 <a class="btn btn-primary botton-sm large"
