@@ -1,6 +1,5 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.ConfermaDonazioneFormException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.IndisponibilitaDonazioneFormException;
 import it.unisa.is.c09.digitaldonation.GestioneSeduteManagement.GestioneSeduteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import java.util.GregorianCalendar;
 /**
  * Classe che definisce un validatore per {@link IndisponibilitaDonazioneForm}.
  * Il controllo effettuato rigurda la
- * validità di alcuni campi definiti nell'entità Donazione.
+ * validità di alcuni campi definiti nell'entità Indisponibilita.
  *
  * @author Mattia Sapere
  */
