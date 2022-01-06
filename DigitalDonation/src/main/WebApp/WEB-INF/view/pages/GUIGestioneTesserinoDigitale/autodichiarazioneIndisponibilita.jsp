@@ -45,12 +45,12 @@
                                         <div class="form-group">
                                                 <p style="color:#4e73df;">Data prossima disponibilità: </p>
                                                 <c:choose>
-                                                    <c:when test="${DataDisponibilitaError == null}">
+                                                    <c:when test="${DataProssimaDisponibilitaError == null}">
                                                         <form:input type="date" class="form-control form-control-user" id="dataDisponibilita" placeholder="Data prossima disponibilità:" path="dataProssimaDisponibilita"/>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <form:input type="date" class="form-control form-control-user is-invalid" id="dataDisponibilita" placeholder="Data prossima disponibilità:" path="dataProssimaDisponibilita"/>
-                                                        <span class="myError">${DataDisponibilitaError}</span>
+                                                        <span class="myError">${DataProssimaDisponibilitaError}</span>
                                                     </c:otherwise>
                                                 </c:choose>
 
@@ -58,12 +58,12 @@
                                             <div class="form-group">
                                                 <p style="color:#4e73df;">Motivazione di indisponibilità: </p>
                                                 <c:choose>
-                                                    <c:when test="${MotivazioneError == null}">
+                                                    <c:when test="${MotivazioniIndisponibilitaError == null}">
                                                         <form:textarea class="textarea form-control" id="exampleMotivazione" placeholder="es. Abuso di sostanze stupefacenti" rows="4" path="motivazioni"/>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <form:textarea class="textarea form-control" id="exampleMotivazione" placeholder="es. Abuso di sostanze stupefacenti" rows="4" path="motivazioni"/>
-                                                        <span class="myError">${MotivazioneError}</span>
+                                                        <span class="myError">${MotivazioniIndisponibilitaError}</span>
                                                     </c:otherwise>
                                                 </c:choose>
 
