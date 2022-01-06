@@ -73,28 +73,28 @@
                                     <form action="./feedback" method="get" id="form">
                                         <input type="hidden" name="idSeduta" value="${seduta.idSeduta}"/>
 
-                                        <div class="form-check">
+                                            <div align="center">
                                                 <div class="col-sm-8 mb-3 mb-sm-0">
                                                     <select name="feedbackSeduta"
                                                             id="feedbackSeduta"
                                                             class="form-control gruppo-sanguigno" aling="center">
-                                                        <option selected="true" value="positivo"> Voglio partecipare
-                                                            alla seduta
-                                                        </option>
-                                                        <option value="negativo">Non voglio partecipare alla seduta
-                                                        </option>
+                                                        <option selected="true" value="positivo"> Voglio partecipare alla seduta </option>
+                                                        <option value="negativo">Non voglio partecipare alla seduta </option>
                                                     </select>
+                                    <!-- Fine menu tendina-->
                                                 </div>
-                                            <br>
-                                            <label class="form-check-label"><h6 class="mb-4" style="text-align: left">
-                                                Dichiarando di voler partecipare alla seduta verrai registrato
-                                                nella lista dei donatori della relativa sede locale. </h6>
-                                            </label>
-                                        </div>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <label class="form-check-label"><h6 class="mb-4" style="text-align: left">
+                                            Dichiarando di voler partecipare alla seduta verrai registrato
+                                            nella lista dei donatori della relativa sede locale. </h6>
+                                        </label>
+                                        <br>
 
                                         <input type="submit" value="Conferma" class="btn btn-primary">
-                                    </form>
-                                    <!-- Fine menu tendina-->
+
+
                                 </div>
                             </div>
                         </div>
