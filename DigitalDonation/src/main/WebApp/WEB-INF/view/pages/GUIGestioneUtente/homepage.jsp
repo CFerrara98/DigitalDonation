@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: angel
-  Date: 02/01/2022
-  Time: 12:55
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Utente" %>
 <%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Donatore" %>
 <%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Operatore" %>

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: elpid
-  Date: 04/01/2022
-  Time: 17:05
-  To change this template use File | Settings | File Templates.
---%>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page isErrorPage="true" %>

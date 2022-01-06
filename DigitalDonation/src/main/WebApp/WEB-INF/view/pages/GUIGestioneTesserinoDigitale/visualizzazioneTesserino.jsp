@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: abasi
-  Date: 04/01/2022
-  Time: 12:06
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
