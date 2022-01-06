@@ -194,7 +194,6 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
                 return codiceFiscale;
             }
         }
-        return codiceFiscale;
     }
 
 
