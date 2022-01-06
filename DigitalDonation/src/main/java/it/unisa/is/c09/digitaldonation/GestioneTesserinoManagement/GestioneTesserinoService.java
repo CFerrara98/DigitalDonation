@@ -231,7 +231,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
         } else {
             if (!(parsDateToString(dataDiNascita).matches(Tesserino.DATARILASCIO_REGEX))) {
                 throw new TesserinoFormException("TesserinoDataNscitaError", "La data non rispetta il formato. Inserire solo dati numerici e del formato dd/mm/aaaa");
-            } else if (((dataDiNascita.getYear() + 1918) - (date.getYear() + 1900) > 0 )) {
+            } else if (((dataDiNascita.getYear()) - (date.getYear()) >= 18 )) {
                 throw new TesserinoFormException("TesserinoDataNscitaError", "L’utente non è maggiorenne. Inserire una data corretta.");
             }
             return dataDiNascita;
@@ -319,10 +319,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     public String validaGruppoSanguigno(String gruppoSanguigno) throws TesserinoFormException {
         if (gruppoSanguigno == null) {
-            throw new TesserinoFormException("TesserinoGruppoSanguignoError", "Il gruppo sanguigno non rispetta il formato. Il gruppo sanguigno può assumere solo valori  “0”, “A”, “B”, “AB”.  ");
+            throw new TesserinoFormException("TesserinoGruppoSanguignoError", "Il gruppo sanguigno non rispetta il formato. Il gruppo sanguigno può assumere solo valori  “0”, “A”, “B”, “AB”.");
         } else {
             if (!gruppoSanguigno.matches(Tesserino.GRUPPOSANGUIGNO_REGEX)) {
-                throw new TesserinoFormException("TesserinoGruppoSanguignoError", "Il gruppo sanguigno non rispetta il formato. Il gruppo sanguigno può assumere solo valori  “0”, “A”, “B”, “AB”.  ");
+                throw new TesserinoFormException("TesserinoGruppoSanguignoError", "Il gruppo sanguigno non rispetta il formato. Il gruppo sanguigno può assumere solo valori  “0”, “A”, “B”, “AB”.");
             } else {
                 return gruppoSanguigno;
             }
@@ -340,10 +340,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     public String validaRh(String Rh) throws TesserinoFormException {
         if (Rh == null) {
-            throw new TesserinoFormException("TesserinoRhError", "Il campo RH non rispetta il formato. Può assumere solo valori “POS” e “NEG” ");
+            throw new TesserinoFormException("TesserinoRhError", "Il campo RH non rispetta il formato. Può assumere solo valori “POS” e “NEG”");
         } else {
             if (!Rh.matches(Tesserino.RH_REGEX)) {
-                throw new TesserinoFormException("TesserinoRhError", "Il campo RH non rispetta il formato. Può assumere solo valori “POS” e “NEG” ");
+                throw new TesserinoFormException("TesserinoRhError", "Il campo RH non rispetta il formato. Può assumere solo valori “POS” e “NEG”");
             } else {
                 return Rh;
             }
