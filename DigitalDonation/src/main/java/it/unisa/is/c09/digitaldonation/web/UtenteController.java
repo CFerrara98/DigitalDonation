@@ -8,6 +8,7 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.User
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginFormValidate;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

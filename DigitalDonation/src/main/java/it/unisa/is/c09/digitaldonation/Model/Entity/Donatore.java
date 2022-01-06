@@ -35,9 +35,6 @@ public class Donatore extends Utente implements Serializable {
     @JoinColumn(name = "codice_fiscale_donatore")
     private List<Indisponibilita> listaIndisponibilita = new ArrayList<>();
 
-
-
-
     /**
      * Costruttore che crea un oggetto Donatore vuoto,
      * che verra' popolato con i metodi setters.

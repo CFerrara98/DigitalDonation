@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
-<z:layout pageTitle="schedulazione Seduta">
+<z:layout pageTitle="Schedulazione Seduta">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -49,7 +49,7 @@
                                                     seduta</h3>
                                             </div>
 
-                                                <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
+                                            <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
                                             <form:form action="./schedulazioneSeduta" method="post"
                                                        modelAttribute="sedutaForm" cssClass="user"
                                                        enctype="application/x-www-form-urlencoded">

@@ -112,7 +112,7 @@
                                         <td scope="col"><h3 class="small font-weight-bold"> Crea un nuovo
                                             tesserino: </h3></td>
                                         <td scope="col"><span class=" float-right">
-                                                <a class="btn btn-primary botton-sm large" href=".html" role="button">Crea tesserino</a>
+                                                <a class="btn btn-primary botton-sm large" href="./goCreazioneTesserino" role="button">Crea tesserino</a>
                                              </span>
                                         </td>
                                     </tr>

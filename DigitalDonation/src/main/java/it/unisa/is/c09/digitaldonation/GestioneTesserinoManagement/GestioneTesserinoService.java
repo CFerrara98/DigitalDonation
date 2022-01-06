@@ -7,10 +7,9 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.SedutaFormException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
-import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
-import it.unisa.is.c09.digitaldonation.Model.Repository.IndisponibilitaRepository;
-import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
-import it.unisa.is.c09.digitaldonation.Model.Repository.TesserinoRepository;
+import it.unisa.is.c09.digitaldonation.Model.Repository.*;
+import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
+import it.unisa.is.c09.digitaldonation.Utils.Forms.TesserinoFormValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,23 +20,27 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword.CryptoByMD5.getMD5;
+
 @Service
 public class GestioneTesserinoService implements GestioneTesserinoServiceInterface {
 
     private static Logger logger = Logger.getLogger(String.valueOf(GestioneTesserinoService.class));
 
     @Autowired
+    private MailSingletonSender mailSingletonSender;
+    @Autowired
+    private UtenteRepository utenteRepository;
+    @Autowired
+    private DonazioneRepository donazioneRepository;
+    @Autowired
     private TesserinoRepository tesserinoRepository;
-
     @Autowired
     private DonatoreRepository donatoreRepository;
-
     @Autowired
     private IndisponibilitaRepository indisponibilitaRepository;
-
     @Autowired
     private SedutaRepository sedutaRepository;
-
 
     /**
      * Questo metodo permette all'operatore di creare un nuovo tesserino.
@@ -47,16 +50,21 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Tesserino creazioneTesserino(Tesserino tesserino) throws CannotSaveDataRepositoryException {
-        if(tesserino == null){
+    public Tesserino creazioneTesserino(Utente utente, Donatore donatore, Tesserino tesserino, Donazione donazione) throws CannotSaveDataRepositoryException {
+        if(tesserino == null || utente == null || donatore == null){
             throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
         }else if(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())!=null){
             throw new CannotSaveDataRepositoryException("tesserinoError", "Il tesserino già esiste");
         }
+        String password = mailSingletonSender.sendEmailCreazioneAccount(utente);
+        String cripted = getMD5(password);
+        utente.setPassword(cripted);
+        utenteRepository.save(utente);
+        donatoreRepository.save(donatore);
         tesserinoRepository.save(tesserino);
+        donazioneRepository.save(donazione);
         return tesserino;
     }
-
 
     /**
      * Questo metodo permette di dichiarare l'indisponibilità di un donatore a donare
@@ -186,6 +194,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
                 return codiceFiscale;
             }
         }
+        return codiceFiscale;
     }
 
 

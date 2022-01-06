@@ -114,9 +114,6 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
         Indisponibilita indisponibilita = new Indisponibilita();
         Donatore donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore);
         Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
-        if(seduta.getDataSeduta().before(new Date())){
-            throw new CannotSaveDataRepositoryException("sedutaError", "La seduta non è stata ancora svolta");
-        }
         if (donatore== null){
             throw new CannotSaveDataRepositoryException("donatoreError", "Errore, il donatore è null");
         }
