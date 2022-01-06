@@ -210,7 +210,7 @@ public class Tesserino implements Serializable {
     public static final String CODICEFISCALE_REGEX = "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$";
 
     /** Espressione regolare che definisce il formato del campo numro matricola */
-    public static final String NUMEROMATRICOLA_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][12]{1}\\d{3}$";
+    public static final String NUMEROMATRICOLA_REGEX = "^[0-9]{4,7}$";
 
     /** Espressione regolare che definisce il formato del campo data rilascio. */
     public static final String DATARILASCIO_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$";
@@ -219,14 +219,14 @@ public class Tesserino implements Serializable {
     public static final String RH_REGEX = "^(POS|NEG)";
 
     /** Espressione regolare che definisce il formato del campo gruppo sanguigno. */
-    public static final String GRUPPOSANGUIGNO_REGEX = "^(0-|0\\+|A-|A\\+|B-|B\\+|AB-|AB\\+)";
+    public static final String GRUPPOSANGUIGNO_REGEX = "^(0|A|B||AB)";
 
     /** Espressione regolare che definisce il formato del campo altre Indicazioni. */
-    public static final String ALTREINDICAZIONI_REGEX = "[A-Za-z0-9 _.,!\"'\\/$\\n]{2,500} ";
+    public static final String ALTREINDICAZIONI_REGEX = "^[A-Za-z0-9 _.,!\"'\\/$\\n]{2,500}";
 
     /** Espressione regolare che definisce il formato del campo rh. */
     public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)";
 
     /** Espressione regolare che definisce il formato del campo motivazioni. */
-    public static final String MOTIVAZIONI_REGEX = "[A-Za-z0-9 _.,!\"'\\/$\\n]{2,500} ";
+    public static final String MOTIVAZIONI_REGEX = "[A-Za-z0-9 _.,!\"'\\/$\\n]{2,500}";
 }

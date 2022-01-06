@@ -72,9 +72,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
         if (indisponibilita.getDataProssimaDisponibilita() == null){
             throw new CannotSaveDataRepositoryException("autodichiarazioneError", "Errore, la data è null");
         }
-        else if(indisponibilita.getDataProssimaDisponibilita() == null){
-            throw new CannotSaveDataRepositoryException("autodichiarazioneError", "Errore, la motivazione è null");
-        }
+        else
 
         indisponibilitaRepository.save(indisponibilita);
 
@@ -133,10 +131,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     public String validaNome(String nome) throws TesserinoFormException {
         if (nome == null) {
-            throw new TesserinoFormException("TesserinoNomeError", "Il nome non rispetta il formato.  Inserire solo caratteri alfabetici.  ");
+            throw new TesserinoFormException("TesserinoNomeError", "Il nome non rispetta il formato.  Inserire solo caratteri alfabetici.");
         } else {
             if (!nome.matches(Donatore.NOME_COGNOME_REGEX)) {
-                throw new TesserinoFormException("TesserinoNomeError", "Il nome non rispetta il formato.  Inserire solo caratteri alfabetici.  .");
+                throw new TesserinoFormException("TesserinoNomeError", "Il nome non rispetta il formato.  Inserire solo caratteri alfabetici.");
             } else {
                 return nome;
             }
@@ -154,10 +152,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     public String validaCognome(String cognome) throws TesserinoFormException {
         if (cognome == null) {
-            throw new TesserinoFormException("TesserinoCognomeError", "Il cognome non rispetta il formato. Inserire solo caratteri alfabetici.  ");
+            throw new TesserinoFormException("TesserinoCognomeError", "Il cognome non rispetta il formato. Inserire solo caratteri alfabetici.");
         } else {
             if (!cognome.matches(Donatore.NOME_COGNOME_REGEX)) {
-                throw new TesserinoFormException("TesserinoCognomeError", "Il cognome non rispetta il formato. Inserire solo caratteri alfabetici.  ");
+                throw new TesserinoFormException("TesserinoCognomeError", "Il cognome non rispetta il formato. Inserire solo caratteri alfabetici.");
             } else {
                 return cognome;
             }
@@ -168,24 +166,24 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      * Controlla che il codiceFiscale di un tesserino sia specificato e che rispetti il formato
      * prestabilito.
      *
-     * @param codiceFisacle Stringa che rappresenta il codice fiscale da controllare
+     * @param codiceFiscale Stringa che rappresenta il codice fiscale da controllare
      * @return codiceFisacle La stringa che rappresenta il codice fiscale da controllare validato
      * @throws TesserinoFormException se il codice fiscale non è specificato oppure se non
      *                            rispetta il formato {@link Tesserino#CODICEFISCALE_REGEX}
      */
-    public String validaCodiceFiscale(String codiceFisacle) throws TesserinoFormException {
+    public String validaCodiceFiscale(String codiceFiscale) throws TesserinoFormException {
 
-        if (codiceFisacle == null) {
+        if (codiceFiscale == null) {
             throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
         } else {
-            if (!codiceFisacle.matches(Tesserino.CODICEFISCALE_REGEX)) {
+            if (!codiceFiscale.matches(Tesserino.CODICEFISCALE_REGEX)) {
                 throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
             } else {
-                if((tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(codiceFisacle) != null))
+                if((tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(codiceFiscale) != null))
                 {
                     throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Utente con questo codice fiscale gia esistente sul database");
                 }
-                return codiceFisacle;
+                return codiceFiscale;
             }
         }
     }
@@ -201,7 +199,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     public Image validaImage(Image image) throws TesserinoFormException {
         if (image == null) {
-            throw new TesserinoFormException("TesserinoImageError", " Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.");
+            throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.");
         } else {
             {
                 return image;
@@ -221,11 +219,11 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     public Date validaDataDiNascita(Date dataDiNascita) throws TesserinoFormException {
         Date date = new Date();
         if (dataDiNascita == null) {
-            throw new TesserinoFormException("TesserinoDataNscitaError", "La data non rispetta il formato. Inserire solo dati numerici e del formato dd/mm/aaaa ");
+            throw new TesserinoFormException("TesserinoDataNscitaError", "La data non rispetta il formato. Inserire solo dati numerici e del formato dd/mm/aaaa");
         } else {
             if (!(parsDateToString(dataDiNascita).matches(Tesserino.DATARILASCIO_REGEX))) {
-                throw new TesserinoFormException("TesserinoDataNscitaError", "La data non rispetta il formato. Inserire solo dati numerici e del formato dd/mm/aaaa ");
-            } else if (((dataDiNascita.getYear() + 18) - date.getYear()) > 0 ) {
+                throw new TesserinoFormException("TesserinoDataNscitaError", "La data non rispetta il formato. Inserire solo dati numerici e del formato dd/mm/aaaa");
+            } else if (((dataDiNascita.getYear() + 1918) - (date.getYear() + 1900) > 0 )) {
                 throw new TesserinoFormException("TesserinoDataNscitaError", "L’utente non è maggiorenne. Inserire una data corretta.");
             }
             return dataDiNascita;
@@ -244,10 +242,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     public String validaLuogoDiNascita(String luogoDiNascita) throws TesserinoFormException {
         if (luogoDiNascita == null) {
-            throw new TesserinoFormException("TesserinoLuogoNascitaError", "Il luogo di nascita non rispetta il formato. Inserire solo valori alfabetici.  ");
+            throw new TesserinoFormException("TesserinoLuogoNascitaError", "Il luogo di nascita non rispetta il formato. Inserire solo valori alfabetici.");
         } else {
             if (!luogoDiNascita.matches(Donatore.LUOGONASCITA_REGEX)) {
-                throw new TesserinoFormException("TesserinoLuogoNascitaError", "Il luogo di nascita non rispetta il formato. Inserire solo valori alfabetici.  ");
+                throw new TesserinoFormException("TesserinoLuogoNascitaError", "Il luogo di nascita non rispetta il formato. Inserire solo valori alfabetici.");
             } else {
                 return luogoDiNascita;
             }
@@ -287,10 +285,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     public String validaEmail(String email, String codiceFiscale) throws TesserinoFormException {
         Donatore donatore = new Donatore();
         if (email == null) {
-            throw new TesserinoFormException("TesserinoEmailError", "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx ");
+            throw new TesserinoFormException("TesserinoEmailError", "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
         } else {
             if (!email.matches(Donatore.EMAIL_REGEX)) {
-                throw new TesserinoFormException("TesserinoEmailError", "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx ");
+                throw new TesserinoFormException("TesserinoEmailError", "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
             } else {
                 donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscale);
                 if(donatore.getEmail().equals(email))
@@ -375,11 +373,11 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      *                            rispetta il formato {@link Tesserino#NUMEROMATRICOLA_REGEX}
      */
     public int validaNumeroMatricola(int numeroMatricola) throws TesserinoFormException {
-        if (numeroMatricola != 0) {
-            throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.  ");
+        if ( !(numeroMatricola != 0)) {
+            throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.");
         } else {
             if (! String.valueOf(numeroMatricola).matches(Tesserino.NUMEROMATRICOLA_REGEX)) {
-                throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.  ");
+                throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.");
             } else {
                 return numeroMatricola;
             }
@@ -397,7 +395,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      *                            rispetta il formato {@link Tesserino#NUMEROMATRICOLA_REGEX}
      */
     public int validaNumeroTessera(int numeroTessera) throws TesserinoFormException {
-        if (numeroTessera != 0) {
+        if (!(numeroTessera != 0)) {
             throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di tesserino non rispetta il formato. Inserire solo 7 caratteri numerici. ");
         } else {
             if (! String.valueOf(numeroTessera).matches(Tesserino.NUMEROMATRICOLA_REGEX)) {
