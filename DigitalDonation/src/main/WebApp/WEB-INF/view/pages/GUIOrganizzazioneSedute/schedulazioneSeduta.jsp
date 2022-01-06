@@ -54,7 +54,7 @@
                                                        modelAttribute="sedutaForm" cssClass="user"
                                                        enctype="application/x-www-form-urlencoded">
                                                 <div class="form-group row">
-                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <div class="col-sm-12 mb-3 mb-sm-0">
                                                         <p style="color:#4e73df;">Data seduta: </p>
                                                         <c:choose>
                                                             <c:when test="${DataError == null}">
