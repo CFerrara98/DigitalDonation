@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,6 +37,8 @@ public class GestioneTesserinoServiceUT {
 
     @Mock
     private MailSingletonSender mailSingletonSender;
+
+
     @Mock
     private DonatoreRepository donatoreRepository;
 
@@ -66,6 +69,7 @@ public class GestioneTesserinoServiceUT {
     @Mock
     private SedutaFormValidate sedutaFormValidate;
 
+
     @InjectMocks
     private GestioneTesserinoService gestioneTesserinoService;
 
@@ -89,6 +93,8 @@ public class GestioneTesserinoServiceUT {
     private Donatore donatore;
     private Utente utente;
     private Donazione donazione;
+    private Date dataProssimaDisponibilita;
+
     /**
      * Funzione per il testing del form
      */
@@ -177,7 +183,7 @@ public class GestioneTesserinoServiceUT {
      */
     @Test
     public void VerificaAutodichiarazioneIndisponibilitaDataProssimaIndisponibilitàNull() {
-        Indisponibilita indisponibilita = new Indisponibilita(null, "Mal di testa",  "Dr. peppe");
+        Indisponibilita indisponibilita = new Indisponibilita(null, "Mal di testa", "Dr. peppe");
         final String message = "Errore, la data è null";
         try {
             gestioneTesserinoService.autodichiarazioneIndisponibilita(indisponibilita);
@@ -193,7 +199,7 @@ public class GestioneTesserinoServiceUT {
     @Test
     public void VerificaAutodichiarazioneIndisponibilitaSuccesso() {
         Calendar dataIndisponibilita = new GregorianCalendar(2022, 5, 15);
-        Indisponibilita indisponibilita = new Indisponibilita(dataIndisponibilita.getTime(), "Mal di testa",  "Dr. peppe");
+        Indisponibilita indisponibilita = new Indisponibilita(dataIndisponibilita.getTime(), "Mal di testa", "Dr. peppe");
         indisponibilita.setCodiceFiscaleDonatore("ACNCZY45X38I793C");
 
         List<Donatore> listaDonatore = new ArrayList<>();
@@ -203,8 +209,8 @@ public class GestioneTesserinoServiceUT {
         listaDonatore.add(donatore2);
 
         List<Seduta> listaSedute = new ArrayList<>();
-        Calendar dataSeduta1 = new GregorianCalendar(2022,  4, 15);
-        Calendar dataSeduta2 = new GregorianCalendar(2022,  6, 15);
+        Calendar dataSeduta1 = new GregorianCalendar(2022, 4, 15);
+        Calendar dataSeduta2 = new GregorianCalendar(2022, 6, 15);
         Seduta seduta1 = new Seduta(52l, dataSeduta1.getTime(), null, null, null, 0, null, null, null, null, listaDonatore);
         Seduta seduta2 = new Seduta(52l, dataSeduta2.getTime(), null, null, null, 0, null, null, null, null, listaDonatore);
         listaSedute.add(seduta1);
@@ -217,7 +223,6 @@ public class GestioneTesserinoServiceUT {
             fail("Errore Successo autodichiarazione di indisponibilita");
         }
     }
-
 
 
     /**
@@ -251,7 +256,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -280,12 +287,13 @@ public class GestioneTesserinoServiceUT {
         tipoDonazione = "cito";
 
         final String message = "Il nome non rispetta il formato.  Inserire solo caratteri alfabetici.";
-
         try {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -322,7 +330,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -359,7 +369,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -396,7 +408,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
 
@@ -434,7 +448,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
 
@@ -476,7 +492,9 @@ public class GestioneTesserinoServiceUT {
             gestioneTesserinoService.validaCodiceFiscale(codiceFiscale);
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
 
@@ -510,7 +528,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -547,7 +567,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -584,7 +606,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -600,7 +624,7 @@ public class GestioneTesserinoServiceUT {
         nome = "Marika";
         cognome = "Pepe";
         codiceFiscale = "PPEMRK00A53H703Y";
-        Calendar dataNascita = new GregorianCalendar(2008, 3, 13);
+        Calendar dataNascita = new GregorianCalendar(2010, 3, 13);
         dataDiNascita = dataNascita.getTime();
         luogoDiNascita = "Salerno";
         residenza = "Via Garibaldi, 44 Salerno SA";
@@ -621,7 +645,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Nessuna eccezione lanciata");
     }
 
     /**
@@ -637,7 +663,7 @@ public class GestioneTesserinoServiceUT {
         nome = "Marika";
         cognome = "Pepe";
         codiceFiscale = "PPEMRK00A53H703Y";
-        Calendar dataNascita = new GregorianCalendar(2022, 1, 13);
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
         dataDiNascita = dataNascita.getTime();
         luogoDiNascita = null;
         residenza = "Via Garibaldi, 44 Salerno SA";
@@ -658,7 +684,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
 
@@ -675,7 +703,7 @@ public class GestioneTesserinoServiceUT {
         nome = "Marika";
         cognome = "Pepe";
         codiceFiscale = "PPEMRK00A53H703Y";
-        Calendar dataNascita = new GregorianCalendar(2022, 1, 13);
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
         dataDiNascita = dataNascita.getTime();
         luogoDiNascita = "5555";
         residenza = "Via Garibaldi, 44 Salerno SA";
@@ -696,7 +724,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -733,7 +763,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -770,7 +802,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -807,7 +841,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -843,7 +879,9 @@ public class GestioneTesserinoServiceUT {
             validaCampi();
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -883,7 +921,9 @@ public class GestioneTesserinoServiceUT {
             gestioneTesserinoService.validaEmail(email, codiceFiscale);
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
+            return;
         }
+        fail("Errore! nessuna eccezione laciata");
     }
 
     /**
@@ -943,7 +983,7 @@ public class GestioneTesserinoServiceUT {
         luogoDiNascita = "Salerno";
         residenza = "Via Garibaldi, 44 Salerno SA";
         email = "maripepe@gmail.com";
-        gruppoSanguigno ="D";
+        gruppoSanguigno = "D";
         rh = "POS";
         altreIndicazioni = "Nessuna";
         numeroMatricola = 53764;
@@ -1022,7 +1062,7 @@ public class GestioneTesserinoServiceUT {
         luogoDiNascita = "Salerno";
         residenza = "Via Garibaldi, 44 Salerno SA";
         email = "maripepe@gmail.com";
-        gruppoSanguigno ="A";
+        gruppoSanguigno = "A";
         rh = "99";
         altreIndicazioni = "Nessuna";
         numeroMatricola = 53764;
@@ -1061,7 +1101,7 @@ public class GestioneTesserinoServiceUT {
         luogoDiNascita = "Salerno";
         residenza = "Via Garibaldi, 44 Salerno SA";
         email = "maripepe@gmail.com";
-        gruppoSanguigno ="A";
+        gruppoSanguigno = "A";
         rh = "POS";
         altreIndicazioni = null;
         numeroMatricola = 53764;
@@ -1100,7 +1140,7 @@ public class GestioneTesserinoServiceUT {
         luogoDiNascita = "Salerno";
         residenza = "Via Garibaldi, 44 Salerno SA";
         email = "maripepe@gmail.com";
-        gruppoSanguigno ="A";
+        gruppoSanguigno = "A";
         rh = "POS";
         altreIndicazioni = "@@@";
         numeroMatricola = 53764;
@@ -1121,6 +1161,542 @@ public class GestioneTesserinoServiceUT {
         fail("Errore! nessuna eccezione laciata");
     }
 
+    /**
+     * Verifica validaNumeroMatricola nel caso in cui la matricola è uguale a 0
+     */
+    @Test
+    public void verificaValidaNumeroMatricolaZero() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 0;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "cito";
+        final String message = "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.";
+
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Errore! nessuna eccezione laciata");
+    }
+
+    /**
+     * Verifica validaNumeroMatricola nel caso in cui la matricola non rispetta il foramto
+     */
+    @Test
+    public void verificaValidaNumeroMatricolaFormato() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "cito";
+        final String message = "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.";
+
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Errore! nessuna eccezione laciata");
+    }
+
+    /**
+     * Verifica validaNumeroTessera nel caso in cui la Tessera è uguale a 0
+     */
+    @Test
+    public void verificaValidaNumeroTesseraZero() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53453;
+        numeroTessera = 0;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "cito";
+        final String message = "Il numero di tesserino non rispetta il formato. Inserire solo 7 caratteri numerici.";
+
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+    /**
+     * Verifica validaNumeroTessera nel caso in cui la Tessera non rispetta il foramto
+     */
+    @Test
+    public void verificaValidaNumeroTesseraFormato() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53453;
+        numeroTessera = 65;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "cito";
+        final String message = "Il numero di tesserino non rispetta il formato. Inserire solo 7 caratteri numerici.";
+
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+    /**
+     * Verifica validaDataRilascio nel caso in cui la data è null
+     */
+    @Test
+    public void validavalidaDataRilascioNull() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53764;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = null;
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "cito";
+
+        final String message = "Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa";
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+    /**
+     * Verifica validaDataRilascio nel caso in cui la data non rispetta il formato
+     */
+    @Test
+    public void validavalidaDataRilascioFormato() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53764;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(20202020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "cito";
+
+        final String message = "Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa";
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+
+    /**
+     * Verifica validaDataRilascio nel caso in cui la data è dopo oggi tipo
+     */
+    @Test
+    public void validavalidaDataRilascioDopoOggi() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53764;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(2030, 12, 11);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "cito";
+
+        final String message = "Data rilascio tessera non può superare la data attuale.";
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+
+    /**
+     * Verifica validaDataDonazione nel caso in cui la data è null
+     */
+    @Test
+    public void validavalidavalidaDataDonazioneNull() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53764;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = null;
+        tipoDonazione = "cito";
+
+        final String message = "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa";
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+    /**
+     * Verifica validaDataDonazione nel caso in cui la data non rispetta il formato
+     */
+    @Test
+    public void validavalidavalidaDataDonazioneFormato() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53764;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021212121, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "cito";
+
+        final String message = "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa";
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+    /**
+     * Verifica validaDataDonazione nel caso in cui la data è dopo oggi tipo
+     */
+    @Test
+    public void validavalidavalidaDataDonazioneDopoOggi() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53764;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2030, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "cito";
+
+        final String message = "Data donazione non può superare la data attuale.";
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+    /**
+     * Verifica validaTipoDonazione nel caso in cui il tipo di donazione è null
+     */
+    @Test
+    public void validavalidaValidaTipoDonazioneNull() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53764;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = null;
+
+        final String message = "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue”";
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+    /**
+     * Verifica validaTipoDonazione nel caso in cui il tipo di donazione non rispetta il formato
+     */
+    @Test
+    public void validavalidaValidaTipoDonazioneFormato() {
+        try {
+            image = ImageIO.read(new File("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        nome = "Marika";
+        cognome = "Pepe";
+        codiceFiscale = "PPEMRK00A53H703Y";
+        Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
+        dataDiNascita = dataNascita.getTime();
+        luogoDiNascita = "Salerno";
+        residenza = "Via Garibaldi, 44 Salerno SA";
+        email = "maripepe@gmail.com";
+        gruppoSanguigno = "A";
+        rh = "POS";
+        altreIndicazioni = "Nessuna";
+        numeroMatricola = 53764;
+        numeroTessera = 65424;
+        Calendar dataRilascioT = new GregorianCalendar(2020, 2, 13);
+        dataRilascio = dataRilascioT.getTime();
+        Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
+        dataDonazione = datadonazione.getTime();
+        tipoDonazione = "|||";
+
+        final String message = "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue”";
+        try {
+            validaCampi();
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Nessuna Eccezione Lanciata!");
+    }
+
+
+    /**
+     * Verifica validaDataProssimaDisponibilitaDonazione nel caso in cui la data è null
+     */
+    @Test
+    public void verificaValidaDataProssimaDisponibilitaDonazioneNull() {
+        Calendar data = new GregorianCalendar(2020, 2, 13);
+        dataProssimaDisponibilita = null;
+
+        final String message = "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa";
+        try {
+            gestioneTesserinoService.validaDataProssimaDisponibilitaDonazione(dataProssimaDisponibilita);
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica validaDataProssimaDisponibilitaDonazione nel caso in cui la data non rispetta il formato
+     */
+    @Test
+    public void verificaValidaDataProssimaDisponibilitaDonazioneFormato() {
+        Calendar data = new GregorianCalendar(20202020, 2, 13);
+        dataProssimaDisponibilita = data.getTime();
+
+        final String message = "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa";
+        try {
+            gestioneTesserinoService.validaDataProssimaDisponibilitaDonazione(dataProssimaDisponibilita);
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+        }
+    }
+
+    /**
+     * Verifica validaDataDonazione nel caso in cui la data è dopo oggi tipo
+     */
+    @Test
+    public void verificalidaDataProssimaDisponibilitaDonazionDopoOggi() {
+        Calendar data = new GregorianCalendar(2020, 2, 13);
+        dataProssimaDisponibilita = data.getTime();
+
+        final String message = "La Data Di Prossima Disponibilità non può essere antecedente a quella attuale";
+        try {
+            gestioneTesserinoService.validaDataProssimaDisponibilitaDonazione(dataProssimaDisponibilita);
+        } catch (TesserinoFormException exception) {
+            assertEquals(message, exception.getMessage());
+            return;
+        }
+        fail("Errore nessuna eccezione laciata!");
+    }
+
+    /**
+     * Verifica validaDataDonazione nel caso in cui ha successo
+     */
+    @Test
+    public void verificalidaDataProssimaDisponibilitaDonazionSuccesso() {
+        Calendar data = new GregorianCalendar(2023, 2, 13);
+        dataProssimaDisponibilita = data.getTime();
+
+        final String message = "La Data Di Prossima Disponibilità non può essere antecedente a quella attuale";
+        try {
+            gestioneTesserinoService.validaDataProssimaDisponibilitaDonazione(dataProssimaDisponibilita);
+        } catch (TesserinoFormException exception) {
+            fail(exception.getMessage());
+        }
+    }
 
 
     /**
@@ -1158,4 +1734,3 @@ public class GestioneTesserinoServiceUT {
         }
     }
 }
-

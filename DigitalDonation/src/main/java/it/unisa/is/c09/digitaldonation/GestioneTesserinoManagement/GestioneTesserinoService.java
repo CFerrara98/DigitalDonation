@@ -231,7 +231,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
         } else {
             if (!(parsDateToString(dataDiNascita).matches(Tesserino.DATARILASCIO_REGEX))) {
                 throw new TesserinoFormException("TesserinoDataNscitaError", "La data non rispetta il formato. Inserire solo dati numerici e del formato dd/mm/aaaa");
-            } else if (((dataDiNascita.getYear()) - (date.getYear()) >= 18 )) {
+            } else if (((date.getYear()) - (dataDiNascita.getYear())) < 18 ) {
                 throw new TesserinoFormException("TesserinoDataNscitaError", "L’utente non è maggiorenne. Inserire una data corretta.");
             }
             return dataDiNascita;
@@ -404,10 +404,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     public int validaNumeroTessera(int numeroTessera) throws TesserinoFormException {
         if (!(numeroTessera != 0)) {
-            throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di tesserino non rispetta il formato. Inserire solo 7 caratteri numerici. ");
+            throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di tesserino non rispetta il formato. Inserire solo 7 caratteri numerici.");
         } else {
             if (! String.valueOf(numeroTessera).matches(Tesserino.NUMEROMATRICOLA_REGEX)) {
-                throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di tesserino non rispetta il formato. Inserire solo 7 caratteri numerici. ");
+                throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di tesserino non rispetta il formato. Inserire solo 7 caratteri numerici.");
             } else {
                 return numeroTessera;
             }
@@ -426,12 +426,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     public Date validaDataRilascio(Date dataRilascio) throws TesserinoFormException {
         Date date = new Date();
         if (dataRilascio == null) {
-            throw new TesserinoFormException("TesserinoDataRilascioError", "Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa ");
+            throw new TesserinoFormException("TesserinoDataRilascioError", "Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa");
         } else {
             if (!(parsDateToString(dataRilascio).matches(Tesserino.DATARILASCIO_REGEX))) {
-                throw new TesserinoFormException("TesserinoDataRilascioError", "Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa ");
+                throw new TesserinoFormException("TesserinoDataRilascioError", "Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa");
             } else if (dataRilascio.after(date)) {
-                throw new TesserinoFormException("TesserinoDataRilascioError", "Data rilascio tessera non può superare la data attuale. ");
+                throw new TesserinoFormException("TesserinoDataRilascioError", "Data rilascio tessera non può superare la data attuale.");
             }
             return dataRilascio;
         }
@@ -449,12 +449,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     public Date validaDataDonazione(Date dataDonazione) throws TesserinoFormException {
         Date date = new Date();
         if (dataDonazione == null) {
-            throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa ");
+            throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa");
         } else {
             if (!(parsDateToString(dataDonazione).matches(Tesserino.DATARILASCIO_REGEX))) {
-                throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa ");
+                throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa");
             } else if (dataDonazione.after(date)) {
-                throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non può superare la data attuale. ");
+                throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non può superare la data attuale.");
             }
             return dataDonazione;
         }
@@ -471,10 +471,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      */
     public String validaTipoDonazione(String tipoDonazione) throws TesserinoFormException {
         if (tipoDonazione == null) {
-            throw new TesserinoFormException("TesserinoTipoDonazioneError", "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue” ");
+            throw new TesserinoFormException("TesserinoTipoDonazioneError", "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue”");
         } else {
             if (!tipoDonazione.matches(Tesserino.TIPODONAZIONE_REGEX)) {
-                throw new TesserinoFormException("TesserinoTipoDonazioneError", "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue” ");
+                throw new TesserinoFormException("TesserinoTipoDonazioneError", "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue”");
             } else {
                 return tipoDonazione;
             }
@@ -511,12 +511,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     public Date validaDataProssimaDisponibilitaDonazione(Date dataProssimaDisponibilita) throws TesserinoFormException {
         Date date = new Date();
         if (dataProssimaDisponibilita == null) {
-            throw new TesserinoFormException("DataProssimaDisponibilitaError", "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa ");
+            throw new TesserinoFormException("DataProssimaDisponibilitaError", "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa");
         } else {
             if (!(parsDateToString(dataProssimaDisponibilita).matches(Tesserino.DATARILASCIO_REGEX))) {
-                throw new TesserinoFormException("DataProssimaDisponibilitaError", "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa ");
+                throw new TesserinoFormException("DataProssimaDisponibilitaError", "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa");
             } else if (dataProssimaDisponibilita.before(date)) {
-                throw new TesserinoFormException("DataProssimaDisponibilitaError", "La Data Di Prossima Disponibilità non può essere antecedente a quella attuale ");
+                throw new TesserinoFormException("DataProssimaDisponibilitaError", "La Data Di Prossima Disponibilità non può essere antecedente a quella attuale");
             }
             return dataProssimaDisponibilita;
         }

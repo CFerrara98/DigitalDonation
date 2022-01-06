@@ -4,7 +4,9 @@ package it.unisa.is.c09.digitaldonation.Utils.Forms;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneTesserinoError.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.SedutaFormException;
 import it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement.GestioneTesserinoService;
+import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -21,6 +23,9 @@ import java.util.GregorianCalendar;
  */
 @Component
 public class TesserinoFormValidate implements Validator {
+
+    @Autowired
+    private GestioneTesserinoService gestioneTesserinoService;
 
     private static Logger logger = Logger.getLogger(String.valueOf(TesserinoFormValidate.class));
 
@@ -40,7 +45,7 @@ public class TesserinoFormValidate implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         TesserinoForm tesserinoForm = (TesserinoForm) target;
-        GestioneTesserinoService gestioneTesserinoService = new GestioneTesserinoService();
+        gestioneTesserinoService = new GestioneTesserinoService();
         //Valida Campo Nome
         try {
             gestioneTesserinoService.validaNome(tesserinoForm.getNome());
