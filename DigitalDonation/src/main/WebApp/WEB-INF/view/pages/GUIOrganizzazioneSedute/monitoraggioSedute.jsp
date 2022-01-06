@@ -170,8 +170,8 @@
                 </div>
                 <div class="modal-body">Seleziona elimina per cancellare la seduta.</div>
                 <div class="modal-footer">
+                    <a class="btn btn-primary" href="/goEliminaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>">Elimina</a>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annulla</button>
-                    <a class="btn btn-primary" href="/eliminaSeduta?idSeduta=<c:out value="${listaSedute.get(i).idSeduta}"></c:out>">Elimina</a>
                 </div>
             </div>
         </div>

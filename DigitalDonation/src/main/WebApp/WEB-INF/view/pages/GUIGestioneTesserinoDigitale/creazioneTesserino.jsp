@@ -29,7 +29,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <div class="card-body">
                             <!-- indietro -->
-                            <a href="./dashboardDonatore" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
+                            <a href="./dashboardOperatore" role="button"> <i class="fas fa-arrow-left float-left icone"></i></a>
 
                             <!-- titolo -->
                             <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Creazione Tesserino</h1>

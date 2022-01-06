@@ -1,10 +1,8 @@
 package it.unisa.is.c09.digitaldonation.web;
 
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotLoadDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotRelaseFeedbackException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotUpdateDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
+import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
@@ -46,6 +44,10 @@ public class OrganizzazioneSeduteController {
     GuestFormValidate guestFormValidate;
     @Autowired
     SedutaFormValidate sedutaFormValidate;
+    @Autowired
+    SedutaRepository sedutaRepository;
+
+
 
     /**
      * Metodo che permette al donatore di poter inviare un feedback.
@@ -184,6 +186,9 @@ public class OrganizzazioneSeduteController {
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         String successo = request.getParameter("successo");
             model.addAttribute("idSeduta" , idSeduta);
+
+           Seduta seduta= sedutaRepository.findByIdSeduta(idSeduta);
+            model.addAttribute("Seduta", seduta );
             request.getSession().setAttribute("idSeduta" , idSeduta);
         try {
             ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
@@ -411,7 +416,7 @@ public class OrganizzazioneSeduteController {
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
         }
         model.addAttribute("success", "Seduta schedulata con successo!");
-        return "GUIGestioneUtente/monitoraggioSedute";
+        return "GUIOrganizzazioneSedute/monitoraggioSedute";
     }
 
 
@@ -419,8 +424,12 @@ public class OrganizzazioneSeduteController {
     public String goEliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
 
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
-        model.addAttribute("idSeduta", idSeduta);
-        return "GUIOrganizzazioneSedute/eliminaSeduta";
+        try {
+        organizzazioneSeduteService.eliminaSeduta(idSeduta);
+        } catch (CannotDeleteDataRepositoryException e) {
+            redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
+        }
+        return "redirect:/visualizzaElencoSedute";
     }
 
     @RequestMapping(value = "/goIndisponibilita", method = RequestMethod.GET)

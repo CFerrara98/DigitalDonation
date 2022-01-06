@@ -131,7 +131,7 @@
                                                     <c:out value="${gruppoSanguigno}"></c:out>
                                                 </h3>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" > %Rh%
-                                                    <c:out value="${RH:}"></c:out>
+                                                    <c:out value="${RH}"></c:out>
                                                 </h3>
                                             </th>
                                         </tr>

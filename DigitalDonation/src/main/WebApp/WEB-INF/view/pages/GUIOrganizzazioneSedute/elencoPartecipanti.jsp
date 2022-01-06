@@ -54,9 +54,16 @@
 
                     <div class="card shadow mb-4 ">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Elenco partecipanti alla seduta del
-                                <c:out value="${dataSeduta}"></c:out> presso
-                                <c:out value="${luogoSeduta}"></c:out>:</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Elenco partecipanti alla seduta del  <c:out
+                                    value="${Seduta.dataSeduta.date}"></c:out>
+                                /
+                                <c:out
+                                        value="${Seduta.dataSeduta.month + 1}"></c:out>
+                                /
+                                <c:out
+                                        value="${Seduta.dataSeduta.year + 1900}"></c:out>
+                                presso <c:out value="${Seduta.luogo}"></c:out>:
+                               </h6>
                         </div>
                         <h6>&nbsp;</h6>
 
@@ -71,7 +78,7 @@
                                 <!-- Bottom indisponibilità seduta -->
                                 <span class="float-left col-xl-1 col-md-6 mb-2">
 
-                                    <a href="/goInserimentoUtenteGuest?idSeduta=<c:out value="${idSeduta}"></c:out>"
+                                    <a href="/goInserimentoUtenteGuest?idSeduta=<c:out value="${idSeduta}"></c:out>">
                                          <i class="fas fa-plus icone"></i> </a>
                                 </span>
                                 <h2>

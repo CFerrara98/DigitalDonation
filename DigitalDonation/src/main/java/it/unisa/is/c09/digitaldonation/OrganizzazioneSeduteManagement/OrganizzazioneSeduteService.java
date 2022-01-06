@@ -170,10 +170,15 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
      * @param idSeduta id della seduta da eliminare
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void eliminaSeduta(Long idSeduta) throws CannotDeleteDataRepositoryException {
         if (sedutaRepository.findByIdSeduta(idSeduta) == null) {
             throw new CannotDeleteDataRepositoryException("eliminazioneSedutaError", "Errore durante l'eliminazione della seduta");
         }
+        Seduta seduta= sedutaRepository.findByIdSeduta(idSeduta);
+        seduta.setListaDonatore(null);
+        seduta.setListaGuest(null);
+        sedutaRepository.save(seduta);
         sedutaRepository.deleteSedutaByIdSeduta(idSeduta);
     }
 
