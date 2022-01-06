@@ -143,7 +143,7 @@ public class GestioneSeduteServiceUT {
         indisponibilitaDonazioneForm.setMotivazioni(null);
         indisponibilitaDonazioneForm.setNomeMedico(null);
 
-        when(donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore)).thenReturn(donatore);
+        //when(donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore)).thenReturn(donatore);
         when(sedutaRepository.findByIdSeduta(idSeduta)).thenReturn(seduta);
 
         final String message = "Errore, il donatore è null";
@@ -158,7 +158,7 @@ public class GestioneSeduteServiceUT {
      * Verifica ValidaTipoDonazione nel caso in cui la seduta è null
      */
     @Test
-    public void VerificaGestioneSeduteSedutaNull(){//TODO sono rimasto qui
+    public void VerificaGestioneSeduteSedutaNull(){
         Donatore donatore = new Donatore();
         Seduta seduta = new Seduta();
         Long idSeduta = 1L;
@@ -171,13 +171,60 @@ public class GestioneSeduteServiceUT {
         indisponibilitaDonazioneForm.setNomeMedico(null);
 
         when(donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore)).thenReturn(donatore);
-        when(sedutaRepository.findByIdSeduta(idSeduta)).thenReturn(seduta);
+        when(sedutaRepository.findByIdSeduta(idSeduta)).thenReturn(null);
 
         final String message = "Errore, la seduta è null";
         try {
-            gestioneSeduteService.salvataggioIndisponibilita(null, seduta.getIdSeduta(),indisponibilitaDonazioneForm);
+            gestioneSeduteService.salvataggioIndisponibilita(codiceFiscaleDonatore, idSeduta, indisponibilitaDonazioneForm);
         } catch (CannotSaveDataRepositoryException e) {
             assertEquals(message, e.getMessage());
+        }
+    }
+
+    /**
+     * Verifica ValidaTipoDonazione nel caso in cui ha successo
+     */
+    @Test
+    public void VerificaGestioneSeduteSuccesso(){
+        Indisponibilita indisponibilita = new Indisponibilita();
+        Donatore donatore = new Donatore();
+        Seduta seduta = new Seduta();
+        String codiceFiscaleDonatore = "ACNCZY45X38I793C";
+        Long idSeduta = 1l;
+        Calendar c = new GregorianCalendar(2022, 05, 01);
+        Calendar dataIndisponibilita = new GregorianCalendar(2022, 5, 15);
+
+        IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = new IndisponibilitaDonazioneForm();
+        indisponibilitaDonazioneForm.setDataProssimaDisponibilita(c.getTime());
+        indisponibilitaDonazioneForm.setMotivazioni(null);
+        indisponibilitaDonazioneForm.setNomeMedico(null);
+
+        //when(indisponibilitaRepository.save(indisponibilita)).thenReturn(indisponibilita);
+        when(donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore)).thenReturn(donatore);
+        when(sedutaRepository.findByIdSeduta(idSeduta)).thenReturn(seduta);
+
+        indisponibilita = new Indisponibilita(dataIndisponibilita.getTime(), "Mal di testa",  "Dr. peppe");
+        indisponibilita.setCodiceFiscaleDonatore("ACNCZY45X38I793C");
+
+        List<Donatore> listaDonatore = new ArrayList<>();
+        Donatore donatore1 = new Donatore("ACNCZY45X38I793C", null, null, null, null, null, null, null, null, null);
+        Donatore donatore2 = new Donatore("AFCLCW22Z02F362J", null, null, null, null, null, null, null, null, null);
+        listaDonatore.add(donatore1);
+        listaDonatore.add(donatore2);
+
+        List<Seduta> listaSedute = new ArrayList<>();
+        Calendar dataSeduta1 = new GregorianCalendar(2022, 4, 15);
+        Calendar dataSeduta2 = new GregorianCalendar(2022, 6, 15);
+        Seduta seduta1 = new Seduta(52l, dataSeduta1.getTime(), null, null, null, 0, null, null, null, null, listaDonatore);
+        Seduta seduta2 = new Seduta(52l, dataSeduta2.getTime(), null, null, null, 0, null, null, null, null, listaDonatore);
+        listaSedute.add(seduta1);
+        listaSedute.add(seduta2);
+        when(sedutaRepository.findAll()).thenReturn(listaSedute);
+
+        try {
+            gestioneSeduteService.salvataggioIndisponibilita(codiceFiscaleDonatore, idSeduta, indisponibilitaDonazioneForm);
+        } catch (CannotSaveDataRepositoryException e) {
+            fail("errore!");
         }
     }
 

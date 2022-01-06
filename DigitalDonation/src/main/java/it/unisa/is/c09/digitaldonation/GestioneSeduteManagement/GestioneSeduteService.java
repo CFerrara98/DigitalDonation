@@ -1,21 +1,15 @@
 package it.unisa.is.c09.digitaldonation.GestioneSeduteManagement;
 
-
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.IndisponibilitaDonazioneForm;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-
 
 /*Validare i campi di conferma donazione form e indisponibilita donazione form*/
 @Service
@@ -35,7 +29,6 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
 
     @Autowired
     private IndisponibilitaRepository indisponibilitaRepository;
-
 
     /**
      * Questo metodo permette di registrare una nuova donazione da parte di un donatore e aggiorna il tesserino del donatore.
