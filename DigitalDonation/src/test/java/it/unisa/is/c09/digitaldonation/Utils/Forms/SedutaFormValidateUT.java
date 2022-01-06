@@ -68,7 +68,7 @@ public class SedutaFormValidateUT {
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
-        Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
+        Calendar myCalendar3 = new GregorianCalendar(2022, 1, 1);
         assertEquals("Data seduta non valida.", myCalendar3.getTime(), sedutaForm.getDataSeduta());
     }
 
@@ -94,7 +94,7 @@ public class SedutaFormValidateUT {
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
         System.out.println(""+ errors.hasErrors());
-        Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
+        Calendar myCalendar3 = new GregorianCalendar(2022, 1, 1);
         assertEquals("Data seduta non valida.", myCalendar3.getTime(), sedutaForm.getDataSeduta());
 
     }
@@ -213,7 +213,7 @@ public class SedutaFormValidateUT {
         citta = "Salerno";
         provincia = "SA";
         CAP = "82100";
-        numeroPartecipanti = 99999;
+        numeroPartecipanti = 0;
         orarioInizio = new Time(22,11,11);
         orarioFine = new Time(23,58,11);
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
@@ -251,7 +251,7 @@ public class SedutaFormValidateUT {
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
-        Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
+        Calendar myCalendar3 = new GregorianCalendar(2022, 1, 1);
         assertEquals("Errore nella data dell'inizio.", myCalendar3.getTime(), sedutaForm.getDataInizioPrenotazione());
     }
 
@@ -278,7 +278,7 @@ public class SedutaFormValidateUT {
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
-        Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
+        Calendar myCalendar3 = new GregorianCalendar(2022, 1, 1);
         assertEquals("Errore nella data dell'inizio.", myCalendar3.getTime(), sedutaForm.getDataInizioPrenotazione());
     }
 
@@ -304,7 +304,7 @@ public class SedutaFormValidateUT {
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
-        Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
+        Calendar myCalendar3 = new GregorianCalendar(2022, 1, 1);
         assertEquals("Errore nella data dell'inizio.", myCalendar3.getTime(), sedutaForm.getDataInizioPrenotazione());
     }
 
@@ -330,7 +330,7 @@ public class SedutaFormValidateUT {
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
-        Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
+        Calendar myCalendar3 = new GregorianCalendar(2022, 1, 1);
         assertEquals("Data di fine prenotazione non valida.", myCalendar3.getTime(), sedutaForm.getDataFinePrenotazione());
     }
 
@@ -356,7 +356,7 @@ public class SedutaFormValidateUT {
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
-        Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
+        Calendar myCalendar3 = new GregorianCalendar(2022, 1, 1);
         assertEquals("Data di fine prenotazione non valida.", myCalendar3.getTime(), sedutaForm.getDataFinePrenotazione());
     }
 
@@ -382,7 +382,7 @@ public class SedutaFormValidateUT {
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
-        Calendar myCalendar3 = new GregorianCalendar(1939, 9, 1);
+        Calendar myCalendar3 = new GregorianCalendar(2022, 1, 1);
         assertEquals("Data di fine prenotazione non valida.", myCalendar3.getTime(), sedutaForm.getDataFinePrenotazione());
     }
 

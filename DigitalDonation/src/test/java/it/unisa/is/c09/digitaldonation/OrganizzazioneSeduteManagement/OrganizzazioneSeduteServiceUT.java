@@ -105,7 +105,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data seduta inserita non ispetta il formato: gg/mm/aaaa";
 
         try {
@@ -131,7 +133,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data seduta inserita non ispetta il formato: gg/mm/aaaa";
 
         try {
@@ -157,8 +161,10 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
 
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
 
         final String message = "La data seduta inserita è minore della data corrente.";
         try {
@@ -184,7 +190,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "L’indirizzo inserito non è corretto.";
 
         try {
@@ -210,7 +218,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "L’indirizzo inserito non è corretto.";
 
         try {
@@ -236,7 +246,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La città inserita non è corretta: non ammette caratteri numeri.";
 
         try {
@@ -262,7 +274,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La città inserita non è corretta: non ammette caratteri numeri.";
 
         try {
@@ -288,7 +302,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.";
 
         try {
@@ -314,7 +330,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.";
 
         try {
@@ -340,7 +358,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La provincia inserita non è corretta: ammette solo due caratteri.";
 
         try {
@@ -366,7 +386,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La provincia inserita non è corretta: ammette solo due caratteri.";
 
         try {
@@ -392,7 +414,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999";
 
         try {
@@ -416,9 +440,11 @@ public class OrganizzazioneSeduteServiceUT {
         numeroPartecipanti = 99999;
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
         dataInizioPrenotazione = myCalendar1.getTime();
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999";
 
         try {
@@ -443,7 +469,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = null;
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.";
 
         try {
@@ -469,7 +497,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.";
 
         try {
@@ -495,7 +525,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data inizio partecipazione inserita è minore della data corrente";
 
         try {
@@ -521,7 +553,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data inizio partecipazione inserita è maggiore della data seduta.";
 
         try {
@@ -546,9 +580,11 @@ public class OrganizzazioneSeduteServiceUT {
         CAP = "82100";
         numeroPartecipanti = 9999;
         Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
         dataInizioPrenotazione = myCalendar1.getTime();
         dataFinePrenotazione = null;
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.";
 
         try {
@@ -573,7 +609,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(202, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.";
 
         try {
@@ -599,7 +637,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2020, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data fine partecipazione inserita è minore della data corrente.";
 
         try {
@@ -625,7 +665,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 5, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data fine partecipazione inserita è maggiore della data seduta.";
 
         try {
@@ -651,7 +693,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 3, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La data fine partecipazione inserita è minore della data inizio partecipazione.";
 
         try {
@@ -677,7 +721,9 @@ public class OrganizzazioneSeduteServiceUT {
         dataInizioPrenotazione = myCalendar1.getTime();
         Calendar myCalendar2 = new GregorianCalendar(2022, 4, 17);
         dataFinePrenotazione = myCalendar2.getTime();
-        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, null, null, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
+        Time orarioInizio = new Time(8,30,00);
+        Time orarioFine = new Time(17,00,00);
+        sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         final String message = "La schedulazione di una nuova seduta va a buon fine.";
 
         try {

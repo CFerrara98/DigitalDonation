@@ -407,7 +407,7 @@ public class OrganizzazioneSeduteServiceGuestUT {
         gruppoSanguigno = "AB+";
         guest = new Guest(codiceFiscaleGuest, nome, cognome, telefono, patologie, gruppoSanguigno);
         Long idSeduta = 745l;
-        final String message = "il guest è gia presente nella seduta";
+        final String message = "Il guest è gia presente nella seduta";
         when(sedutaRepository.existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(idSeduta, guest.getcodiceFiscaleGuest())).thenReturn(true);
         try {
             organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
