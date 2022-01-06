@@ -61,13 +61,13 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <img class="col-lg-6 d-none d-lg-block" src=../../../../resources/img/imglogin.jpg alt="...">
+                        <img class="col-lg-6 d-none d-lg-block" src=../../../../resources/img/imglogin.png alt="...">
 
                         <div class="col-lg-6">
                             <div class="p-5">
-                                <br><br>
+                                <br>
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Benvenuto!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Benvenuto in Digital Donation!</h1>
                                 </div>
 
                                 <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm"--%>
@@ -115,20 +115,17 @@
                                     </c:choose>
                                 </div>
 
-                            <br>
+
                             <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
 
+                                <div class="text-center">
+                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                </div>
                             </div>
                             <br>
 
                             </form:form>
 
-
-                            <!-- Ipotetico Cambio Password
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            -->
                         </div>
                     </div>
                 </div>

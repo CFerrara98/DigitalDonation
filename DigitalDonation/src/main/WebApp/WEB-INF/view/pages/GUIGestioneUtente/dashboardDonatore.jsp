@@ -76,14 +76,15 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="mt-4 mb-4 text-center small">
-                                        <h1>&nbsp;</h1>
+                                    <div class="text-center">
+                                        <img class="img-fluid px-5 " style="width: 24rem;"
+                                             src="../../resources/img/list.png" alt="...">
                                         <h1 align="center" class="h3 mb-2 text-gray-800">Visualizza le sedute
                                             disponibili per te:</h1>
                                         <a class="btn btn-primary" href="./goSeduteDisponibili"
                                            role="button">Sedute</a>
-                                        <h1>&nbsp;</h1>
-                                        <h1>&nbsp;</h1>
+                                        <h1><img class="img-fluid px-5 " style="width: 24rem;"
+                                             src="../../resources/img/autodichiarazione.png" alt="..."></h1>
                                         <h1 align="center" class="h3 mb-2 text-gray-800">Compila la tua
                                             autodichiarazione di indisponibilità:</h1>
                                         <a class="btn btn-primary" href="./goAutodichiarazioneIndisponibilita" role="button">Compila</a>
