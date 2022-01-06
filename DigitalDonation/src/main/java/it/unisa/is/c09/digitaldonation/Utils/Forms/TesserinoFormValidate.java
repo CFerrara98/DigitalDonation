@@ -4,6 +4,7 @@ package it.unisa.is.c09.digitaldonation.Utils.Forms;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneTesserinoError.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.SedutaFormException;
 import it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement.GestioneTesserinoService;
+import org.jboss.logging.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -20,6 +21,8 @@ import java.util.GregorianCalendar;
  */
 @Component
 public class TesserinoFormValidate implements Validator {
+
+    private static Logger logger = Logger.getLogger(String.valueOf(TesserinoFormValidate.class));
 
     @Override
     public boolean supports(Class<?> aClass) {

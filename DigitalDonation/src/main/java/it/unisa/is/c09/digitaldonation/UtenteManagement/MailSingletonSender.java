@@ -4,6 +4,7 @@ import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.SimpleMailMessage;
@@ -11,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Classe singleton che permette di inviare una email informativa all'utente
@@ -44,6 +46,12 @@ public class MailSingletonSender {
         javaMailSender.send(msg);
     }
 
+    /**
+     * Metodo che permette di inviare un email a tutti i donatori disponibili quando una seduta viene schedulata.
+     *
+     * @param donatore Oggetto donatore disponibile.
+     * @param seduta   Oggetto seduta a cui il donatore si è prenotato.
+     */
     public void sendEmailSchedulazioneSeduta(Seduta seduta, Donatore donatore) {
 
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -57,16 +65,25 @@ public class MailSingletonSender {
         javaMailSender.send(msg);
     }
 
-    /*public void spammaCarmine(){
+    public String sendEmailCreazioneAccount(Utente utente){
+
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("abatefrancesco98@gmail.com");
-        msg.setSubject("Piattaforma Digital Donation");
-        String messaggio = "\nGentile Francesco Abate,\n siamo della piattaforma di Digital Donation, a seguito della sua richiesta di utilizzare Node.js " +
-                "volevamo informarla che le tecnologie di back-end sono cambiare.\nLA ASPETTIAMO SULLA NOSTRA PIATTAFORMA\nCordiali Saluti, Digital Donation";
+        msg.setTo(utente.getEmail());
+        msg.setSubject("Account creato");
+        String lettere = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        String numeri = "0123456789";
+        String speciali = "@!#$%&";
+        String pwdLettere = RandomStringUtils.random(5, lettere);
+        String pwdNumeri = RandomStringUtils.random(2, numeri);
+        String pwdSpeciali = RandomStringUtils.random(1, speciali);
+        String password = pwdLettere+pwdNumeri+pwdSpeciali;
+
+        String messaggio = ("Gentile "+utente.getNome()+" "+utente.getCognome()+",\n" +
+                "le comunichiamo che il suo account sulla piattaforma Digital Donation è stato creato, per accedere alla piattaforma inserisca le credenziali qui sotto\n" +
+                "email: "+utente.getEmail()+"\npassword: "+password+"\n\nCordiali saluti");
         msg.setText(messaggio);
-        for(int i=0; i<75; i++){
-            javaMailSender.send(msg);
-        }
-    }*/
+        javaMailSender.send(msg);
+        return password;
+    }
 }
 

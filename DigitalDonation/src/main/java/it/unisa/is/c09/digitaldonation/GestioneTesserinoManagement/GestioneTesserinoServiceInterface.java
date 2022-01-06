@@ -2,14 +2,13 @@ package it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotUpdateDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Indisponibilita;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 
 import java.util.Date;
 
 public interface GestioneTesserinoServiceInterface {
 
-    public Tesserino creazioneTesserino(Tesserino tesserino) throws CannotSaveDataRepositoryException;
+    public Tesserino creazioneTesserino(Utente utente, Donatore donatore, Tesserino tesserino, Donazione donazione) throws CannotSaveDataRepositoryException;
 
     public Indisponibilita autodichiarazioneIndisponibilita(Indisponibilita indisponibilita) throws CannotSaveDataRepositoryException;
 

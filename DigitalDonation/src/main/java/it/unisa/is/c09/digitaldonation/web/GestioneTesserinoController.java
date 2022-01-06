@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -149,15 +150,36 @@ public class GestioneTesserinoController {
             return "redirect:/goCreazioneTesserino";
         }
 
+        Utente utente = new Utente();
+        utente.setCodiceFiscale(tesserinoForm.getCodiceFiscale());
+        utente.setNome(tesserinoForm.getNome());
+        utente.setCognome(tesserinoForm.getCognome());
+        utente.setEmail(tesserinoForm.getEmail());
+
+        Donatore donatore = new Donatore();
+        donatore.setCodiceFiscale(tesserinoForm.getCodiceFiscale());
+        donatore.setDataDiNascita(tesserinoForm.getDataNascita());
+        donatore.setLuogoDiNascita(tesserinoForm.getLuogoNascita());
+        donatore.setResidenza(tesserinoForm.getResidenza());
+
         Tesserino tesserino = new Tesserino();
+        tesserino.setDonatoreUtenteCodiceFiscale(tesserinoForm.getCodiceFiscale());
         tesserino.setDataRilascio(tesserinoForm.getDataRilascio());
         tesserino.setGruppoSanguigno(tesserinoForm.getGruppoSanguigno());
-        //immagine
         tesserino.setNumeroMatricola(tesserinoForm.getNumeroMatricola());
         tesserino.setRh(tesserinoForm.getRh());
 
+        Donazione donazione = new Donazione();
+        donazione.setTipoDonazione(tesserinoForm.getTipoDonazione());
+        donazione.setDataDonazione(tesserinoForm.getDataDonazione());
+        donazione.setTesserino(tesserino);
+
+        List<Donazione> listaDonazioni = new ArrayList<>();
+        listaDonazioni.add(donazione);
+        tesserino.setListaDonazioni(listaDonazioni);
+
         try {
-            gestioneTesserinoService.creazioneTesserino(tesserino);
+            gestioneTesserinoService.creazioneTesserino(utente, donatore, tesserino, donazione);
         } catch (CannotSaveDataRepositoryException e) {
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
             return "redirect:/goCreazioneTesserino";
