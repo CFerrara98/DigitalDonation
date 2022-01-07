@@ -134,7 +134,7 @@ public class GestioneTesserinoServiceUT {
 
         final String message = "Errore, il tesserino è null";
         try {
-            gestioneTesserinoService.creazioneTesserino(utente, donatore, tesserino, donazione);
+            gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
 
         } catch (CannotSaveDataRepositoryException exception) {
             assertEquals(message, exception.getMessage());
@@ -153,7 +153,7 @@ public class GestioneTesserinoServiceUT {
         when(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())).thenReturn(tesserino);
         final String message = "Il tesserino già esiste";
         try {
-            gestioneTesserinoService.creazioneTesserino(utente, donatore, tesserino, donazione);
+            gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
 
         } catch (CannotSaveDataRepositoryException exception) {
             assertEquals(message, exception.getMessage());
@@ -172,7 +172,7 @@ public class GestioneTesserinoServiceUT {
         when(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())).thenReturn(null);
         when(mailSingletonSender.sendEmailCreazioneAccount(utente)).thenReturn("123456");
         try {
-            gestioneTesserinoService.creazioneTesserino(utente, donatore, tesserino, donazione);
+            gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
         } catch (CannotSaveDataRepositoryException exception) {
             fail(exception.getMessage());
         }
