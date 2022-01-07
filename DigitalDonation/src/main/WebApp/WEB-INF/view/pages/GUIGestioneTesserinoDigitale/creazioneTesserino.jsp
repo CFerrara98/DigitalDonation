@@ -54,7 +54,27 @@
                                                     </div>
                                                     <div class="card-body">
 
-                                                   
+                                                        <div class="custom-file">
+                                                            <c:choose>
+                                                                <c:when test="${TesserinoImageError == null}">
+                                                                    <form:input type="file"
+                                                                                class=" form-control form-control-user custom-file-input"
+                                                                                path="image" id="customFile"/>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <form:input type="file"
+                                                                                class=" form-control form-control-user custom-file-input is-invalid"
+                                                                                path="image" id="customFile"/>
+                                                                    <span class="myError">${TesserinoImageError}</span>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            <label class="custom-file-label" for="customFile">Inserisci
+                                                                la tua foto</label>
+                                                        </div>
+
+                                                        <br>
+                                                        <br>
+
                                                         <div class="form-group row">
                                                             <div class="col-sm-3 mb-3 mb-sm-0">
                                                                 <p style="color:#4e73df;">Nome: </p>
