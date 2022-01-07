@@ -100,7 +100,7 @@ public class GestioneTesserinoServiceUT {
      */
     public void validaCampi() throws TesserinoFormException {
         tesserino = null;
-        when(tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino);
+        when(tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino);
 
         Donatore donatore = new Donatore("ACNCZY45X38I793C", null, null, "test@gmai.com", null, null, null, null, null, null);
         when(donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscale)).thenReturn(donatore);
@@ -108,7 +108,7 @@ public class GestioneTesserinoServiceUT {
         gestioneTesserinoService.validaNome(nome);
         gestioneTesserinoService.validaCognome(cognome);
         gestioneTesserinoService.validaCodiceFiscale(codiceFiscale);
-        gestioneTesserinoService.validaImage(image);
+        //gestioneTesserinoService.validaImage(image);
         gestioneTesserinoService.validaDataDiNascita(dataDiNascita);
         gestioneTesserinoService.validaLuogoDiNascita(luogoDiNascita);
         gestioneTesserinoService.validaResidenza(residenza);
@@ -134,7 +134,7 @@ public class GestioneTesserinoServiceUT {
 
         final String message = "Errore, il tesserino è null";
         try {
-            gestioneTesserinoService.creazioneTesserino(utente, donatore, tesserino, donazione);
+            gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
 
         } catch (CannotSaveDataRepositoryException exception) {
             assertEquals(message, exception.getMessage());
@@ -153,7 +153,7 @@ public class GestioneTesserinoServiceUT {
         when(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())).thenReturn(tesserino);
         final String message = "Il tesserino già esiste";
         try {
-            gestioneTesserinoService.creazioneTesserino(utente, donatore, tesserino, donazione);
+            gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
 
         } catch (CannotSaveDataRepositoryException exception) {
             assertEquals(message, exception.getMessage());
@@ -170,9 +170,9 @@ public class GestioneTesserinoServiceUT {
         utente = new Utente();
         donatore = new Donatore();
         when(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())).thenReturn(null);
-        when(mailSingletonSender.sendEmailCreazioneAccount(utente)).thenReturn("123456");
+        when(mailSingletonSender.sendEmailCreazioneAccount(donatore)).thenReturn("123456");
         try {
-            gestioneTesserinoService.creazioneTesserino(utente, donatore, tesserino, donazione);
+            gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
         } catch (CannotSaveDataRepositoryException exception) {
             fail(exception.getMessage());
         }
@@ -485,7 +485,7 @@ public class GestioneTesserinoServiceUT {
 
         Tesserino tesserino1 = new Tesserino();
 
-        when(tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino1);
+        when(tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino1);
 
         final String message = "Utente con questo codice fiscale gia esistente sul database";
         try {

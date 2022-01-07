@@ -27,6 +27,9 @@ public class testttt {
     }
 
     public static void main(String[] args) {
-        System.out.println(getMD5("pdT!nW&6kGSS"));
+        //System.out.println(getMD5("pdT!nW&6kGSS"));
+
     }
+
+
 }

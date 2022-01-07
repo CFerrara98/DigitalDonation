@@ -1,6 +1,5 @@
 package it.unisa.is.c09.digitaldonation.web;
 
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotLoadDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement.GestioneTesserinoService;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
@@ -56,33 +55,35 @@ public class GestioneTesserinoController {
      */
     @RequestMapping(value = "/autodichiarazioneIndisponibilita", method = RequestMethod.POST)
     public String autodichiarazioneDiIndisponibilita(HttpServletRequest request, @ModelAttribute AutodichiarazioneIndisponibilitaForm autodichiarazioneForm,
-                  BindingResult result, RedirectAttributes redirectAttribute, Model model){
+                                                     BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente == null || utente instanceof Operatore) {
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         autodichiarazioneFormValidate.validate(autodichiarazioneForm, result);
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             redirectAttribute.addFlashAttribute("autodichiarazioneForm", autodichiarazioneForm);
             for (ObjectError x : result.getGlobalErrors()) {
                 redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
             }
             return "redirect:/goAutodichiarazioneIndisponibilita";
         }
-        if(utente instanceof Donatore){
-            Indisponibilita indisponibilita = new Indisponibilita();
-            indisponibilita.setCodiceFiscaleDonatore(utente.getCodiceFiscale());
-            indisponibilita.setDataProssimaDisponibilita(autodichiarazioneForm.getDataProssimaDisponibilita());
-            indisponibilita.setMotivazioni(autodichiarazioneForm.getMotivazioni());
 
-            try {
-                gestioneTesserinoService.autodichiarazioneIndisponibilita(indisponibilita);
-            } catch (CannotSaveDataRepositoryException e) {
-                redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
-                return "redirect:/goAutodichiarazioneIndisponibilita";
-            }
+        Indisponibilita indisponibilita = new Indisponibilita();
+        indisponibilita.setCodiceFiscaleDonatore(utente.getCodiceFiscale());
+        indisponibilita.setDataProssimaDisponibilita(autodichiarazioneForm.getDataProssimaDisponibilita());
+        indisponibilita.setMotivazioni(autodichiarazioneForm.getMotivazioni());
+
+        try {
+            gestioneTesserinoService.autodichiarazioneIndisponibilita(indisponibilita);
+        } catch (CannotSaveDataRepositoryException e) {
+            redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
+            return "redirect:/goAutodichiarazioneIndisponibilita";
         }
-        else{
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
-            return "redirect:/error";
-        }
+
         model.addAttribute("success", "Autodichiarazione compilata con successo");
         return "GUIGestioneUtente/dashboardDonatore";
     }
@@ -96,7 +97,13 @@ public class GestioneTesserinoController {
      */
     @RequestMapping(value = "/goAutodichiarazioneIndisponibilita", method = RequestMethod.GET)
     public String goAutodichiarazioneDiIndisponibilita(HttpServletRequest request, Model model){
+
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Operatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         AutodichiarazioneIndisponibilitaForm autodichiarazioneIndisponibilitaForm = new AutodichiarazioneIndisponibilitaForm();
         model.addAttribute("autodichiarazioneForm", autodichiarazioneIndisponibilitaForm);
         return "GUIGestioneTesserinoDigitale/autodichiarazioneIndisponibilita";
@@ -111,6 +118,11 @@ public class GestioneTesserinoController {
      */
     @RequestMapping(value = "/goTesserino", method = RequestMethod.GET)
     public String goVisualizzaTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Operatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
         return "GUIOrganizzazioneSedute/visualizzaTesserino";
     }
 
@@ -123,13 +135,19 @@ public class GestioneTesserinoController {
      */
     @RequestMapping(value = "/goCreazioneTesserino", method = RequestMethod.GET)
     public String goCreazioneTesserino(HttpServletRequest request, Model model){
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         TesserinoForm tesserinoForm = new TesserinoForm();
         model.addAttribute("tesserinoForm", tesserinoForm);
         return "GUIGestioneTesserinoDigitale/creazioneTesserino";
     }
 
     /**
-     * Metodo che permette al donatore di compilare un autodichiarazione di indisponibilità.
+     * Metodo che permette la creazione di un nuovo tesserino.
      *
      * @param request           è la richiesta dalla sessione.
      * @param tesserinoForm     è l'oggetto form dell'utente guest.
@@ -141,6 +159,13 @@ public class GestioneTesserinoController {
     @RequestMapping(value = "/creazioneTesserino", method = RequestMethod.POST)
     public String creazioneTesserino(HttpServletRequest request, @ModelAttribute TesserinoForm tesserinoForm,
                                                      BindingResult result, RedirectAttributes redirectAttribute, Model model){
+        Utente user = (Utente) request.getSession().getAttribute("utente");
+        if(user==null || user instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
+        //TODO errore con il caricamento dell'immagine
         tesserinoFormValidate.validate(tesserinoForm, result);
         if(result.hasErrors()){
             redirectAttribute.addFlashAttribute("tesserinoForm", tesserinoForm);
@@ -150,17 +175,18 @@ public class GestioneTesserinoController {
             return "redirect:/goCreazioneTesserino";
         }
 
-        Utente utente = new Utente();
-        utente.setCodiceFiscale(tesserinoForm.getCodiceFiscale());
-        utente.setNome(tesserinoForm.getNome());
-        utente.setCognome(tesserinoForm.getCognome());
-        utente.setEmail(tesserinoForm.getEmail());
-
         Donatore donatore = new Donatore();
+        donatore.setNome(tesserinoForm.getNome());
+        donatore.setCognome(tesserinoForm.getCognome());
+<<<<<<< HEAD
+        donatore.setEmail(tesserinoForm.getEmail());
+=======
+>>>>>>> 5caec03d434f7ca320bad148135ec89deea5aba6
         donatore.setCodiceFiscale(tesserinoForm.getCodiceFiscale());
         donatore.setDataDiNascita(tesserinoForm.getDataNascita());
         donatore.setLuogoDiNascita(tesserinoForm.getLuogoNascita());
         donatore.setResidenza(tesserinoForm.getResidenza());
+        donatore.setEmail(tesserinoForm.getEmail());
 
         Tesserino tesserino = new Tesserino();
         tesserino.setDonatoreUtenteCodiceFiscale(tesserinoForm.getCodiceFiscale());
@@ -169,6 +195,7 @@ public class GestioneTesserinoController {
         tesserino.setNumeroMatricola(tesserinoForm.getNumeroMatricola());
         tesserino.setRh(tesserinoForm.getRh());
 
+        //TODO controllare prima se esiste una donazione precedente
         Donazione donazione = new Donazione();
         donazione.setTipoDonazione(tesserinoForm.getTipoDonazione());
         donazione.setDataDonazione(tesserinoForm.getDataDonazione());
@@ -179,12 +206,18 @@ public class GestioneTesserinoController {
         tesserino.setListaDonazioni(listaDonazioni);
 
         try {
-            gestioneTesserinoService.creazioneTesserino(utente, donatore, tesserino, donazione);
+<<<<<<< HEAD
+            System.out.println("Nel try");
+=======
+>>>>>>> 5caec03d434f7ca320bad148135ec89deea5aba6
+            gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
         } catch (CannotSaveDataRepositoryException e) {
+            e.printStackTrace();
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
+            System.out.println("CannotSaveDataRepositoryException");
             return "redirect:/goCreazioneTesserino";
         }
         model.addAttribute("success", "Tesserino creato con successo");
-        return "GUIGestioneUtente/dashboardDonatore";
+        return "GUIGestioneUtente/dashboardOperatore";
     }
 }

@@ -10,7 +10,7 @@
     //if(utente==null)response.sendRedirect("GUIGestioneUtente/homepage");
     //Nel caso invece c'è un utente loggato in base alla tipologia si redireziona sulla rispettiva pagina
     if(utente instanceof Donatore) response.sendRedirect("GUIGestioneUtente/dashboardDonatore");
-    else if(utente instanceof Operatore) response.sendRedirect("GUIGestioneUtente/dashboardOperatore");
+    if(utente instanceof Operatore) response.sendRedirect("GUIGestioneUtente/dashboardOperatore");
 %>
 
 <!--Fine gestione della sessione-->

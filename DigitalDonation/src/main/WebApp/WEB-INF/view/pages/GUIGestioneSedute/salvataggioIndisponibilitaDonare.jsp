@@ -161,12 +161,12 @@
                                                 <div class="form-group">
                                                     <p style="color:#4e73df;">Motivazioni: </p>
                                                     <c:choose>
-                                                        <c:when test="${motivazioniIndisponibilitaError == null}">
+                                                        <c:when test="${MotivazioniIndisponibilitaError == null}">
                                                             <form:textarea class="textarea form-control" id="exampleMotivazioni" rows="4" path="motivazioni"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:textarea class="textarea form-control is-invalid" id="exampleMotivazioni" rows="4" path="motivazioni"/>
-                                                            <span class="myError">${motivazioniIndisponibilitaError}</span>
+                                                            <span class="myError">${MotivazioniIndisponibilitaError}</span>
                                                         </c:otherwise>
                                                     </c:choose>
 
@@ -178,12 +178,12 @@
                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                 <p style="color:#4e73df;">Nome Medico: </p>
                                                 <c:choose>
-                                                    <c:when test="${nomeMedicoError == null}">
+                                                    <c:when test="${NomeMedicoIndisponibilitaError == null}">
                                                         <form:input type="text" class="form-control form-control-user" id="nomeMedico" path="nomeMedico"/>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <form:input type="text" class="form-control form-control-user is-invalid" id="nomeMedico" path="nomeMedico"/>
-                                                        <span class="myError">${nomeMedicoError}</span>
+                                                        <span class="myError">${NomeMedicoIndisponibilitaError}</span>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>
@@ -194,12 +194,12 @@
                                                 <p style="color:#4e73df;">Data scadenza non idoneità: </p>
 
                                                 <c:choose>
-                                                    <c:when test="${dataScadenzaNonIdoneitaError == null}">
+                                                    <c:when test="${DataProssimaDisponibilitaError == null}">
                                                         <form:input type="date" class="form-control form-control-user" id="exampleData" placeholder="es. 18/01/2022" path="dataProssimaDisponibilita"/>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <form:input type="date" class="form-control form-control-user is-invalid" id="exampleData" placeholder="es. 18/01/2022" path="dataProssimaDisponibilita"/>
-                                                        <span class="myError">${dataScadenzaNonIdoneitaError}</span>
+                                                        <span class="myError">${DataProssimaDisponibilitaError}</span>
                                                     </c:otherwise>
                                                 </c:choose>
 

@@ -95,7 +95,7 @@ public class GestioneSeduteServiceUT {
         when(donatoreRepository.findDonatoreByCodiceFiscaleUtente(donatore.getCodiceFiscaleUtente())).thenReturn(donatore);
         when(sedutaRepository.findByIdSeduta(seduta.getIdSeduta())).thenReturn(seduta);
         when(sedutaRepository.existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(seduta.getIdSeduta(), donatore.getCodiceFiscale())).thenReturn(true);
-        when(tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale())).thenReturn(tesserino);
+        when(tesserinoRepository.findByDonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale())).thenReturn(tesserino);
         //when(donazioneRepository.save(donazione)).thenReturn(donazione);
         when(tesserinoRepository.save(tesserino)).thenReturn(tesserino);
         //when(indisponibilitaRepository.save(indisponibilita)).thenReturn(indisponibilita);

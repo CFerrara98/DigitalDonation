@@ -80,7 +80,7 @@
                             </div>
 
                                     </form:form>
-                                    -->
+                                    --                                                             >
 
                                     <form action="./salvataggioDonazione" method="post" id="form">
                                         <div class="form-check">

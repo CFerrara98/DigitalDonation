@@ -65,10 +65,10 @@ public class MailSingletonSender {
         javaMailSender.send(msg);
     }
 
-    public String sendEmailCreazioneAccount(Utente utente){
+    public String sendEmailCreazioneAccount(Donatore donatore){
 
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(utente.getEmail());
+        msg.setTo(donatore.getEmail());
         msg.setSubject("Account creato");
         String lettere = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         String numeri = "0123456789";
@@ -78,9 +78,9 @@ public class MailSingletonSender {
         String pwdSpeciali = RandomStringUtils.random(1, speciali);
         String password = pwdLettere+pwdNumeri+pwdSpeciali;
 
-        String messaggio = ("Gentile "+utente.getNome()+" "+utente.getCognome()+",\n" +
+        String messaggio = ("Gentile "+donatore.getNome()+" "+donatore.getCognome()+",\n" +
                 "le comunichiamo che il suo account sulla piattaforma Digital Donation è stato creato, per accedere alla piattaforma inserisca le credenziali qui sotto\n" +
-                "email: "+utente.getEmail()+"\npassword: "+password+"\n\nCordiali saluti");
+                "email: "+donatore.getEmail()+"\npassword: "+password+"\n\nCordiali saluti");
         msg.setText(messaggio);
         javaMailSender.send(msg);
         return password;

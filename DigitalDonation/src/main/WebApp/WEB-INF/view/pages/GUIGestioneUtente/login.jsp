@@ -10,10 +10,8 @@
 
 <%
     Utente utente=(Utente)session.getAttribute("utente");
-    
     if(utente instanceof Donatore) response.sendRedirect("GUIGestioneUtente/dashboardDonatore");
-    else if(utente instanceof Operatore) response.sendRedirect("GUIGestioneUtente/dashboardOperatore");
-
+    if(utente instanceof Operatore) response.sendRedirect("GUIGestioneUtente/dashboardOperatore");
 %>
 
 <!--Fine gestione della sessione-->
