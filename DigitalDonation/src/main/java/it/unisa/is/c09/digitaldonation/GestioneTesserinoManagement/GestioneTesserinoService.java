@@ -63,7 +63,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
         utenteRepository.save(donatore);
         tesserinoRepository.save(tesserino);
 
-        return tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale());
+        return tesserinoRepository.findByDonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale());
     }
 
     /**

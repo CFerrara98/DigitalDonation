@@ -178,8 +178,6 @@ public class GestioneTesserinoController {
         Donatore donatore = new Donatore();
         donatore.setNome(tesserinoForm.getNome());
         donatore.setCognome(tesserinoForm.getCognome());
-=======
->>>>>>> 5caec03d434f7ca320bad148135ec89deea5aba6
         donatore.setCodiceFiscale(tesserinoForm.getCodiceFiscale());
         donatore.setDataDiNascita(tesserinoForm.getDataNascita());
         donatore.setLuogoDiNascita(tesserinoForm.getLuogoNascita());
@@ -204,8 +202,6 @@ public class GestioneTesserinoController {
         tesserino.setListaDonazioni(listaDonazioni);
 
         try {
-=======
->>>>>>> 5caec03d434f7ca320bad148135ec89deea5aba6
             gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
         } catch (CannotSaveDataRepositoryException e) {
             e.printStackTrace();

@@ -465,7 +465,7 @@ public class OrganizzazioneSeduteController {
         } catch (CannotUpdateDataRepositoryException e) {
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
         }
-        model.addAttribute("success", "Seduta schedulata con successo!");
+        model.addAttribute("success", "Seduta schedulata con successo");
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
     }
 
@@ -495,7 +495,6 @@ public class OrganizzazioneSeduteController {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
             return "redirect:/error";
         }
-
         String codiceFiscale = request.getParameter("codiceFiscale");
         try{
             if(utente == null) new IllegalArgumentException();

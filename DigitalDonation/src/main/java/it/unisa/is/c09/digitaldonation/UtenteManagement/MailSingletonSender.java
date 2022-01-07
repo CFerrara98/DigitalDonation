@@ -66,7 +66,6 @@ public class MailSingletonSender {
     }
 
     public String sendEmailCreazioneAccount(Donatore donatore){
-
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(donatore.getEmail());
         msg.setSubject("Account creato");
