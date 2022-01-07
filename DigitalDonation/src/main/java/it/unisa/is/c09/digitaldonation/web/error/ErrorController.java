@@ -3,6 +3,7 @@ package it.unisa.is.c09.digitaldonation.web.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,15 +16,16 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
 
     /**
      * Mappa i vari errori http response
+     *
      * @return
      */
     @RequestMapping(value = "/error")
-    public String  renderErrorPage(HttpServletRequest httpRequest) {
+    public String renderErrorPage(HttpServletRequest httpRequest, Model model) {
 
         ModelAndView errorPage = new ModelAndView("errorPage");
-        String errorMsg = "";
-        int httpErrorCode = getErrorCode(httpRequest);
-        if(httpErrorCode!=-1){
+        String errorMsg = "default";
+        int httpErrorCode = (int) httpRequest.getSession().getAttribute("codiceErrore");
+        if (httpErrorCode != -1) {
             switch (httpErrorCode) {
                 case 400: {
                     errorMsg = "Http Error Code: 400. Bad Request";
@@ -43,14 +45,11 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
                 }
             }
         }
-        errorPage.addObject("errorMsg", errorMsg);
+        httpRequest.getSession().removeAttribute("codiceErrore");
+        model.addAttribute("errorMsg", errorMsg);
         return "errorsPages/errorPage";
     }
 
-    private int getErrorCode(HttpServletRequest httpRequest) {
-        return httpRequest.getAttribute("javax.servlet.error.status_code")==null ? -1 :
-            (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
-    }
 
     @Override
     public String getErrorPath() {

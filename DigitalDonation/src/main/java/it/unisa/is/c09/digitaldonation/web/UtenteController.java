@@ -162,7 +162,7 @@ public class UtenteController {
             //TODO Caricare la img del donatore come da mock-up
             return "GUIGestioneUtente/dashboardDonatore";
         }
-        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+        request.getSession().setAttribute("codiceErrore", 401);
         return "redirect:/error";
     }
 
