@@ -35,12 +35,13 @@ public class PopulatorController {
     public String upladFile(HttpServletRequest request, Model model) {
         logger.info("Looking for file");
 
-        File file = new File("C:\\Users\\elpid\\Downloads\\Download_Firefox\\IMG_20150706_164211.jpg");
+        File file = new File("C:\\Users\\elpid\\Documents\\GitHub\\DigitalDonation\\DigitalDonation\\src\\main\\resources\\bucky.png");
         //File file = new File("/src/main/resources/bucky.png");
         //File file = new File("demo.txt");
         logger.info("Try to upload.....");
         com.google.api.services.drive.model.File file2  = googleDriveService.upLoadFile(file.getName(), file.getAbsolutePath(),"image/jpg");
         logger.info("File uploaded");
+        logger.info(file2.getWebViewLink());
         try {
             System.err.println(file2.toPrettyString());
         } catch (IOException e) {
