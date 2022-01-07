@@ -45,7 +45,7 @@ public class TesserinoFormValidate implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         TesserinoForm tesserinoForm = (TesserinoForm) target;
-        gestioneTesserinoService = new GestioneTesserinoService();
+        //gestioneTesserinoService = new GestioneTesserinoService();
         //Valida Campo Nome
         try {
             gestioneTesserinoService.validaNome(tesserinoForm.getNome());
@@ -71,12 +71,12 @@ public class TesserinoFormValidate implements Validator {
         }
 
         //Valida Campo image
-        try {
+        /*try {
             gestioneTesserinoService.validaImage(tesserinoForm.getImage());
         } catch (TesserinoFormException e1) {
             errors.reject("TesserinoImageError", e1.getMessage());
             tesserinoForm.setImage(null);
-        }
+        }*/
 
         //Valida Campo Data Di Nascita
         try {

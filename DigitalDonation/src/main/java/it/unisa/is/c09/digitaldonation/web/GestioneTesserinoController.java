@@ -165,6 +165,7 @@ public class GestioneTesserinoController {
             return "redirect:/error";
         }
 
+        //TODO errore con il caricamento dell'immagine
         tesserinoFormValidate.validate(tesserinoForm, result);
         if(result.hasErrors()){
             redirectAttribute.addFlashAttribute("tesserinoForm", tesserinoForm);
@@ -173,18 +174,15 @@ public class GestioneTesserinoController {
             }
             return "redirect:/goCreazioneTesserino";
         }
-        //TODO NON FUNZIONANTE
-        Utente utente = new Utente();
-        utente.setCodiceFiscale(tesserinoForm.getCodiceFiscale());
-        utente.setNome(tesserinoForm.getNome());
-        utente.setCognome(tesserinoForm.getCognome());
-        utente.setEmail(tesserinoForm.getEmail());
 
         Donatore donatore = new Donatore();
+        donatore.setNome(tesserinoForm.getNome());
+        donatore.setCognome(tesserinoForm.getCognome());
         donatore.setCodiceFiscale(tesserinoForm.getCodiceFiscale());
         donatore.setDataDiNascita(tesserinoForm.getDataNascita());
         donatore.setLuogoDiNascita(tesserinoForm.getLuogoNascita());
         donatore.setResidenza(tesserinoForm.getResidenza());
+        donatore.setEmail(tesserinoForm.getEmail());
 
         Tesserino tesserino = new Tesserino();
         tesserino.setDonatoreUtenteCodiceFiscale(tesserinoForm.getCodiceFiscale());
@@ -193,6 +191,7 @@ public class GestioneTesserinoController {
         tesserino.setNumeroMatricola(tesserinoForm.getNumeroMatricola());
         tesserino.setRh(tesserinoForm.getRh());
 
+        //TODO controllare prima se esiste una donazione precedente
         Donazione donazione = new Donazione();
         donazione.setTipoDonazione(tesserinoForm.getTipoDonazione());
         donazione.setDataDonazione(tesserinoForm.getDataDonazione());
@@ -203,12 +202,12 @@ public class GestioneTesserinoController {
         tesserino.setListaDonazioni(listaDonazioni);
 
         try {
-            gestioneTesserinoService.creazioneTesserino(utente, donatore, tesserino, donazione);
+            gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
         } catch (CannotSaveDataRepositoryException e) {
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
             return "redirect:/goCreazioneTesserino";
         }
         model.addAttribute("success", "Tesserino creato con successo");
-        return "GUIGestioneUtente/dashboardDonatore";
+        return "GUIGestioneUtente/dashboardOperatore";
     }
 }

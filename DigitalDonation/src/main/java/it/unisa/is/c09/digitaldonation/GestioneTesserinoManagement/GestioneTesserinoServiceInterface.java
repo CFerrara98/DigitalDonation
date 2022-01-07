@@ -8,7 +8,7 @@ import java.util.Date;
 
 public interface GestioneTesserinoServiceInterface {
 
-    public Tesserino creazioneTesserino(Utente utente, Donatore donatore, Tesserino tesserino, Donazione donazione) throws CannotSaveDataRepositoryException;
+    public Tesserino creazioneTesserino(Donatore donatore, Tesserino tesserino, Donazione donazione) throws CannotSaveDataRepositoryException;
 
     public Indisponibilita autodichiarazioneIndisponibilita(Indisponibilita indisponibilita) throws CannotSaveDataRepositoryException;
 
