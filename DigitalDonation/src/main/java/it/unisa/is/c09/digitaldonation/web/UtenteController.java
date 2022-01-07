@@ -38,12 +38,16 @@ public class UtenteController {
      * Metodo per la visualizzazione dell'homepage o della dashboard
      *
      * @param model è l'oggetto Model.
-     * @param session è la sessione dell'utente.
      * @return String stringa che rappresenta la pagina da visualizzare.
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String visualizzaHome(HttpSession session, Model model) {
-        session.invalidate();
+    public String visualizzaHome(HttpServletRequest request, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente!=null) {
+            if (utente instanceof Operatore) return "GUIGestioneUtente/dashboardOperatore";
+            if (utente instanceof Donatore) return "GUIGestioneUtente/dashboardDonatore";
+        }
+        request.getSession().invalidate();
         return "GUIGestioneUtente/homepage";
     }
 
@@ -135,11 +139,13 @@ public class UtenteController {
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        try {
-            utenteService.logout(utente);
-        } catch (AccessNotAuthorizedException e) {
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
-            return "redirect:/error";
+        if (utente != null) {
+            try {
+                utenteService.logout(utente);
+            } catch (AccessNotAuthorizedException e) {
+                request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+                return "redirect:/error";
+            }
         }
         request.getSession().invalidate();
         return "GUIGestioneUtente/homepage";

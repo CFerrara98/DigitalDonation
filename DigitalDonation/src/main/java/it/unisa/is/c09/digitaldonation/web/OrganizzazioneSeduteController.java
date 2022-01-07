@@ -4,7 +4,6 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
-import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestFormValidate;
@@ -60,17 +59,19 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
     public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model,
                                    @RequestParam(name= "feedbackSeduta") String feedbackSeduta, @RequestParam(name="idSeduta") Long idSeduta) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(!(utente instanceof Donatore) || utente == null){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
         if(feedbackSeduta.equals("positivo")) {
-            Donatore utente = (Donatore) request.getSession().getAttribute("utente");
-            if (utente != null) {
                 try {
-                    organizzazioneSeduteService.feedbackDonatore(utente, idSeduta);
+                    organizzazioneSeduteService.feedbackDonatore((Donatore) utente, idSeduta);
                     model.addAttribute("success", "Ti sei prenotato alla seduta, controlla la tua email.");
                     return "GUIGestioneUtente/dashboardDonatore";
                 } catch (CannotRelaseFeedbackException e) {
                     return "GUIGestioneUtente/dashboardDonatore";
                 }
-            }
         }
         return "redirect:/dashboardDonatore";
     }
@@ -100,10 +101,12 @@ public class OrganizzazioneSeduteController {
                 }
                 return "GUIOrganizzazioneSedute/elencoPartecipanti";
             } catch (CannotLoadDataRepositoryException e) {
-                return "errorsPages/error503";
+                request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+                return "redirect:/error";
             }
-        } else
-            return "redirect:/";
+        }
+        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+        return "redirect:/error";
     }
 
     /**
@@ -124,7 +127,8 @@ public class OrganizzazioneSeduteController {
                 e.printStackTrace();
             }
         } else {
-            return "redirect:/";
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
         }
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
     }
@@ -138,18 +142,19 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/goSeduteDisponibili", method = RequestMethod.GET)
     public String seduteDisponibili(HttpServletRequest request,Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if (utente instanceof Donatore){
-            try{
-                List<Seduta> lista = organizzazioneSeduteService.visualizzaElencoSeduteDisponibili(utente.getCodiceFiscale());
-                model.addAttribute("listaSedutePrenotabili", lista);
-            } catch (CannotLoadDataRepositoryException e) {
-                e.printStackTrace();
-            }
-        } else {
-            return "redirect:/";
-            }
-        return "GUIOrganizzazioneSedute/seduteDisponibili";
+
+        if(!(utente instanceof Donatore) || utente==null){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
         }
+        try{
+            List<Seduta> lista = organizzazioneSeduteService.visualizzaElencoSeduteDisponibili(utente.getCodiceFiscale());
+            model.addAttribute("listaSedutePrenotabili", lista);
+        } catch (CannotLoadDataRepositoryException e) {
+            e.printStackTrace();
+        }
+        return "GUIOrganizzazioneSedute/seduteDisponibili";
+    }
 
     /**
      * Metodo che permette al donatore di poter visualizzare una seduta.
@@ -161,18 +166,18 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/visualizzaSeduta", method = RequestMethod.GET)
     public String visualizzaSeduta(HttpServletRequest request, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if (utente instanceof Donatore) {
-            Long idSeduta = (Long) model.getAttribute("idSeduta");
-            List<Seduta> lista = (List<Seduta>) model.getAttribute("listaSedutePrenotabili");
-            for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getIdSeduta() == idSeduta) {
-                    model.addAttribute("sedutaScelta", lista.get(i));
-                }
-            }
-            return "GUIOrganizzazioneSedute/partecipaSeduta";
-        } else {
-            return "redirect:/";
+        if (!(utente instanceof Donatore) || utente == null) {
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
         }
+        Long idSeduta = (Long) model.getAttribute("idSeduta");
+        List<Seduta> lista = (List<Seduta>) model.getAttribute("listaSedutePrenotabili");
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdSeduta() == idSeduta) {
+                model.addAttribute("sedutaScelta", lista.get(i));
+            }
+        }
+        return "GUIOrganizzazioneSedute/partecipaSeduta";
     }
 
     /**
@@ -183,13 +188,20 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value = "/goElencoPartecipanti", method = RequestMethod.GET)
     public String elencoPartecipanti(Model model, HttpServletRequest request) {
+
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         String successo = request.getParameter("successo");
-            model.addAttribute("idSeduta" , idSeduta);
+        model.addAttribute("idSeduta", idSeduta);
 
-           Seduta seduta= sedutaRepository.findByIdSeduta(idSeduta);
-            model.addAttribute("Seduta", seduta );
-            request.getSession().setAttribute("idSeduta" , idSeduta);
+        Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
+        model.addAttribute("Seduta", seduta);
+        request.getSession().setAttribute("idSeduta", idSeduta);
         try {
             ArrayList<Object> list = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
             model.addAttribute("listaUtenti", list);
@@ -224,7 +236,12 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione alla pagina.
      */
     @RequestMapping(value = "/goMonitoraggioSedute", method = RequestMethod.GET)
-    public String monitoraggioSedute(Model model) {
+    public String monitoraggioSedute(HttpServletRequest request, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
     }
 
@@ -236,6 +253,12 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value = "/goPartecipaSeduta", method = RequestMethod.GET)
     public String partecipaSeduta(HttpServletRequest request, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Operatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         Long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         model.addAttribute("idSeduta" , idSeduta);
 
@@ -257,7 +280,13 @@ public class OrganizzazioneSeduteController {
      * @return String ridirezione alla pagina delle sedute disponibile.
      */
     @RequestMapping(value = "/goSchedulazioneSeduta", method = RequestMethod.GET)
-    public String schedulazioneSeduta(Model model) {
+    public String schedulazioneSeduta(HttpServletRequest request, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         if (model.getAttribute("sedutaForm") != null) {
             return "GUIOrganizzazioneSedute/schedulazioneSeduta";
         }
@@ -267,7 +296,13 @@ public class OrganizzazioneSeduteController {
     }
 
     @RequestMapping(value = "/goModificaSeduta", method = RequestMethod.GET)
-    public String goModificaSeduta(@RequestParam(name="idSeduta") String idSeduta, Model model) {
+    public String goModificaSeduta(HttpServletRequest request, @RequestParam(name="idSeduta") String idSeduta, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         if (model.getAttribute("sedutaForm") != null) {
             return "GUIOrganizzazioneSedute/modificaSeduta";
         }
@@ -286,6 +321,11 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
     public String inserimentoUtenteGuest(HttpServletRequest request, @ModelAttribute("guestForm")
         GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
 
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         model.addAttribute("idSeduta", idSeduta);
@@ -306,6 +346,11 @@ public class OrganizzazioneSeduteController {
     public String inserimentoGuest(HttpServletRequest request, @ModelAttribute GuestForm guestForm, BindingResult
             result, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente == null || utente instanceof Donatore) {
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         guestFormValidate.validate(guestForm, result);
         if (result.hasErrors()) {
@@ -313,27 +358,23 @@ public class OrganizzazioneSeduteController {
             for (ObjectError x : result.getGlobalErrors()) {
                 redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
             }
-            return "redirect:/goInserimentoUtenteGuest?idSeduta=" + idSeduta ;
+            return "redirect:/goInserimentoUtenteGuest?idSeduta=" + idSeduta;
         }
-        if (utente instanceof Operatore) {
-            Guest guest = new Guest();
-            guest.setNome(guestForm.getNome());
-            guest.setCognome(guestForm.getCognome());
-            guest.setcodiceFiscaleGueste(guestForm.getCodiceFiscale());
-            guest.setPatologie(guestForm.getPatologie());
-            guest.setTelefono(guestForm.getTelefono());
-            guest.setGruppoSanguigno(guestForm.getGruppoSanguigno());
-            try {
-                organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
-                return  "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo=" + "Utente guest inserito correttamente";
-            } catch (CannotSaveDataRepositoryException e) {
-                redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
-                return "redirect:/goInserimentoUtenteGuest?idSeduta=" + idSeduta;
-            }
-        } else
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
-        return "redirect:/error";
 
+        Guest guest = new Guest();
+        guest.setNome(guestForm.getNome());
+        guest.setCognome(guestForm.getCognome());
+        guest.setcodiceFiscaleGueste(guestForm.getCodiceFiscale());
+        guest.setPatologie(guestForm.getPatologie());
+        guest.setTelefono(guestForm.getTelefono());
+        guest.setGruppoSanguigno(guestForm.getGruppoSanguigno());
+        try {
+            organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
+            return "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo=" + "Utente guest inserito correttamente";
+        } catch (CannotSaveDataRepositoryException e) {
+            redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
+            return "redirect:/goInserimentoUtenteGuest?idSeduta=" + idSeduta;
+        }
     }
 
     /**
@@ -349,6 +390,10 @@ public class OrganizzazioneSeduteController {
     public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm,
                                       RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
 
         try {
             sedutaFormValidate.validate(sedutaForm, result);
@@ -385,7 +430,12 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/modificaSeduta", method = RequestMethod.POST)
     public String modificaSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, @ModelAttribute(name="idSeduta") Long idSeduta,
                                       RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
 
         sedutaFormValidate.validate(sedutaForm, result);
         if (result.hasErrors()) {
@@ -423,6 +473,12 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/goEliminaSeduta", method = RequestMethod.GET)
     public String goEliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
 
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         long idSeduta = Long.valueOf(request.getParameter("idSeduta"));
         try {
         organizzazioneSeduteService.eliminaSeduta(idSeduta);
@@ -435,6 +491,11 @@ public class OrganizzazioneSeduteController {
     @RequestMapping(value = "/goIndisponibilita", method = RequestMethod.GET)
     public String indisponibilitaByOperatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         String codiceFiscale = request.getParameter("codiceFiscale");
         try{
             if(utente == null) new IllegalArgumentException();

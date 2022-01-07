@@ -1,0 +1,6 @@
+#google drive api
+google:
+  service_account_email: testapp@digitaldonation.iam.gserviceaccount.com
+  application_name: testapp
+  folder_id: 1w1em67GABuZsAz2B7XWLlHG7-UMnTtXD
+  service_account_key: digitaldonation-6865c2998046.p12

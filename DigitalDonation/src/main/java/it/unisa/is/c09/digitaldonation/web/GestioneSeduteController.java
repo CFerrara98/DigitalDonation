@@ -3,6 +3,7 @@ package it.unisa.is.c09.digitaldonation.web;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.GestioneSeduteManagement.GestioneSeduteService;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donazione;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.*;
@@ -44,6 +45,12 @@ public class GestioneSeduteController {
     @RequestMapping(value = "/goIndisponibilitaByOperatore", method = RequestMethod.GET)
     public String indisponibilitaByOperatoreGET(HttpServletRequest request, Model model, @RequestParam("codiceFiscale") String codiceFiscale) {
 
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = new IndisponibilitaDonazioneForm();
         model.addAttribute("indisponibilitaDonazioneForm", indisponibilitaDonazioneForm);
         request.getSession().setAttribute("codiceFiscale",codiceFiscale);
@@ -61,6 +68,11 @@ public class GestioneSeduteController {
     public String indisponibilitaByOperatorePOST(HttpServletRequest request, @ModelAttribute IndisponibilitaDonazioneForm indisponibilitaDonazioneForm,
                                                  RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         String codiceFiscale = (String)  request.getSession().getAttribute("codiceFiscale");
         Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
         try{
@@ -101,6 +113,10 @@ public class GestioneSeduteController {
     public String confermaDonazioneGET(HttpServletRequest request, @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
                                              RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
 
         String codiceFiscale = request.getParameter("codiceFiscale");
         try{
@@ -134,11 +150,15 @@ public class GestioneSeduteController {
                                                  RedirectAttributes redirectAttribute, BindingResult result, Model model, @RequestParam(name = "gruppoSanguigno")String gruppoSanguigno) {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Donatore){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            return "redirect:/error";
+        }
+
         String codiceFiscale = (String) request.getSession().getAttribute("codiceFiscale");
         Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
 
         try{
-            if(utente == null) new IllegalArgumentException();
             if(codiceFiscale.matches(Utente.CF_REGEX));
         }catch (Exception e){
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
