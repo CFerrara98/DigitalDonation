@@ -53,16 +53,17 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     public Tesserino creazioneTesserino(Donatore donatore, Tesserino tesserino, Donazione donazione) throws CannotSaveDataRepositoryException {
         if(tesserino == null || donatore == null){
             throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
-        }else if(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())!=null){
+            //TODO tesserino identificato con chiave primaria codice fiscale e nn id tessera
+        }/*else if(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())!=null){
             throw new CannotSaveDataRepositoryException("tesserinoError", "Il tesserino già esiste");
-        }
+        }*/
         String password = mailSingletonSender.sendEmailCreazioneAccount(donatore);
         String cripted = getMD5(password);
         donatore.setPassword(cripted);
-        donatoreRepository.save(donatore);
+        utenteRepository.save(donatore);
         tesserinoRepository.save(tesserino);
-        donazioneRepository.save(donazione);
-        return tesserino;
+
+        return tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale());
     }
 
     /**
@@ -201,7 +202,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      * @return image La stringa che rappresenta l'immagine da controllare validata
      * @throws TesserinoFormException
      */
-    public Image validaImage(Image image) throws TesserinoFormException {
+    /*public Image validaImage(Image image) throws TesserinoFormException {
         if (image == null) {
             throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.");
         } else {
@@ -209,7 +210,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
                 return image;
             }
         }
-    }
+    }*/
 
     /**
      * Controlla che il la data di nascita di un tesserino sia specificato e che rispetti il formato
@@ -295,6 +296,9 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
                 throw new TesserinoFormException("TesserinoEmailError", "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
             } /*else {
                 donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscale);
+                if(donatore == null){
+                    return email;
+                }
                 if(donatore.getEmail().equals(email))
                 {
                     throw new TesserinoFormException("TesserinoEmailError", "L’email è già stata utilizzata. L’email è stata già registrata in qualche altro tesserino");

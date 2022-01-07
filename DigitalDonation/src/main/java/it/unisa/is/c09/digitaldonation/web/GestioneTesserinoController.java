@@ -178,8 +178,6 @@ public class GestioneTesserinoController {
         Donatore donatore = new Donatore();
         donatore.setNome(tesserinoForm.getNome());
         donatore.setCognome(tesserinoForm.getCognome());
-<<<<<<< HEAD
-        donatore.setEmail(tesserinoForm.getEmail());
 =======
 >>>>>>> 5caec03d434f7ca320bad148135ec89deea5aba6
         donatore.setCodiceFiscale(tesserinoForm.getCodiceFiscale());
@@ -206,8 +204,6 @@ public class GestioneTesserinoController {
         tesserino.setListaDonazioni(listaDonazioni);
 
         try {
-<<<<<<< HEAD
-            System.out.println("Nel try");
 =======
 >>>>>>> 5caec03d434f7ca320bad148135ec89deea5aba6
             gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
