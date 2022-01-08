@@ -63,7 +63,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
         utenteRepository.save(donatore);
         tesserinoRepository.save(tesserino);
 
-        return tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale());
+        return tesserinoRepository.findByDonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale());
     }
 
     /**
@@ -81,8 +81,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
             throw new CannotSaveDataRepositoryException("autodichiarazioneError", "Errore, la data è null");
         }
         else
-
-        indisponibilitaRepository.save(indisponibilita);
+            indisponibilitaRepository.save(indisponibilita);
 
         listaSedute = sedutaRepository.findAll();
         for(Seduta s: listaSedute){
@@ -180,22 +179,20 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      *                            rispetta il formato {@link Tesserino#CODICEFISCALE_REGEX}
      */
     public String validaCodiceFiscale(String codiceFiscale) throws TesserinoFormException {
-
         if (codiceFiscale == null) {
             throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
         } else {
             if (!codiceFiscale.matches(Tesserino.CODICEFISCALE_REGEX)) {
                 throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
-            } else {
-                if((tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(codiceFiscale) != null))
-                {
+            } /*else {
+                if((tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale) != null)) {
                     throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Utente con questo codice fiscale gia esistente sul database");
                 }
                 return codiceFiscale;
-            }
+            }*/
+            return codiceFiscale;
         }
     }
-
 
     /**
      * Controlla che il l'immagine di un tesserino sia specificato e che rispetti il formato
@@ -297,7 +294,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
         } else {
             if (!email.matches(Donatore.EMAIL_REGEX)) {
                 throw new TesserinoFormException("TesserinoEmailError", "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
-            } else {
+            } /*else {
                 donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscale);
                 if(donatore == null){
                     return email;
@@ -307,7 +304,8 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
                     throw new TesserinoFormException("TesserinoEmailError", "L’email è già stata utilizzata. L’email è stata già registrata in qualche altro tesserino");
                 }
                 return email;
-            }
+            }*/
+            return email;
         }
     }
 

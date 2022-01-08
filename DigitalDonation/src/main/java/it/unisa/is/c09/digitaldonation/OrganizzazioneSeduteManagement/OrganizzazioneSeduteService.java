@@ -1,10 +1,7 @@
 package it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Indisponibilita;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
+import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.GuestRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.IndisponibilitaRepository;
@@ -15,6 +12,9 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Time;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,8 +45,8 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     /**
      * Questo metodo permette al donatore di comunicare la partecipazione o meno alla seduta di donazione.
      *
-     * @param donatore Il donatore
-     * @param idSeduta La seudta alla quale
+     * @param donatore oggetto donatore.
+     * @param idSeduta id della seduta.
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -145,21 +145,36 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     /**
      * Questo metodo permette di modificare una seduta
      *
-     * @param seduta id della seduta da modificare
+     * @param idSeduta id della seduta da modificare
      * @return la seduta modificata
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Seduta modificaSeduta(Seduta seduta, Long idSeduta) throws CannotUpdateDataRepositoryException {
+    public Seduta modificaSeduta(SedutaForm sedutaForm, Long idSeduta, Utente utente) throws CannotUpdateDataRepositoryException {
+        DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+        Operatore operatore = (Operatore) utente;
+        SedeLocale sedeLocale = operatore.getSedeLocale();
+
+        Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
+        List<Donatore> listaDonatori = seduta.getListaDonatore();
+        seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
+        seduta.setDataSeduta(sedutaForm.getDataSeduta());
+        seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
+        seduta.setNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
+        seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
+        seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
+        seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
+        String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
+        seduta.setLuogo(luogo);
         if (seduta == null) {
             throw new CannotUpdateDataRepositoryException("sedutaError", "La seduta non può essere null");
         }
         if (idSeduta == null) {
             throw new CannotUpdateDataRepositoryException("sedutaError", "La seduta da modificare non può essere null");
         }
-
-        sedutaRepository.deleteSedutaByIdSeduta(idSeduta);
-        seduta.setIdSeduta(idSeduta);
+        for(int i=0; i<listaDonatori.size(); i++){
+            mailSingletonSender.sendEmailModificaSeduta(seduta, listaDonatori.get(i));
+        }
         sedutaRepository.save(seduta);
         return seduta;
     }
@@ -176,6 +191,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
             throw new CannotDeleteDataRepositoryException("eliminazioneSedutaError", "Errore durante l'eliminazione della seduta");
         }
         Seduta seduta= sedutaRepository.findByIdSeduta(idSeduta);
+        List<Donatore> listaDonatori = seduta.getListaDonatore();
+        for(int i=0; i<listaDonatori.size(); i++){
+            mailSingletonSender.sendEmailEliminaSeduta(seduta, listaDonatori.get(i));
+        }
         seduta.setListaDonatore(null);
         seduta.setListaGuest(null);
         sedutaRepository.save(seduta);

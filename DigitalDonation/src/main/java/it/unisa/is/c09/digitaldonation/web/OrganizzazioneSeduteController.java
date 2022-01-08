@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Time;
@@ -58,7 +57,7 @@ public class OrganizzazioneSeduteController {
      */
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
     public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model,
-                                   @RequestParam(name= "feedbackSeduta") String feedbackSeduta, @RequestParam(name="idSeduta") Long idSeduta) {
+                                   @RequestParam(name="feedbackSeduta") String feedbackSeduta, @RequestParam(name="idSeduta") Long idSeduta) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(!(utente instanceof Donatore) || utente == null){
             request.getSession().setAttribute("codiceErrore", 401);
@@ -296,7 +295,7 @@ public class OrganizzazioneSeduteController {
     }
 
     @RequestMapping(value = "/goModificaSeduta", method = RequestMethod.GET)
-    public String goModificaSeduta(HttpServletRequest request, @RequestParam(name="idSeduta") String idSeduta, Model model) {
+    public String goModificaSeduta(HttpServletRequest request, @RequestParam(name="idSeduta") Long idSeduta, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
             request.getSession().setAttribute("codiceErrore", 401);
@@ -307,7 +306,7 @@ public class OrganizzazioneSeduteController {
             return "GUIOrganizzazioneSedute/modificaSeduta";
         }
         SedutaForm sedutaForm = new SedutaForm();
-        model.addAttribute("idSeduta", idSeduta);
+        request.getSession().setAttribute("idSeduta", idSeduta);
         model.addAttribute("sedutaForm", sedutaForm);
         return "GUIOrganizzazioneSedute/modificaSeduta";
     }
@@ -427,16 +426,30 @@ public class OrganizzazioneSeduteController {
         return "GUIGestioneUtente/dashboardOperatore";
     }
 
+    /**
+     * Metodo che permette all'operatore di poter modificare una seduta.
+     *
+     * @param request           è la richiesta dalla sessione.
+     * @param sedutaForm        è l'oggetto form della seduta.
+     * @param redirectAttribute è l'attributo di ridirezione.
+     * @param result            è la variabile di binding.
+     * @param model             è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/modificaSeduta", method = RequestMethod.POST)
-    public String modificaSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm, @ModelAttribute(name="idSeduta") Long idSeduta,
+    public String modificaSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm,
                                       RedirectAttributes redirectAttribute, BindingResult result, Model model) {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
         if(utente==null || utente instanceof Donatore){
             request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
-
+        if(idSeduta == null){
+            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            return "redirect:/error";
+        }
         sedutaFormValidate.validate(sedutaForm, result);
         if (result.hasErrors()) {
             // se ci sono errori il metodo controller setta tutti i parametri
@@ -446,30 +459,23 @@ public class OrganizzazioneSeduteController {
             }
             return "redirect:/goModificaSeduta";
         }
-        DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
-        Operatore operatore = (Operatore) utente;
-        SedeLocale sedeLocale = operatore.getSedeLocale();
-
-        Seduta seduta = new Seduta();
-        seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
-        seduta.setDataSeduta(sedutaForm.getDataSeduta());
-        seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
-        seduta.setNumeroPartecipanti(sedutaForm.getNumeroPartecipanti());
-        seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
-        seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
-        seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
-        String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
-        seduta.setLuogo(luogo);
         try {
-            organizzazioneSeduteService.modificaSeduta(seduta, idSeduta);
+            organizzazioneSeduteService.modificaSeduta(sedutaForm, idSeduta, utente);
         } catch (CannotUpdateDataRepositoryException e) {
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
         }
-        model.addAttribute("success", "Seduta schedulata con successo!");
-        return "GUIOrganizzazioneSedute/monitoraggioSedute";
+        model.addAttribute("success", "Seduta modificata con successo");
+        return "GUIGestioneUtente/dashboardOperatore";
     }
 
-
+    /**
+     * Metodo che permette all'operatore di poter eliminare una seduta.
+     *
+     * @param request           è la richiesta dalla sessione.
+     * @param redirectAttribute è l'attributo di ridirezione.
+     * @param model             è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/goEliminaSeduta", method = RequestMethod.GET)
     public String goEliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
 
@@ -485,29 +491,7 @@ public class OrganizzazioneSeduteController {
         } catch (CannotDeleteDataRepositoryException e) {
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
         }
-        return "redirect:/visualizzaElencoSedute";
+        model.addAttribute("success", "Seduta eliminata con successo");
+        return "GUIGestioneUtente/dashboardOperatore";
     }
-
-    @RequestMapping(value = "/goIndisponibilita", method = RequestMethod.GET)
-    public String indisponibilitaByOperatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if(utente==null || utente instanceof Donatore){
-            request.getSession().setAttribute("codiceErrore", 401);
-            return "redirect:/error";
-        }
-
-        String codiceFiscale = request.getParameter("codiceFiscale");
-        try{
-            if(utente == null) new IllegalArgumentException();
-            if(codiceFiscale.matches(Utente.CF_REGEX));
-        }catch (Exception e){
-            request.getSession().setAttribute("codiceErrore", 401);
-            return "redirect:/error";
-        }
-        //TODO Vanno fatti prima i form
-        //Aggiungi al model il form indisponibilità
-        //redirect su servlet /indisponibilita
-        return "redirect:/error";
-    }
-
 }

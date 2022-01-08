@@ -100,7 +100,7 @@ public class GestioneTesserinoServiceUT {
      */
     public void validaCampi() throws TesserinoFormException {
         tesserino = null;
-        when(tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino);
+        when(tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino);
 
         Donatore donatore = new Donatore("ACNCZY45X38I793C", null, null, "test@gmai.com", null, null, null, null, null, null);
         when(donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscale)).thenReturn(donatore);
@@ -170,7 +170,7 @@ public class GestioneTesserinoServiceUT {
         utente = new Utente();
         donatore = new Donatore();
         when(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())).thenReturn(null);
-        when(mailSingletonSender.sendEmailCreazioneAccount(utente)).thenReturn("123456");
+        when(mailSingletonSender.sendEmailCreazioneAccount(donatore)).thenReturn("123456");
         try {
             gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
         } catch (CannotSaveDataRepositoryException exception) {
@@ -485,7 +485,7 @@ public class GestioneTesserinoServiceUT {
 
         Tesserino tesserino1 = new Tesserino();
 
-        when(tesserinoRepository.findDonatoreBydonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino1);
+        when(tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino1);
 
         final String message = "Utente con questo codice fiscale gia esistente sul database";
         try {

@@ -204,7 +204,9 @@ public class GestioneTesserinoController {
         try {
             gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
         } catch (CannotSaveDataRepositoryException e) {
+            e.printStackTrace();
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
+            System.out.println("CannotSaveDataRepositoryException");
             return "redirect:/goCreazioneTesserino";
         }
         model.addAttribute("success", "Tesserino creato con successo");

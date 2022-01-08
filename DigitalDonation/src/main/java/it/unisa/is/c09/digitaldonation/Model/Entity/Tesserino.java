@@ -13,7 +13,6 @@ import java.util.List;
  * Classe che modella un tesserino.
  */
 
-@Data
 @Entity
 @Table(name = "tesserino")
 public class Tesserino implements Serializable {
