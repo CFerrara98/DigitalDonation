@@ -61,7 +61,7 @@ public class OrganizzazioneSeduteController {
                                    @RequestParam(name= "feedbackSeduta") String feedbackSeduta, @RequestParam(name="idSeduta") Long idSeduta) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(!(utente instanceof Donatore) || utente == null){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         if(feedbackSeduta.equals("positivo")) {
@@ -105,7 +105,7 @@ public class OrganizzazioneSeduteController {
                 return "redirect:/error";
             }
         }
-        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+        request.getSession().setAttribute("codiceErrore", 401);
         return "redirect:/error";
     }
 
@@ -127,7 +127,7 @@ public class OrganizzazioneSeduteController {
                 e.printStackTrace();
             }
         } else {
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
@@ -144,7 +144,7 @@ public class OrganizzazioneSeduteController {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
 
         if(!(utente instanceof Donatore) || utente==null){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         try{
@@ -167,7 +167,7 @@ public class OrganizzazioneSeduteController {
     public String visualizzaSeduta(HttpServletRequest request, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (!(utente instanceof Donatore) || utente == null) {
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         Long idSeduta = (Long) model.getAttribute("idSeduta");
@@ -191,7 +191,7 @@ public class OrganizzazioneSeduteController {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -239,7 +239,7 @@ public class OrganizzazioneSeduteController {
     public String monitoraggioSedute(HttpServletRequest request, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         return "GUIOrganizzazioneSedute/monitoraggioSedute";
@@ -255,7 +255,7 @@ public class OrganizzazioneSeduteController {
     public String partecipaSeduta(HttpServletRequest request, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Operatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -268,7 +268,7 @@ public class OrganizzazioneSeduteController {
             return "GUIOrganizzazioneSedute/partecipaSeduta";
 
         } catch (CannotLoadDataRepositoryException e) {
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
     }
@@ -283,7 +283,7 @@ public class OrganizzazioneSeduteController {
     public String schedulazioneSeduta(HttpServletRequest request, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -299,7 +299,7 @@ public class OrganizzazioneSeduteController {
     public String goModificaSeduta(HttpServletRequest request, @RequestParam(name="idSeduta") String idSeduta, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -323,7 +323,7 @@ public class OrganizzazioneSeduteController {
         GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -347,7 +347,7 @@ public class OrganizzazioneSeduteController {
             result, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente == null || utente instanceof Donatore) {
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -391,7 +391,7 @@ public class OrganizzazioneSeduteController {
                                       RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -433,7 +433,7 @@ public class OrganizzazioneSeduteController {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -475,7 +475,7 @@ public class OrganizzazioneSeduteController {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -492,7 +492,7 @@ public class OrganizzazioneSeduteController {
     public String indisponibilitaByOperatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -501,7 +501,7 @@ public class OrganizzazioneSeduteController {
             if(utente == null) new IllegalArgumentException();
             if(codiceFiscale.matches(Utente.CF_REGEX));
         }catch (Exception e){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         //TODO Vanno fatti prima i form

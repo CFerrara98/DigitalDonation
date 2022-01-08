@@ -143,7 +143,7 @@ public class UtenteController {
             try {
                 utenteService.logout(utente);
             } catch (AccessNotAuthorizedException e) {
-                request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+                request.getSession().setAttribute("codiceErrore", 401);
                 return "redirect:/error";
             }
         }
@@ -178,7 +178,7 @@ public class UtenteController {
         if(request.getSession().getAttribute("utente") instanceof Operatore){
             return "GUIGestioneUtente/dashboardOperatore";
         }
-        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+        request.getSession().setAttribute("codiceErrore", 401);
         return "redirect:/error";
     }
 }

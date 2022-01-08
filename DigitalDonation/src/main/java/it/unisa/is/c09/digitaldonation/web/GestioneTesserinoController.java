@@ -59,7 +59,7 @@ public class GestioneTesserinoController {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente == null || utente instanceof Operatore) {
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -100,7 +100,7 @@ public class GestioneTesserinoController {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Operatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -120,7 +120,7 @@ public class GestioneTesserinoController {
     public String goVisualizzaTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Operatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         return "GUIOrganizzazioneSedute/visualizzaTesserino";
@@ -137,7 +137,7 @@ public class GestioneTesserinoController {
     public String goCreazioneTesserino(HttpServletRequest request, Model model){
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -161,7 +161,7 @@ public class GestioneTesserinoController {
                                                      BindingResult result, RedirectAttributes redirectAttribute, Model model){
         Utente user = (Utente) request.getSession().getAttribute("utente");
         if(user==null || user instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 

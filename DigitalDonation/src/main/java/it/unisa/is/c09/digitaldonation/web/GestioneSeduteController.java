@@ -47,7 +47,7 @@ public class GestioneSeduteController {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -69,7 +69,7 @@ public class GestioneSeduteController {
                                                  RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -79,7 +79,7 @@ public class GestioneSeduteController {
             if(utente == null) new IllegalArgumentException();
             if(codiceFiscale.matches(Utente.CF_REGEX));
         }catch (Exception e){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         indisponibilitaDonazioneFormValidate.validate(indisponibilitaDonazioneForm,result);
@@ -93,7 +93,7 @@ public class GestioneSeduteController {
         try {
             gestioneSeduteService.salvataggioIndisponibilita(codiceFiscale,idSeduta,indisponibilitaDonazioneForm);
         } catch (CannotSaveDataRepositoryException e) {
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         model.addAttribute("success","Indisponibilita' aggiunta con successo!");
@@ -114,7 +114,7 @@ public class GestioneSeduteController {
                                              RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -123,7 +123,7 @@ public class GestioneSeduteController {
             if(utente == null) new IllegalArgumentException();
             if(codiceFiscale.matches(Utente.CF_REGEX));
         }catch (Exception e){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         /*if(confermaDonazioneForm == null) confermaDonazioneForm= new ConfermaDonazioneForm();
@@ -151,7 +151,7 @@ public class GestioneSeduteController {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
