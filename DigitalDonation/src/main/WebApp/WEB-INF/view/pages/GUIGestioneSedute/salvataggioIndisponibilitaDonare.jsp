@@ -35,7 +35,7 @@
 
                                 <div class="col-lg-4 mb-5">
                                     <div class="card h-80 shadow border-0">
-                                        <img class="card-img-top" src="${tesserino.imgSource}" alt="..." />
+                                        <img class="card-img-top" src="${tesserino.imgSource}" alt="Impossibile caricare l'immagine" />
                                     </div>
                                 </div>
                                 <!-- Tabella -->

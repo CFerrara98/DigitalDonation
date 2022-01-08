@@ -48,7 +48,7 @@
 
                                 <div class="col-lg-4 mb-5">
                                     <div class="card h-80 shadow border-0">
-                                        <img class="card-img-top" src="img/blood4.png" alt="..." />
+                                        <img class="card-img-top" src="${tesserino.imgSource}" alt="Errore caricamento immagine" />
                                     </div>
                                 </div>
                                 <!-- Tabella -->
@@ -65,10 +65,10 @@
                                             </th>
                                             <th>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${Nome}"></c:out>
+                                                    <c:out value="${donatore.nome}"></c:out>
                                                 </h3>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${Cognome}"></c:out>
+                                                    <c:out value="${donatore.cognome}"></c:out>
                                                 </h3>
                                             </th>
 
@@ -79,7 +79,7 @@
                                             </th>
                                             <th>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${Matricola}"></c:out>
+                                                    <c:out value="${tesserino.numeroMatricola}"></c:out>
                                                 </h3>
                                             </th>
                                         </tr>
@@ -89,7 +89,7 @@
                                             </th>
                                             <th>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${dataRilascio}"></c:out>
+                                                    <c:out value="${tesserino.dataRilascio}"></c:out>
                                                 </h3>
                                             </th>
                                         </tr>
@@ -99,7 +99,7 @@
                                             </th>
                                             <th>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${residenza}"></c:out>
+                                                    <c:out value="${donatore.residenza}"></c:out>
                                                 </h3>
                                             </th>
                                         </tr>
@@ -109,7 +109,7 @@
                                             </th>
                                             <th>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${dataDiNascita}"></c:out>
+                                                    <c:out value="${donatore.dataDiNascita}"></c:out>
                                                 </h3>
                                             </th>
                                         </tr>
@@ -121,10 +121,10 @@
                                             </th>
                                             <th>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${gruppoSanguigno}"></c:out>
+                                                    <c:out value="${tesserino.gruppoSanguigno}"></c:out>
                                                 </h3>
-                                                <h3 align="left" class="h6 mb-2 text-gray-800" > %Rh%
-                                                    <c:out value="${RH}"></c:out>
+                                                <h3 align="left" class="h6 mb-2 text-gray-800" >
+                                                    <c:out value="${tesserino.rh}"></c:out>
                                                 </h3>
                                             </th>
                                         </tr>
@@ -134,7 +134,6 @@
                                             </th>
                                             <th>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${altreIndicazioni}"></c:out>
                                                 </h3>
                                             </th>
                                         </tr>
@@ -185,16 +184,16 @@
 
                                             <!-- ciclo di righe con tutte le donazioni effettuate dal donatore-->
 
-                                            <c:forEach begin="0" end="${listaDonazioni.size()-1}" step="1" var="i">
+                                            <c:forEach begin="0" end="${tesserino.listaDonazioni.size()-1}" step="1" var="i">
                                                 <tr>
                                                     <th>
                                                         <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                            <c:out value="${listaDonazioniEffettuate.get(i).dataDonazione}"></c:out>
+                                                            <c:out value="${tesserino.listaDonazioni.get(i).dataDonazione}"></c:out>
                                                         </h3>
                                                     </th>
                                                     <th>
                                                         <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                            <c:out value="${listaDonazioniEffettuate.get(i).tipoDonazione}"></c:out>
+                                                            <c:out value="${tesserino.listaDonazioni.get(i).tipoDonazione}"></c:out>
                                                         </h3>
                                                     </th>
                                                 </tr>

@@ -68,7 +68,6 @@ public class GestioneSeduteController {
 
         IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = new IndisponibilitaDonazioneForm();
         model.addAttribute("indisponibilitaDonazioneForm", indisponibilitaDonazioneForm);
-
         model.addAttribute("utenteDonatore", utenteDonatore);
         model.addAttribute("donatore", donatore);
         model.addAttribute("tesserino", tesserino);

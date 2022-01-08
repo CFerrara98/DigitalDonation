@@ -100,14 +100,18 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
 
 
     /**
-     * Questo metodo permette di aggiornare il tesserino
+     * Questo metodo permette di aggiornare le informazioni sul tesserino.
      *
-     * @param tesserino Il tesserino
-     * @return il tesserino aggiornato
+     * @param utente Oggetto utente.
+     * @return il tesserino aggiornato.
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Tesserino aggiornaTesserino(Tesserino tesserino) throws CannotUpdateDataRepositoryException {
+    public Tesserino aggiornaTesserino(Utente utente) throws CannotSaveDataRepositoryException {
+        Tesserino tesserino = tesserinoRepository.findByDonatoreUtenteCodiceFiscale(utente.getCodiceFiscale());
+        if(tesserino == null){
+            throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
+        }
         return tesserino;
     }
 

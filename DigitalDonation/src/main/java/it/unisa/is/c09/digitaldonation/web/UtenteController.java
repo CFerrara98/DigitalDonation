@@ -1,10 +1,14 @@
 package it.unisa.is.c09.digitaldonation.web;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.AccessNotAuthorizedException;
+import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement.GestioneTesserinoService;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Operatore;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.UserNotLoggedException;
+import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginFormValidate;
@@ -29,6 +33,8 @@ import java.util.logging.Logger;
 public class UtenteController {
     @Autowired
     UtenteService utenteService;
+    @Autowired
+    GestioneTesserinoService gestioneTesserinoService;
     @Autowired
     LoginFormValidate loginFormValidator;
 
@@ -125,6 +131,13 @@ public class UtenteController {
             //Se è un donatore
             else if (utente instanceof Donatore) {
                 request.getSession().setAttribute("utente", utente);
+                Tesserino tesserino = null;
+                try {
+                    tesserino = gestioneTesserinoService.aggiornaTesserino(utente);
+                } catch (CannotSaveDataRepositoryException e) {
+                    return "redirect:/";
+                }
+                model.addAttribute("tesserino", tesserino);
                 return "GUIGestioneUtente/dashboardDonatore";
             }
         }
@@ -158,8 +171,16 @@ public class UtenteController {
      */
     @RequestMapping(value ="/dashboardDonatore", method = RequestMethod.GET)
     public String dashboardDonatore(HttpServletRequest request, Model model) {
-        if(request.getSession().getAttribute("utente") instanceof Donatore){
-            //TODO Caricare la img del donatore come da mock-up
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente instanceof Donatore){
+            model.addAttribute("utente", request.getSession().getAttribute("utente"));
+            Tesserino tesserino = null;
+            try {
+                tesserino = gestioneTesserinoService.aggiornaTesserino(utente);
+            } catch (CannotSaveDataRepositoryException e) {
+                return "redirect:/";
+            }
+            model.addAttribute("tesserino", tesserino);
             return "GUIGestioneUtente/dashboardDonatore";
         }
         request.getSession().setAttribute("codiceErrore", 401);

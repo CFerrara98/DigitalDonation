@@ -206,10 +206,28 @@ public class GestioneTesserinoController {
         } catch (CannotSaveDataRepositoryException e) {
             e.printStackTrace();
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
-            System.out.println("CannotSaveDataRepositoryException");
             return "redirect:/goCreazioneTesserino";
         }
         model.addAttribute("success", "Tesserino creato con successo");
         return "GUIGestioneUtente/dashboardOperatore";
+    }
+
+    @RequestMapping(value = "/visualizzaTesserino", method = RequestMethod.GET)
+    public String visualizzaTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente==null || utente instanceof Operatore){
+            request.getSession().setAttribute("codiceErrore", 401);
+            return "redirect:/error";
+        }
+        Donatore donatore = (Donatore) utente;
+        model.addAttribute("donatore", donatore);
+        try {
+            Tesserino tesserino = gestioneTesserinoService.aggiornaTesserino(utente);
+            model.addAttribute("tesserino", tesserino);
+        } catch (CannotSaveDataRepositoryException e) {
+            redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
+            return "GUIGestioneUtente/dashboardDonatore";
+        }
+        return "GUIGestioneTesserinoDigitale/visualizzazioneTesserino";
     }
 }
