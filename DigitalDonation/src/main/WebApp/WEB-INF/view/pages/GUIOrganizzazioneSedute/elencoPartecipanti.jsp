@@ -68,7 +68,7 @@
                             <div class="card-body">
 
 
-                                <!-- Bottom indisponibilità seduta -->
+                                <!-- Bottom utente guest -->
                                 <span class="float-left col-xl-1 col-md-6 mb-2">
 
                                     <a href="/goInserimentoUtenteGuest?idSeduta=<c:out value="${idSeduta}"></c:out>">
@@ -88,7 +88,7 @@
                                            var="i">
 
 
-                                    <!-- pRTECIPANTE -->
+                                    <!-- PARTECIPANTE -->
                                     <div class="card shadow mb-4">
                                         <div class=" m-0 card-header py-3">
                                             <h6 class="m-0 font-weight-bold text-primary h6">
