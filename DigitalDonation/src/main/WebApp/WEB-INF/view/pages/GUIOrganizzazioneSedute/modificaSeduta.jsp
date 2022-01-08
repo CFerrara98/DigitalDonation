@@ -40,10 +40,9 @@
                                         <div class="text-center">
                                             <h3 class="h4 text-gray-900 mb-4">Modifica i campi e clicca su conferma per aggiornare la seduta</h3>
                                         </div>
-
                                         <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
                                         <form:form action="./modificaSeduta" method="post"
-                                                   modelAttribute="sedutaForm" cssClass="user"
+                                                   modelAttribute="sedutaForm"  cssClass="user"
                                                    enctype="application/x-www-form-urlencoded">
                                             <div class="form-group row">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">

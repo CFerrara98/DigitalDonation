@@ -22,7 +22,7 @@ import static it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword.Cr
 public class UtenteService implements UtenteServiceInterface {
 
     @Autowired
-    private UtenteRepository utenteRepository ;
+    private UtenteRepository utenteRepository;
 
     /**
      * Permette l'autenticazione di un utente nel sistema.
@@ -52,7 +52,6 @@ public class UtenteService implements UtenteServiceInterface {
         throw new UserNotLoggedException("login", "Email o password errati.");
     }
 
-    //TODO METODO INUTILE!
     /**
      * Permette la rimozione dell'utente dalla sessione.
      */

@@ -4,6 +4,8 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
+import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +21,7 @@ public interface OrganizzazioneSeduteServiceInterface {
 
     public Seduta schedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException;
 
-    public Seduta modificaSeduta(Seduta seduta, Long idSeduta) throws CannotUpdateDataRepositoryException;
+    public Seduta modificaSeduta(SedutaForm sedutaForm, Long idSeduta, Utente utente) throws CannotUpdateDataRepositoryException;
 
     public void eliminaSeduta(Long idSeduta) throws CannotDeleteDataRepositoryException;
 
