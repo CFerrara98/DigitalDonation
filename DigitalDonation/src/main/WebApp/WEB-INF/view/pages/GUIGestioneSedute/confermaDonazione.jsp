@@ -43,21 +43,21 @@
                                 <!-- menu tendina -->
                                 <div class="container">
 
-                                    <!--
-                                        <%--@elvariable id="confermaDonazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.ConfermaDonazioneForm"--%>
+
+                                        <%--@elvariable id="confermaDonazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.ConfermaDonazioneForm"  --%>
                                     <form:form action="./salvataggioDonazione" method="post" modelAttribute="confermaDonazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
 
                                         <div class="form-group row">
                                             <div class="col-sm-4 mb-3 mb-sm-0">
-                                                <label for="gruppoSanguigno" style="color:#4e73df;">Inserire il tipo di donazione del donatore: </label>
+                                                <label for="tipoDonazione" style="color:#4e73df;">Inserire il tipo di donazione del donatore: </label>
 
                                             </div>
 
                                             <div class="col-sm-6">
 
 
-                                                <form:select name="gruppoSanguigno"
-                                                             id="gruppoSanguigno"
+                                                <form:select name="tipoDonazione"
+                                                             id="tipoDonazione"
                                                              class="form-control gruppo-sanguigno"
                                                              path="tipoDonazione">
 
@@ -74,29 +74,15 @@
                                                 </form:select>
                                             </div>
                                         </div>
-
+                                        <br>
                                 </div>
                                 <input type="submit" value="Conferma" class="btn btn-primary">
                             </div>
 
                                     </form:form>
-                                    --                                                             >
+                            <br>
 
-                                    <form action="./salvataggioDonazione" method="post" id="form">
-                                        <div class="form-check">
-                                            <div class="col-sm-8 mb-3 mb-sm-0">
-                                            <select name="gruppoSanguigno"
-                                                    id="gruppoSanguigno"
-                                                    class="form-control gruppo-sanguigno">
-                                                <option selected="true" value="plasma">Plasma</option>
-                                                <option value="cito">Cito</option>
-                                                <option value="sangue">Sangue</option>
-                                            </select>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <input type="submit" value="Conferma" class="btn btn-primary">
-                                    </form>
+
 
                                 </div>
                             </div>

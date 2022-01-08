@@ -147,7 +147,7 @@ public class GestioneSeduteController {
      */
     @RequestMapping(value = "/salvataggioDonazione", method = RequestMethod.POST)
     public String indisponibilitaByOperatorePost(HttpServletRequest request, @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
-                                                 RedirectAttributes redirectAttribute, BindingResult result, Model model, @RequestParam(name = "gruppoSanguigno")String gruppoSanguigno) {
+                                                 RedirectAttributes redirectAttribute, BindingResult result, Model model, @RequestParam(name = "tipoDonazione")String tipoDonazione) {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
@@ -164,7 +164,7 @@ public class GestioneSeduteController {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
             return "redirect:/error";
         }
-        confermaDonazioneForm.setTipoDonazione(gruppoSanguigno);
+        confermaDonazioneForm.setTipoDonazione(tipoDonazione);
         confermaDonazioneFormValidate.validate(confermaDonazioneForm,result);
         if(result.hasErrors()){
             redirectAttribute.addFlashAttribute("confermaDonazioneForm",confermaDonazioneForm);
@@ -174,14 +174,6 @@ public class GestioneSeduteController {
             return "/GUIGestioneSedute/confermaDonazione";
         }
 
-        String tipoDonazione = null;
-        if(gruppoSanguigno.equals("plasma")){
-            tipoDonazione = "plasma";
-        }else if(gruppoSanguigno.equals("cito")){
-            tipoDonazione = "cito";
-        }else if(gruppoSanguigno.equals("sangue")){
-            tipoDonazione = "sangue";
-        }
 
         try {
             gestioneSeduteService.salvataggioDonazione(codiceFiscale,idSeduta,tipoDonazione);
