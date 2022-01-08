@@ -5,7 +5,12 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.GestioneSeduteManagement.GestioneSeduteService;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donazione;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
+import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
+import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
+import it.unisa.is.c09.digitaldonation.Model.Repository.TesserinoRepository;
+import it.unisa.is.c09.digitaldonation.Model.Repository.UtenteRepository;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +40,12 @@ public class GestioneSeduteController {
     GestioneSeduteService gestioneSeduteService;
     @Autowired
     ConfermaDonazioneFormValidate confermaDonazioneFormValidate;
+    @Autowired
+    UtenteRepository utenteRepository ;
+    @Autowired
+    DonatoreRepository donatoreRepository;
+    @Autowired
+    TesserinoRepository tesserinoRepository;
 
     /**
      * Metodo GET per inserire l'indisponibilità di un donatore a seguito della visita medica.
@@ -51,8 +62,18 @@ public class GestioneSeduteController {
             return "redirect:/error";
         }
 
+        Utente utenteDonatore =  utenteRepository.findByCodiceFiscaleUtente(codiceFiscale);
+        Donatore donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscale);
+        Tesserino tesserino = tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale);
+
         IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = new IndisponibilitaDonazioneForm();
         model.addAttribute("indisponibilitaDonazioneForm", indisponibilitaDonazioneForm);
+
+        model.addAttribute("utenteDonatore", utenteDonatore);
+        model.addAttribute("donatore", donatore);
+        model.addAttribute("tesserino", tesserino);
+
+
         request.getSession().setAttribute("codiceFiscale",codiceFiscale);
         return "GUIGestioneSedute/salvataggioIndisponibilitaDonare";
     }
