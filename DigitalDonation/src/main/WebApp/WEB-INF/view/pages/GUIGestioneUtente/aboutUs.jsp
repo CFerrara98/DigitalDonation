@@ -44,10 +44,10 @@
                     <h2 class="fw-bolder">Perchè scegliere la nostra piattaforma?</h2>
                     <p class="lead fw-normal text-muted mb-0">Perchè fornisce...</p>
                     <ul>
-                        <li>tutti i servizi utili alla gestione dell’utente all’interno del sistema, quindi autenticazione, inserimento dei dati di un donatore volontario, logout. </li>
+                        <li>tutti i servizi utili alla gestione dell’utente all’interno del sistema, quindi autenticazione, inserimento dei dati di un donatore volontario, logout.</li>
                         <li>tutti i servizi relativi all’organizzazione di una seduta. </li>
                         <li>tutti i servizi finalizzati all’ottenere una comoda visione delle sedute disponibili. </li>
-                        <li>tutti i servizi relativi all’invio di una domanda di prenotazione di una seduta. </li>
+                        <li>tutti i servizi relativi all’invio di una domanda di prenotazione di una seduta.</li>
                         <li>tutti i servizi relativi all’analisi dei dati dei potenziali partecipanti di una seduta e degli effettivi donatori di ogni seduta. </li>
 
                     </ul>

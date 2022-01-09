@@ -202,4 +202,15 @@ public class UtenteController {
         request.getSession().setAttribute("codiceErrore", 401);
         return "redirect:/error";
     }
+
+    /**
+     * Metodo che permette di andare alla pagina del team.
+     * @return String ridirezione alla pagina.
+     */
+    @RequestMapping(value ="/goAboutUs", method = RequestMethod.GET)
+    public String aboutUs (HttpServletRequest request, Model model) {
+
+        return "GUIGestioneUtente/aboutUs";
+    }
+
 }

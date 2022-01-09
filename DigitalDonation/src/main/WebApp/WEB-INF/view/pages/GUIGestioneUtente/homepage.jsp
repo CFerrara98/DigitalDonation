@@ -153,7 +153,7 @@
 
                 <p style="color:#6C757D;"> Grazie per aver visitato il nostro sito!<br>
                     Qui trovi una piccola descrizione del nostro team, visita la pagina
-                    <a href="aboutUs.jsp"> About us </a>
+                    <a href="./goAboutUs"> About us </a>
                 </p>
 
 
@@ -169,7 +169,8 @@
                 </div>
             </div>
 
-        </footer><!-- End Footer -->
+        </footer>
+        <!-- End Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
