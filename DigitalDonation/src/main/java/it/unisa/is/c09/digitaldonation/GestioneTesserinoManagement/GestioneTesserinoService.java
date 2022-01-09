@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.awt.*;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -181,17 +182,14 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     public String validaCodiceFiscale(String codiceFiscale) throws TesserinoFormException {
         if (codiceFiscale == null) {
             throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
-        } else {
-            if (!codiceFiscale.matches(Tesserino.CODICEFISCALE_REGEX)) {
-                throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
-            } /*else {
-                if((tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale) != null)) {
-                    throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Utente con questo codice fiscale gia esistente sul database");
-                }
-                return codiceFiscale;
-            }*/
-            return codiceFiscale;
         }
+        if (!codiceFiscale.matches(Tesserino.CODICEFISCALE_REGEX)) {
+            throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
+        }
+         if ((utenteRepository.findByCodiceFiscaleUtente(codiceFiscale) != null)) {
+             throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Utente con questo codice fiscale gia esistente sul database");
+         }
+        return codiceFiscale;
     }
 
     /**
@@ -202,15 +200,15 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      * @return image La stringa che rappresenta l'immagine da controllare validata
      * @throws TesserinoFormException
      */
-    /*public Image validaImage(Image image) throws TesserinoFormException {
-        if (image == null) {
+    public String validaImage(String image) throws TesserinoFormException {
+        if (image == null) throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.");
+        String end = image.substring(image.indexOf("."));
+        if(end.matches(".png" ) || end.matches(".jpg"))
+                 return image;
+        else
             throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.");
-        } else {
-            {
-                return image;
-            }
-        }
-    }*/
+    }
+
 
     /**
      * Controlla che il la data di nascita di un tesserino sia specificato e che rispetti il formato

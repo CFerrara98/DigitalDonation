@@ -1,14 +1,17 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.annotation.MultipartConfig;
 import java.awt.*;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
 public class TesserinoForm {
 
-    public TesserinoForm(String nome, String cognome, String codiceFiscale, Image image, Date dataNascita, String luogoNascita, String residenza, String email, String gruppoSanguigno, String rh, String altreIndicazioni, int numeroMatricola, int numeroTessera, Date dataRilascio, Date dataDonazione, String tipoDonazione) {
+    public TesserinoForm(String nome, String cognome, String codiceFiscale, MultipartFile image, Date dataNascita, String luogoNascita, String residenza, String email, String gruppoSanguigno, String rh, String altreIndicazioni, int numeroMatricola, int numeroTessera, Date dataRilascio, Date dataDonazione, String tipoDonazione) {
         this.nome = nome;
         this.cognome = cognome;
         this.codiceFiscale = codiceFiscale;
@@ -87,7 +90,7 @@ public class TesserinoForm {
      *
      * @return image è l'immagine che compare sul tesserino.
      */
-    public Image getImage() {
+    public MultipartFile getImage() {
         return image;
     }
     /**
@@ -95,7 +98,7 @@ public class TesserinoForm {
      *
      * @param image è il image che compare sul tesserino.
      */
-    public void setImage(Image image) {
+    public void setImage(MultipartFile image) {
         this.image = image;
     }
 
@@ -308,7 +311,8 @@ public class TesserinoForm {
     private String nome;
     private String cognome;
     private String codiceFiscale;
-    private Image image;
+
+    private MultipartFile image;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dataNascita;
     private String luogoNascita;

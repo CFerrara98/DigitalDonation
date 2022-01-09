@@ -24,32 +24,35 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
 
         ModelAndView errorPage = new ModelAndView("errorPage");
         String errorMsg = "default";
-        int httpErrorCode = (int) httpRequest.getSession().getAttribute("codiceErrore");
-        if (httpErrorCode != -1) {
-            switch (httpErrorCode) {
-                case 400: {
-                    errorMsg = "Http Error Code: 400. Bad Request";
-                    break;
-                }
-                case 401: {
-                    errorMsg = "Http Error Code: 401. Unauthorized";
-                    break;
-                }
-                case 404: {
-                    errorMsg = "Http Error Code: 404. Resource not found";
-                    break;
-                }
-                case 500: {
-                    errorMsg = "Http Error Code: 500. Internal Server Error";
-                    break;
+        if (httpRequest.getSession().getAttribute("codiceErrore") != null) {
+
+            int httpErrorCode = (int) httpRequest.getSession().getAttribute("codiceErrore");
+            if (httpErrorCode != -1) {
+                switch (httpErrorCode) {
+                    case 400: {
+                        errorMsg = "Http Error Code: 400. Bad Request";
+                        break;
+                    }
+                    case 401: {
+                        errorMsg = "Http Error Code: 401. Unauthorized";
+                        break;
+                    }
+                    case 404: {
+                        errorMsg = "Http Error Code: 404. Resource not found";
+                        break;
+                    }
+                    case 500: {
+                        errorMsg = "Http Error Code: 500. Internal Server Error";
+                        break;
+                    }
                 }
             }
+            httpRequest.getSession().removeAttribute("codiceErrore");
+            model.addAttribute("errorMsg", errorMsg);
+            return "errorsPages/errorPage";
         }
-        httpRequest.getSession().removeAttribute("codiceErrore");
-        model.addAttribute("errorMsg", errorMsg);
         return "errorsPages/errorPage";
     }
-
 
     @Override
     public String getErrorPath() {

@@ -10,10 +10,8 @@ import java.io.Serializable;
  * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella un operatore.
  */
-@Data
 @Entity
 @Table(name = "operatore")
-@EqualsAndHashCode(callSuper = true)
 public class Operatore extends Utente implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -46,7 +46,7 @@
                                                 <%--@elvariable id="tesserinoForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.TesserinoForm"--%>
                                             <form:form action="./creazioneTesserino" method="post"
                                                        modelAttribute="tesserinoForm" cssClass="user"
-                                                       enctype="application/x-www-form-urlencoded">
+                                                       enctype="multipart/form-data" >
                                                 <div class="card shadow mb-4">
                                                     <div class=" m-0 card-header py-3">
                                                         <h6 class="m-0 font-weight-bold text-primary h6">Dati
@@ -59,7 +59,8 @@
                                                                 <c:when test="${TesserinoImageError == null}">
                                                                     <form:input type="file"
                                                                                 class=" form-control form-control-user custom-file-input"
-                                                                                path="image" id="customFile"/>
+                                                                                path="image" id="customFile"
+                                                                        />
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <form:input type="file"
@@ -319,26 +320,6 @@
                                                                                     placeholder="es. Salerno"
                                                                                     path="numeroMatricola"/>
                                                                         <span class="myError">${TesserinoNumeroMatricolaError}</span>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </div>
-                                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                <p style="color:#4e73df;">Numero tessera: </p>
-                                                                <c:choose>
-                                                                    <c:when test="${TesserinoNumeroTesseraError == null}">
-                                                                        <form:input type="text"
-                                                                                    class="form-control form-control-user"
-                                                                                    id="numeroTessera"
-                                                                                    placeholder="es. 65475"
-                                                                                    path="numeroTessera"/>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <form:input type="text"
-                                                                                    class="form-control form-control-user is-invalid"
-                                                                                    id="numeroTessera"
-                                                                                    placeholder="es. 26543"
-                                                                                    path="numeroTessera"/>
-                                                                        <span class="myError">${TesserinoNumeroTesseraError}</span>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </div>

@@ -70,13 +70,13 @@ public class TesserinoFormValidate implements Validator {
             tesserinoForm.setCodiceFiscale("");
         }
 
-        //Valida Campo image
-        /*try {
-            gestioneTesserinoService.validaImage(tesserinoForm.getImage());
+
+        try {
+            gestioneTesserinoService.validaImage(tesserinoForm.getImage().getOriginalFilename());
         } catch (TesserinoFormException e1) {
             errors.reject("TesserinoImageError", e1.getMessage());
             tesserinoForm.setImage(null);
-        }*/
+        }
 
         //Valida Campo Data Di Nascita
         try {
@@ -129,6 +129,7 @@ public class TesserinoFormValidate implements Validator {
 
         //Valida Campo Altre Indicazioni
         try {
+            if(tesserinoForm.getAltreIndicazioni()==null) tesserinoForm.setAltreIndicazioni("Nessuna");
             gestioneTesserinoService.validaAltreIndicazioni(tesserinoForm.getAltreIndicazioni());
         } catch (TesserinoFormException e1) {
             errors.reject("TesserinoAltreIndicazioniError", e1.getMessage());
@@ -143,13 +144,13 @@ public class TesserinoFormValidate implements Validator {
             tesserinoForm.setNumeroMatricola(0);
         }
 
-        //Valida Campo Numero Tessera
-        try {
-            gestioneTesserinoService.validaNumeroTessera(tesserinoForm.getNumeroTessera());
-        } catch (TesserinoFormException e1) {
-            errors.reject("TesserinoNumeroTesseraError", e1.getMessage());
-            tesserinoForm.setNumeroTessera(0);
-        }
+//        //Valida Campo Numero Tessera
+//        try {
+//            gestioneTesserinoService.validaNumeroTessera(tesserinoForm.getNumeroTessera());
+//        } catch (TesserinoFormException e1) {
+//            errors.reject("TesserinoNumeroTesseraError", e1.getMessage());
+//            tesserinoForm.setNumeroTessera(0);
+//        }
 
         //Valida Campo Data Rilascio
         try {

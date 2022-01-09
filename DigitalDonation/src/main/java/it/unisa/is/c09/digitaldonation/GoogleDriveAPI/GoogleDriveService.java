@@ -13,7 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 
@@ -72,5 +77,39 @@ public class GoogleDriveService implements GoogleDriveServiceInterface{
         }
         return file;
     }
+
+    @Override
+    public File upLoadFile(String fileName, java.io.File fileUpload, String mimeType) {
+        File file = new File();
+        try {
+            com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File();
+            fileMetadata.setMimeType(mimeType);
+            fileMetadata.setName(fileName);
+            fileMetadata.setParents(Collections.singletonList(folderID));
+            com.google.api.client.http.FileContent fileContent = new FileContent(mimeType, fileUpload);
+            file = getDriveService().files().create(fileMetadata, fileContent)
+                    .setFields("id,webContentLink,webViewLink").execute();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return file;
+    }
+
+    /**
+     * https://drive.google.com/file/d/18dTDFIxhBleEiayTwhtpz0oNKiuVqm7u/view?usp=drivesdk
+     * https://drive.google.com/uc?export=view&id=18dTDFIxhBleEiayTwhtpz0oNKiuVqm7u
+     *
+     * Example of Embedding a Google Drive Image
+     * Original URL: https://drive.google.com/file/d/0B6wwyazyzml-OGQ3VUo0Z2thdmc/view
+     *
+     * You need to copy the ID from the original URL (the characters between the /d/ and /view), and use it in this URL:
+     *
+     * https://drive.google.com/uc?export=view&id=0B6wwyazyzml-OGQ3VUo0Z2thdmc
+     * */
+     public String pathSavedToView(String path){
+        String startingPath = "https://drive.google.com/uc?export=view&id=";
+        String subPath = path.substring(path.lastIndexOf("/d/")+3,path.lastIndexOf("/view"));
+        return startingPath+subPath;
+     }
 
 }
