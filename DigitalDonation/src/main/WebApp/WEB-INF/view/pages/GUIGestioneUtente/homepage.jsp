@@ -146,15 +146,30 @@
 
 
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white ">
-                <div class="container my-auto ">
-                    <div class="copyright text-center my-auto ">
-                        <span>Digital Donation 2021</span>
-                    </div>
+        <!-- ======= Footer ======= -->
+        <footer id="footer" class="sticky-footer bg-white">
+            <div align="center" class="container my-auto">
+                <h3 style="color:#6C757D";>Digital Donation</h3>
+
+                <p style="color:#6C757D;"> Grazie per aver visitato il nostro sito!<br>
+                    Qui trovi una piccola descrizione del nostro team, visita la pagina
+                    <a href="aboutUs.jsp"> About us </a>
+                </p>
+
+
+                <div class="copyright" style="color:#6C757D;">
+                    <h6 >&copy; Copyright 2021</h6><br>
+                    Il trattamento dei dati personali è svolto nel rispetto dei diritti sulla privacy in base alla legge n. 675 del 31 dicembre 1996
+                    <br> e dei diritti per condivisione dei dati personali come stabilito dalla legge n 675/96 del 2003.
+                    <br>
+
+
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                <div class="credits">
+                </div>
+            </div>
+
+        </footer><!-- End Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
