@@ -5,7 +5,12 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.GestioneSeduteManagement.GestioneSeduteService;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donazione;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
+import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
+import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
+import it.unisa.is.c09.digitaldonation.Model.Repository.TesserinoRepository;
+import it.unisa.is.c09.digitaldonation.Model.Repository.UtenteRepository;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +40,12 @@ public class GestioneSeduteController {
     GestioneSeduteService gestioneSeduteService;
     @Autowired
     ConfermaDonazioneFormValidate confermaDonazioneFormValidate;
+    @Autowired
+    UtenteRepository utenteRepository ;
+    @Autowired
+    DonatoreRepository donatoreRepository;
+    @Autowired
+    TesserinoRepository tesserinoRepository;
 
     /**
      * Metodo GET per inserire l'indisponibilità di un donatore a seguito della visita medica.
@@ -47,12 +58,21 @@ public class GestioneSeduteController {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
+        Utente utenteDonatore =  utenteRepository.findByCodiceFiscaleUtente(codiceFiscale);
+        Donatore donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscale);
+        Tesserino tesserino = tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale);
+
         IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = new IndisponibilitaDonazioneForm();
         model.addAttribute("indisponibilitaDonazioneForm", indisponibilitaDonazioneForm);
+        model.addAttribute("utenteDonatore", utenteDonatore);
+        model.addAttribute("donatore", donatore);
+        model.addAttribute("tesserino", tesserino);
+
+
         request.getSession().setAttribute("codiceFiscale",codiceFiscale);
         return "GUIGestioneSedute/salvataggioIndisponibilitaDonare";
     }
@@ -69,7 +89,7 @@ public class GestioneSeduteController {
                                                  RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -79,7 +99,7 @@ public class GestioneSeduteController {
             if(utente == null) new IllegalArgumentException();
             if(codiceFiscale.matches(Utente.CF_REGEX));
         }catch (Exception e){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         indisponibilitaDonazioneFormValidate.validate(indisponibilitaDonazioneForm,result);
@@ -93,7 +113,7 @@ public class GestioneSeduteController {
         try {
             gestioneSeduteService.salvataggioIndisponibilita(codiceFiscale,idSeduta,indisponibilitaDonazioneForm);
         } catch (CannotSaveDataRepositoryException e) {
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         model.addAttribute("success","Indisponibilita' aggiunta con successo!");
@@ -114,7 +134,7 @@ public class GestioneSeduteController {
                                              RedirectAttributes redirectAttribute, BindingResult result, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -123,7 +143,7 @@ public class GestioneSeduteController {
             if(utente == null) new IllegalArgumentException();
             if(codiceFiscale.matches(Utente.CF_REGEX));
         }catch (Exception e){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
         /*if(confermaDonazioneForm == null) confermaDonazioneForm= new ConfermaDonazioneForm();
@@ -147,11 +167,11 @@ public class GestioneSeduteController {
      */
     @RequestMapping(value = "/salvataggioDonazione", method = RequestMethod.POST)
     public String indisponibilitaByOperatorePost(HttpServletRequest request, @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
-                                                 RedirectAttributes redirectAttribute, BindingResult result, Model model, @RequestParam(name = "gruppoSanguigno")String gruppoSanguigno) {
+                                                 RedirectAttributes redirectAttribute, BindingResult result, Model model, @RequestParam(name = "tipoDonazione")String tipoDonazione) {
 
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente==null || utente instanceof Donatore){
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.UNAUTHORIZED);
+            request.getSession().setAttribute("codiceErrore", 401);
             return "redirect:/error";
         }
 
@@ -164,7 +184,7 @@ public class GestioneSeduteController {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
             return "redirect:/error";
         }
-        confermaDonazioneForm.setTipoDonazione(gruppoSanguigno);
+        confermaDonazioneForm.setTipoDonazione(tipoDonazione);
         confermaDonazioneFormValidate.validate(confermaDonazioneForm,result);
         if(result.hasErrors()){
             redirectAttribute.addFlashAttribute("confermaDonazioneForm",confermaDonazioneForm);
@@ -174,14 +194,6 @@ public class GestioneSeduteController {
             return "/GUIGestioneSedute/confermaDonazione";
         }
 
-        String tipoDonazione = null;
-        if(gruppoSanguigno.equals("plasma")){
-            tipoDonazione = "plasma";
-        }else if(gruppoSanguigno.equals("cito")){
-            tipoDonazione = "cito";
-        }else if(gruppoSanguigno.equals("sangue")){
-            tipoDonazione = "sangue";
-        }
 
         try {
             gestioneSeduteService.salvataggioDonazione(codiceFiscale,idSeduta,tipoDonazione);

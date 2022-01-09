@@ -12,7 +12,7 @@ public interface GestioneTesserinoServiceInterface {
 
     public Indisponibilita autodichiarazioneIndisponibilita(Indisponibilita indisponibilita) throws CannotSaveDataRepositoryException;
 
-    public Tesserino aggiornaTesserino(Tesserino tesserino) throws CannotUpdateDataRepositoryException;
+    public Tesserino aggiornaTesserino(Utente utente) throws CannotSaveDataRepositoryException;
 
     public String generaPassword(Tesserino tesserino) throws CannotSaveDataRepositoryException;
 }

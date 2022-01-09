@@ -81,10 +81,9 @@
                                                         <option selected="true" value="positivo"> Voglio partecipare alla seduta </option>
                                                         <option value="negativo">Non voglio partecipare alla seduta </option>
                                                     </select>
-                                    <!-- Fine menu tendina-->
+                                                    <!-- Fine menu tendina-->
                                                 </div>
                                             </div>
-                                        </form>
                                         <br>
                                         <label class="form-check-label"><h6 class="mb-4" style="text-align: left">
                                             Dichiarando di voler partecipare alla seduta verrai registrato
@@ -93,8 +92,7 @@
                                         <br>
 
                                         <input type="submit" value="Conferma" class="btn btn-primary">
-
-
+                                    </form>
                                 </div>
                             </div>
                         </div>

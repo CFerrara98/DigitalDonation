@@ -65,6 +65,11 @@ public class MailSingletonSender {
         javaMailSender.send(msg);
     }
 
+    /**
+     * Metodo che permette di inviare un email ad un account appena creato.
+     *
+     * @param donatore Oggetto donatore con l'account creato.
+     */
     public String sendEmailCreazioneAccount(Donatore donatore){
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(donatore.getEmail());
@@ -83,6 +88,41 @@ public class MailSingletonSender {
         msg.setText(messaggio);
         javaMailSender.send(msg);
         return password;
+    }
+
+    /**
+     * Metodo che permette di inviare un email a tutti i donatori prenotati quando una seduta viene modificata.
+     *
+     * @param donatore Oggetto donatore disponibile.
+     * @param seduta   Oggetto seduta a cui il donatore si è prenotato.
+     */
+    public void sendEmailModificaSeduta(Seduta seduta, Donatore donatore){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(donatore.getEmail());
+        msg.setSubject("Seduta modificata");
+        String messaggio = ("Gentile " + donatore.getNome() + " " + donatore.getCognome() + " utente delle piattaforma Digital Donation,\n" +
+                "le comunichiamo che la seduta a cui si era prenotato è stata modificata, nuove informazioni della seduta: " + seduta.getLuogo() + " in data: " +
+                seduta.getDataSeduta() + " dalle ore: " + seduta.getOraInizio() + " alle ore: " + seduta.getOraFine() +"\nCordiali saluti da Digital Donation");
+        msg.setText(messaggio);
+        javaMailSender.send(msg);
+    }
+
+    /**
+     * Metodo che permette di inviare un email a tutti i donatori prenotati quando una seduta viene eliminata.
+     *
+     * @param donatore Oggetto donatore disponibile.
+     * @param seduta   Oggetto seduta a cui il donatore si è prenotato.
+     */
+    public void sendEmailEliminaSeduta(Seduta seduta, Donatore donatore){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(donatore.getEmail());
+        msg.setSubject("Seduta eliminata");
+        String messaggio = ("Gentile " + donatore.getNome() + " " + donatore.getCognome() + " utente delle piattaforma Digital Donation,\n" +
+                "le comunichiamo che la seduta: " + seduta.getLuogo() + " in data: " +
+                seduta.getDataSeduta() + " dalle ore: " + seduta.getOraInizio() + " alle ore: " + seduta.getOraFine()+"\nè stata cancellata, ci scusiamo per il disagio"
+                +"\nCordiali saluti da Digital Donation");
+        msg.setText(messaggio);
+        javaMailSender.send(msg);
     }
 }
 
