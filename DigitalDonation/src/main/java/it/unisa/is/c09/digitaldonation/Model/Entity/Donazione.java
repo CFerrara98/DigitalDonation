@@ -26,7 +26,7 @@ public class Donazione implements Serializable {
     @Column(name = "tipo_donazione")
     private String tipoDonazione;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "cf_tessera", referencedColumnName = "codice_fiscale_donatore")
     private Tesserino tesserino;
 

@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Operatore extends Utente implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "sede_locale_codice_identificativo", referencedColumnName = "id_sede")
     private SedeLocale sedeLocale;
 

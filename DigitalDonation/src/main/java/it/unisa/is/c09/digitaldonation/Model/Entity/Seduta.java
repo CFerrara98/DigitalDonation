@@ -42,13 +42,13 @@ public class Seduta implements Serializable {
     @Column(name = "id_sedeLocale")
     private Long sedeLocaleCodiceIdentificativo;
 
-    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany()
     @JoinTable(name = "seduta_guest",
             joinColumns = @JoinColumn(name = "id_seduta"),
             inverseJoinColumns = @JoinColumn(name = "codice_fiscale_guest"))
     private List<Guest> listaGuest = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany()
     @JoinTable(name = "seduta_donatore",
             joinColumns = @JoinColumn(name = "id_seduta"),
             inverseJoinColumns = @JoinColumn(name = "codice_fiscale_donatore"))

@@ -1,6 +1,15 @@
 package it.unisa.is.c09.digitaldonation.GestioneSeduteManagement;
 
-/*
+
+import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Donazione;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.Model.Repository.*;
+import it.unisa.is.c09.digitaldonation.Utils.Forms.IndisponibilitaDonazioneForm;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertThat;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -71,12 +80,12 @@ public class GestioneSeduteServiceIT {
     private Seduta seduta;
 
 
- */
+
     /**
      * Salva la lista di donatori su database prima dell'esecuzione di ogni singolo
      * test.
      */
-    /*
+
     @Before
     public void setUp() {
         donazioneRepository.deleteAll();
@@ -139,4 +148,4 @@ public class GestioneSeduteServiceIT {
             e.printStackTrace();
         }
     }
-}*/
+}
