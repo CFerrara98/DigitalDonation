@@ -1,13 +1,18 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
+/**
+ * Classe che rappresenta l'oggetto Form di login.
+ *
+ * @author Fabio Siepe, Mattia Sapere
+ */
 public class LoginForm {
 
     /**
      * Costruttore che crea un oggeto LoginForm vuoto,
      * che verra' popolato con i metodi setters.
-     * @author Mattia Sapere, Fabio Siepe.
      */
     public LoginForm() {}
+
     /**
      * Costruttore di un form di login con parametri utili nei casi di test.
      * @param email e' l'email inserita nel form.

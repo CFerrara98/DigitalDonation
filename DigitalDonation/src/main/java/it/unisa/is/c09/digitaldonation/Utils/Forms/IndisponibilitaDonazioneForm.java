@@ -4,17 +4,30 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+/**
+ * Classe che rappresenta l'oggetto Form di indisponibilità.
+ *
+ * @author Fabio Siepe, Mattia Sapere
+ */
 public class IndisponibilitaDonazioneForm {
 
+    /**
+     * Costruttore con parametri utili nei casi di test.
+     * @param dataProssimaDisponibilita e' la data della prossima disponibilità inserita nel form.
+     * @param motivazioni sone le motivazioni inserite nel form.
+     * @param nomeMedico è il nome del medico inserito nel form.
+     */
     public IndisponibilitaDonazioneForm(Date dataProssimaDisponibilita, String motivazioni, String nomeMedico) {
         this.dataProssimaDisponibilita = dataProssimaDisponibilita;
         this.motivazioni = motivazioni;
         this.nomeMedico = nomeMedico;
     }
 
-    public IndisponibilitaDonazioneForm() {
-
-    }
+    /**
+     * Costruttore che crea un oggetto vuoto,
+     * che verra' popolato con i metodi setters.
+     */
+    public IndisponibilitaDonazioneForm() {}
 
     /**
      * Metodo che ritorna il nome del medico.

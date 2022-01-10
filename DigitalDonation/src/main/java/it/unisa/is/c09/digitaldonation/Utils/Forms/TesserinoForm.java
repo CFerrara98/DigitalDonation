@@ -9,8 +9,32 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Classe che rappresenta l'oggetto Form del tesserino.
+ *
+ * @author Fabio Siepe, Mattia Sapere
+ */
 public class TesserinoForm {
 
+    /**
+     * Costruttore con parametri utili nei casi di test.
+     * @param nome e' il nome inserito nel form.
+     * @param cognome e' il nome inserito nel form.
+     * @param codiceFiscale e' il codice fiscale inserito nel form.
+     * @param image e' l'immagine inserita nel form.
+     * @param dataNascita e' la data di nascita inserita nel form.
+     * @param luogoNascita e' il luogo di nascita inserito nel form.
+     * @param residenza e' la residenza inserita nel form.
+     * @param email e' la mail inserita nel form.
+     * @param gruppoSanguigno e' il gruppo sanguigno inserito nel form.
+     * @param rh e' l'rh inserito nel form.
+     * @param altreIndicazioni sono le indicazioni inserite nel form.
+     * @param numeroMatricola e' il numero di matricola inserito nel form.
+     * @param numeroTessera e' il numero di tessera inserito nel form.
+     * @param dataRilascio e' la data di rilascio inserita nel form.
+     * @param dataDonazione e' la data della donazione inserita nel form.
+     * @param tipoDonazione e' il tipo di donazione inserito nel form.
+     */
     public TesserinoForm(String nome, String cognome, String codiceFiscale, MultipartFile image, Date dataNascita, String luogoNascita, String residenza, String email, String gruppoSanguigno, String rh, String altreIndicazioni, int numeroMatricola, int numeroTessera, Date dataRilascio, Date dataDonazione, String tipoDonazione) {
         this.nome = nome;
         this.cognome = cognome;
@@ -30,9 +54,11 @@ public class TesserinoForm {
         this.tipoDonazione=tipoDonazione;
     }
 
-    public TesserinoForm() {
-
-    }
+    /**
+     * Costruttore che crea un oggetto vuoto,
+     * che verra' popolato con i metodi setters.
+     */
+    public TesserinoForm() {}
 
     /**
      * Metodo che ritorna il nome del tesserino.

@@ -3,6 +3,11 @@ package it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * La classe permette il criptaggio della password in MD5.
+ *
+ * @author Kevin Pacifico
+ */
 public class CryptoByMD5 {
     /**
      * Metodo che crypta la password

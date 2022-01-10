@@ -11,21 +11,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Interfaccia che fornisce i metodi per la logica di business dell'organizzazione delle sedute.
+ * @author Fabio Siepe, Mattia Sapere
+ */
 public interface OrganizzazioneSeduteServiceInterface {
 
-    public void feedbackDonatore(Donatore donatore, Long idSeduta) throws CannotRelaseFeedbackException;
-
-    public ArrayList<Object> monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException;
-
-    public Guest inserimentoGuest(Long idSeduta, Guest guest) throws CannotSaveDataRepositoryException;
-
-    public Seduta schedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException;
-
-    public Seduta modificaSeduta(SedutaForm sedutaForm, Long idSeduta, Utente utente) throws CannotUpdateDataRepositoryException;
-
-    public void eliminaSeduta(Long idSeduta) throws CannotDeleteDataRepositoryException;
-
-    public Seduta visualizzaSeduta(Long idSeduta) throws CannotLoadDataRepositoryException;
-
-    public List<Seduta> visualizzaElencoSedute() throws CannotLoadDataRepositoryException;
+    void feedbackDonatore(Donatore donatore, Long idSeduta) throws CannotRelaseFeedbackException;
+    ArrayList<Object> monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException;
+    Guest inserimentoGuest(Long idSeduta, Guest guest) throws CannotSaveDataRepositoryException;
+    Seduta schedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException;
+    Seduta modificaSeduta(SedutaForm sedutaForm, Long idSeduta, Utente utente) throws CannotUpdateDataRepositoryException;
+    void eliminaSeduta(Long idSeduta) throws CannotDeleteDataRepositoryException;
+    Seduta visualizzaSeduta(Long idSeduta) throws CannotLoadDataRepositoryException;
+    List<Seduta> visualizzaElencoSedute() throws CannotLoadDataRepositoryException;
 }

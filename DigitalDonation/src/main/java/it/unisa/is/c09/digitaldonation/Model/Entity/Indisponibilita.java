@@ -8,9 +8,9 @@ import java.util.Date;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
+ *
  * Classe che modella l'indisponibilità a donare di un donatore.
  */
-
 @Data
 @Entity
 @Table(name = "indisponibilita")

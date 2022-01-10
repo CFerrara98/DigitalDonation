@@ -15,9 +15,9 @@ import java.security.NoSuchAlgorithmException;
 import static it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword.CryptoByMD5.getMD5;
 
 /**
- * Utente
+ * La classe fornisce i metodi per la logica di business della gestione delle sedute.
+ * @author Mattia Sapere, Fabio Siepe
  */
-
 @Service
 public class UtenteService implements UtenteServiceInterface {
 
@@ -86,6 +86,4 @@ public class UtenteService implements UtenteServiceInterface {
             }
         }
     }
-
-
 }

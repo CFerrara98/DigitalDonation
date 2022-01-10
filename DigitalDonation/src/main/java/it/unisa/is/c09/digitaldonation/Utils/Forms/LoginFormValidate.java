@@ -17,7 +17,6 @@ import org.springframework.validation.Validator;
  *
  * @author Mattia Sapere, Fabio Siepe
  */
-
 @Component
 public class LoginFormValidate implements Validator {
 
@@ -36,7 +35,6 @@ public class LoginFormValidate implements Validator {
      * @param target Oggetto da validare
      * @param errors Oggetto in cui salvare l'esito della validazione
      */
-
     @Override
     public void validate(Object target, Errors errors) {
         LoginForm loginForm = (LoginForm) target;

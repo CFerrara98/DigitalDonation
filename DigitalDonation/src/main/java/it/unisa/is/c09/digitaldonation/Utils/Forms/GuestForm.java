@@ -1,8 +1,21 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
-
+/**
+ * Classe che rappresenta l'oggetto Form per l'inserimento di un utente guest.
+ *
+ * @author Fabio Siepe, Mattia Sapere
+ */
 public class GuestForm {
 
+    /**
+     * Costruttore con parametri utili nei casi di test.
+     * @param codiceFiscale e' il codice fiscale inserito nel form.
+     * @param nome è il nome inserito nel form.
+     * @param cognome è il cognome inserito nel form.
+     * @param telefono è il telefono inserito nel form.
+     * @param patologie sono le patologie inserite nel form.
+     * @param gruppoSanguigno è il gruppo sanguigno inserito nel form.
+     */
     public GuestForm(String codiceFiscale, String nome, String cognome, String telefono, String patologie, String gruppoSanguigno) {
         this.codiceFiscale = codiceFiscale;
         this.nome = nome;
@@ -12,6 +25,10 @@ public class GuestForm {
         this.gruppoSanguigno = gruppoSanguigno;
     }
 
+    /**
+     * Metodo toString.
+     * @return String rappresenta l'oggetto in formato stringa.
+     */
     @Override
     public String toString() {
         return "GuestForm{" +
@@ -141,5 +158,4 @@ public class GuestForm {
     private String telefono;
     private String patologie;
     private String gruppoSanguigno;
-
 }

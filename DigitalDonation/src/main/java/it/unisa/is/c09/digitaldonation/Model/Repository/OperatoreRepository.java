@@ -30,16 +30,4 @@ import org.springframework.stereotype.Repository;
          * @pre codiceFiscale != null
          */
         Operatore findOperatoreByCodiceFiscaleUtente(String CodiceFiscaleUtente);
-
-        /**
-         * Permette di ottenere la sede locale dell'operatore in base all'email.
-         *
-         * @param email Stringa che rappresenta l'email dell'operatore.
-         *
-         * @return Oggetto {@link SedeLocale} che rappresenta la sede locale. Può essere
-         *         null se nel database non è presente una sede locale con email come parametro.
-         *
-         * @pre email != null
-         */
-        //SedeLocale findByEmail(String email);
 }

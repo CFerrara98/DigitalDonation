@@ -1,14 +1,25 @@
 package it.unisa.is.c09.digitaldonation.Utils.Forms;
 
+/**
+ * Classe che rappresenta l'oggetto Form di conferma donazione.
+ *
+ * @author Fabio Siepe, Mattia Sapere
+ */
 public class ConfermaDonazioneForm {
 
+    /**
+     * Costruttore con parametri utili nei casi di test.
+     * @param tipoDonazione e' il tipo di donazione inserita nel form.
+     */
     public ConfermaDonazioneForm(String tipoDonazione) {
         this.tipoDonazione = tipoDonazione;
     }
 
-    public ConfermaDonazioneForm() {
-
-    }
+    /**
+     * Costruttore che crea un oggetto vuoto,
+     * che verra' popolato con i metodi setters.
+     */
+    public ConfermaDonazioneForm() {}
 
     /**
      * Metodo che ritorna il tipo di donazione per la conferma della donazione.

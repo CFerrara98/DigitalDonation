@@ -8,9 +8,9 @@ import java.util.Date;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
+ *
  * Classe che modella una donazione effettuata da un donatore.
  */
-
 @Data
 @Entity
 @Table(name = "donazione")

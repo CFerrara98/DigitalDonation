@@ -18,6 +18,10 @@ import java.util.logging.Logger;
 
 import static it.unisa.is.c09.digitaldonation.UtenteManagement.cryptoPassword.CryptoByMD5.getMD5;
 
+/**
+ * La classe fornisce i metodi per la logica di business della gestione del tesserino.
+ * @author Mattia Sapere, Fabio Siepe
+ */
 @Service
 public class GestioneTesserinoService implements GestioneTesserinoServiceInterface {
 
@@ -49,10 +53,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     public Tesserino creazioneTesserino(Donatore donatore, Tesserino tesserino, Donazione donazione) throws CannotSaveDataRepositoryException {
         if(tesserino == null || donatore == null){
             throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
-            //TODO tesserino identificato con chiave primaria codice fiscale e nn id tessera
-        }/*else if(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())!=null){
-            throw new CannotSaveDataRepositoryException("tesserinoError", "Il tesserino già esiste");
-        }*/
+        }
         String password = mailSingletonSender.sendEmailCreazioneAccount(donatore);
         String cripted = getMD5(password);
         donatore.setPassword(cripted);
@@ -200,12 +201,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      * @throws TesserinoFormException
      */
     public String validaImage(String image) throws TesserinoFormException {
-        if (image == null) throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.");
+        if (image == null || image.equals("")) throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.");
         String end = image.substring(image.indexOf("."));
-        if(end.matches(".png" ) || end.matches(".jpg"))
+        if(end.matches(".png" ) || end.matches(".jpeg"))
                  return image;
         else
-            throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.");
+            throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpeg.");
     }
 
 
@@ -479,8 +480,6 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
         }
     }
 
-
-
     /**
      * Controlla che le motivazioni di una indisponibilità siano specificato e che rispetti il formato
      * prestabilito.
@@ -491,9 +490,6 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
      *                            rispettano il formato.
      */
     public String validaMotivazioni(String motivazioni) throws TesserinoFormException {
-        /*if (!motivazioni.matches(Tesserino.MOTIVAZIONI_REGEX)) {
-                throw new TesserinoFormException("MotivazioneError", "Le motivazioni di indisponibilità non rispettano il formato ");
-            }*/
         return motivazioni;
     }
 

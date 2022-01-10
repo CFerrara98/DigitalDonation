@@ -6,9 +6,9 @@ import javax.persistence.*;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
- * Classe che modella un guest che partecipèa a una seduta.
+ *
+ * Classe che modella un guest che partecipa a una seduta.
  */
-
 @Data
 @Entity
 @Table(name = "guest")

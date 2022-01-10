@@ -10,9 +10,9 @@ import java.util.List;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
+ *
  * Classe che modella un tesserino.
  */
-
 @Entity
 @Table(name = "tesserino")
 public class Tesserino implements Serializable {

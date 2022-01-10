@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 
+/**
+ * Classe che esegue il progetto.
+ */
 @SpringBootApplication
 @ServletComponentScan
 public class DigitalDonationApplication {
@@ -20,7 +23,6 @@ public class DigitalDonationApplication {
     public static void main(String[] args) {
         SpringApplication.run(DigitalDonationApplication.class, args);
     }
-
 
     @Bean
     @Primary

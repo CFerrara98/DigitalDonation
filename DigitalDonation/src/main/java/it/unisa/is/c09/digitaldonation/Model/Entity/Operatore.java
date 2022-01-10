@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
+ *
  * Classe che modella un operatore.
  */
 @Entity

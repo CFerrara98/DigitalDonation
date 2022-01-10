@@ -11,7 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/*Validare i campi di conferma donazione form e indisponibilita donazione form*/
+/**
+ * La classe fornisce i metodi per la logica di business della gestione delle sedute.
+ * @author Mattia Sapere, Fabio Siepe
+ */
 @Service
 public class GestioneSeduteService implements GestioneSeduteServiceInterface{
 

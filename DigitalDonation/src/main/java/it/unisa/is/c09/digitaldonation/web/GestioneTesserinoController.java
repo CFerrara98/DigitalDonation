@@ -31,15 +31,15 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static java.lang.System.in;
-import static java.lang.System.out;
-
+/**
+ * Controller per la gestione del tesserino.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
+ */
 @Controller
 @MultipartConfig(fileSizeThreshold = 1024*1024*10 ,
         maxFileSize = (1024*1024*10)/2
@@ -270,6 +270,14 @@ public class GestioneTesserinoController {
 
     }
 
+    /**
+     * Metodo che permette di visualizzare il tesserino.
+     *
+     * @param request           è la richiesta dalla sessione.
+     * @param redirectAttribute è l'attributo di ridirezione.
+     * @param model             è l'oggetto Model.
+     * @return String ridirezione ad una pagina.
+     */
     @RequestMapping(value = "/visualizzaTesserino", method = RequestMethod.GET)
     public String visualizzaTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model){
         Utente utente = (Utente) request.getSession().getAttribute("utente");

@@ -2,11 +2,10 @@ package it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError;
 
 
 /**
- * Eccezione lanciata quando il controllo sull'email di un utente fallisce
-        * perché questo non rispetta il pattern oppure è nullo.
-        *
-        * @author Mattia Sapere, Fabio Siepe
-        */
+ * Eccezione generata in caso di mail non valida.
+ *
+ * @author Mattia Sapere, Fabio Siepe
+ */
 public class MailNonValidaException extends Exception {
 
     private static final long serialVersionUID = -8870973825876004160L;

@@ -26,6 +26,11 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
 
+/**
+ * Controller per l'organizzazione delle sedute.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
+ */
 @Controller
 public class GestioneSeduteController {
 
@@ -116,8 +121,6 @@ public class GestioneSeduteController {
         model.addAttribute("success","Indisponibilita' aggiunta con successo!");
         return "redirect:/goElencoPartecipanti?idSeduta="+idSeduta+"&successo=Indisponibilita' aggiunta con successo!";
     }
-
-
 
     /**
      * Metodo GET per la conferma dell'avenuta donazione

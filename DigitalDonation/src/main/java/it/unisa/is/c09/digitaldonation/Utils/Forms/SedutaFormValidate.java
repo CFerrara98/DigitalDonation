@@ -19,7 +19,6 @@ import java.util.GregorianCalendar;
  *
  * @author Mattia Sapere, Fabio Siepe
  */
-
 @Component
 public class SedutaFormValidate implements Validator {
 
@@ -38,7 +37,6 @@ public class SedutaFormValidate implements Validator {
      * @param target Oggetto da validare
      * @param errors Oggetto in cui salvare l'esito della validazione
      */
-
     @Override
     public void validate(Object target, Errors errors) {
 

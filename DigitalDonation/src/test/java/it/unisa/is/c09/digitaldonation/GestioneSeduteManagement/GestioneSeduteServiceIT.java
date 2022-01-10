@@ -1,5 +1,5 @@
 package it.unisa.is.c09.digitaldonation.GestioneSeduteManagement;
-
+/*
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +44,13 @@ public class GestioneSeduteServiceIT {
     @Autowired
     private UtenteRepository utenteRepository;
 
-    private Donatore donatore;
+    private Donatore donatore;*/
 
     /**
      * Salva la lista di donatori su database prima dell'esecuzione di ogni singolo
      * test.
      */
-    @Before
+/*    @Before
     public void salvaDonatore() {
 
         donatore = new Donatore();
@@ -68,3 +68,4 @@ public class GestioneSeduteServiceIT {
         donatoreRepository.save(donatore);
     }
 }
+*/

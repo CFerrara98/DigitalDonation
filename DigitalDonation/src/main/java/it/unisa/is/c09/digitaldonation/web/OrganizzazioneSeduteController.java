@@ -30,6 +30,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Controller per l'organizzazione delle sedute.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
+ */
 @Controller
 public class OrganizzazioneSeduteController {
 
@@ -303,6 +308,12 @@ public class OrganizzazioneSeduteController {
         return "GUIOrganizzazioneSedute/schedulazioneSeduta";
     }
 
+    /**
+     * Metodo che permette di andare alla pagina di modifica seduta.
+     *
+     * @param model è l'oggetto model.
+     * @return String ridirezione alla pagina delle sedute disponibile.
+     */
     @RequestMapping(value = "/goModificaSeduta", method = RequestMethod.GET)
     public String goModificaSeduta(HttpServletRequest request, @RequestParam(name="idSeduta") Long idSeduta, Model model) {
         Utente utente = (Utente) request.getSession().getAttribute("utente");

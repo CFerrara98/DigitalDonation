@@ -6,8 +6,25 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.util.Date;
 
+/**
+ * Classe che rappresenta l'oggetto Form di indisponibilità.
+ *
+ * @author Fabio Siepe, Mattia Sapere
+ */
 public class SedutaForm {
 
+    /**
+     * Costruttore con parametri utili nei casi di test.
+     * @param dataSeduta e' la data della seduta inserita nel form.
+     * @param indirizzo e' l'indirizzo inserito nel form.
+     * @param citta e' la citta inserita nel form.
+     * @param provincia e' la provincia inserita nel form.
+     * @param CAP è il CAP inserito nel form.
+     * @param orarioInizio è l'orario di inizio inserito nel form.
+     * @param orarioFine è l'orario di fine inserito nel form.
+     * @param dataInizioPrenotazione è la data di inizio prenotazione inserita nel form.
+     * @param dataFinePrenotazione è la data di fine prenotazione inserita nel form.
+     */
     public SedutaForm(Date dataSeduta, String indirizzo, String citta, String provincia, String CAP, Time orarioInizio, Time orarioFine, int numeroPartecipanti, Date dataInizioPrenotazione, Date dataFinePrenotazione) {
         this.dataSeduta = dataSeduta;
         this.indirizzo = indirizzo;
@@ -21,9 +38,12 @@ public class SedutaForm {
         this.dataFinePrenotazione = dataFinePrenotazione;
     }
 
-    public SedutaForm() {
+    /**
+     * Costruttore che crea un oggetto vuoto,
+     * che verra' popolato con i metodi setters.
+     */
+    public SedutaForm() {}
 
-    }
     /**
      * Metodo che ritorna la data della seduta.
      *

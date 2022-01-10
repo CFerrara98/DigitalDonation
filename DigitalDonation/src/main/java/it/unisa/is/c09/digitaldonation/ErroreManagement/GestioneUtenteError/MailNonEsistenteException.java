@@ -1,11 +1,10 @@
 package it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError;
 
 /**
-        * Eccezione lanciata quando il controllo sull'email di un utente fallisce
-        * perché questo è già presente nel sistema.
-        *
-        * @author Mattia Sapere, Fabio Siepe
-        */
+ * Eccezione generata in caso di mail non esistente.
+ *
+ * @author Mattia Sapere, Fabio Siepe
+ */
 public class MailNonEsistenteException extends Exception {
 
     private static final long serialVersionUID = 6746818670147635153L;
