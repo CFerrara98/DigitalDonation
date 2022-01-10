@@ -114,7 +114,7 @@ public class GestioneSeduteController {
             return "redirect:/error";
         }
         model.addAttribute("success","Indisponibilita' aggiunta con successo!");
-        return "redirect:/goElencoPartecipanti?idSeduta="+idSeduta+"&successo=Indisponibilità aggiunta con successo!";
+        return "redirect:/goElencoPartecipanti?idSeduta="+idSeduta+"&successo=Indisponibilita' aggiunta con successo!";
     }
 
 

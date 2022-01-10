@@ -180,13 +180,10 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-
-                                <h6 align="center"> Nessun partecipante all'interno della seduta </h6>
-
+                                <h6 align="center"> Nessun partecipante all'interno della seduta </h6><br>
                             </c:otherwise>
                         </c:choose>
                     </div>

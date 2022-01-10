@@ -101,11 +101,13 @@ public class GestioneTesserinoController {
 
         try {
             gestioneTesserinoService.autodichiarazioneIndisponibilita(indisponibilita);
+            Donatore donatore = (Donatore) utente;
+            Tesserino tesserino = gestioneTesserinoService.aggiornaTesserino(donatore);
+            model.addAttribute("tesserino", tesserino);
         } catch (CannotSaveDataRepositoryException e) {
             redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
             return "redirect:/goAutodichiarazioneIndisponibilita";
         }
-
         model.addAttribute("success", "Autodichiarazione compilata con successo");
         return "GUIGestioneUtente/dashboardDonatore";
     }
@@ -210,13 +212,11 @@ public class GestioneTesserinoController {
             donatore.setResidenza(tesserinoForm.getResidenza());
             donatore.setEmail(tesserinoForm.getEmail());
 
-
             tesserino.setDonatoreUtenteCodiceFiscale(tesserinoForm.getCodiceFiscale());
             tesserino.setDataRilascio(tesserinoForm.getDataRilascio());
             tesserino.setGruppoSanguigno(tesserinoForm.getGruppoSanguigno());
             tesserino.setNumeroMatricola(tesserinoForm.getNumeroMatricola());
             tesserino.setRh(tesserinoForm.getRh());
-
 
             if (tesserinoForm.getTipoDonazione() != null && tesserinoForm.getDataDonazione() != null) {
                 donazione = new Donazione();
