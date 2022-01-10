@@ -1,6 +1,7 @@
 package it.unisa.is.c09.digitaldonation.web;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
+import it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement.GestioneTesserinoService;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
@@ -37,6 +38,8 @@ public class OrganizzazioneSeduteController {
     @Autowired
     OrganizzazioneSeduteService organizzazioneSeduteService;
     @Autowired
+    GestioneTesserinoService gestioneTesserinoService;
+    @Autowired
     UtenteService utenteService;
     @Autowired
     GuestFormValidate guestFormValidate;
@@ -44,8 +47,6 @@ public class OrganizzazioneSeduteController {
     SedutaFormValidate sedutaFormValidate;
     @Autowired
     SedutaRepository sedutaRepository;
-
-
 
     /**
      * Metodo che permette al donatore di poter inviare un feedback.
@@ -67,6 +68,14 @@ public class OrganizzazioneSeduteController {
                 try {
                     organizzazioneSeduteService.feedbackDonatore((Donatore) utente, idSeduta);
                     model.addAttribute("success", "Ti sei prenotato alla seduta, controlla la tua email.");
+                    Donatore donatore = (Donatore) utente;
+                    try {
+                        Tesserino tesserino = gestioneTesserinoService.aggiornaTesserino(donatore);
+                        model.addAttribute("tesserino", tesserino);
+                    } catch (CannotSaveDataRepositoryException e) {
+                        e.printStackTrace();
+                        return "GUIGestioneUtente/dashboardDonatore";
+                    }
                     return "GUIGestioneUtente/dashboardDonatore";
                 } catch (CannotRelaseFeedbackException e) {
                     return "GUIGestioneUtente/dashboardDonatore";

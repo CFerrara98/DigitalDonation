@@ -51,7 +51,17 @@ public class UtenteController {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente!=null) {
             if (utente instanceof Operatore) return "GUIGestioneUtente/dashboardOperatore";
-            if (utente instanceof Donatore) return "GUIGestioneUtente/dashboardDonatore";
+            if (utente instanceof Donatore) {
+                Donatore donatore = (Donatore) utente;
+                try {
+                    Tesserino tesserino = gestioneTesserinoService.aggiornaTesserino(donatore);
+                    model.addAttribute("tesserino", tesserino);
+                } catch (CannotSaveDataRepositoryException e) {
+                    e.printStackTrace();
+                    return "GUIGestioneUtente/dashboardDonatore";
+                }
+                return "GUIGestioneUtente/dashboardDonatore";
+            }
         }
         request.getSession().invalidate();
         return "GUIGestioneUtente/homepage";
@@ -69,7 +79,6 @@ public class UtenteController {
     @RequestMapping(value ="/goLogin", method = RequestMethod.GET)
     public String goLogin(HttpServletRequest request,@ModelAttribute("loginModel")LoginForm loginForm,
                           BindingResult result, RedirectAttributes redirectAttribute, Model model){
-        //TODO controllare la sessione
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if(utente == null){
             model.addAttribute("loginForm",new LoginForm());
@@ -137,7 +146,7 @@ public class UtenteController {
                 } catch (CannotSaveDataRepositoryException e) {
                     return "redirect:/";
                 }
-                model.addAttribute("tesserino", tesserino);
+                request.getSession().setAttribute("tesserino", tesserino);
                 return "GUIGestioneUtente/dashboardDonatore";
             }
         }

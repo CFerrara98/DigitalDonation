@@ -37,9 +37,8 @@
                         </div>
                         <h6>&nbsp;</h6>
 
-
-                        <c:choose>
-                        <c:when test="${listaSedutePrenotabili.get(0) != null}">
+                <c:choose>
+                    <c:when test="${listaSedutePrenotabili.size() > 0}">
                         <c:forEach begin="0" end="${listaSedutePrenotabili.size()-1}" step="1"
                                    var="i">
                             <!-- prima seduta-->
@@ -67,8 +66,10 @@
                                                         <c:out
                                                                 value="${listaSedutePrenotabili.get(i).dataSeduta.year + 1900}"></c:out></h3>
                                                 <td scope="col"><span class=" float-right">
-                                                <a class="btn btn-primary botton-sm large" href="./goPartecipaSeduta?idSeduta=<c:out value="${listaSedutePrenotabili.get(i).idSeduta}"></c:out>" role="button">Partecipa</a>
-                                             </span>
+                                                    <a class="btn btn-primary botton-sm large"
+                                                       href="./goPartecipaSeduta?idSeduta=<c:out value="${listaSedutePrenotabili.get(i).idSeduta}"></c:out>"
+                                                       role="button">Partecipa</a>
+                                                 </span>
                                                 </td>
                                             </tr>
                                             </thead>
@@ -77,19 +78,14 @@
                                     <!-- fine tabella-->
                                 </div>
                             </div>
-
                         </c:forEach>
-                        </c:when>
-                            <c:otherwise>
-
-                                <h6 align="center"> Nessuna seduta disponibile per te </h6>
-
-                            </c:otherwise>
-                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <h6 align="center"> Nessuna seduta disponibile per te </h6><br>
+                    </c:otherwise>
+                </c:choose>
                     </div>
-
                 </div>
-
                 <!-- /.container-fluid -->
 
             </div>

@@ -183,7 +183,8 @@
                                             <tbody>
 
                                             <!-- ciclo di righe con tutte le donazioni effettuate dal donatore-->
-
+                                    <c:choose>
+                                        <c:when test="${tesserino.listaDonazioni.size() > 0}">
                                             <c:forEach begin="0" end="${tesserino.listaDonazioni.size()-1}" step="1" var="i">
                                                 <tr>
                                                     <th>
@@ -199,7 +200,11 @@
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
-
+                                        </c:when>
+                                        <c:otherwise>
+                                            <h6 align="center"> Nessuna seduta disponibile per te </h6><br>
+                                        </c:otherwise>
+                                    </c:choose>
                                         </table>
                                     </div>
 
