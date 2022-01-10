@@ -23,7 +23,7 @@ public class LoginFormValidate implements Validator {
   private UtenteService utenteService;
 
   @Override
-  public boolean supports(Class<?> aClass) {
+  public boolean supports(Class<?> aclass) {
     return false;
   }
 
@@ -38,17 +38,6 @@ public class LoginFormValidate implements Validator {
   public void validate(Object target, Errors errors) {
     LoginForm loginForm = (LoginForm) target;
 
-        /*        organizzazioneSeduteService = new OrganizzazioneSeduteService();
-        //Validazione del campo dataSeduta
-        try {
-
-            organizzazioneSeduteService.validaDataSeduta(sedutaForm.getDataSeduta());
-
-        } catch (SedutaFormException e1) {
-            errors.reject("Data non valida.", e1.getMessage());
-            sedutaForm.setDataSeduta(null);
-            return;
-        }*/
 
     //Validazione del campo email
     //TODO DA VALIDARE LA PASSWORD!

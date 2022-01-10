@@ -17,6 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 
+
 public class RandChoiser {
 
   /**
@@ -204,10 +205,11 @@ public class RandChoiser {
    */
 
 
-  /*
+
   public static String generateLuogoDiNascita() {
     Random random = new Random();
     String comune;
+
     String[] name =
             {"Abano Terme", "Abbadia Lariana", "Abbasanta", "Abbiategrasso",
                     "Abriola", "Accadia", "Accettura", "Accumoli", "Acerno",
@@ -622,7 +624,7 @@ public class RandChoiser {
     } while (!(comune.matches(Donatore.LUOGONASCITA_REGEX)));
     return comune;
   }
-*/
+
   /**
    * Metodo che genera una data di nascita tra il 1900 e 2020.
    *

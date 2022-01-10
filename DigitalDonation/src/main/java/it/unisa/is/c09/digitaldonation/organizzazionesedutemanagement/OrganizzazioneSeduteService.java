@@ -7,7 +7,6 @@ import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerro
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotDeleteDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.GuestFormException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.SedutaFormException;
-
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
 import it.unisa.is.c09.digitaldonation.model.entity.Guest;
 import it.unisa.is.c09.digitaldonation.model.entity.Indisponibilita;
@@ -25,11 +24,10 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.sql.Time;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -82,7 +80,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   }
 
   /**
-   * Questo metodo permette di recuperare i donatori appartenenti alla seduta partendo dall'id
+   * Questo metodo permette di recuperare i donatori appartenenti alla seduta partendo dall'id.
    *
    * @param idSeduta L'id della seduta che si vuole monitorare
    * @return Una lista di Utenti che appartengono a quella seduta
@@ -133,7 +131,9 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
       throw new CannotSaveDataRepositoryException("SedutaError",
               "Il guest è gia presente nella seduta");
     }
-    if (guest.getPatologie() == "") guest.setPatologie("Nessuna");
+    if (guest.getPatologie() == "") {
+      guest.setPatologie("Nessuna");
+    }
     Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
     seduta.addPartecipante(guest);
     sedutaRepository.save(seduta);
@@ -160,9 +160,9 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     sedutaRepository.save(seduta);
     List<Donatore> donatori = donatoreRepository.findAll();
     for (int i = 0; i < donatori.size(); i++) {
-      List<Indisponibilita> indisponibilitaLista = indisponibilitaRepository.
-              findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter
-              (donatori.get(i).getCodiceFiscale(), seduta.getDataSeduta());
+      List<Indisponibilita> indisponibilitaLista = indisponibilitaRepository
+              .findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter
+                      (donatori.get(i).getCodiceFiscale(), seduta.getDataSeduta());
       if (indisponibilitaLista.isEmpty()) {
         mailSingletonSender.sendEmailSchedulazioneSeduta(seduta, donatori.get(i));
       }
@@ -171,7 +171,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   }
 
   /**
-   * Questo metodo permette di modificare una seduta
+   * Questo metodo permette di modificare una seduta.
    *
    * @param idSeduta id della seduta da modificare
    * @return la seduta modificata
@@ -211,7 +211,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   }
 
   /**
-   * Questo metodo permette di eliminare una seduta
+   * Questo metodo permette di eliminare una seduta.
    *
    * @param idSeduta id della seduta da eliminare
    */
@@ -234,7 +234,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   }
 
   /**
-   * Questo metodo permette di recuperare una seduta dato il suo id
+   * Questo metodo permette di recuperare una seduta dato il suo id.
    *
    * @param idSeduta id della seduta da recuperare
    * @return la seduta recuperata
@@ -421,7 +421,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    *
    * @param gruppoSanguigno Stringa che rappresenta il gruppo sanguigno da controllare
    * @return gruppoSanguigno La stringa che rappresentano il
-   * gruppo sanguigno da controllare validato
+   *        gruppo sanguigno da controllare validato
    * @throws GuestFormException se il gruppo sanguigno non è specificate oppure se non
    *                            rispetta il formato {@link Guest#REG_GRUPPOSANGUIGNO}
    */
@@ -546,16 +546,16 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    *                             rispetta il formato
    *                             {@link Seduta#CAP_REGEX}
    */
-  public String validaCAP(String CAP) throws SedutaFormException {
-    if (CAP == null) {
+  public String validaCaP(String CaP) throws SedutaFormException {
+    if (CaP == null) {
       throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto:"
               + " ammette solo 5 caratteri numerici.");
     } else {
-      if (!CAP.matches(Seduta.CAP_REGEX)) {
+      if (!CaP.matches(Seduta.CAP_REGEX)) {
         throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto:"
                 + "ammette solo 5 caratteri numerici.");
       }
-      return CAP;
+      return CaP;
     }
   }
 
@@ -649,10 +649,12 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     guestRepository.save(guest);
     return guest;
   }
+
   public Seduta salvaSeduta(Seduta seduta) {
     sedutaRepository.save(seduta);
     return seduta;
   }
+
   public Donatore salvaDonatore(Donatore donatore) {
     donatoreRepository.save(donatore);
     return donatore;
@@ -660,7 +662,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
 
 
   /**
-   * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa
+   * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa.
    *
    * @param date data in input
    * @return stringa gg-mm-aaaa

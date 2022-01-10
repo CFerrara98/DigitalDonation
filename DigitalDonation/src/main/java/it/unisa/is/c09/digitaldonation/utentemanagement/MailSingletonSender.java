@@ -32,10 +32,13 @@ public class MailSingletonSender {
     SimpleMailMessage msg = new SimpleMailMessage();
     msg.setTo(donatore.getEmail());
     msg.setSubject("Prenotazione ad una nuova seduta di donazione");
-    String messaggio = ("Gentile " + donatore.getNome() + " " + donatore.getCognome() + " utente delle piattaforma Digital Donation,\n" +
-            "le comunichiamo che la prenotazione alla seduta di donazione in via: " + seduta.getLuogo() + " in data: " +
-            seduta.getDataSeduta() + " dalle ore: " + seduta.getOraInizio() + " alle ore: " + seduta.getOraFine() +
-            "\nè avvenuta con successo, la attendiamo.\nCordiali saluti da Digital Donation");
+    String messaggio = ("Gentile " + donatore.getNome() + " " + donatore.getCognome()
+            + " utente delle piattaforma Digital Donation,\n" +
+            "le comunichiamo che la prenotazione alla seduta di donazione in via: "
+            + seduta.getLuogo() + " in data: " +
+            seduta.getDataSeduta() + " dalle ore: " + seduta.getOraInizio() + " alle ore: "
+            + seduta.getOraFine()
+            + "\nè avvenuta con successo, la attendiamo.\nCordiali saluti da Digital Donation");
 
     msg.setText(messaggio);
     javaMailSender.send(msg);
@@ -112,9 +115,11 @@ public class MailSingletonSender {
     SimpleMailMessage msg = new SimpleMailMessage();
     msg.setTo(donatore.getEmail());
     msg.setSubject("Seduta eliminata");
-    String messaggio = ("Gentile " + donatore.getNome() + " " + donatore.getCognome() + " utente delle piattaforma Digital Donation,\n" +
-            "le comunichiamo che la seduta: " + seduta.getLuogo() + " in data: " +
-            seduta.getDataSeduta() + " dalle ore: " + seduta.getOraInizio() + " alle ore: " + seduta.getOraFine() + "\nè stata cancellata, ci scusiamo per il disagio"
+    String messaggio = ("Gentile " + donatore.getNome() + " " + donatore.getCognome()
+            + " utente delle piattaforma Digital Donation,\n" +
+            "le comunichiamo che la seduta: " + seduta.getLuogo() + " in data: "
+            + seduta.getDataSeduta() + " dalle ore: " + seduta.getOraInizio() + " alle ore: "
+            + seduta.getOraFine() + "\nè stata cancellata, ci scusiamo per il disagio"
             + "\nCordiali saluti da Digital Donation");
     msg.setText(messaggio);
     javaMailSender.send(msg);

@@ -1,7 +1,11 @@
 package it.unisa.is.c09.digitaldonation.model.entity;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 
 /**
  * Classe che modella un operatore.
@@ -14,7 +18,8 @@ public class Operatore extends Utente implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @ManyToOne()
-  @JoinColumn(name = "sede_locale_codice_identificativo", referencedColumnName = "id_sede", nullable = true)
+  @JoinColumn(name = "sede_locale_codice_identificativo",
+          referencedColumnName = "id_sede", nullable = true)
   private SedeLocale sedeLocale;
 
   /**
@@ -34,7 +39,8 @@ public class Operatore extends Utente implements Serializable {
    * @param password      è la password dell'operatore.
    * @param sedeLocale    è l'oggetto della sede locale.
    */
-  public Operatore(String codiceFiscale, String nome, String cognome, String email, String password, SedeLocale sedeLocale) {
+  public Operatore(String codiceFiscale, String nome, String cognome,
+                   String email, String password, SedeLocale sedeLocale) {
     super(codiceFiscale, nome, cognome, email, password);
     this.sedeLocale = sedeLocale;
   }
