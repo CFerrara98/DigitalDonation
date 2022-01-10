@@ -354,6 +354,150 @@
         ["xpath=//form/input", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "5733ad0a-1d5c-40ec-9e88-84f6e0368532",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError",
+      "targets": [
+        ["css=.myError", "css:finder"],
+        ["xpath=//form[@id='autodichiarazioneForm']/div[2]/span", "xpath:idRelative"],
+        ["xpath=//div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Le motivazioni di indisponibilità non rispettano il formato.')]", "xpath:innerText"]
+      ],
+      "value": "Le motivazioni di indisponibilità non rispettano il formato."
+    }]
+  }, {
+    "id": "e22775f6-971c-4507-bab1-f192baf3ceb3",
+    "name": "TC_3.2_4",
+    "commands": [{
+      "id": "ebd5bffe-01d8-4d75-8369-01982cd929a3",
+      "comment": "",
+      "command": "open",
+      "target": "http://lolcahost:8080/goAutodichiarazioneIndisponibilita",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c5972bcf-5cb2-4636-920d-bf013aca7a68",
+      "comment": "",
+      "command": "click",
+      "target": "id=dataDisponibilita",
+      "targets": [
+        ["id=dataDisponibilita", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#dataDisponibilita", "css:finder"],
+        ["xpath=//input[@id='dataDisponibilita']", "xpath:attributes"],
+        ["xpath=//form[@id='autodichiarazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f07973a3-28cb-44d2-a3a2-11e948d25942",
+      "comment": "",
+      "command": "type",
+      "target": "id=dataDisponibilita",
+      "targets": [
+        ["id=dataDisponibilita", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#dataDisponibilita", "css:finder"],
+        ["xpath=//input[@id='dataDisponibilita']", "xpath:attributes"],
+        ["xpath=//form[@id='autodichiarazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "0002-12-19"
+    }, {
+      "id": "04a88bd6-fec4-4cc5-b85d-5df2dcaafbe7",
+      "comment": "",
+      "command": "type",
+      "target": "id=dataDisponibilita",
+      "targets": [
+        ["id=dataDisponibilita", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#dataDisponibilita", "css:finder"],
+        ["xpath=//input[@id='dataDisponibilita']", "xpath:attributes"],
+        ["xpath=//form[@id='autodichiarazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "0020-12-19"
+    }, {
+      "id": "6d0262e6-d6e5-435e-93dd-cac7465b37bd",
+      "comment": "",
+      "command": "type",
+      "target": "id=dataDisponibilita",
+      "targets": [
+        ["id=dataDisponibilita", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#dataDisponibilita", "css:finder"],
+        ["xpath=//input[@id='dataDisponibilita']", "xpath:attributes"],
+        ["xpath=//form[@id='autodichiarazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "0203-12-19"
+    }, {
+      "id": "f406495d-8966-4aa8-a4c6-0ec491d8ec6b",
+      "comment": "",
+      "command": "type",
+      "target": "id=dataDisponibilita",
+      "targets": [
+        ["id=dataDisponibilita", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#dataDisponibilita", "css:finder"],
+        ["xpath=//input[@id='dataDisponibilita']", "xpath:attributes"],
+        ["xpath=//form[@id='autodichiarazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2030-12-19"
+    }, {
+      "id": "bdc34d3a-1dbd-4fa1-8d22-1179a0be82c1",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleMotivazione",
+      "targets": [
+        ["id=exampleMotivazione", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazione", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazione']", "xpath:attributes"],
+        ["xpath=//form[@id='autodichiarazioneForm']/div[2]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b93b4c0f-bf5c-49fa-89fa-aa8c06e8ecb5",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleMotivazione",
+      "targets": [
+        ["id=exampleMotivazione", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazione", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazione']", "xpath:attributes"],
+        ["xpath=//form[@id='autodichiarazioneForm']/div[2]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Sto assumendo farmaci."
+    }, {
+      "id": "b94c5ec7-1bb3-47e5-b7c3-91d621c76502",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [
+        ["css=.btn-user", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='autodichiarazioneForm']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "79d01e56-f3fe-4cac-8481-14e0649ae8c2",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.alert",
+      "targets": [
+        ["css=.alert", "css:finder"],
+        ["xpath=//div[@id='content']/div/div", "xpath:idRelative"],
+        ["xpath=//div/div/div/div/div", "xpath:position"]
+      ],
+      "value": ""
     }]
   }],
   "suites": [{

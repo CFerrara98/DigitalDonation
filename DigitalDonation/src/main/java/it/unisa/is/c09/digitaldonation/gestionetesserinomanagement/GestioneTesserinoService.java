@@ -5,6 +5,7 @@ import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.Cr
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestionetesserinoerror.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.GuestFormException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.IndisponibilitaDonazioneFormException;
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
 import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
 import it.unisa.is.c09.digitaldonation.model.entity.Guest;
@@ -531,7 +532,17 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    *                                rispettano il formato.
    */
   public String validaMotivazioni(String motivazioni) throws TesserinoFormException {
-    return motivazioni;
+    if (motivazioni == null) {
+      throw new TesserinoFormException("MotivazioniIndisponibilitaError",
+              "Le motivazioni di indisponibilità non rispettano il formato.");
+    } else {
+      if (!motivazioni.matches(Indisponibilita.MOTIVAZIONI_REGEX)) {
+        throw new TesserinoFormException("MotivazioniIndisponibilitaError",
+                "Le motivazioni di indisponibilità non rispettano il formato.");
+      } else {
+        return motivazioni;
+      }
+    }
   }
 
   /**
