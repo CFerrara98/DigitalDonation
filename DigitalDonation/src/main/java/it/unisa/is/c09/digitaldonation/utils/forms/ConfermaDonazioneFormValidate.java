@@ -16,35 +16,35 @@ import org.springframework.validation.Validator;
  */
 
 @Component
-public class ConfermaDonazioneFormValidate implements Validator{
+public class ConfermaDonazioneFormValidate implements Validator {
 
-    @Autowired
-    private GestioneSeduteService gestioneSeduteService;
+  @Autowired
+  private GestioneSeduteService gestioneSeduteService;
 
-    @Override
-    public boolean supports(Class<?> aClass) {
-        return false;
+  @Override
+  public boolean supports(Class<?> aClass) {
+    return false;
+  }
+
+  /**
+   * Effettua la validazione dell'oggetto target riportando gli errori
+   * nell'oggetto errors.
+   *
+   * @param target Oggetto da validare
+   * @param errors Oggetto in cui salvare l'esito della validazione
+   */
+  @Override
+  public void validate(Object target, Errors errors) {
+
+    ConfermaDonazioneForm confermaDonazioneForm = (ConfermaDonazioneForm) target;
+    gestioneSeduteService = new GestioneSeduteService();
+
+    //Validazione del campo tipoDonazione
+    try {
+      gestioneSeduteService.validaTipoDonazione(confermaDonazioneForm.getTipoDonazione());
+    } catch (ConfermaDonazioneFormException e) {
+      errors.reject("TipoDonazioneError", e.getMessage());
+      confermaDonazioneForm.setTipoDonazione("");
     }
-
-    /**
-     * Effettua la validazione dell'oggetto target riportando gli errori
-     * nell'oggetto errors.
-     *
-     * @param target Oggetto da validare
-     * @param errors Oggetto in cui salvare l'esito della validazione
-     */
-    @Override
-    public void validate(Object target, Errors errors) {
-
-        ConfermaDonazioneForm confermaDonazioneForm = (ConfermaDonazioneForm) target;
-        gestioneSeduteService = new GestioneSeduteService();
-
-        //Validazione del campo tipoDonazione
-        try {
-            gestioneSeduteService.validaTipoDonazione(confermaDonazioneForm.getTipoDonazione());
-        } catch (ConfermaDonazioneFormException e) {
-            errors.reject("TipoDonazioneError", e.getMessage());
-            confermaDonazioneForm.setTipoDonazione("");
-        }
-    }
+  }
 }

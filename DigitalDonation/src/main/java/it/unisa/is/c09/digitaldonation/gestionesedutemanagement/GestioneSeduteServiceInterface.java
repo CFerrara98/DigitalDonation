@@ -7,6 +7,7 @@ import it.unisa.is.c09.digitaldonation.utils.forms.IndisponibilitaDonazioneForm;
 
 /**
  * Interfaccia che fornisce i metodi per la logica di business della gestione delle sedute.
+ *
  * @author Fabio Siepe, Mattia Sapere
  */
 public interface GestioneSeduteServiceInterface {
