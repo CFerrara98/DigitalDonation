@@ -1,6 +1,10 @@
 package it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement;
 
-import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.*;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotRelaseFeedbackException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotLoadDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotUpdateDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotDeleteDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
 import it.unisa.is.c09.digitaldonation.model.entity.Guest;
 import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
@@ -25,7 +29,8 @@ public interface OrganizzazioneSeduteServiceInterface {
 
   Seduta schedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException;
 
-  Seduta modificaSeduta(SedutaForm sedutaForm, Long idSeduta, Utente utente) throws CannotUpdateDataRepositoryException;
+  Seduta modificaSeduta(SedutaForm sedutaForm, Long idSeduta, Utente utente)
+          throws CannotUpdateDataRepositoryException;
 
   void eliminaSeduta(Long idSeduta) throws CannotDeleteDataRepositoryException;
 

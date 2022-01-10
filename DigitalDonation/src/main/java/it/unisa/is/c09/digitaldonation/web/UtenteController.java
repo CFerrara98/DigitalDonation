@@ -1,13 +1,13 @@
 package it.unisa.is.c09.digitaldonation.web;
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.AccessNotAuthorizedException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.UserNotLoggedException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.gestionetesserinomanagement.GestioneTesserinoService;
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
 import it.unisa.is.c09.digitaldonation.model.entity.Operatore;
 import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.model.entity.Utente;
-import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.UserNotLoggedException;
 import it.unisa.is.c09.digitaldonation.utentemanagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.utils.form.LoginForm;
 import it.unisa.is.c09.digitaldonation.utils.form.LoginFormValidate;
@@ -94,9 +94,7 @@ public class UtenteController {
       if (utente instanceof Operatore) {
         request.getSession().setAttribute("utente", utente);
         return "GUIGestioneUtente/dashboardOperatore";
-      }
-      //Se è un donatore
-      else if (utente instanceof Donatore) {
+      } else if (utente instanceof Donatore) {
         request.getSession().setAttribute("utente", utente);
         return "GUIGestioneUtente/dashboardDonatore";
       }
@@ -140,13 +138,11 @@ public class UtenteController {
       }
     }
     if (utente != null) {
-      //Se è un operatore
+
       if (utente instanceof Operatore) {
         request.getSession().setAttribute("utente", utente);
         return "GUIGestioneUtente/dashboardOperatore";
-      }
-      //Se è un donatore
-      else if (utente instanceof Donatore) {
+      } else if (utente instanceof Donatore) {
         request.getSession().setAttribute("utente", utente);
         Tesserino tesserino = null;
         try {
@@ -161,8 +157,8 @@ public class UtenteController {
     return "redirect:/goLogin";
   }
 
-  .  /**
-   * Metodo che permette ad un utente di effettuare il logout
+  /**
+   * Metodo che permette ad un utente di effettuare il logout.
    *
    * @param request è la richiesta inviata dall'utente.
    * @return String che ridireziona ad una pagina.

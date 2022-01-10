@@ -52,7 +52,7 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
   /**
    * Permette di cancellare le informazioni di un utente nel database.
    *
-   * @param CodiceFiscaleUtente Stringa che rappresenta il codice fiscale di un utente.
+   * @param codiceFiscaleUtente Stringa che rappresenta il codice fiscale di un utente.
    * @pre codiceFiscale != null
    */
   void deleteByCodiceFiscaleUtente(String codiceFiscaleUtente);

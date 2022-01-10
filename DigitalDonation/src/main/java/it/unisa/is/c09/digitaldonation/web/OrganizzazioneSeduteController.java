@@ -30,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 /**
  * Controller per l'organizzazione delle sedute.
@@ -39,8 +39,6 @@ import java.util.logging.Logger;
  */
 @Controller
 public class OrganizzazioneSeduteController {
-
-  private static Logger logger = Logger.getLogger(String.valueOf(OrganizzazioneSeduteController.class));
 
   @Autowired
   OrganizzazioneSeduteService organizzazioneSeduteService;
@@ -64,8 +62,9 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/feedback", method = RequestMethod.GET)
-  public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model,
-                                 @RequestParam(name = "feedbackSeduta") String feedbackSeduta, @RequestParam(name = "idSeduta") Long idSeduta) {
+  public String feedbackDonatore(HttpServletRequest request, RedirectAttributes redirectAttribute,
+                  Model model, @RequestParam(name = "feedbackSeduta") String feedbackSeduta,
+                                 @RequestParam(name = "idSeduta") Long idSeduta) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (!(utente instanceof Donatore) || utente == null) {
       request.getSession().setAttribute("codiceErrore", 401);
@@ -92,7 +91,8 @@ public class OrganizzazioneSeduteController {
   }
 
   /**
-   * Metodo che permette all'operatore di poter visualizzare una seduta con l'elenco dei partecipanti.
+   * Metodo che permette all'operatore di poter visualizzare una seduta con
+   * l'elenco dei partecipanti.
    *
    * @param request           è la richiesta dalla sessione.
    * @param redirectAttribute è l'attributo di ridirezione.
@@ -100,13 +100,15 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/monitoraggioSeduta", method = RequestMethod.GET)
-  public String monitoraggioSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+  public String monitoraggioSeduta(HttpServletRequest request,
+                                   RedirectAttributes redirectAttribute, Model model) {
     Utente utente = (Utente) model.getAttribute("utente");
     Long idSeduta = (Long) model.getAttribute("idSeduta");
     request.getSession().setAttribute("idSeduta", idSeduta);
     if (utente instanceof Operatore) {
       try {
-        ArrayList<Object> listaPartecipanti = organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
+        ArrayList<Object> listaPartecipanti =
+                organizzazioneSeduteService.monitoraggioSeduta(idSeduta);
         model.addAttribute("listaPartecipanti", listaPartecipanti);
         List<Seduta> listaSedute = (List<Seduta>) model.getAttribute("listaSedutePrenotabili");
         for (int i = 0; i < listaSedute.size(); i++) {
@@ -163,7 +165,8 @@ public class OrganizzazioneSeduteController {
       return "redirect:/error";
     }
     try {
-      List<Seduta> lista = organizzazioneSeduteService.visualizzaElencoSeduteDisponibili(utente.getCodiceFiscale());
+      List<Seduta> lista = organizzazioneSeduteService
+              .visualizzaElencoSeduteDisponibili(utente.getCodiceFiscale());
       model.addAttribute("listaSedutePrenotabili", lista);
     } catch (CannotLoadDataRepositoryException e) {
       e.printStackTrace();
@@ -317,7 +320,8 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione alla pagina delle sedute disponibile.
    */
   @RequestMapping(value = "/goModificaSeduta", method = RequestMethod.GET)
-  public String goModificaSeduta(HttpServletRequest request, @RequestParam(name = "idSeduta") Long idSeduta, Model model) {
+  public String goModificaSeduta(HttpServletRequest request,
+                 @RequestParam(name = "idSeduta") Long idSeduta, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);
@@ -341,7 +345,8 @@ public class OrganizzazioneSeduteController {
    */
   @RequestMapping(value = "/goInserimentoUtenteGuest", method = RequestMethod.GET)
   public String inserimentoUtenteGuest(HttpServletRequest request, @ModelAttribute("guestForm")
-          GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+          GuestForm guestForm, BindingResult result, RedirectAttributes redirectAttribute,
+                                       Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);
@@ -364,8 +369,8 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/inserimentoGuest", method = RequestMethod.POST)
-  public String inserimentoGuest(HttpServletRequest request, @ModelAttribute GuestForm guestForm, BindingResult
-          result, RedirectAttributes redirectAttribute, Model model) {
+  public String inserimentoGuest(HttpServletRequest request, @ModelAttribute GuestForm guestForm,
+               BindingResult result, RedirectAttributes redirectAttribute, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);
@@ -391,7 +396,8 @@ public class OrganizzazioneSeduteController {
     guest.setGruppoSanguigno(guestForm.getGruppoSanguigno());
     try {
       organizzazioneSeduteService.inserimentoGuest(idSeduta, guest);
-      return "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo=" + "Utente guest inserito correttamente";
+      return "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo="
+              + "Utente guest inserito correttamente";
     } catch (CannotSaveDataRepositoryException e) {
       redirectAttribute.addFlashAttribute(e.getTarget(), e.getMessage());
       return "redirect:/goInserimentoUtenteGuest?idSeduta=" + idSeduta;
@@ -408,17 +414,18 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
-  public String schedulazioneSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm,
-                                    RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+  public String schedulazioneSeduta(HttpServletRequest request,
+                @ModelAttribute SedutaForm sedutaForm,
+                RedirectAttributes redirectAttribute, BindingResult result, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);
       return "redirect:/error";
     }
-    LocalTime oraInizio = LocalTime.of(8,0) ;
+    LocalTime oraInizio = LocalTime.of(8,0);
     sedutaForm.setOrarioInizio(oraInizio);
 
-    LocalTime oraFine = LocalTime.of(12,0) ;
+    LocalTime oraFine = LocalTime.of(12,0);
     sedutaForm.setOrarioFine(oraFine);
 
     try {
@@ -443,7 +450,8 @@ public class OrganizzazioneSeduteController {
       seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
       seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
       seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
-      String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCap(), sedutaForm.getProvincia());
+      String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(),
+              sedutaForm.getCap(), sedutaForm.getProvincia());
       seduta.setLuogo(luogo);
       organizzazioneSeduteService.schedulazioneSeduta(seduta);
     } catch (CannotSaveDataRepositoryException e) {
@@ -465,7 +473,7 @@ public class OrganizzazioneSeduteController {
    */
   @RequestMapping(value = "/modificaSeduta", method = RequestMethod.POST)
   public String modificaSeduta(HttpServletRequest request, @ModelAttribute SedutaForm sedutaForm,
-                               RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+                 RedirectAttributes redirectAttribute, BindingResult result, Model model) {
 
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
@@ -504,8 +512,8 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/goEliminaSeduta", method = RequestMethod.GET)
-  public String goEliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
-
+  public String goEliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute,
+                                Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);

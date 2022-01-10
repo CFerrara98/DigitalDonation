@@ -22,7 +22,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
    * Definisce il message source di sistema per la risoluzione dei messaggi.
    *
    * @return L'oggetto MessageSource che definisce classpath e codifica dei
-   * messaggi
+   *        messaggi
    */
   @Bean
   public MessageSource messageSource() {
@@ -39,7 +39,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
    * restituite nei controller in pagine JSP.
    *
    * @return L'oggetto ViewResolver che incapsula le informazioni su come
-   * risolvere le viste delegate dai controller
+   *        risolvere le viste delegate dai controller
    */
   @Bean
   public ViewResolver internalResourceViewResolver() {
