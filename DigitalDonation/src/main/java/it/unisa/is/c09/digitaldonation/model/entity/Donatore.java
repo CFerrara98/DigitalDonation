@@ -178,7 +178,7 @@ public class Donatore extends Utente implements Serializable {
   /**
    * Espressione regolare che definisce il formato del campo residenza.
    */
-  public static final String RESIDENZA_REGEX = "[A-Za-z0-9 _.,!\'\\/$\\n]{2,500}";
+  public static final String RESIDENZA_REGEX = "[A-Za-z _.,!'\\/$\\n]{2,50}[0-9]{2,500}";
 
   /**
    * Espressione regolare che definisce il formato del campo di data di nascita.
