@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @author Kevin Pacifico, Elpidio Mazza
  * Classe astratta che modella un utente generico registrato alla piattaforma.
+ * @author Kevin Pacifico, Elpidio Mazza
  */
 @Data
 @Entity

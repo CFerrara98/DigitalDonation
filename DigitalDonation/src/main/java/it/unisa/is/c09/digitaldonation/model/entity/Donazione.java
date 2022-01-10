@@ -1,15 +1,23 @@
 package it.unisa.is.c09.digitaldonation.model.entity;
 
-import lombok.Data;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import lombok.Data;
 
 /**
- * @author Kevin Pacifico, Elpidio Mazza
- * <p>
  * Classe che modella una donazione effettuata da un donatore.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
+ *
+ *
  */
 @Data
 @Entity
@@ -27,7 +35,8 @@ public class Donazione implements Serializable {
   private String tipoDonazione;
 
   @ManyToOne()
-  @JoinColumn(name = "cf_tessera", referencedColumnName = "codice_fiscale_donatore", nullable = true)
+  @JoinColumn(name = "cf_tessera",
+          referencedColumnName = "codice_fiscale_donatore", nullable = true)
   private Tesserino tesserino;
 
 
@@ -104,9 +113,9 @@ public class Donazione implements Serializable {
   }
 
   /**
-   * Espressioni regolare che definisce il formato del campo tipo donazione
+   * Espressioni regolare che definisce il formato del campo tipo donazione.
    */
-  public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)$";// OK es: plasma cito sangue
+  public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)$";
 
   public Tesserino getTesserino() {
     return tesserino;

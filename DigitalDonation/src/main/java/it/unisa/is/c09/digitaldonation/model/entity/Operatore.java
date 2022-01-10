@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @author Kevin Pacifico, Elpidio Mazza
- * <p>
  * Classe che modella un operatore.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
  */
 @Entity
 @Table(name = "operatore")

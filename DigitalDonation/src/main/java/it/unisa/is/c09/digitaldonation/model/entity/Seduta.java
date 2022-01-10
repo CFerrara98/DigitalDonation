@@ -8,9 +8,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Kevin Pacifico, Elpidio Mazza
- * <p>
  * Classe che modella una seduta di donazione.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
  */
 @Entity
 @Table(name = "seduta")
