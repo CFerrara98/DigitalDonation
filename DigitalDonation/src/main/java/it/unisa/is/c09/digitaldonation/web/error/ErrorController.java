@@ -10,7 +10,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+/**
+ * Classe controller che filtra gli errori.
+ *
+ * @author Elpidio Mazza
+ */
 @Controller
 public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
 

@@ -21,7 +21,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Guest + Seduta
+ * La classe fornisce i metodi per la logica di business dell'organizzazione delle sedute.
+ * @author Mattia Sapere, Fabio Siepe
  */
 @Service
 public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceInterface {

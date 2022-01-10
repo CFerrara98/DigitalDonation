@@ -3,14 +3,29 @@ package it.unisa.is.c09.digitaldonation.Utils.Forms;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
+/**
+ * Classe che rappresenta l'oggetto Form di autodichiarazione indisponibilità.
+ *
+ * @author Fabio Siepe, Mattia Sapere
+ */
 public class AutodichiarazioneIndisponibilitaForm {
 
+    /**
+     * Costruttore con parametri utili nei casi di test.
+     * @param dataProssimaDisponibilita e' la data della prossima disponibilità inserita nel form.
+     * @param motivazioni sone le motivazioni inserite nel form.
+     */
     public AutodichiarazioneIndisponibilitaForm(Date dataProssimaDisponibilita, String motivazioni){
         this.dataProssimaDisponibilita = dataProssimaDisponibilita;
         this.motivazioni = motivazioni;
     }
 
+    /**
+     * Costruttore che crea un oggetto vuoto,
+     * che verra' popolato con i metodi setters.
+     */
     public AutodichiarazioneIndisponibilitaForm(){}
+
     /**
      * Metodo che ritorna la data di disponbilità dell'autodichiarazione di indisponibilità.
      *

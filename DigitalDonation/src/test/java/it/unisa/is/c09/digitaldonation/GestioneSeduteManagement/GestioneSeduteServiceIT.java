@@ -1,5 +1,5 @@
 package it.unisa.is.c09.digitaldonation.GestioneSeduteManagement;
-
+/*
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;

@@ -6,9 +6,9 @@ import javax.persistence.*;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
- * Classe che modella un guest che partecipèa a una seduta.
+ *
+ * Classe che modella un guest che partecipa a una seduta.
  */
-
 @Data
 @Entity
 @Table(name = "guest")
@@ -16,7 +16,7 @@ public class Guest {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "codice_fiscale_guest", nullable = false)
+    @Column(name = "codice_fiscale_guest")
     private String codiceFiscaleGuest;
     @Column(name = "cognome")
     private String cognome;

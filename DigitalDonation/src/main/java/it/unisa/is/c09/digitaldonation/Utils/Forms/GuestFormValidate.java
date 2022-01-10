@@ -14,7 +14,6 @@ import org.springframework.validation.Validator;
  *
  * @author Mattia Sapere, Fabio Siepe
  */
-
 @Component
 public class GuestFormValidate implements Validator {
 

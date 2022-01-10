@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
+ *
  * Classe che modella un donatore.
  */
 // Rimosso @Data per problemi con il toString
@@ -28,11 +29,11 @@ public class Donatore extends Utente implements Serializable {
     private String residenza;
 
     @OneToOne()
-    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "codice_fiscale_donatore")
+    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "codice_fiscale_donatore", nullable = true)
     private Tesserino tesserino;
 
     @OneToMany()
-    @JoinColumn(name = "codice_fiscale_donatore")
+    @JoinColumn(name = "codice_fiscale_donatore",nullable = true)
     private List<Indisponibilita> listaIndisponibilita = new ArrayList<>();
 
     /**
@@ -162,8 +163,5 @@ public class Donatore extends Utente implements Serializable {
     public static final String DATANASCITA_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][12]{1}\\d{3}$";//OK es: gg/mm/aa
 
     /** Espressione regolare che definisce il formato del campo luogo di nascita. */
-    public static final String LUOGONASCITA_REGEX = "^[a-zA-Zàòùèéìçê' -]{2,35}+$";//OK es: Salerno
-
-
-
+    public static final String LUOGONASCITA_REGEX = "^[a-zA-Zàòùèéìçê' -]{2,35}+$";
 }

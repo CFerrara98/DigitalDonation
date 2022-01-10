@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
+ *
  * Classe che modella un operatore.
  */
 @Entity
@@ -16,7 +17,7 @@ public class Operatore extends Utente implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ManyToOne()
-    @JoinColumn(name = "sede_locale_codice_identificativo", referencedColumnName = "id_sede")
+    @JoinColumn(name = "sede_locale_codice_identificativo", referencedColumnName = "id_sede", nullable = true)
     private SedeLocale sedeLocale;
 
     /**

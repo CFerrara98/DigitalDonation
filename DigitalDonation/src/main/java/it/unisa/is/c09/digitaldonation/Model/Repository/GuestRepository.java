@@ -40,7 +40,4 @@ public interface GuestRepository extends JpaRepository<Guest, String> {
      * @pre codiceFiscale != null
      */
     Guest findByCodiceFiscaleGuest(String CodiceFiscaleGuest);
-
-    /*@Query("select (count(g) > 0) from Guest g where g.codiceFiscaleGuest = ?1")
-    boolean existGuest(String codiceFiscaleGuest);*/
 }

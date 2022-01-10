@@ -29,6 +29,11 @@ import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 
+/**
+ * Controller per la gestione dell'utenza.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
+ */
 @Controller
 public class UtenteController {
     @Autowired
@@ -218,8 +223,6 @@ public class UtenteController {
      */
     @RequestMapping(value ="/goAboutUs", method = RequestMethod.GET)
     public String aboutUs (HttpServletRequest request, Model model) {
-
         return "GUIGestioneUtente/aboutUs";
     }
-
 }

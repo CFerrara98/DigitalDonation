@@ -12,10 +12,9 @@ import java.util.List;
 /**
  *
  * @author Kevin Pacifico, Elpidio Mazza
+ *
  * Classe che modella una seduta di donazione.
  */
-
-// romosso @Data per problemi con il toString
 @Entity
 @Table(name = "seduta")
 public class Seduta implements Serializable {
@@ -23,7 +22,7 @@ public class Seduta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_seduta", nullable = false)
+    @Column(name = "id_seduta")
     private Long idSeduta;
     @Column(name = "data_fine_prenotazione")
     private Date dataFinePrenotazione;
@@ -33,7 +32,7 @@ public class Seduta implements Serializable {
     private Date dataSeduta;
     @Column(name = "luogo")
     private String luogo;
-    @Column(name = "numero_partecipanti", nullable = false)
+    @Column(name = "numero_partecipanti", nullable = true)
     private Integer numeroPartecipanti;
     @Column(name = "ora_fine")
     private Time oraFine;
@@ -315,7 +314,9 @@ public class Seduta implements Serializable {
         this.listaDonatore = listaDonatore;
     }
 
-
+    /**
+     * Regex dei campi della seduta.
+     */
     public static final String DATA_SEDUTA_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][2]{1}\\d{3}$";
     public static final String INDIRIZZO_REGEX = "[A-Za-z]+(['\\/.-]{0,1}[ ]{0,1}[A-Za-zà-ù]+)*[a-zà-ù]+([ ]{1}([ ]{0,1}[XIV]{1})+){0,1}([,]{0,1}[ ]{1}[0-9]{0,5}([\\/]([A-Za-z]|[0-9]{0,5})){0,1}){0,1}";
     public static final String CITTA_REGEX = "^[a-zA-Zàòùèéìçê' -]{2,35}+$";
@@ -324,6 +325,4 @@ public class Seduta implements Serializable {
     public static final String DATA_INIZIO_PARTECIPAZIONE_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][2]{1}\\d{3}$";
     public static final String DATA_FINE_PARTECIPAZIONE_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][2]{1}\\d{3}$";
     public static final String NUMERO_PARTECIPANTI_REGEX = "^(?:[0-9][0-9]{3}|[0-9][0-9]{2}|[1-9][1-9]|[0-9])$";
-
-
 }

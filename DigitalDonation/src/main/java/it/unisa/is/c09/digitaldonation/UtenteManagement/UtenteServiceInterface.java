@@ -6,10 +6,12 @@ import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Interfaccia che fornisce i metodi per la logica di business della gestione dell'utenza
+ * @author Fabio Siepe, Mattia Sapere
+ */
 public interface UtenteServiceInterface {
 
-    public Utente login(String email, String password) throws UserNotLoggedException, NoSuchAlgorithmException;
-
-    public void logout(Utente utente) throws AccessNotAuthorizedException;;
-
+    Utente login(String email, String password) throws UserNotLoggedException, NoSuchAlgorithmException;
+    void logout(Utente utente) throws AccessNotAuthorizedException;
 }

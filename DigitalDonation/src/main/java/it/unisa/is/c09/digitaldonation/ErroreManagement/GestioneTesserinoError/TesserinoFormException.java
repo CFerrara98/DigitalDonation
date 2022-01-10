@@ -1,5 +1,10 @@
 package it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneTesserinoError;
 
+/**
+ * Eccezione generata in caso di campi sbagliati nel form del tesserino.
+ *
+ * @author Mattia Sapere, Fabio Siepe
+ */
 public class TesserinoFormException extends Exception{
 
     private static final long serialVersionUID = 2441773366582183446L;

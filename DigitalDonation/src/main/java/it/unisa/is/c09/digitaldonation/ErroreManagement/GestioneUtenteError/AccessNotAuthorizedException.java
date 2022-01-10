@@ -1,7 +1,7 @@
 package it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError;
 
 /**
- * Eccezione generata in caso di parametri non validi durante il logout
+ * Eccezione generata in caso di accesso non autorizzato.
  *
  * @author Mattia Sapere, Fabio Siepe
  */
