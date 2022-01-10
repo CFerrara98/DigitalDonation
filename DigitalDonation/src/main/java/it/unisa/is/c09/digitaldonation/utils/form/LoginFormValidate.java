@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.utils.forms;
+package it.unisa.is.c09.digitaldonation.utils.form;
 
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.MailNonEsistenteException;
@@ -19,24 +19,24 @@ import org.springframework.validation.Validator;
 @Component
 public class LoginFormValidate implements Validator {
 
-    @Autowired
-    private UtenteService utenteService;
+  @Autowired
+  private UtenteService utenteService;
 
-    @Override
-    public boolean supports(Class<?> aClass) {
-        return false;
-    }
+  @Override
+  public boolean supports(Class<?> aClass) {
+    return false;
+  }
 
-    /**
-     * Effettua la validazione dell'oggetto target riportando gli errori
-     * nell'oggetto errors.
-     *
-     * @param target Oggetto da validare
-     * @param errors Oggetto in cui salvare l'esito della validazione
-     */
-    @Override
-    public void validate(Object target, Errors errors) {
-        LoginForm loginForm = (LoginForm) target;
+  /**
+   * Effettua la validazione dell'oggetto target riportando gli errori
+   * nell'oggetto errors.
+   *
+   * @param target Oggetto da validare
+   * @param errors Oggetto in cui salvare l'esito della validazione
+   */
+  @Override
+  public void validate(Object target, Errors errors) {
+    LoginForm loginForm = (LoginForm) target;
 
         /*        organizzazioneSeduteService = new OrganizzazioneSeduteService();
         //Validazione del campo dataSeduta
@@ -50,18 +50,18 @@ public class LoginFormValidate implements Validator {
             return;
         }*/
 
-        //Validazione del campo email
-        //TODO DA VALIDARE LA PASSWORD!
-        try {
-            utenteService.validaMail(loginForm.getEmail());
-        } catch (MailNonValidaException e1) {
-            errors.reject("errore", e1.getMessage());
-            loginForm.setEmail("");
-            return;
-        } catch (MailNonEsistenteException e2) {
-            errors.reject("errore", e2.getMessage());
-            loginForm.setEmail("");
-            return;
-        }
+    //Validazione del campo email
+    //TODO DA VALIDARE LA PASSWORD!
+    try {
+      utenteService.validaMail(loginForm.getEmail());
+    } catch (MailNonValidaException e1) {
+      errors.reject("errore", e1.getMessage());
+      loginForm.setEmail("");
+      return;
+    } catch (MailNonEsistenteException e2) {
+      errors.reject("errore", e2.getMessage());
+      loginForm.setEmail("");
+      return;
     }
+  }
 }

@@ -60,7 +60,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Benvenuto in Digital Donation!</h1>
                                 </div>
 
-                                <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.utils.forms.LoginForm"--%>
+                                <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.utils.form.LoginForm"--%>
                                 <form:form action="./login" method="post" modelAttribute="loginForm" cssClass="user"
                                            enctype="application/x-www-form-urlencoded">
                                 <div class="form-group">

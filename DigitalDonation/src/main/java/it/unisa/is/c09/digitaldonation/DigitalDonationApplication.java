@@ -16,19 +16,19 @@ import org.springframework.core.io.ClassPathResource;
 @ServletComponentScan
 public class DigitalDonationApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(DigitalDonationApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(DigitalDonationApplication.class, args);
+  }
 
-    @Bean
-    @Primary
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
-        YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
-        yaml.setResources(new ClassPathResource("application.yml"));
-        propertySourcesPlaceholderConfigurer.setProperties(yaml.getObject());
-        return propertySourcesPlaceholderConfigurer;
-    }
+  @Bean
+  @Primary
+  public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+    YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
+    yaml.setResources(new ClassPathResource("application.yml"));
+    propertySourcesPlaceholderConfigurer.setProperties(yaml.getObject());
+    return propertySourcesPlaceholderConfigurer;
+  }
 
 
 }

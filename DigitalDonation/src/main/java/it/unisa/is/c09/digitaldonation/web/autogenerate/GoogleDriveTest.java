@@ -17,30 +17,29 @@ import java.util.logging.Logger;
 @Controller
 public class GoogleDriveTest {
 
-    @Autowired
-    GoogleDriveService googleDriveService;
+  @Autowired
+  GoogleDriveService googleDriveService;
 
-    private Logger logger = Logger.getLogger("GoogleDriveAPI");
+  private Logger logger = Logger.getLogger("GoogleDriveAPI");
 
-    @RequestMapping(value = "/testUpload", method = RequestMethod.GET)
-    public String upladFile(HttpServletRequest request, Model model) {
-        logger.info("Looking for file");
+  @RequestMapping(value = "/testUpload", method = RequestMethod.GET)
+  public String upladFile(HttpServletRequest request, Model model) {
+    logger.info("Looking for file");
 
-        File file = new File("C:\\Users\\elpid\\Documents\\GitHub\\DigitalDonation\\DigitalDonation\\src\\main\\resources\\bucky.png");
-        //File file = new File("/src/main/resources/bucky.png");
-        //File file = new File("demo.txt");
-        logger.info("Try to upload.....");
-        com.google.api.services.drive.model.File file2  = googleDriveService.upLoadFile(file.getName(), file.getAbsolutePath(),"image/jpg");
-        logger.info("File uploaded");
-        logger.info(file2.getWebViewLink());
-        try {
-            System.err.println(file2.toPrettyString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    File file = new File("C:\\Users\\elpid\\Documents\\GitHub\\DigitalDonation\\DigitalDonation\\src\\main\\resources\\bucky.png");
+    //File file = new File("/src/main/resources/bucky.png");
+    //File file = new File("demo.txt");
+    logger.info("Try to upload.....");
+    com.google.api.services.drive.model.File file2 = googleDriveService.upLoadFile(file.getName(), file.getAbsolutePath(), "image/jpg");
+    logger.info("File uploaded");
+    logger.info(file2.getWebViewLink());
+    try {
+      System.err.println(file2.toPrettyString());
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-
+    return null;
+  }
 
 
 }

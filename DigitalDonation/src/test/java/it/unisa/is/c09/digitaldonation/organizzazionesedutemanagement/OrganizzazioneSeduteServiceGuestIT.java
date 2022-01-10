@@ -1,6 +1,7 @@
 package it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement;
 
 
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotRelaseFeedbackException;
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
 import it.unisa.is.c09.digitaldonation.model.entity.Guest;
 import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
@@ -88,6 +89,10 @@ public class OrganizzazioneSeduteServiceGuestIT {
 
     private Seduta seduta;
 
+    private Donatore donatore;
+
+
+
     /**
      * Salva la lista di donazioni su database prima dell'esecuzione di ogni singolo
      * test.
@@ -95,23 +100,17 @@ public class OrganizzazioneSeduteServiceGuestIT {
     @Before
     public void setUp() {
 
-        operatoreRepository.deleteAll();
-
-        sedeLocaleRepository.deleteAll();
-
-        guestRepository.deleteAll();
-
-        indisponibilitaRepository.deleteAll();
-
-        donazioneRepository.deleteAll();
-
-        tesserinoRepository.deleteAll();
-
-        donatoreRepository.deleteAll();
-
-        utenteRepository.deleteAll();
-
-        sedutaRepository.deleteAll();
+        donatore = new Donatore();
+        donatore.setCodiceFiscale("FJNYQC47M70C283I");
+        donatore.setNome("Mattia");
+        donatore.setCognome("Sapere");
+        donatore.setEmail("mattiasapere81@gmail.com");
+        donatore.setPassword("Mattia.123");
+        donatore.setResidenza("Via Garibaldi, 44");
+        donatore.setDataDiNascita(null);
+        donatore.setLuogoDiNascita("Salerno");
+        donatore.setTesserino(null);
+        donatore.setListaIndisponibilita(null);
 
         codiceFiscaleGuest = "MVYZZV65L56I556J";
         nome = "Angela";
@@ -121,7 +120,6 @@ public class OrganizzazioneSeduteServiceGuestIT {
         gruppoSanguigno = "AB+";
 
         guest = new Guest(codiceFiscaleGuest, nome, cognome, telefono, patologie, gruppoSanguigno);
-
 
         long idSeduta = 420l;
         Calendar myCalendar = new GregorianCalendar(202, 4, 22);
@@ -139,25 +137,62 @@ public class OrganizzazioneSeduteServiceGuestIT {
         dataFinePrenotazione = myCalendar2.getTime();
         List<Guest> listaGuest = new ArrayList<Guest>();
         List<Donatore> listaDonatore = new ArrayList<Donatore>();
-        Seduta seduta1 = new Seduta(idSeduta, dataSeduta, indirizzo, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataInizioPrenotazione, 25l, listaGuest, listaDonatore);
+        seduta = new Seduta(idSeduta, dataSeduta, indirizzo, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataInizioPrenotazione, 25l, listaGuest, listaDonatore);
 
+    }
+
+    /**
+     * Testa il corretto funzionamento del metodo feedbackDonatore
+     *
+     * @test {@link OrganizzazioneSeduteService#feedbackDonatore(Donatore, Long)}
+     * @result Il test è superato se l'inserimento di utenti guest viene correttamente effettuato.
+     */
+    @Test
+    public void feedbackDonatore() {
+        donatoreRepository.save(donatore);
+        sedutaRepository.save(seduta);
+        Donatore donatoreRitorno = null;
+        try {
+            organizzazioneSeduteService.feedbackDonatore(donatore, seduta.getIdSeduta());
+        } catch (CannotRelaseFeedbackException e) {
+            e.printStackTrace();
+        }
+        assertEquals(donatoreRitorno, donatore);
+
+        sedutaRepository.deleteAll();
+        guestRepository.deleteAll();
     }
 
     /**
      * Testa il corretto funzionamento del metodo inserimentoGuest
      *
      * @test {@link OrganizzazioneSeduteService#salvaGuest(Guest)}
-     * @result Il test è superato se le aziende convenzionate vengono correttamente
-     * visualizzate.
+     * @result Il test è superato se l'inserimento di utenti guest viene correttamente effettuato.
      */
-
     @Test
     public void inserimentoGuest() {
         sedutaRepository.save(seduta);
         Guest guestRitorno = organizzazioneSeduteService.salvaGuest(guest);
 
         assertEquals(guestRitorno, guest);
+
+        sedutaRepository.deleteAll();
+        guestRepository.deleteAll();
     }
 
+    /**
+     * Testa il corretto funzionamento del metodo modificaSeduta
+     *
+     * @result Il test è superato se la modifica di una seduta viene correttamente effettuata.
+     */
+    @Test
+    public void modificaSeduta() {
+        sedutaRepository.save(seduta);
+        Seduta sedutaRitorno = organizzazioneSeduteService.salvaSeduta(seduta);
+
+        assertEquals(sedutaRitorno, seduta);
+
+        sedutaRepository.deleteAll();
+    }
 
 }

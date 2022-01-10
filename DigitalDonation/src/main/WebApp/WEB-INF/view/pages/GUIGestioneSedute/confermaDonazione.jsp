@@ -44,7 +44,7 @@
                                 <div class="container">
 
 
-                                        <%--@elvariable id="confermaDonazioneForm" type="it.unisa.is.c09.digitaldonation.utils.forms.ConfermaDonazioneForm"  --%>
+                                        <%--@elvariable id="confermaDonazioneForm" type="it.unisa.is.c09.digitaldonation.utils.form.ConfermaDonazioneForm"  --%>
                                     <form:form action="./salvataggioDonazione" method="post" modelAttribute="confermaDonazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
 
                                         <div class="form-group row">

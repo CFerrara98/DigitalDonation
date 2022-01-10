@@ -2,6 +2,9 @@ package it.unisa.is.c09.digitaldonation.utils.forms;
 
 import it.unisa.is.c09.digitaldonation.model.repository.UtenteRepository;
 import it.unisa.is.c09.digitaldonation.utentemanagement.UtenteService;
+import it.unisa.is.c09.digitaldonation.utils.form.LoginForm;
+import it.unisa.is.c09.digitaldonation.utils.form.LoginFormValidate;
+import it.unisa.is.c09.digitaldonation.utils.form.SedutaFormValidate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
