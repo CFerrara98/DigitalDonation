@@ -6,11 +6,7 @@ import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerro
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotUpdateDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotDeleteDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.gestionetesserinomanagement.GestioneTesserinoService;
-import it.unisa.is.c09.digitaldonation.model.entity.Utente;
-import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
-import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
-import it.unisa.is.c09.digitaldonation.model.entity.Operatore;
-import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.model.entity.*;
 
 
 import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
