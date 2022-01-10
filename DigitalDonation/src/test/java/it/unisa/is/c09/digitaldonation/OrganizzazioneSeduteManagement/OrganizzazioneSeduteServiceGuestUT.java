@@ -335,7 +335,7 @@ public class OrganizzazioneSeduteServiceGuestUT {
         patologie = "Nessuna";
         gruppoSanguigno = "AB+";
 
-        //when(guestRepository.exists(codiceFiscaleGuest)).thenReturn(false);
+
 
         guest = new Guest(codiceFiscaleGuest, nome, cognome, telefono, patologie, gruppoSanguigno);
 

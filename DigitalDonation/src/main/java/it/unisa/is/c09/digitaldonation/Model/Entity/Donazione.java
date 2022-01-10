@@ -19,15 +19,15 @@ public class Donazione implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_donazione", nullable = false)
+    @Column(name = "id_donazione")
     private Long idDonazione;
     @Column(name = "data_donazione")
     private Date dataDonazione;
     @Column(name = "tipo_donazione")
     private String tipoDonazione;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cf_tessera", referencedColumnName = "codice_fiscale_donatore")
+    @ManyToOne()
+    @JoinColumn(name = "cf_tessera", referencedColumnName = "codice_fiscale_donatore", nullable = true)
     private Tesserino tesserino;
 
 

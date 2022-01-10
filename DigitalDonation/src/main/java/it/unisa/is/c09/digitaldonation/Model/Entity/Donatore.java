@@ -28,12 +28,12 @@ public class Donatore extends Utente implements Serializable {
     @Column(name = "residenza")
     private String residenza;
 
-    @OneToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
-    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "codice_fiscale_donatore")
+    @OneToOne()
+    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "codice_fiscale_donatore", nullable = true)
     private Tesserino tesserino;
 
-    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
-    @JoinColumn(name = "codice_fiscale_donatore")
+    @OneToMany()
+    @JoinColumn(name = "codice_fiscale_donatore",nullable = true)
     private List<Indisponibilita> listaIndisponibilita = new ArrayList<>();
 
     /**

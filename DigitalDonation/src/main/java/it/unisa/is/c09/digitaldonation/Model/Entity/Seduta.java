@@ -22,7 +22,7 @@ public class Seduta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_seduta", nullable = false)
+    @Column(name = "id_seduta")
     private Long idSeduta;
     @Column(name = "data_fine_prenotazione")
     private Date dataFinePrenotazione;
@@ -32,7 +32,7 @@ public class Seduta implements Serializable {
     private Date dataSeduta;
     @Column(name = "luogo")
     private String luogo;
-    @Column(name = "numero_partecipanti", nullable = false)
+    @Column(name = "numero_partecipanti", nullable = true)
     private Integer numeroPartecipanti;
     @Column(name = "ora_fine")
     private Time oraFine;
@@ -41,13 +41,13 @@ public class Seduta implements Serializable {
     @Column(name = "id_sedeLocale")
     private Long sedeLocaleCodiceIdentificativo;
 
-    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany()
     @JoinTable(name = "seduta_guest",
             joinColumns = @JoinColumn(name = "id_seduta"),
             inverseJoinColumns = @JoinColumn(name = "codice_fiscale_guest"))
     private List<Guest> listaGuest = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany()
     @JoinTable(name = "seduta_donatore",
             joinColumns = @JoinColumn(name = "id_seduta"),
             inverseJoinColumns = @JoinColumn(name = "codice_fiscale_donatore"))

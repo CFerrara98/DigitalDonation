@@ -19,7 +19,7 @@ public class Tesserino implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "codice_fiscale_donatore", nullable = false)
+    @Column(name = "codice_fiscale_donatore")
     private String donatoreUtenteCodiceFiscale;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +35,7 @@ public class Tesserino implements Serializable {
     @Column(name = "rh")
     private String rh;
 
-    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+    @OneToMany()
     @JoinColumn(name = "cf_tessera" , referencedColumnName = "codice_fiscale_donatore")
     private List<Donazione> listaDonazioni = new ArrayList<>();
 

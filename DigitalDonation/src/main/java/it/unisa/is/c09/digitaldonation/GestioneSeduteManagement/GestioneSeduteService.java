@@ -62,7 +62,6 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface{
         else if(sedutaRepository.existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(seduta.getIdSeduta(), donatore.getCodiceFiscale())){
             donazione = new Donazione(seduta.getDataSeduta(), tipoDonazione);
 
-
             tesserino = tesserinoRepository.findByDonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale());
             donazione.setTesserino(tesserino);
             donazioneRepository.save(donazione);
