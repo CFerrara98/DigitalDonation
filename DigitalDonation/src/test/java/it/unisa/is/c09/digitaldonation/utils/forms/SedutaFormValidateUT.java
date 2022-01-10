@@ -173,7 +173,7 @@ public class SedutaFormValidateUT {
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
         sedutaFormValidate.validate(sedutaForm, errors);
 
-        assertEquals("CAP non valido.", "", sedutaForm.getCAP());
+        assertEquals("CAP non valido.", "", sedutaForm.getCap());
     }
 
     /**

@@ -17,7 +17,8 @@ public class GuestForm {
    * @param patologie       sono le patologie inserite nel form.
    * @param gruppoSanguigno è il gruppo sanguigno inserito nel form.
    */
-  public GuestForm(String codiceFiscale, String nome, String cognome, String telefono, String patologie, String gruppoSanguigno) {
+  public GuestForm(String codiceFiscale, String nome, String cognome,
+         String telefono, String patologie, String gruppoSanguigno) {
     this.codiceFiscale = codiceFiscale;
     this.nome = nome;
     this.cognome = cognome;
@@ -33,14 +34,14 @@ public class GuestForm {
    */
   @Override
   public String toString() {
-    return "GuestForm{" +
-            "codiceFiscale='" + codiceFiscale + '\'' +
-            ", nome='" + nome + '\'' +
-            ", cognome='" + cognome + '\'' +
-            ", telefono='" + telefono + '\'' +
-            ", patologie='" + patologie + '\'' +
-            ", gruppoSanguigno='" + gruppoSanguigno + '\'' +
-            '}';
+    return "GuestForm{"
+            + "codiceFiscale='" + codiceFiscale + '\''
+            + ", nome='" + nome + '\''
+            + ", cognome='" + cognome + '\''
+            + ", telefono='" + telefono + '\''
+            + ", patologie='" + patologie + '\''
+            + ", gruppoSanguigno='" + gruppoSanguigno + '\''
+            + '}';
   }
 
   /**

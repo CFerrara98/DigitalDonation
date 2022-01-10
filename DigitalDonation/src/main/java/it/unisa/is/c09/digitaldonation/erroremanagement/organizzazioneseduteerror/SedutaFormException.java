@@ -1,7 +1,8 @@
 package it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror;
 
 /**
- * Eccezione generata in caso di parametri non validi durante il compilamento del form di schedulazione di una nuova seduta
+ * Eccezione generata in caso di parametri non validi durante
+ * il compilamento del form di schedulazione di una nuova seduta.
  *
  * @author Mattia Sapere, Fabio Siepe
  */
@@ -9,14 +10,15 @@ public class SedutaFormException extends Exception {
   private static final long serialVersionUID = 2441773366582183446L;
 
   /**
-   * Parametro indicante il tipo di errore avvenuto
+   * Parametro indicante il tipo di errore avvenuto.
    */
   private String target;
 
   /**
    * Stringa che definisce il messaggio di default utilizzato nell'eccezione.
    */
-  private static final String MESSAGGIO_DEFAULT = "Errore nel from di schedulazione di una nuova seduta";
+  private static final String MESSAGGIO_DEFAULT =
+          "Errore nel from di schedulazione di una nuova seduta";
 
   /**
    * Genera un'eccezione che riporta come messaggio il messaggio di default:
@@ -28,7 +30,7 @@ public class SedutaFormException extends Exception {
 
   /**
    * Genera un'eccezione che riporta come messaggio un messaggio passato come
-   * parametro
+   * parametro.
    *
    * @param messaggio Stringa che rappresenta il messaggio da mostrare
    *                  nell'output dell'eccezione
@@ -39,7 +41,7 @@ public class SedutaFormException extends Exception {
 
   /**
    * Genera un'eccezione  etichettata con parametro di discriminazione
-   * che riporta come messaggio, un messaggio passato come parametro
+   * che riporta come messaggio, un messaggio passato come parametro.
    *
    * @param target    Stringa che rappresenta il tipo di errore generato
    * @param messaggio Stringa che rappresenta il messaggio da mostrare nell'output dell'eccezione

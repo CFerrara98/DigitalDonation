@@ -90,8 +90,8 @@ public class GestioneSeduteController {
    */
   @RequestMapping(value = "/indisponibilitaByOperatore", method = RequestMethod.POST)
   public String indisponibilitaByOperatorePost(HttpServletRequest request,
-                         @ModelAttribute IndisponibilitaDonazioneForm indisponibilitaDonazioneForm,
-                         RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+                 @ModelAttribute IndisponibilitaDonazioneForm indisponibilitaDonazioneForm,
+                 RedirectAttributes redirectAttribute, BindingResult result, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);
@@ -126,7 +126,8 @@ public class GestioneSeduteController {
       return "redirect:/error";
     }
     model.addAttribute("success", "Indisponibilita' aggiunta con successo!");
-    return "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo=Indisponibilita' aggiunta con successo!";
+    return "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta
+            + "&successo=Indisponibilita' aggiunta con successo!";
   }
 
   /**
@@ -139,9 +140,9 @@ public class GestioneSeduteController {
    */
 
   @RequestMapping(value = "/goSalvataggioDonazione", method = RequestMethod.GET)
-  public String confermaDonazioneGet (HttpServletRequest request,
-                                     @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
-                                     RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+  public String confermaDonazioneGet(HttpServletRequest request,
+             @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
+             RedirectAttributes redirectAttribute, BindingResult result, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);
@@ -150,16 +151,13 @@ public class GestioneSeduteController {
 
     String codiceFiscale = request.getParameter("codiceFiscale");
     try {
-      if (utente == null) new IllegalArgumentException();
-
+      if (utente == null) {
+        new IllegalArgumentException();
+      }
     } catch (Exception e) {
       request.getSession().setAttribute("codiceErrore", 401);
       return "redirect:/error";
     }
-        /*if(confermaDonazioneForm == null) confermaDonazioneForm= new ConfermaDonazioneForm();
-        model.addAttribute("confermaDonazioneForm",confermaDonazioneForm);
-        request.getSession().setAttribute("confermaDonazioneForm" , confermaDonazioneForm);*/
-
     model.addAttribute("codiceFiscale", codiceFiscale);
     request.getSession().setAttribute("codiceFiscale", codiceFiscale);
 
@@ -177,8 +175,10 @@ public class GestioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/salvataggioDonazione", method = RequestMethod.POST)
-  public String indisponibilitaByOperatorePost(HttpServletRequest request, @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
-                                               RedirectAttributes redirectAttribute, BindingResult result, Model model, @RequestParam(name = "tipoDonazione") String tipoDonazione) {
+  public String indisponibilitaByOperatorePost(HttpServletRequest request,
+                 @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
+                 RedirectAttributes redirectAttribute, BindingResult result, Model model,
+                 @RequestParam(name = "tipoDonazione") String tipoDonazione) {
 
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
@@ -189,12 +189,6 @@ public class GestioneSeduteController {
     String codiceFiscale = (String) request.getSession().getAttribute("codiceFiscale");
     Long idSeduta = (Long) request.getSession().getAttribute("idSeduta");
 
-    try {
-      if (codiceFiscale.matches(Utente.CF_REGEX)) ;
-    } catch (Exception e) {
-      request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
-      return "redirect:/error";
-    }
     confermaDonazioneForm.setTipoDonazione(tipoDonazione);
     confermaDonazioneFormValidate.validate(confermaDonazioneForm, result);
     if (result.hasErrors()) {
@@ -213,6 +207,7 @@ public class GestioneSeduteController {
       request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
       return "redirect:/error";
     }
-    return "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo=" + "Donazione avvenuta con successo!";
+    return "redirect:/goElencoPartecipanti?idSeduta=" + idSeduta + "&successo="
+            + "Donazione avvenuta con successo!";
   }
 }

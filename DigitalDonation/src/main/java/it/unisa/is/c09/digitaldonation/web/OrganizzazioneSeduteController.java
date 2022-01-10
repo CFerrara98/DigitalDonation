@@ -443,7 +443,7 @@ public class OrganizzazioneSeduteController {
       seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
       seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
       seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
-      String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
+      String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCap(), sedutaForm.getProvincia());
       seduta.setLuogo(luogo);
       organizzazioneSeduteService.schedulazioneSeduta(seduta);
     } catch (CannotSaveDataRepositoryException e) {

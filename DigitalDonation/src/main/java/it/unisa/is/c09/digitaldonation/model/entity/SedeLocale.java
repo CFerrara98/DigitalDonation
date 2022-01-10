@@ -1,9 +1,11 @@
 package it.unisa.is.c09.digitaldonation.model.entity;
 
-import lombok.Data;
-
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.Data;
 
 /**
  * Classe che modella una sede locale della piattaforma.
