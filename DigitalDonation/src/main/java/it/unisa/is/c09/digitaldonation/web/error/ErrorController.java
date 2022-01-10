@@ -19,7 +19,7 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
   /**
    * Mappa i vari errori http response.
    *
-   * @return
+   * @return String ridirezione alla pagina.
    */
   @RequestMapping(value = "/error")
   public String renderErrorPage(HttpServletRequest httpRequest, Model model) {
@@ -31,6 +31,10 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
       int httpErrorCode = (int) httpRequest.getSession().getAttribute("codiceErrore");
       if (httpErrorCode != -1) {
         switch (httpErrorCode) {
+          default: {
+            errorMsg = "Http Error Code: 500. Internal Server Error";
+            break;
+          }
           case 400: {
             errorMsg = "Http Error Code: 400. Bad Request";
             break;

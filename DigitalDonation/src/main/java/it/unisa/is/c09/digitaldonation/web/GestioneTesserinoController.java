@@ -4,10 +4,30 @@ import com.google.api.services.drive.model.File;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.gestionetesserinomanagement.GestioneTesserinoService;
 import it.unisa.is.c09.digitaldonation.googledriveapi.GoogleDriveService;
-import it.unisa.is.c09.digitaldonation.model.entity.*;
+import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
+import it.unisa.is.c09.digitaldonation.model.entity.Indisponibilita;
+import it.unisa.is.c09.digitaldonation.model.entity.Operatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.model.entity.Utente;
 import it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.utentemanagement.UtenteService;
-import it.unisa.is.c09.digitaldonation.utils.form.*;
+import it.unisa.is.c09.digitaldonation.utils.form.AutodichiarazioneIndisponibilitaForm;
+import it.unisa.is.c09.digitaldonation.utils.form.AutodichiarazioneIndisponibilitaFormValidate;
+import it.unisa.is.c09.digitaldonation.utils.form.GuestFormValidate;
+import it.unisa.is.c09.digitaldonation.utils.form.SedutaFormValidate;
+import it.unisa.is.c09.digitaldonation.utils.form.TesserinoForm;
+import it.unisa.is.c09.digitaldonation.utils.form.TesserinoFormValidate;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +38,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServletRequest;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Controller per la gestione del tesserino.
@@ -37,7 +50,8 @@ import java.util.logging.Logger;
 )
 public class GestioneTesserinoController {
 
-  private static Logger logger = Logger.getLogger(String.valueOf(OrganizzazioneSeduteController.class));
+  private static Logger logger = Logger
+          .getLogger(String.valueOf(OrganizzazioneSeduteController.class));
 
   @Autowired
   GestioneTesserinoService gestioneTesserinoService;
@@ -67,8 +81,9 @@ public class GestioneTesserinoController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/autodichiarazioneIndisponibilita", method = RequestMethod.POST)
-  public String autodichiarazioneDiIndisponibilita(HttpServletRequest request, @ModelAttribute AutodichiarazioneIndisponibilitaForm autodichiarazioneForm,
-                                                   BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+  public String autodichiarazioneDiIndisponibilita(HttpServletRequest request,
+                  @ModelAttribute AutodichiarazioneIndisponibilitaForm autodichiarazioneForm,
+                  BindingResult result, RedirectAttributes redirectAttribute, Model model) {
 
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Operatore) {
@@ -87,7 +102,8 @@ public class GestioneTesserinoController {
 
     Indisponibilita indisponibilita = new Indisponibilita();
     indisponibilita.setCodiceFiscaleDonatore(utente.getCodiceFiscale());
-    indisponibilita.setDataProssimaDisponibilita(autodichiarazioneForm.getDataProssimaDisponibilita());
+    indisponibilita.setDataProssimaDisponibilita(autodichiarazioneForm
+            .getDataProssimaDisponibilita());
     indisponibilita.setMotivazioni(autodichiarazioneForm.getMotivazioni());
 
     try {
@@ -104,7 +120,8 @@ public class GestioneTesserinoController {
   }
 
   /**
-   * Metodo che permette al donatore di andare alla pagina dell'autodichiarazione di indisponibilità.
+   * Metodo che permette al donatore di andare alla
+   * pagina dell'autodichiarazione di indisponibilità.
    *
    * @param request è la richiesta dalla sessione.
    * @param model   è l'oggetto Model.
@@ -119,7 +136,8 @@ public class GestioneTesserinoController {
       return "redirect:/error";
     }
 
-    AutodichiarazioneIndisponibilitaForm autodichiarazioneIndisponibilitaForm = new AutodichiarazioneIndisponibilitaForm();
+    AutodichiarazioneIndisponibilitaForm autodichiarazioneIndisponibilitaForm
+            = new AutodichiarazioneIndisponibilitaForm();
     model.addAttribute("autodichiarazioneForm", autodichiarazioneIndisponibilitaForm);
     return "GUIGestioneTesserinoDigitale/autodichiarazioneIndisponibilita";
   }
@@ -132,7 +150,8 @@ public class GestioneTesserinoController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/goTesserino", method = RequestMethod.GET)
-  public String goVisualizzaTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+  public String goVisualizzaTesserino(HttpServletRequest request,
+                                      RedirectAttributes redirectAttribute, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Operatore) {
       request.getSession().setAttribute("codiceErrore", 401);
@@ -172,8 +191,11 @@ public class GestioneTesserinoController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/creazioneTesserino", method = RequestMethod.POST)
-  public String creazioneTesserino(HttpServletRequest request, @ModelAttribute TesserinoForm tesserinoForm,
-                                   BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+  public String creazioneTesserino(HttpServletRequest request,
+                                   @ModelAttribute TesserinoForm tesserinoForm,
+                                   BindingResult result,
+                                   RedirectAttributes redirectAttribute,
+                                   Model model) {
     Utente user = (Utente) request.getSession().getAttribute("utente");
     if (user == null || user instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);
@@ -216,8 +238,9 @@ public class GestioneTesserinoController {
         donazione.setTesserino(tesserino);
       }
       List<Donazione> listaDonazioni = new ArrayList<>();
-      if (donazione != null)
+      if (donazione != null) {
         listaDonazioni.add(donazione);
+      }
       tesserino.setListaDonazioni(listaDonazioni);
     } while (false);
     //Caricamento della foto sul Drive Google
@@ -242,7 +265,8 @@ public class GestioneTesserinoController {
         e.printStackTrace();
       }
       //il type lo si prende da myFile.getContentType()
-      File file = googleDriveService.upLoadFile(donatore.getCodiceFiscale(), newFile.getAbsolutePath(), myFile.getContentType());
+      File file = googleDriveService.upLoadFile(donatore.getCodiceFiscale(),
+              newFile.getAbsolutePath(), myFile.getContentType());
       //Rende l'URL visualizzabile
       pathForView = googleDriveService.pathSavedToView(file.getWebViewLink());
       newFile.delete();
@@ -270,7 +294,8 @@ public class GestioneTesserinoController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/visualizzaTesserino", method = RequestMethod.GET)
-  public String visualizzaTesserino(HttpServletRequest request, RedirectAttributes redirectAttribute, Model model) {
+  public String visualizzaTesserino(HttpServletRequest request,
+             RedirectAttributes redirectAttribute, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Operatore) {
       request.getSession().setAttribute("codiceErrore", 401);

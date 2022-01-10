@@ -1,7 +1,20 @@
 package it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement;
 
-import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.*;
-import it.unisa.is.c09.digitaldonation.model.entity.*;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotRelaseFeedbackException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotLoadDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotUpdateDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotDeleteDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.GuestFormException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.SedutaFormException;
+
+import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Guest;
+import it.unisa.is.c09.digitaldonation.model.entity.Indisponibilita;
+import it.unisa.is.c09.digitaldonation.model.entity.Operatore;
+import it.unisa.is.c09.digitaldonation.model.entity.SedeLocale;
+import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
+import it.unisa.is.c09.digitaldonation.model.entity.Utente;
 import it.unisa.is.c09.digitaldonation.model.repository.DonatoreRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.GuestRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.IndisponibilitaRepository;
@@ -45,14 +58,16 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   private GuestRepository guestRepository;
 
   /**
-   * Questo metodo permette al donatore di comunicare la partecipazione o meno alla seduta di donazione.
+   * Questo metodo permette al donatore di comunicare la partecipazione
+   * o meno alla seduta di donazione.
    *
    * @param donatore oggetto donatore.
    * @param idSeduta id della seduta.
    */
   @Override
   @Transactional(rollbackFor = Exception.class)
-  public void feedbackDonatore(Donatore donatore, Long idSeduta) throws CannotRelaseFeedbackException {
+  public void feedbackDonatore(Donatore donatore, Long idSeduta)
+          throws CannotRelaseFeedbackException {
     if (donatore.getCodiceFiscale() == null) {
       throw new CannotRelaseFeedbackException("feedbackError", "Il campo id non può essere null.");
     }
@@ -73,15 +88,18 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    * @return Una lista di Utenti che appartengono a quella seduta
    */
   @Override
-  public ArrayList<Object> monitoraggioSeduta(Long idSeduta) throws CannotLoadDataRepositoryException {
+  public ArrayList<Object> monitoraggioSeduta(Long idSeduta)
+          throws CannotLoadDataRepositoryException {
 
     if (idSeduta == null) {
-      throw new CannotLoadDataRepositoryException("sedutaError", "Il campo id della seduta non può essere null.");
+      throw new CannotLoadDataRepositoryException("sedutaError",
+              "Il campo id della seduta non può essere null.");
     }
     Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
 
     if (seduta == null) {
-      throw new CannotLoadDataRepositoryException("sedutaError", "Non è stata trovata nessuna seduta con questo id.");
+      throw new CannotLoadDataRepositoryException("sedutaError",
+              "Non è stata trovata nessuna seduta con questo id.");
     }
     ArrayList<Object> lista = new ArrayList<Object>();
     lista.addAll(seduta.getListaDonatore());
@@ -98,17 +116,22 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   @Override
   @Transactional(rollbackFor = Exception.class)
-  public Guest inserimentoGuest(Long idSeduta, Guest guest) throws CannotSaveDataRepositoryException {
+  public Guest inserimentoGuest(Long idSeduta, Guest guest)
+          throws CannotSaveDataRepositoryException {
     if (idSeduta == null) {
-      throw new CannotSaveDataRepositoryException("SedutaError", "Il campo id della seduta non può essere null.");
+      throw new CannotSaveDataRepositoryException("SedutaError",
+              "Il campo id della seduta non può essere null.");
     }
 
     if (guest.getcodiceFiscaleGuest() == null) {
-      throw new CannotSaveDataRepositoryException("GuestError", "il campo CF del guest non può essere null");
+      throw new CannotSaveDataRepositoryException("GuestError",
+              "il campo CF del guest non può essere null");
     }
 
-    if (sedutaRepository.existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(idSeduta, guest.getcodiceFiscaleGuest())) {
-      throw new CannotSaveDataRepositoryException("SedutaError", "Il guest è gia presente nella seduta");
+    if (sedutaRepository.existsByIdSedutaAndListaGuest_CodiceFiscaleGuest(idSeduta,
+            guest.getcodiceFiscaleGuest())) {
+      throw new CannotSaveDataRepositoryException("SedutaError",
+              "Il guest è gia presente nella seduta");
     }
     if (guest.getPatologie() == "") guest.setPatologie("Nessuna");
     Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
@@ -129,7 +152,8 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   @Transactional(rollbackFor = Exception.class)
   public Seduta schedulazioneSeduta(Seduta seduta) throws CannotSaveDataRepositoryException {
     if (seduta.getIdSeduta() == null) {
-      throw new CannotSaveDataRepositoryException("SedutaError", "Il campo id della seduta non può essere null.");
+      throw new CannotSaveDataRepositoryException("SedutaError",
+              "Il campo id della seduta non può essere null.");
     }
     if (seduta.getIdSeduta() == -1) {
       seduta.setIdSeduta(null);
@@ -137,7 +161,9 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     sedutaRepository.save(seduta);
     List<Donatore> donatori = donatoreRepository.findAll();
     for (int i = 0; i < donatori.size(); i++) {
-      List<Indisponibilita> indisponibilitaLista = indisponibilitaRepository.findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter(donatori.get(i).getCodiceFiscale(), seduta.getDataSeduta());
+      List<Indisponibilita> indisponibilitaLista = indisponibilitaRepository.
+              findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter
+              (donatori.get(i).getCodiceFiscale(), seduta.getDataSeduta());
       if (indisponibilitaLista.isEmpty()) {
         mailSingletonSender.sendEmailSchedulazioneSeduta(seduta, donatori.get(i));
       }
@@ -153,7 +179,8 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   @Override
   @Transactional(rollbackFor = Exception.class)
-  public Seduta modificaSeduta(SedutaForm sedutaForm, Long idSeduta, Utente utente) throws CannotUpdateDataRepositoryException {
+  public Seduta modificaSeduta(SedutaForm sedutaForm, Long idSeduta, Utente utente)
+          throws CannotUpdateDataRepositoryException {
     DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
     Operatore operatore = (Operatore) utente;
     SedeLocale sedeLocale = operatore.getSedeLocale();
@@ -167,13 +194,15 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
     seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
     seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
-    String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
+    String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(),
+            sedutaForm.getCap(), sedutaForm.getProvincia());
     seduta.setLuogo(luogo);
     if (seduta == null) {
       throw new CannotUpdateDataRepositoryException("sedutaError", "La seduta non può essere null");
     }
     if (idSeduta == null) {
-      throw new CannotUpdateDataRepositoryException("sedutaError", "La seduta da modificare non può essere null");
+      throw new CannotUpdateDataRepositoryException("sedutaError",
+              "La seduta da modificare non può essere null");
     }
     for (int i = 0; i < listaDonatori.size(); i++) {
       mailSingletonSender.sendEmailModificaSeduta(seduta, listaDonatori.get(i));
@@ -191,7 +220,8 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   @Transactional(rollbackFor = Exception.class)
   public void eliminaSeduta(Long idSeduta) throws CannotDeleteDataRepositoryException {
     if (sedutaRepository.findByIdSeduta(idSeduta) == null) {
-      throw new CannotDeleteDataRepositoryException("eliminazioneSedutaError", "Errore durante l'eliminazione della seduta");
+      throw new CannotDeleteDataRepositoryException("eliminazioneSedutaError",
+              "Errore durante l'eliminazione della seduta");
     }
     Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
     List<Donatore> listaDonatori = seduta.getListaDonatore();
@@ -213,7 +243,8 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   @Override
   public Seduta visualizzaSeduta(Long idSeduta) throws CannotLoadDataRepositoryException {
     if (idSeduta == null) {
-      throw new CannotLoadDataRepositoryException("erroreVisualizzazioneSeduta", "La seduta da visualizzare deve esistere");
+      throw new CannotLoadDataRepositoryException("erroreVisualizzazioneSeduta",
+              "La seduta da visualizzare deve esistere");
     }
     return sedutaRepository.findByIdSeduta(idSeduta);
   }
@@ -234,8 +265,10 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    * @param codiceFiscale String che rappresenta il codice fiscale del donatore.
    * @return la lista delle sedute disponibili.
    */
-  public List<Seduta> visualizzaElencoSeduteDisponibili(String codiceFiscale) throws CannotLoadDataRepositoryException {
-    List<Indisponibilita> listaIndisponibilitaDonatore = indisponibilitaRepository.findIndisponibilitaByCodiceFiscaleDonatore(codiceFiscale);
+  public List<Seduta> visualizzaElencoSeduteDisponibili(String codiceFiscale)
+          throws CannotLoadDataRepositoryException {
+    List<Indisponibilita> listaIndisponibilitaDonatore = indisponibilitaRepository
+            .findIndisponibilitaByCodiceFiscaleDonatore(codiceFiscale);
     List<Seduta> seduteDisponibili = new ArrayList<>();
     if (listaIndisponibilitaDonatore.isEmpty()) {
       seduteDisponibili = sedutaRepository.findAll();
@@ -273,10 +306,12 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   public String validaNome(String nome) throws GuestFormException {
     if (nome == null) {
-      throw new GuestFormException("GuestNomeError", "Il formato del nome è errato: bisogna inserire solo caratteri alfabetici.");
+      throw new GuestFormException("GuestNomeError",
+              "Il formato del nome è errato: bisogna inserire solo caratteri alfabetici.");
     } else {
       if (!nome.matches(Guest.NOME_COGNOME_REGEX)) {
-        throw new GuestFormException("GuestNomeError", "Il formato del nome è errato: bisogna inserire solo caratteri alfabetici.");
+        throw new GuestFormException("GuestNomeError",
+                "Il formato del nome è errato: bisogna inserire solo caratteri alfabetici.");
       } else {
         return nome;
       }
@@ -294,10 +329,12 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   public String validaCognome(String cognome) throws GuestFormException {
     if (cognome == null) {
-      throw new GuestFormException("GuestCognomeError", "Il formato del cognome è errato: bisogna inserire solo caratteri alfabetici.");
+      throw new GuestFormException("GuestCognomeError",
+              "Il formato del cognome è errato: bisogna inserire solo caratteri alfabetici.");
     } else {
       if (!cognome.matches(Guest.NOME_COGNOME_REGEX)) {
-        throw new GuestFormException("GuestCognomeError", "Il formato del cognome è errato: bisogna inserire solo caratteri alfabetici.");
+        throw new GuestFormException("GuestCognomeError",
+                "Il formato del cognome è errato: bisogna inserire solo caratteri alfabetici.");
       } else {
         return cognome;
       }
@@ -315,10 +352,14 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   public String validaTelefono(String telefono) throws GuestFormException {
     if (telefono == null) {
-      throw new GuestFormException("GuestTelefonoError", "Il formato del numero di telefono è errato: bisogna inserire solo caratteri numerici e simboli.");
+      throw new GuestFormException("GuestTelefonoError",
+              "Il formato del numero di telefono è errato: bisogna inserire "
+                      + "solo caratteri numerici e simboli.");
     } else {
       if (!telefono.matches(Guest.NUMERO_TELEFONO)) {
-        throw new GuestFormException("GuestTelefonoError", "Il formato del numero di telefono è errato: bisogna inserire solo caratteri numerici e simboli.");
+        throw new GuestFormException("GuestTelefonoError",
+                "Il formato del numero di telefono è errato: bisogna inserire "
+                        + "solo caratteri numerici e simboli.");
       } else {
         return telefono;
       }
@@ -337,10 +378,13 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   public String validaCodiceFiscaleGuest(String codiceFiscale) throws GuestFormException {
     if (codiceFiscale == null) {
-      throw new GuestFormException("GuestCodiceFiscaleError", "Il formato del codice fiscale è errato: bisogna inserire solo caratteri alfanumerici.");
+      throw new GuestFormException("GuestCodiceFiscaleError",
+              "Il formato del codice fiscale è errato: bisogna "
+                      + "inserire solo caratteri alfanumerici.");
     } else {
       if (!codiceFiscale.matches(Guest.CF_REGEX)) {
-        throw new GuestFormException("GuestCodiceFiscaleError", "Il formato del codice fiscale è errato: bisogna inserire solo caratteri alfanumerici.");
+        throw new GuestFormException("GuestCodiceFiscaleError", "Il formato del codice "
+                + "fiscale è errato: bisogna inserire solo caratteri alfanumerici.");
       } else {
         return codiceFiscale;
       }
@@ -358,10 +402,14 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   public String validaPatologie(String patologie) throws GuestFormException {
     if (patologie == null) {
-      throw new GuestFormException("GuestPatologieError", "Il formato delle patologie è errato: bisogna inserire solo caratteri alfanumerici e simboli composti da almeno 2 caratteri.");
+      throw new GuestFormException("GuestPatologieError", "Il formato delle patologie "
+              + "è errato: bisogna inserire solo caratteri alfanumerici e simboli composti "
+              + "da almeno 2 caratteri.");
     } else {
       if (!patologie.matches(Guest.REG_PATOLOGIE)) {
-        throw new GuestFormException("GuestPatologieError", "Il formato delle patologie è errato: bisogna inserire solo caratteri alfanumerici e simboli composti da almeno 2 caratteri.");
+        throw new GuestFormException("GuestPatologieError", "Il formato delle patologie è "
+                + "errato: bisogna inserire solo caratteri alfanumerici e simboli composti"
+                + " da almeno 2 caratteri.");
       } else {
         return patologie;
       }
@@ -373,16 +421,21 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    * prestabilito.
    *
    * @param gruppoSanguigno Stringa che rappresenta il gruppo sanguigno da controllare
-   * @return gruppoSanguigno La stringa che rappresentano il gruppo sanguigno da controllare validato
+   * @return gruppoSanguigno La stringa che rappresentano il
+   * gruppo sanguigno da controllare validato
    * @throws GuestFormException se il gruppo sanguigno non è specificate oppure se non
    *                            rispetta il formato {@link Guest#REG_GRUPPOSANGUIGNO}
    */
   public String validaGruppoSanguigno(String gruppoSanguigno) throws GuestFormException {
     if (gruppoSanguigno == null) {
-      throw new GuestFormException("GuestGruppoSanguignoError", "Il formato del gruppo sanguigno è errato, è possibile inserire solo le seguenti combinazioni: 0-, 0+, A-, A+, B-, B+, AB-, AB+");
+      throw new GuestFormException("GuestGruppoSanguignoError", "Il formato del gruppo sanguigno"
+              + " è errato, è possibile inserire solo le seguenti"
+              + " combinazioni: 0-, 0+, A-, A+, B-, B+, AB-, AB+");
     } else {
       if (!gruppoSanguigno.matches(Guest.REG_GRUPPOSANGUIGNO)) {
-        throw new GuestFormException("GuestGruppoSanguignoError", "Il formato del gruppo sanguigno è errato, è possibile inserire solo le seguenti combinazioni: 0-, 0+, A-, A+, B-, B+, AB-, AB+");
+        throw new GuestFormException("GuestGruppoSanguignoError", "Il formato del gruppo sanguigno"
+                + " è errato, è possibile inserire solo le seguenti combinazioni:"
+                + " 0-, 0+, A-, A+, B-, B+, AB-, AB+");
       } else {
         return gruppoSanguigno;
       }
@@ -402,12 +455,15 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   public Date validaDataSeduta(Date dataSeduta) throws SedutaFormException {
     Date date = new Date();
     if (dataSeduta == null) {
-      throw new SedutaFormException("SedutaDataError", "La data seduta inserita non ispetta il formato: gg/mm/aaaa");
+      throw new SedutaFormException("SedutaDataError", "La data seduta inserita non "
+              + "ispetta il formato: gg/mm/aaaa");
     } else {
       if (!(parsDateToString(dataSeduta).matches(Seduta.DATA_SEDUTA_REGEX))) {
-        throw new SedutaFormException("SedutaDataError", "La data seduta inserita non ispetta il formato: gg/mm/aaaa");
+        throw new SedutaFormException("SedutaDataError", "La data seduta inserita non "
+                + "ispetta il formato: gg/mm/aaaa");
       } else if (dataSeduta.before(date)) {
-        throw new SedutaFormException("SedutaDataError", "La data seduta inserita è minore della data corrente.");
+        throw new SedutaFormException("SedutaDataError", "La data seduta inserita è"
+                + " minore della data corrente.");
       }
       return dataSeduta;
     }
@@ -428,7 +484,8 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
       throw new SedutaFormException("SedutaIndirizzoError", "L’indirizzo inserito non è corretto.");
     } else {
       if (!indirizzo.matches(Seduta.INDIRIZZO_REGEX)) {
-        throw new SedutaFormException("SedutaIndirizzoError", "L’indirizzo inserito non è corretto.");
+        throw new SedutaFormException("SedutaIndirizzoError",
+                "L’indirizzo inserito non è corretto.");
       }
       return indirizzo;
     }
@@ -446,10 +503,12 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   public String validaCitta(String citta) throws SedutaFormException {
     if (citta == null) {
-      throw new SedutaFormException("SedutaCittaError", "La città inserita non è corretta: non ammette caratteri numeri.");
+      throw new SedutaFormException("SedutaCittaError", "La città inserita"
+              + " non è corretta: non ammette caratteri numeri.");
     } else {
       if (!citta.matches(Seduta.CITTA_REGEX)) {
-        throw new SedutaFormException("SedutaCittaError", "La città inserita non è corretta: non ammette caratteri numeri.");
+        throw new SedutaFormException("SedutaCittaError", "La città inserita non "
+                + "è corretta: non ammette caratteri numeri.");
       }
       return citta;
     }
@@ -467,10 +526,12 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   public String validaProvincia(String provincia) throws SedutaFormException {
     if (provincia == null) {
-      throw new SedutaFormException("SedutaProvinciaError", "La provincia inserita non è corretta: ammette solo due caratteri.");
+      throw new SedutaFormException("SedutaProvinciaError", "La provincia inserita "
+              + "non è corretta: ammette solo due caratteri.");
     } else {
       if (!provincia.matches(Seduta.PROVINCIA_REGEX)) {
-        throw new SedutaFormException("SedutaProvinciaError", "La provincia inserita non è corretta: ammette solo due caratteri.");
+        throw new SedutaFormException("SedutaProvinciaError", "La provincia inserita "
+                + "non è corretta: ammette solo due caratteri.");
       }
       return provincia;
     }
@@ -488,17 +549,20 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   public String validaCAP(String CAP) throws SedutaFormException {
     if (CAP == null) {
-      throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.");
+      throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto:"
+              + " ammette solo 5 caratteri numerici.");
     } else {
       if (!CAP.matches(Seduta.CAP_REGEX)) {
-        throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.");
+        throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto:"
+                + "ammette solo 5 caratteri numerici.");
       }
       return CAP;
     }
   }
 
   /**
-   * Controlla che il numero dei partecipanti ad una seduta sia specificato e che rispetti il formato
+   * Controlla che il numero dei partecipanti ad una seduta sia specificato e
+   * che rispetti il formato
    * prestabilito.
    *
    * @param numeroPartecipanti int che rappresenta il numero dei partecipanti
@@ -509,14 +573,15 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    */
   public int validaNumeroPartecipanti(int numeroPartecipanti) throws SedutaFormException {
     if (numeroPartecipanti < 0) {
-      throw new SedutaFormException("SedutaPartecipantiError", "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999");
+      throw new SedutaFormException("SedutaPartecipantiError",
+              "Il numero di Partecipanti inserito non è corretto: il limite massimo è 9999");
     }
     return numeroPartecipanti;
   }
 
   /**
-   * Controlla che la data di inizio di partecipazione ad una seduta sia specificata e che rispetti il formato
-   * prestabilito.
+   * Controlla che la data di inizio di partecipazione ad una seduta
+   * sia specificata e che rispetti il formato prestabilito.
    *
    * @param sedutaForm sedutaForm da cui prendere le date da verificare
    * @return dataInizioPrenotazioni Date che rappresenta la data dell'inizio delle prenotazioni
@@ -527,14 +592,19 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   public Date validaDataInizioPrenotazioni(SedutaForm sedutaForm) throws SedutaFormException {
     Date date = new Date();
     if (sedutaForm.getDataInizioPrenotazione() == null) {
-      throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
+      throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione"
+              + " inserita non rispetta il formato: gg/mm/aaaa.");
     } else {
-      if (!(parsDateToString(sedutaForm.getDataInizioPrenotazione()).matches(Seduta.DATA_INIZIO_PARTECIPAZIONE_REGEX))) {
-        throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
+      if (!(parsDateToString(sedutaForm.getDataInizioPrenotazione())
+              .matches(Seduta.DATA_INIZIO_PARTECIPAZIONE_REGEX))) {
+        throw new SedutaFormException("SedutaDataInizioError", "La data inizio"
+                + " partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
       } else if (sedutaForm.getDataInizioPrenotazione().before(date)) {
-        throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita è minore della data corrente");
+        throw new SedutaFormException("SedutaDataInizioError", "La data inizio "
+                + "partecipazione inserita è minore della data corrente");
       } else if (sedutaForm.getDataInizioPrenotazione().after(sedutaForm.getDataSeduta())) {
-        throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione inserita è maggiore della data seduta.");
+        throw new SedutaFormException("SedutaDataInizioError", "La data inizio partecipazione"
+                + " inserita è maggiore della data seduta.");
       }
 
       return sedutaForm.getDataInizioPrenotazione();
@@ -542,8 +612,8 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   }
 
   /**
-   * Controlla che la data di fine di partecipazione ad una seduta sia specificata e che rispetti il formato
-   * prestabilito.
+   * Controlla che la data di fine di partecipazione ad una seduta sia specificata e
+   * che rispetti il formato prestabilito.
    *
    * @param sedutaForm sedutaForm da cui prendere le date da verificare
    * @return dataInizioPrenotazioni Date che rappresenta la data di fine delle prenotazioni
@@ -554,16 +624,23 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
   public Date validaDataFinePrenotazioni(SedutaForm sedutaForm) throws SedutaFormException {
     Date date = new Date();
     if (sedutaForm.getDataFinePrenotazione() == null) {
-      throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
+      throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione"
+              + " inserita non rispetta il formato: gg/mm/aaaa.");
     } else {
-      if (!(parsDateToString(sedutaForm.getDataFinePrenotazione()).matches((Seduta.DATA_FINE_PARTECIPAZIONE_REGEX)))) {
-        throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita non rispetta il formato: gg/mm/aaaa.");
+      if (!(parsDateToString(sedutaForm.getDataFinePrenotazione())
+              .matches((Seduta.DATA_FINE_PARTECIPAZIONE_REGEX)))) {
+        throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione "
+                + "inserita non rispetta il formato: gg/mm/aaaa.");
       } else if (sedutaForm.getDataFinePrenotazione().before(date)) {
-        throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è minore della data corrente.");
+        throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione"
+                + " inserita è minore della data corrente.");
       } else if (sedutaForm.getDataFinePrenotazione().after(sedutaForm.getDataSeduta())) {
-        throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è maggiore della data seduta.");
-      } else if (sedutaForm.getDataFinePrenotazione().before(sedutaForm.getDataInizioPrenotazione())) {
-        throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione inserita è minore della data inizio partecipazione.");
+        throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione"
+                + " inserita è maggiore della data seduta.");
+      } else if (sedutaForm.getDataFinePrenotazione().before(sedutaForm
+              .getDataInizioPrenotazione())) {
+        throw new SedutaFormException("SedutaDataInizioError", "La data fine partecipazione"
+                + " inserita è minore della data inizio partecipazione.");
       }
       return sedutaForm.getDataFinePrenotazione();
     }
@@ -577,6 +654,11 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     sedutaRepository.save(seduta);
     return seduta;
   }
+  public Donatore salvaDonatore(Donatore donatore) {
+    donatoreRepository.save(donatore);
+    return donatore;
+  }
+
 
   /**
    * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa

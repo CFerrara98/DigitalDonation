@@ -119,14 +119,14 @@
                                                                         id="cap"
                                                                         maxlength="5"
                                                                         placeholder="es. 84100"
-                                                                        path="CAP"/>
+                                                                        path="cap"/>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <form:input type="text"
                                                                         class="form-control form-control-user is-invalid"
                                                                         id="cap"
                                                                         maxlength="5"
-                                                                        placeholder="es. 84100" path="CAP"/>
+                                                                        placeholder="es. 84100" path="cap"/>
                                                             <span class="myError">${CAPError}</span>
                                                         </c:otherwise>
                                                     </c:choose>

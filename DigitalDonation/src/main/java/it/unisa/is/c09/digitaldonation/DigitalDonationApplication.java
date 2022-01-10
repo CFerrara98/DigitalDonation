@@ -10,7 +10,11 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 
 /**
- * Classe che esegue il progetto.
+ * Classe che definisce il caricamento delle configurazioni nel caso di build
+ * war non eseguibile. Garantisce il corretto funzionamento dell'applicazione
+ * anche per il tradizionale deploy su applications server esterni.
+ *
+ * @author Kevin Pacifico
  */
 @SpringBootApplication
 @ServletComponentScan
@@ -20,7 +24,11 @@ public class DigitalDonationApplication {
     SpringApplication.run(DigitalDonationApplication.class, args);
   }
 
-
+  /**
+   * Metodo per il caricamento delle configurazioni. Visto l'utilizzo di Spring
+   * Boot e di {@link Webapp EnableAutoConfiguration}, non è necessario che il
+   * programmatore vi apporti modifiche.
+   */
   @Bean
   @Primary
   public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
