@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author Kevin Pacifico, Elpidio Mazza
- * <p>
  * Classe che modella l'indisponibilità a donare di un donatore.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
  */
 @Data
 @Entity

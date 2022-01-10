@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 
 /**
- * @author Kevin Pacifico, Elpidio Mazza
- * <p>
  * Classe che modella un guest che partecipa a una seduta.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
  */
 @Data
 @Entity

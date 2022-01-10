@@ -6,8 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @author Kevin Pacifico, Elpidio Mazza
  * Classe che modella una sede locale della piattaforma.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
  */
 @Data
 @Entity

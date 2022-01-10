@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Kevin Pacifico, Elpidio Mazza
- * <p>
  * Classe che modella un tesserino.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
  */
 @Entity
 @Table(name = "tesserino")

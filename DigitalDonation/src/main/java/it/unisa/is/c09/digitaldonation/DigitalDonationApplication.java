@@ -23,7 +23,8 @@ public class DigitalDonationApplication {
   @Bean
   @Primary
   public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-    PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+    PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer =
+            new PropertySourcesPlaceholderConfigurer();
     YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
     yaml.setResources(new ClassPathResource("application.yml"));
     propertySourcesPlaceholderConfigurer.setProperties(yaml.getObject());

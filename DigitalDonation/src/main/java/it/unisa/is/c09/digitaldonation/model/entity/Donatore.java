@@ -1,17 +1,23 @@
 package it.unisa.is.c09.digitaldonation.model.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * @author Kevin Pacifico, Elpidio Mazza
- * <p>
  * Classe che modella un donatore.
+ *
+ * @author Kevin Pacifico, Elpidio Mazza
+ *
+ *
  */
 // Rimosso @Data per problemi con il toString
 @Entity
@@ -28,7 +34,8 @@ public class Donatore extends Utente implements Serializable {
   private String residenza;
 
   @OneToOne()
-  @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "codice_fiscale_donatore", nullable = true)
+  @JoinColumn(name = "codice_fiscale_utente",
+          referencedColumnName = "codice_fiscale_donatore", nullable = true)
   private Tesserino tesserino;
 
   @OneToMany()
@@ -57,7 +64,9 @@ public class Donatore extends Utente implements Serializable {
    * @param tesserino            è il tesserino dell'utente.
    * @param listaIndisponibilita è la lista di indisponibilità dell'utente.
    */
-  public Donatore(String codiceFiscale, String nome, String cognome, String email, String password, String residenza, Date dataDiNascita, String luogoDiNascita, Tesserino tesserino, List<Indisponibilita> listaIndisponibilita) {
+  public Donatore(String codiceFiscale, String nome, String cognome, String email, String password,
+                  String residenza, Date dataDiNascita, String luogoDiNascita,
+                  Tesserino tesserino, List<Indisponibilita> listaIndisponibilita) {
     super(codiceFiscale, nome, cognome, email, password);
     this.residenza = residenza;
     this.dataDiNascita = dataDiNascita;
@@ -68,7 +77,7 @@ public class Donatore extends Utente implements Serializable {
 
 
   /**
-   * Aggiunge una indisponibilita
+   * Aggiunge una indisponibilita.
    *
    * @param indisponibilita descrizione dell'indisponibilita
    */
@@ -115,7 +124,6 @@ public class Donatore extends Utente implements Serializable {
   /**
    * Metodo che ritorna il luogo di nascita dell'utente.
    *
-   * @param
    * @return luogoDiNascita e' il luogo di nascita dell'utente.
    */
   public String getLuogoDiNascita() {
@@ -170,12 +178,13 @@ public class Donatore extends Utente implements Serializable {
   /**
    * Espressione regolare che definisce il formato del campo residenza.
    */
-  public static final String RESIDENZA_REGEX = "[A-Za-z0-9 _.,!\'\\/$\\n]{2,500}";//OK
+  public static final String RESIDENZA_REGEX = "[A-Za-z0-9 _.,!\'\\/$\\n]{2,500}";
 
   /**
    * Espressione regolare che definisce il formato del campo di data di nascita.
    */
-  public static final String DATANASCITA_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][12]{1}\\d{3}$";//OK es: gg/mm/aa
+  public static final String DATANASCITA_REGEX =
+          "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-][12]{1}\\d{3}$";
 
   /**
    * Espressione regolare che definisce il formato del campo luogo di nascita.
