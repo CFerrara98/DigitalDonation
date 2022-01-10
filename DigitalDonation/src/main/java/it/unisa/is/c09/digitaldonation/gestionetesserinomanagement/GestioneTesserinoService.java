@@ -20,6 +20,8 @@ import it.unisa.is.c09.digitaldonation.utentemanagement.MailSingletonSender;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,7 +60,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
       throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
     }
     String password = mailSingletonSender.sendEmailCreazioneAccount(donatore);
-    String cripted = getMd5(password);
+    String cripted = CryptoByMd5.getMd5(password);
     donatore.setPassword(cripted);
     utenteRepository.save(donatore);
     tesserinoRepository.save(tesserino);

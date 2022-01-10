@@ -135,7 +135,8 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
       guest.setPatologie("Nessuna");
     }
     Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
-    seduta.addPartecipante(guest);
+    seduta.addPartecipante((Guest) guest);
+    guestRepository.save(guest);
     sedutaRepository.save(seduta);
     return guest;
   }
