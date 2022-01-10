@@ -191,8 +191,11 @@ public class GestioneTesserinoController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/creazioneTesserino", method = RequestMethod.POST)
-  public String creazioneTesserino(HttpServletRequest request, @ModelAttribute TesserinoForm tesserinoForm,
-              BindingResult result, RedirectAttributes redirectAttribute, Model model) {
+  public String creazioneTesserino(HttpServletRequest request,
+                                   @ModelAttribute TesserinoForm tesserinoForm,
+                                   BindingResult result,
+                                   RedirectAttributes redirectAttribute,
+                                   Model model) {
     Utente user = (Utente) request.getSession().getAttribute("utente");
     if (user == null || user instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);

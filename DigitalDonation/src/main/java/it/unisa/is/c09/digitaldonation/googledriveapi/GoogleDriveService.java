@@ -16,7 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Classe che implementa la logica di business per caricare le immagini su Google Drive.
+ *
+ * @author Elpidio Mazza
+ */
 @Service
 public class GoogleDriveService implements GoogleDriveServiceInterface {
 
@@ -96,13 +100,10 @@ public class GoogleDriveService implements GoogleDriveServiceInterface {
   /**
    * https://drive.google.com/file/d/18dTDFIxhBleEiayTwhtpz0oNKiuVqm7u/view?usp=drivesdk
    * https://drive.google.com/uc?export=view&id=18dTDFIxhBleEiayTwhtpz0oNKiuVqm7u
-   *
-   * Example of Embedding a Google Drive Image
+   * Esempio di immagine Google Drive Image
    * Original URL: https://drive.google.com/file/d/0B6wwyazyzml-OGQ3VUo0Z2thdmc/view
-   *
-   * You need to copy the ID from the original URL
-   * (the characters between the /d/ and /view), and use it in this URL:
-   *
+   * Bisogna copiare l'id dall'URL originale.
+   * (tra /d e /view), e va messo nell'URL:
    * https://drive.google.com/uc?export=view&id=0B6wwyazyzml-OGQ3VUo0Z2thdmc
    */
   public String pathSavedToView(String path) {

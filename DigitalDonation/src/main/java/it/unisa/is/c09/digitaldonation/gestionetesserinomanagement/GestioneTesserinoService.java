@@ -3,19 +3,24 @@ package it.unisa.is.c09.digitaldonation.gestionetesserinomanagement;
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestionetesserinoerror.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.GuestFormException;
+import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
+import it.unisa.is.c09.digitaldonation.model.entity.Indisponibilita;
 import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
-import it.unisa.is.c09.digitaldonation.model.entity.*;
-import it.unisa.is.c09.digitaldonation.model.repository.*;
+import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
+import it.unisa.is.c09.digitaldonation.model.entity.Utente;
+import it.unisa.is.c09.digitaldonation.model.entity.Guest;
+import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
+import it.unisa.is.c09.digitaldonation.model.repository.UtenteRepository;
+import it.unisa.is.c09.digitaldonation.model.repository.TesserinoRepository;
+import it.unisa.is.c09.digitaldonation.model.repository.IndisponibilitaRepository;
 import it.unisa.is.c09.digitaldonation.utentemanagement.MailSingletonSender;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
 
 /**
@@ -26,18 +31,12 @@ import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.Cr
 @Service
 public class GestioneTesserinoService implements GestioneTesserinoServiceInterface {
 
-  private static Logger logger = Logger.getLogger(String.valueOf(GestioneTesserinoService.class));
-
   @Autowired
   private MailSingletonSender mailSingletonSender;
   @Autowired
   private UtenteRepository utenteRepository;
   @Autowired
-  private DonazioneRepository donazioneRepository;
-  @Autowired
   private TesserinoRepository tesserinoRepository;
-  @Autowired
-  private DonatoreRepository donatoreRepository;
   @Autowired
   private IndisponibilitaRepository indisponibilitaRepository;
   @Autowired

@@ -3,16 +3,16 @@ package it.unisa.is.c09.digitaldonation.gestionesedutemanagement;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.ConfermaDonazioneFormException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.IndisponibilitaDonazioneFormException;
-import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
-import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
-import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
 import it.unisa.is.c09.digitaldonation.model.entity.Indisponibilita;
+import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
+import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.model.repository.DonatoreRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.DonazioneRepository;
+import it.unisa.is.c09.digitaldonation.model.repository.IndisponibilitaRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.TesserinoRepository;
-import it.unisa.is.c09.digitaldonation.model.repository.IndisponibilitaRepository;
 import it.unisa.is.c09.digitaldonation.utils.form.IndisponibilitaDonazioneForm;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,7 +45,8 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
   private IndisponibilitaRepository indisponibilitaRepository;
 
   /**
-   * Questo metodo permette di registrare una nuova donazione da parte di un donatore e aggiorna il tesserino del donatore.
+   * Questo metodo permette di registrare una nuova donazione da parte
+   * di un donatore ed aggiorna il tesserino del donatore.
    *
    * @param codiceFiscaleDonatore Il codice fiscale del donatore
    * @param idSeduta              L'id della seduta
@@ -54,15 +55,15 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
    */
   @Override
   @Transactional(rollbackFor = Exception.class)
-  public Donazione salvataggioDonazione(String codiceFiscaleDonatore, Long idSeduta, String tipoDonazione) throws CannotSaveDataRepositoryException {
+  public Donazione salvataggioDonazione(String codiceFiscaleDonatore, Long idSeduta,
+                                        String tipoDonazione)
+          throws CannotSaveDataRepositoryException {
     Donazione donazione = new Donazione();
     Tesserino tesserino;
-    List<Seduta> listaSedute;
     Indisponibilita indisponibilita = new Indisponibilita();
 
     Donatore donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore);
     Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
-
     if (donatore == null) {
       throw new CannotSaveDataRepositoryException("donatoreError", "Errore, il donatore è null");
     } else if (seduta == null) {
@@ -86,7 +87,7 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
     indisponibilita.setMotivazioni("donazione");
     indisponibilitaRepository.save(indisponibilita);
 
-    listaSedute = sedutaRepository.findAll();
+    List<Seduta> listaSedute = sedutaRepository.findAll();
     for (Seduta s : listaSedute) {
       if (s.getDataSeduta().before(indisponibilita.getDataProssimaDisponibilita())) {
         for (int i = 0; i < s.getListaDonatore().size(); i++) {

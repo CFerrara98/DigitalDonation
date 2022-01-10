@@ -12,6 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Controller per salvare l'immagine su Google Drive .
+ *
+ * @author Elpidio Mazza
+ */
 @Controller
 public class GoogleDriveTest {
 
@@ -20,6 +25,14 @@ public class GoogleDriveTest {
 
   private Logger logger = Logger.getLogger("GoogleDriveAPI");
 
+  /**
+   * Metodo che permette al donatore di andare alla
+   * pagina dell'autodichiarazione di indisponibilità.
+   *
+   * @param request è la richiesta dalla sessione.
+   * @param model   è l'oggetto Model.
+   * @return String ridirezione ad una pagina.
+   */
   @RequestMapping(value = "/testUpload", method = RequestMethod.GET)
   public String upladFile(HttpServletRequest request, Model model) {
     logger.info("Looking for file");
@@ -40,6 +53,4 @@ public class GoogleDriveTest {
     }
     return null;
   }
-
-
 }

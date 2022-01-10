@@ -20,7 +20,6 @@ public class DigitalDonationApplication {
     SpringApplication.run(DigitalDonationApplication.class, args);
   }
 
-
   @Bean
   @Primary
   public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

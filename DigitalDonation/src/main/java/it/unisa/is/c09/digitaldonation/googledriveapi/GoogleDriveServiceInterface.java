@@ -2,10 +2,13 @@ package it.unisa.is.c09.digitaldonation.googledriveapi;
 
 import com.google.api.services.drive.model.File;
 
-
+/**
+ * Interfaccia che fornisce i metodi per caricare le immagini su Google Drive.
+ *
+ * @author Elpidio Mazza
+ */
 public interface GoogleDriveServiceInterface {
 
-  public File upLoadFile(String fileName, String filePath, String mimeType);
-
-  public File upLoadFile(String fileName, java.io.File file, String mimeType);
+  File upLoadFile(String fileName, String filePath, String mimeType);
+  File upLoadFile(String fileName, java.io.File file, String mimeType);
 }

@@ -175,7 +175,7 @@ public class GestioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/salvataggioDonazione", method = RequestMethod.POST)
-  public String indisponibilitaByOperatorePost(HttpServletRequest request,
+  public String salvataggioDonazione(HttpServletRequest request,
                  @ModelAttribute ConfermaDonazioneForm confermaDonazioneForm,
                  RedirectAttributes redirectAttribute, BindingResult result, Model model,
                  @RequestParam(name = "tipoDonazione") String tipoDonazione) {
