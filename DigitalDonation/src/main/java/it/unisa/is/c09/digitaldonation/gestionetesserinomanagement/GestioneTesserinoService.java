@@ -10,13 +10,14 @@ import it.unisa.is.c09.digitaldonation.utentemanagement.MailSingletonSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
+
 
 /**
  * La classe fornisce i metodi per la logica di business della gestione del tesserino.
@@ -56,7 +57,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
       throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
     }
     String password = mailSingletonSender.sendEmailCreazioneAccount(donatore);
-    String cripted = getMd5(password);
+    String cripted = CryptoByMd5.getMd5(password);
     donatore.setPassword(cripted);
     utenteRepository.save(donatore);
     tesserinoRepository.save(tesserino);

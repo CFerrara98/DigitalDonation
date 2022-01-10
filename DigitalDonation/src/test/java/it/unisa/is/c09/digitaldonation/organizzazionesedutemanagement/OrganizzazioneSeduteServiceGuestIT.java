@@ -142,25 +142,25 @@ public class OrganizzazioneSeduteServiceGuestIT {
     }
 
     /**
-     * Testa il corretto funzionamento del metodo feedbackDonatore
+     * Testa il corretto funzionamento del metodo feedbackDonatore per il feedback positivo del donatore
      *
      * @test {@link OrganizzazioneSeduteService#feedbackDonatore(Donatore, Long)}
-     * @result Il test è superato se l'inserimento di utenti guest viene correttamente effettuato.
+     * @result Il test è superato se l'inserimento di utenti donatori viene correttamente effettuato.
      */
     @Test
     public void feedbackDonatore() {
-        donatoreRepository.save(donatore);
-        sedutaRepository.save(seduta);
-        Donatore donatoreRitorno = null;
+        Donatore donatoreRitorno  = donatoreRepository.save(donatore);
+        Seduta seduta2 = sedutaRepository.save(seduta);
+
         try {
-            organizzazioneSeduteService.feedbackDonatore(donatore, seduta.getIdSeduta());
+            organizzazioneSeduteService.feedbackDonatore(donatore, seduta2.getIdSeduta());
         } catch (CannotRelaseFeedbackException e) {
             e.printStackTrace();
         }
-        assertEquals(donatoreRitorno, donatore);
-
+        seduta2 = sedutaRepository.findByIdSeduta(seduta2.getIdSeduta());
+        assertEquals(seduta2.getListaDonatore().contains(donatoreRitorno),true);
         sedutaRepository.deleteAll();
-        guestRepository.deleteAll();
+        donatoreRepository.deleteAll();
     }
 
     /**
