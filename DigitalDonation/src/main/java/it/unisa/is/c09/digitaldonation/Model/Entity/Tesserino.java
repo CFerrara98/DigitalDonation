@@ -19,7 +19,7 @@ public class Tesserino implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "codice_fiscale_donatore", nullable = false)
+    @Column(name = "codice_fiscale_donatore")
     private String donatoreUtenteCodiceFiscale;
 
     @GeneratedValue(strategy = GenerationType.AUTO)

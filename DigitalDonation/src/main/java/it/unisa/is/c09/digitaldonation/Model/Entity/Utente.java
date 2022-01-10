@@ -19,7 +19,7 @@ public class Utente implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "codice_fiscale_utente", nullable = false)
+    @Column(name = "codice_fiscale_utente")
     private String codiceFiscaleUtente;
     @Column(name = "cognome")
     private String cognome;

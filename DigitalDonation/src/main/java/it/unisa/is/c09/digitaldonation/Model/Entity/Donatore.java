@@ -28,11 +28,11 @@ public class Donatore extends Utente implements Serializable {
     private String residenza;
 
     @OneToOne()
-    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "codice_fiscale_donatore")
+    @JoinColumn(name = "codice_fiscale_utente", referencedColumnName = "codice_fiscale_donatore", nullable = true)
     private Tesserino tesserino;
 
     @OneToMany()
-    @JoinColumn(name = "codice_fiscale_donatore")
+    @JoinColumn(name = "codice_fiscale_donatore",nullable = true)
     private List<Indisponibilita> listaIndisponibilita = new ArrayList<>();
 
     /**
