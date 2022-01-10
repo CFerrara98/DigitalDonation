@@ -20,7 +20,7 @@ public interface OperatoreRepository extends JpaRepository<Operatore, String> {
    *
    * @param codiceFiscaleUtente Stringa che rappresenta il codice fiscale dell'operatore.
    * @return Oggetto {@link Operatore} che rappresenta l'operatore. Può essere
-   * null se nel database non è presente un operatore con codice fiscale come parametro.
+   *         null se nel database non è presente un operatore con codice fiscale come parametro.
    * @pre codiceFiscale != null
    */
   Operatore findOperatoreByCodiceFiscaleUtente(String codiceFiscaleUtente);

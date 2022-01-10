@@ -2,14 +2,8 @@ package it.unisa.is.c09.digitaldonation.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Data;
 
 /**
@@ -34,7 +28,7 @@ public class Donazione implements Serializable {
   @Column(name = "tipo_donazione")
   private String tipoDonazione;
 
-  @ManyToOne()
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "cf_tessera",
           referencedColumnName = "codice_fiscale_donatore", nullable = true)
   private Tesserino tesserino;

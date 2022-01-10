@@ -1,8 +1,14 @@
 package it.unisa.is.c09.digitaldonation.web;
 
-import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.*;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotRelaseFeedbackException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotLoadDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotUpdateDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotDeleteDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.gestionetesserinomanagement.GestioneTesserinoService;
 import it.unisa.is.c09.digitaldonation.model.entity.*;
+
+
 import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.utentemanagement.UtenteService;
@@ -10,6 +16,14 @@ import it.unisa.is.c09.digitaldonation.utils.form.GuestForm;
 import it.unisa.is.c09.digitaldonation.utils.form.GuestFormValidate;
 import it.unisa.is.c09.digitaldonation.utils.form.SedutaForm;
 import it.unisa.is.c09.digitaldonation.utils.form.SedutaFormValidate;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -22,14 +36,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 /**
@@ -413,6 +420,7 @@ public class OrganizzazioneSeduteController {
    * @param model             è l'oggetto Model.
    * @return String ridirezione ad una pagina.
    */
+
   @RequestMapping(value = "/schedulazioneSeduta", method = RequestMethod.POST)
   public String schedulazioneSeduta(HttpServletRequest request,
                 @ModelAttribute SedutaForm sedutaForm,
@@ -422,10 +430,10 @@ public class OrganizzazioneSeduteController {
       request.getSession().setAttribute("codiceErrore", 401);
       return "redirect:/error";
     }
-    LocalTime oraInizio = LocalTime.of(8,0);
+    LocalTime oraInizio = LocalTime.of(8, 0);
     sedutaForm.setOrarioInizio(oraInizio);
 
-    LocalTime oraFine = LocalTime.of(12,0);
+    LocalTime oraFine = LocalTime.of(12, 0);
     sedutaForm.setOrarioFine(oraFine);
 
     try {

@@ -1,10 +1,8 @@
 package it.unisa.is.c09.digitaldonation.model.repository;
 
 import it.unisa.is.c09.digitaldonation.model.entity.Indisponibilita;
-
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -23,7 +21,8 @@ public interface IndisponibilitaRepository extends JpaRepository<Indisponibilita
    *
    * @param indisponibilita Oggetto che rappresenta le informazioni di un'indisponibilità a donare.
    * @return Oggetto {@link Indisponibilita} che rappresenta un'indisponibilità a donare. Può essere
-   * null se nel database non è possibile aggiornare le informazioni di un'indisponibilità a donare.
+   *        null se nel database non è possibile aggiornare le informazioni
+   *        di un'indisponibilità a donare.
    * @pre indisponibilita != null
    */
   Indisponibilita save(Indisponibilita indisponibilita);
@@ -42,8 +41,9 @@ public interface IndisponibilitaRepository extends JpaRepository<Indisponibilita
    *
    * @return lista indisponibilita scadute.
    */
-  @Query("select i from Indisponibilita i where i.codiceFiscaleDonatore = ?1 and i.dataProssimaDisponibilita > ?2")
+  @Query("select i from Indisponibilita i where i.codiceFiscaleDonatore = ?1 "
+          + "and i.dataProssimaDisponibilita > ?2")
   List<Indisponibilita>
-  findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter
-  (String codiceFiscale, Date data);
+  findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter(String codiceFiscale,
+                                                                              Date data);
 }

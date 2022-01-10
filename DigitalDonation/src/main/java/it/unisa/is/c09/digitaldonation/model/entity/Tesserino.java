@@ -4,14 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Classe che modella un tesserino.
@@ -40,7 +33,8 @@ public class Tesserino implements Serializable {
   @Column(name = "rh")
   private String rh;
 
-  @OneToMany()
+  @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE,
+          CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
   @JoinColumn(name = "cf_tessera", referencedColumnName = "codice_fiscale_donatore")
   private List<Donazione> listaDonazioni = new ArrayList<>();
 
