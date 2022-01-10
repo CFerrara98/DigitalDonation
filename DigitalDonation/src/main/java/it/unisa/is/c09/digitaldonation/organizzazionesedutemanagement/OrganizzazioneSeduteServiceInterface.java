@@ -5,7 +5,7 @@ import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
 import it.unisa.is.c09.digitaldonation.model.entity.Guest;
 import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
 import it.unisa.is.c09.digitaldonation.model.entity.Utente;
-import it.unisa.is.c09.digitaldonation.utils.forms.SedutaForm;
+import it.unisa.is.c09.digitaldonation.utils.form.SedutaForm;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,8 @@
 package it.unisa.is.c09.digitaldonation.utils.forms;
 
 
+import it.unisa.is.c09.digitaldonation.utils.form.SedutaForm;
+import it.unisa.is.c09.digitaldonation.utils.form.SedutaFormValidate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

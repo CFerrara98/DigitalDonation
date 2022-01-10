@@ -3,7 +3,7 @@ package it.unisa.is.c09.digitaldonation.gestionesedutemanagement;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.*;
 import it.unisa.is.c09.digitaldonation.model.entity.*;
 import it.unisa.is.c09.digitaldonation.model.repository.*;
-import it.unisa.is.c09.digitaldonation.utils.forms.IndisponibilitaDonazioneForm;
+import it.unisa.is.c09.digitaldonation.utils.form.IndisponibilitaDonazioneForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

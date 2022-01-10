@@ -1,11 +1,12 @@
 package it.unisa.is.c09.digitaldonation.gestionesedutemanagement;
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
 import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
 import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
 import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.model.repository.*;
-import it.unisa.is.c09.digitaldonation.utils.forms.IndisponibilitaDonazioneForm;
+import it.unisa.is.c09.digitaldonation.utils.form.IndisponibilitaDonazioneForm;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertThat;

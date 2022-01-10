@@ -7,7 +7,7 @@ import it.unisa.is.c09.digitaldonation.model.repository.GuestRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.IndisponibilitaRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.utentemanagement.MailSingletonSender;
-import it.unisa.is.c09.digitaldonation.utils.forms.SedutaForm;
+import it.unisa.is.c09.digitaldonation.utils.form.SedutaForm;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

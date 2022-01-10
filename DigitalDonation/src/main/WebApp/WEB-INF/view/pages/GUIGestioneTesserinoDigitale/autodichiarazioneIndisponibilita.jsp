@@ -40,7 +40,7 @@
                                         <div class="text-center">
                                             <h3 class="h4 text-gray-900 mb-4">Compila il form per l'autodichiarazione d'indisponibilità</h3>
                                         </div>
-                                            <%--@elvariable id="autodichiarazioneForm" type="it.unisa.is.c09.digitaldonation.utils.forms.AutodichiarazioneIndisponibilitaForm"--%>
+                                            <%--@elvariable id="autodichiarazioneForm" type="it.unisa.is.c09.digitaldonation.utils.form.AutodichiarazioneIndisponibilitaForm"--%>
                                         <form:form action="./autodichiarazioneIndisponibilita" method="post" modelAttribute="autodichiarazioneForm" cssClass="user" enctype="application/x-www-form-urlencoded">
                                         <div class="form-group">
                                                 <p style="color:#4e73df;">Data prossima disponibilità: </p>

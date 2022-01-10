@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.utils.forms;
+package it.unisa.is.c09.digitaldonation.utils.form;
 
 /**
  * Classe che rappresenta l'oggetto Form di conferma donazione.

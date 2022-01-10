@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.utils.forms;
+package it.unisa.is.c09.digitaldonation.utils.form;
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.ConfermaDonazioneFormException;
 import it.unisa.is.c09.digitaldonation.gestionesedutemanagement.GestioneSeduteService;

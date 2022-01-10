@@ -1,6 +1,7 @@
 package it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement;
 
 
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotRelaseFeedbackException;
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
 import it.unisa.is.c09.digitaldonation.model.entity.Guest;
 import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
@@ -120,7 +121,6 @@ public class OrganizzazioneSeduteServiceGuestIT {
 
         guest = new Guest(codiceFiscaleGuest, nome, cognome, telefono, patologie, gruppoSanguigno);
 
-
         long idSeduta = 420l;
         Calendar myCalendar = new GregorianCalendar(202, 4, 22);
         dataSeduta = myCalendar.getTime();
@@ -151,10 +151,12 @@ public class OrganizzazioneSeduteServiceGuestIT {
     public void feedbackDonatore() {
         donatoreRepository.save(donatore);
         sedutaRepository.save(seduta);
-        Donatore donatoreRitorno = organizzazioneSeduteService.feedbackDonatore(donatore, seduta.getIdSeduta());
-        //TODO sono qui
-
-        assertEquals(donatoreRitorno, donatore);
+        Donatore donatoreRitorno = null;
+        try {
+            organizzazioneSeduteService.feedbackDonatore(donatore, seduta.getIdSeduta());
+        } catch (CannotRelaseFeedbackException e) {
+            e.printStackTrace();
+        }
 
         sedutaRepository.deleteAll();
         guestRepository.deleteAll();
@@ -180,7 +182,6 @@ public class OrganizzazioneSeduteServiceGuestIT {
     /**
      * Testa il corretto funzionamento del metodo modificaSeduta
      *
-     * @test {@link OrganizzazioneSeduteService#modificaSeduta(SedutaForm, Long, Utente)}
      * @result Il test è superato se la modifica di una seduta viene correttamente effettuata.
      */
     @Test

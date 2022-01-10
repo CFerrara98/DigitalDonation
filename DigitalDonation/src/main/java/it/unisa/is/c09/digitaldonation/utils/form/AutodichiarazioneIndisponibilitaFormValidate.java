@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.utils.forms;
+package it.unisa.is.c09.digitaldonation.utils.form;
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestionetesserinoerror.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.gestionetesserinomanagement.GestioneTesserinoService;

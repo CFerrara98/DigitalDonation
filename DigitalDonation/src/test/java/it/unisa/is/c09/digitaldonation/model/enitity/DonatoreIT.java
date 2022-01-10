@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.model.Enitity;
+package it.unisa.is.c09.digitaldonation.model.enitity;
 
 
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;

@@ -5,7 +5,7 @@ import it.unisa.is.c09.digitaldonation.erroremanagement.gestionetesserinoerror.T
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.model.entity.*;
 import it.unisa.is.c09.digitaldonation.model.repository.*;
-import it.unisa.is.c09.digitaldonation.utils.forms.SedutaFormValidate;
+import it.unisa.is.c09.digitaldonation.utils.form.SedutaFormValidate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

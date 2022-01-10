@@ -1,10 +1,10 @@
 package it.unisa.is.c09.digitaldonation.web;
 
 
-import it.unisa.is.c09.digitaldonation.utils.forms.ConfermaDonazioneForm;
-import it.unisa.is.c09.digitaldonation.utils.forms.ConfermaDonazioneFormValidate;
-import it.unisa.is.c09.digitaldonation.utils.forms.IndisponibilitaDonazioneForm;
-import it.unisa.is.c09.digitaldonation.utils.forms.IndisponibilitaDonazioneFormValidate;
+import it.unisa.is.c09.digitaldonation.utils.form.ConfermaDonazioneForm;
+import it.unisa.is.c09.digitaldonation.utils.form.ConfermaDonazioneFormValidate;
+import it.unisa.is.c09.digitaldonation.utils.form.IndisponibilitaDonazioneForm;
+import it.unisa.is.c09.digitaldonation.utils.form.IndisponibilitaDonazioneFormValidate;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.gestionesedutemanagement.GestioneSeduteService;
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
@@ -13,7 +13,6 @@ import it.unisa.is.c09.digitaldonation.model.entity.Utente;
 import it.unisa.is.c09.digitaldonation.model.repository.DonatoreRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.TesserinoRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.UtenteRepository;
-import it.unisa.is.c09.digitaldonation.utils.Forms.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
