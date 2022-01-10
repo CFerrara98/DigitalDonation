@@ -2,7 +2,7 @@
   "id": "6f5e7d03-d6e6-4ff7-942f-18d6f9e7c845",
   "version": "2.0",
   "name": "DigitalDonation3",
-  "url": "http://localhost:8080/goInserimentoUtenteGuest?idSeduta=1",
+  "url": "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C",
   "tests": [{
     "id": "6b1a8d62-b100-429a-a331-bf51da4d3bc5",
     "name": "Untitled",
@@ -1347,6 +1347,869 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "9a03a658-e8b8-42c4-8db5-4b11edb43587",
+    "name": "TC_GSD_02_1  ",
+    "commands": [{
+      "id": "611fd155-f19e-49ec-ae6d-416554094315",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bbc57127-f2d0-4365-8af5-4dbaf0114874",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "834x570",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8c2ce070-f984-4970-b453-68275f907eb9",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0957dfa0-feb9-4a5a-b02f-b9a5ba648c87",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "@@@"
+    }, {
+      "id": "0abe187e-b5de-4ed6-b83a-ed935d41b219",
+      "comment": "",
+      "command": "click",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7d141e4e-8902-45f0-8ff6-1405209bf8ee",
+      "comment": "",
+      "command": "type",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Fabio Siepe "
+    }, {
+      "id": "31eb7f0c-1c4b-448d-8662-ccc432273282",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2606f284-208f-428f-8aef-baff1ee81f05",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a5b2cd07-748a-48e9-8bdc-1b52dd1ac8aa",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0002-02-15"
+    }, {
+      "id": "cea6521d-59d9-4948-9bc5-05b2d7299fb7",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0020-02-15"
+    }, {
+      "id": "0502aa53-0d3b-4d28-826f-86615f696818",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0202-02-15"
+    }, {
+      "id": "de67c0bf-372e-41dd-8f5f-a0987cd6220a",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2022-02-15"
+    }, {
+      "id": "403c9bed-8bba-45da-802c-44ca963e0910",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [
+        ["css=.btn-user", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8268f4f8-9365-46d1-9a50-5cd8af40ec27",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError",
+      "targets": [
+        ["css=.myError", "css:finder"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/span", "xpath:idRelative"],
+        ["xpath=//div/div/div/span", "xpath:position"]
+      ],
+      "value": "Nel parametro motivazioni non sono ammessi caratteri speciali: Inserisci solo caratteri alfanumerici e punteggiatura” _.,!\"'\\/”. "
+    }]
+  }, {
+    "id": "083987c8-34dd-4ae4-ad73-7bc67e26c2cf",
+    "name": "TC_ GSD_02_2  ",
+    "commands": [{
+      "id": "022bffe3-cda4-4414-8fdd-92f846b738d3",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "090e3343-df9c-4b1f-8360-d5341ba8a866",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "834x570",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e0cefea6-d579-437a-9969-48bbbc546444",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e95e422e-58f5-4092-8b50-0a9728e9e748",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Abuso di alcolici"
+    }, {
+      "id": "9d623c6c-45d4-47b5-955b-955474a6e609",
+      "comment": "",
+      "command": "click",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e339ab3d-ac74-466c-8a4f-33dcdf36c126",
+      "comment": "",
+      "command": "type",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Fabio Siepe!!!"
+    }, {
+      "id": "cd667685-7b22-4739-802b-f6dc8626e602",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "22a6d1ed-4ba8-4e39-8ebf-c5eb3f01e915",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0002-02-15"
+    }, {
+      "id": "99f7fdab-3da5-4e6b-ac41-8924e403e607",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0020-02-15"
+    }, {
+      "id": "52d8913c-d7f5-496e-a9a4-8a6de715ae5e",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0202-02-15"
+    }, {
+      "id": "7618f88f-6fbc-497a-af2e-97c88a1ff7fa",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2022-02-15"
+    }, {
+      "id": "68b4f6d8-b9eb-4bf5-84e9-a6f00cf92138",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [
+        ["css=.btn-user", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b61ca815-e13a-465b-8852-d3cda5f84dc9",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError",
+      "targets": [
+        ["css=.myError", "css:finder"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/span", "xpath:idRelative"],
+        ["xpath=//div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Il formato del nome del medico è errato. Sono ammessi solo caratteri alfabetici.')]", "xpath:innerText"]
+      ],
+      "value": "Il nome medico non rispetta il formato. Sono ammessi solo caratteri alfabetici."
+    }]
+  }, {
+    "id": "4c3dc36b-9695-4c2e-8c10-854c52605a10",
+    "name": "TC_ GSD_02_3  ",
+    "commands": [{
+      "id": "3886c790-eded-48ab-a53d-41511b578ccc",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "baa32610-58e9-4d06-8340-6e0fff39e6a1",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "630x570",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c3efb846-f34e-473f-bd15-36a6d134c6bd",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "47f7cdd1-df4e-4800-b3e5-679f7ef6ff88",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Abuso di alcol"
+    }, {
+      "id": "4dbc11ad-49ca-4b3c-83c0-11ba8e1ac636",
+      "comment": "",
+      "command": "click",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1b7489ec-1371-48d4-b153-035799a13408",
+      "comment": "",
+      "command": "type",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Fabio Siepe"
+    }, {
+      "id": "78572c81-f24e-40b2-8f51-47bcf3f47914",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "24f86e41-d4a1-4ad2-a933-c0b1ef61a8ab",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ceeb4396-a05d-433e-9f80-2650d5f3f628",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0002-02-15"
+    }, {
+      "id": "ba5fe385-7c75-4f1e-9c17-e47612474d60",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0020-02-15"
+    }, {
+      "id": "4eeeaa74-3da5-420d-8fc2-1a467a989c9c",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "202-02-15"
+    }, {
+      "id": "ba204584-ba33-453e-ba3a-b0bfd80c1954",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [
+        ["css=.btn-user", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1bb2c2d3-2b7f-4398-ada2-0a983a049df9",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError",
+      "targets": [
+        ["css=.myError", "css:finder"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/span", "xpath:idRelative"],
+        ["xpath=//div[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'La data di prossima disponibilità inserita non rispetta il formato: gg/mm/aaaa.')]", "xpath:innerText"]
+      ],
+      "value": "La data di prossima disponibilità inserita non rispetta il formato: gg/mm/aaaa."
+    }]
+  }, {
+    "id": "ba6677fb-9560-4e42-a8e6-2f2724b5db7b",
+    "name": "TC_ GSD_02_4  ",
+    "commands": [{
+      "id": "01735f41-10bd-48ba-8bf9-3f7ac73b49a2",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "22914c21-ff4b-4a86-895f-53147e19c5f6",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "630x570",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1536e32a-9efb-4687-adb4-d69ecf7b8fec",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1c6dcfd5-ce7f-45ec-bc72-fd33a29fc1cf",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Abuso di alcol"
+    }, {
+      "id": "bab571f5-495b-4818-93f5-9250f576f841",
+      "comment": "",
+      "command": "click",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "14c2648a-256b-413b-91f0-405e668b526e",
+      "comment": "",
+      "command": "type",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Fabio Siepe"
+    }, {
+      "id": "27b59423-93f0-43ef-bbb5-51d9e1673b69",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7018088b-6ba5-457e-81af-be8fc9384993",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0002-12-10"
+    }, {
+      "id": "c37505e4-6bb2-4cd6-b244-b0bd11ee80a2",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0020-12-10"
+    }, {
+      "id": "a420bd1f-71c9-43da-a519-e95a89c1a48a",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0202-12-10"
+    }, {
+      "id": "f67aa663-7e66-48ad-ba5f-5708f751cb5a",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2021-12-10"
+    }, {
+      "id": "5bff7aa1-7a19-4696-9d9f-c53321318f7d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [
+        ["css=.btn-user", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b24bb7a9-bb07-448e-9d39-bf5ec249f4a8",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError",
+      "targets": [
+        ["css=.myError", "css:finder"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/span", "xpath:idRelative"],
+        ["xpath=//div[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'La data di scadenza non può essere antecedente a quella odierna. Ed il formato è gg/mm/aaaa')]", "xpath:innerText"]
+      ],
+      "value": "La data di scadenza non può essere antecedente a quella odierna. Ed il formato è gg/mm/aaaa"
+    }]
+  }, {
+    "id": "f2f55f28-f367-4133-bd61-3195fd2acf95",
+    "name": "TC_ GSD_02_5 ",
+    "commands": [{
+      "id": "fd557f29-caa8-4e4b-9f7d-2645e747dc08",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "06ae37c3-668b-446d-99cd-5390b76920b5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "630x570",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5387d87f-c8ed-4db0-a1b4-0e61ce0933b5",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bfbc0fb7-71a1-472c-ad1c-9b0bd0304e9a",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleMotivazioni",
+      "targets": [
+        ["id=exampleMotivazioni", "id"],
+        ["name=motivazioni", "name"],
+        ["css=#exampleMotivazioni", "css:finder"],
+        ["xpath=//textarea[@id='exampleMotivazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Abuso di alcol"
+    }, {
+      "id": "a8eb6d53-8b19-484f-8e52-403c9d3bb508",
+      "comment": "",
+      "command": "click",
+      "target": "css=#indisponibilitaDonazioneForm > .card-body",
+      "targets": [
+        ["css=#indisponibilitaDonazioneForm > .card-body", "css:finder"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div", "xpath:idRelative"],
+        ["xpath=//form/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4dda8c71-b914-4875-9ddc-8373a197acbb",
+      "comment": "",
+      "command": "click",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "30c7c936-a2b6-42a7-8109-93d29655ae6e",
+      "comment": "",
+      "command": "type",
+      "target": "id=nomeMedico",
+      "targets": [
+        ["id=nomeMedico", "id"],
+        ["name=nomeMedico", "name"],
+        ["css=#nomeMedico", "css:finder"],
+        ["xpath=//input[@id='nomeMedico']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Fabio Siepe"
+    }, {
+      "id": "ee3ee8a2-60d7-4665-b914-b8c4a5b4959d",
+      "comment": "",
+      "command": "click",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e137db77-e960-4b4f-a14c-ba33eb89f2be",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0002-02-15"
+    }, {
+      "id": "7d4a9b99-3579-4fd7-a909-70b35511ace9",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0020-02-15"
+    }, {
+      "id": "ed6c2f9e-2733-4272-b0b7-53f9fe12d39f",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0202-02-15"
+    }, {
+      "id": "0e323392-6883-4bef-8056-a8caa3aaeafc",
+      "comment": "",
+      "command": "type",
+      "target": "id=exampleData",
+      "targets": [
+        ["id=exampleData", "id"],
+        ["name=dataProssimaDisponibilita", "name"],
+        ["css=#exampleData", "css:finder"],
+        ["xpath=//input[@id='exampleData']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2022-02-15"
+    }, {
+      "id": "1b531985-2200-453c-933b-5d79a6819f2c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [
+        ["css=.btn-user", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='indisponibilitaDonazioneForm']/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "13ad5f69-b990-423e-82d1-cd8d59056847",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.alert-heading",
+      "targets": [
+        ["css=.alert-heading", "css:finder"],
+        ["xpath=//div[@id='content']/div/div/div/div/h4", "xpath:idRelative"],
+        ["xpath=//h4", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "dae32b80-8be2-4541-8b08-741fcaee7e79",
@@ -1356,6 +2219,6 @@
     "timeout": 300,
     "tests": ["6b1a8d62-b100-429a-a331-bf51da4d3bc5"]
   }],
-  "urls": ["http://localhost:8080/goInserimentoUtenteGuest?idSeduta=1"],
+  "urls": ["http://localhost:8080/goInserimentoUtenteGuest?idSeduta=1", "http://localhost:8080/goAutodichiarazioneIndisponibilita", "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C", "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=AFKIWW94S77T163B", "http://localhost:8080/goElencoPartecipanti?idSeduta=681"],
   "plugins": []
 }
