@@ -156,49 +156,6 @@
 
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                                        <p style="color:#4e73df;">Orario di inizio: </p>
-                                                        <c:choose>
-                                                            <c:when test="${OraInizioError == null}">
-                                                                <form:input type="time"
-                                                                            class="form-control form-control-user"
-                                                                            id="oraInizio"
-                                                                            placeholder="Orario inizio:"
-                                                                            path="orarioInizio"/>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <form:input type="time"
-                                                                            class="form-control form-control-user is-invalid"
-                                                                            id="oraInizio" placeholder="Orario inizio:"
-                                                                            path="orarioInizio"/>
-                                                                <span class="myError">${OraInizioError}</span>
-                                                            </c:otherwise>
-                                                        </c:choose>
-
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <p style="color:#4e73df;">Orario di fine: </p>
-                                                        <c:choose>
-                                                            <c:when test="${OraFineError == null}">
-
-                                                                <form:input type="time"
-                                                                            class="form-control form-control-user"
-                                                                            id="oraFine" placeholder="Orario fine:"
-                                                                            path="orarioFine"/>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <form:input type="time"
-                                                                            class="form-control form-control-user is-invalid"
-                                                                            id="oraFine" placeholder="Orario fine:"
-                                                                            path="orarioFine"/>
-                                                                <span class="myError">${OraFineError}</span>
-                                                            </c:otherwise>
-                                                        </c:choose>
-
-                                                    </div>
-                                                </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <p style="color:#4e73df;">Data di inizio prenotazione: </p>
