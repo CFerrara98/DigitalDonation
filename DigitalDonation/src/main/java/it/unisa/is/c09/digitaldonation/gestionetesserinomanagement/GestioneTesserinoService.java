@@ -20,6 +20,8 @@ import it.unisa.is.c09.digitaldonation.utentemanagement.MailSingletonSender;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
