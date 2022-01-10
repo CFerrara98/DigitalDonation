@@ -254,6 +254,11 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
     }
   }
 
+  public Indisponibilita salvaIndisponibilita(Indisponibilita indisponibilita) {
+    indisponibilitaRepository.save(indisponibilita);
+    return indisponibilita;
+  }
+
   /**
    * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa.
    *

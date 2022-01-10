@@ -189,9 +189,6 @@ public class OrganizzazioneSeduteServiceIT {
             e.printStackTrace();
         }
         assertEquals(donatoreRitorno, donatore);
-
-        sedutaRepository.deleteAll();
-        donatoreRepository.deleteAll();
     }
 
     /**
@@ -215,8 +212,6 @@ public class OrganizzazioneSeduteServiceIT {
         }
         assertEquals(guestRitorno, guest);
         assertEquals(donatoreRitorno, donatore);
-
-        sedutaRepository.deleteAll();
     }
 
     /**
@@ -231,9 +226,6 @@ public class OrganizzazioneSeduteServiceIT {
         Guest guestRitorno = organizzazioneSeduteService.salvaGuest(guest);
 
         assertEquals(guestRitorno, guest);
-
-        sedutaRepository.deleteAll();
-        guestRepository.deleteAll();
     }
 
     /**
@@ -253,8 +245,6 @@ public class OrganizzazioneSeduteServiceIT {
             e.printStackTrace();
         }
         assertEquals(sedutaRitorno, seduta);
-
-        sedutaRepository.deleteAll();
     }
 
     /**
@@ -295,10 +285,6 @@ public class OrganizzazioneSeduteServiceIT {
         }
 
         assertEquals(sedutaRitorno, seduta);
-
-        sedutaRepository.deleteAll();
-        operatoreRepository.deleteAll();
-        utenteRepository.deleteAll();
     }
 
     /**
@@ -324,8 +310,6 @@ public class OrganizzazioneSeduteServiceIT {
             e.printStackTrace();
         }
         assertEquals(listaSedute.contains(seduta1), false);
-
-        sedutaRepository.deleteAll();
     }
 
     /**
@@ -350,8 +334,5 @@ public class OrganizzazioneSeduteServiceIT {
             e.printStackTrace();
         }
         assertEquals(lista.contains(sedutaRitorno), false);
-
-        indisponibilitaRepository.deleteAll();
-        sedutaRepository.deleteAll();
     }
 }

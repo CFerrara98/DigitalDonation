@@ -1,10 +1,7 @@
 package it.unisa.is.c09.digitaldonation.gestionesedutemanagement;
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
-import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
-import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
-import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.model.entity.*;
 import it.unisa.is.c09.digitaldonation.model.repository.*;
 import it.unisa.is.c09.digitaldonation.utils.form.IndisponibilitaDonazioneForm;
 import org.junit.Before;
@@ -18,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.transaction.Transactional;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.assertEquals;
@@ -75,7 +73,7 @@ public class GestioneSeduteServiceIT {
     private Tesserino tesserino;
     private Seduta seduta;
     private Donatore donatore;
-
+    private Utente utente;
 
 
     /**
@@ -85,31 +83,31 @@ public class GestioneSeduteServiceIT {
 
     @Before
     public void setUp() {
-        donazione = new Donazione();
-        tesserino = new Tesserino();
-        seduta = new Seduta();
         donatore = new Donatore();
-
         donatore.setCodiceFiscale("ABRBAK53R70D887V");
         donatore.setResidenza("Prova");
         Calendar dataNascitaDonatore = new GregorianCalendar(2000, 4, 15);
         donatore.setDataDiNascita(dataNascitaDonatore.getTime());
         donatore.setLuogoDiNascita("Salerno");
-        //donatore.setTesserino(new Tesserino());
         //donatore.setListaIndisponibilita();
 
-
-        Calendar dataDonazione = new GregorianCalendar(2022, 4, 15);
-        donazione.setDataDonazione(dataDonazione.getTime());
-        donazione.setTipoDonazione("Plasma");
-
-        tesserino.setDonatoreUtenteCodiceFiscale("AFCLCW23302F362J");
+        tesserino = new Tesserino();
+        tesserino.setIdTessera(102L);
+        tesserino.setDonatoreUtenteCodiceFiscale("ABRBAK53R70D887V");
         tesserino.setNumeroMatricola(12345);
         tesserino.setGruppoSanguigno("AB");
         tesserino.setRh("POS");
         //tesserino.setListaDonazioni();
         //tesserino.setImgSource();
+        donatore.setTesserino(tesserino);
 
+        donazione = new Donazione();
+        Calendar dataDonazione = new GregorianCalendar(2022, 4, 15);
+        donazione.setDataDonazione(dataDonazione.getTime());
+        donazione.setTipoDonazione("Plasma");
+        donazione.setTesserino(tesserino);
+
+        seduta = new Seduta();
         /*
         this.sedeLocaleCodiceIdentificativo = sedeLocaleCodiceIdentificativo;
         this.listaGuest = listaGuest;
@@ -126,17 +124,58 @@ public class GestioneSeduteServiceIT {
         seduta.setSedeLocale(1L);
         //seduta.setListaGuest();
         //seduta.setListaDonatore();
+
+        donatore.setCodiceFiscale("ABRBAK53R70D887V");
+        donatore.setCodiceFiscaleUtente("ABRBAK53R70D887V");
+        donatore.setNome("Mario");
+        donatore.setCognome("Rossi");
+        donatore.setEmail("mariorossi1@gmail.com");
+        donatore.setPassword("Mariorossi.1");
+
     }
 
-    @Test
+    /*@Test
     public void SalvataggioDonazione(){
         donatoreRepository.save(donatore);
         sedutaRepository.save(seduta);
 
         try {
-            assertThat(gestioneSeduteService.salvataggioDonazione(donatore.getCodiceFiscale(), seduta.getIdSeduta(), "cito"), isNotNull());
+            gestioneSeduteService.salvataggioDonazione(donatore.getCodiceFiscale(), seduta.getIdSeduta(), "cito");
         } catch (CannotSaveDataRepositoryException e) {
             e.printStackTrace();
         }
+    }*/
+
+    @Test
+    public void salvataggioIndisponibilita(){
+
+        Indisponibilita indisponibilita = new Indisponibilita();
+        Calendar myCalendar3 = new GregorianCalendar(2022, 3, 22);
+        indisponibilita.setDataProssimaDisponibilita(myCalendar3.getTime());
+        indisponibilita.setMotivazioni("Problemi di salute");
+        indisponibilita.setNomeMedico("Elpidio");
+
+        Calendar myCalendar1 = new GregorianCalendar(2022, 4, 15);
+        Date dataProssimaDisponibilita = myCalendar1.getTime();
+        String motivazioni = "Problemi di salute";
+        String nomeMedico = "Mattia";
+        IndisponibilitaDonazioneForm indisponibilitaDonazioneForm1 = new IndisponibilitaDonazioneForm(dataProssimaDisponibilita, motivazioni, nomeMedico);
+
+
+
+        donatoreRepository.save(donatore);
+        sedutaRepository.save(seduta);
+        tesserinoRepository.save(tesserino);
+        Indisponibilita indisp = null;
+
+        Indisponibilita indispRitorno = gestioneSeduteService.salvaIndisponibilita(indisponibilita);
+
+        try {
+            indisp = gestioneSeduteService.salvataggioIndisponibilita(donatore.getCodiceFiscale(), seduta.getIdSeduta(), indisponibilitaDonazioneForm1);
+        } catch (CannotSaveDataRepositoryException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(indisp, indisponibilita);
     }
 }
