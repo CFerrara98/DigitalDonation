@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.Model.Repository.Enitity;
+package it.unisa.is.c09.digitaldonation.Model.Enitity;
 
 
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;

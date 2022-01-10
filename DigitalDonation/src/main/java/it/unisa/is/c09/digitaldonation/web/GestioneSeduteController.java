@@ -4,11 +4,9 @@ package it.unisa.is.c09.digitaldonation.web;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.GestioneSeduteManagement.GestioneSeduteService;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Donazione;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
-import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.TesserinoRepository;
 import it.unisa.is.c09.digitaldonation.Model.Repository.UtenteRepository;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.*;
@@ -26,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.logging.Logger;
 
 @Controller

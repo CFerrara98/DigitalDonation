@@ -5,7 +5,6 @@ import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteErro
 import it.unisa.is.c09.digitaldonation.Model.Entity.Guest;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

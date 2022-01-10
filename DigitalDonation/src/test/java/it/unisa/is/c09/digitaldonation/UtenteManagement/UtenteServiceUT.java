@@ -22,7 +22,6 @@ import java.security.NoSuchAlgorithmException;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
 /**
  * Test di unità per la classe UtenteService; tipologia di test:
