@@ -576,6 +576,11 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     sedutaRepository.save(seduta);
     return seduta;
   }
+  public Donatore salvaDonatore(Donatore donatore) {
+    donatoreRepository.save(donatore);
+    return donatore;
+  }
+
 
   /**
    * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa
