@@ -11,6 +11,9 @@ import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.User
 import it.unisa.is.c09.digitaldonation.utentemanagement.UtenteService;
 import it.unisa.is.c09.digitaldonation.utils.form.LoginForm;
 import it.unisa.is.c09.digitaldonation.utils.form.LoginFormValidate;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Logger;
+
 
 /**
  * Controller per la gestione dell'utenza.
@@ -41,7 +42,7 @@ public class UtenteController {
   private Logger logger = Logger.getLogger(String.valueOf(UtenteController.class));
 
   /**
-   * Metodo per la visualizzazione dell'homepage o della dashboard
+   * Metodo per la visualizzazione dell'homepage o della dashboard.
    *
    * @param model è l'oggetto Model.
    * @return String stringa che rappresenta la pagina da visualizzare.
@@ -50,7 +51,9 @@ public class UtenteController {
   public String visualizzaHome(HttpServletRequest request, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente != null) {
-      if (utente instanceof Operatore) return "GUIGestioneUtente/dashboardOperatore";
+      if (utente instanceof Operatore) {
+        return "GUIGestioneUtente/dashboardOperatore";
+      }
       if (utente instanceof Donatore) {
         Donatore donatore = (Donatore) utente;
         try {
@@ -78,7 +81,8 @@ public class UtenteController {
    * @return String ridirezione alla pagina.
    */
   @RequestMapping(value = "/goLogin", method = RequestMethod.GET)
-  public String goLogin(HttpServletRequest request, @ModelAttribute("loginModel") LoginForm loginForm,
+  public String goLogin(HttpServletRequest request,
+                        @ModelAttribute("loginModel") LoginForm loginForm,
                         BindingResult result, RedirectAttributes redirectAttribute, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null) {
@@ -119,14 +123,16 @@ public class UtenteController {
       loginFormValidator.validate(loginForm, result);
       if (result.hasErrors()) {
         // se ci sono errori il metodo controller setta tutti i parametri
-        redirectAttribute.addFlashAttribute("EmailError", "Email o password errati, per favore riprova");
+        redirectAttribute.addFlashAttribute("EmailError",
+                "Email o password errati, per favore riprova");
         return "redirect:/goLogin";
       }
       try {
         utente = utenteService.login(loginForm.getEmail(), loginForm.getPassword());
       } catch (UserNotLoggedException e) {
         redirectAttribute.addFlashAttribute("EmailPrecedente", loginForm.getEmail());
-        redirectAttribute.addFlashAttribute("PasswordError", "Email o password errati, per favore riprova");
+        redirectAttribute.addFlashAttribute("PasswordError",
+                "Email o password errati, per favore riprova");
         //model.addAttribute("utente",utente);
         return "redirect:/goLogin";
       } catch (NoSuchAlgorithmException e) {
@@ -155,7 +161,7 @@ public class UtenteController {
     return "redirect:/goLogin";
   }
 
-  /**
+  .  /**
    * Metodo che permette ad un utente di effettuare il logout
    *
    * @param request è la richiesta inviata dall'utente.

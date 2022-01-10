@@ -1,5 +1,6 @@
 package it.unisa.is.c09.digitaldonation.utentemanagement;
 
+import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.AccessNotAuthorizedException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.MailNonEsistenteException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.MailNonValidaException;
@@ -8,11 +9,8 @@ import it.unisa.is.c09.digitaldonation.model.entity.Utente;
 import it.unisa.is.c09.digitaldonation.model.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import java.security.NoSuchAlgorithmException;
 
-import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
 
 /**
  * La classe fornisce i metodi per la logica di business della gestione delle sedute.
@@ -34,7 +32,8 @@ public class UtenteService implements UtenteServiceInterface {
    * @throws UserNotLoggedException se la coppia (email, password) non è presente nel sistema
    */
   @Override
-  public Utente login(String email, String password) throws UserNotLoggedException, NoSuchAlgorithmException {
+  public Utente login(String email, String password) throws UserNotLoggedException,
+          NoSuchAlgorithmException {
 
     if (password == null) {
       throw new UserNotLoggedException("login", "La password non è valida.");
