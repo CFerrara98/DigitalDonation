@@ -166,7 +166,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     seduta.setOraInizio(Time.valueOf(sedutaForm.getOrarioInizio()));
     seduta.setOraFine(Time.valueOf(sedutaForm.getOrarioFine()));
     seduta.setSedeLocale(sedeLocale.getCodiceIdentificativo());
-    String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCAP(), sedutaForm.getProvincia());
+    String luogo = Seduta.parseToLuogo(sedutaForm.getIndirizzo(), sedutaForm.getCitta(), sedutaForm.getCap(), sedutaForm.getProvincia());
     seduta.setLuogo(luogo);
     if (seduta == null) {
       throw new CannotUpdateDataRepositoryException("sedutaError", "La seduta non può essere null");

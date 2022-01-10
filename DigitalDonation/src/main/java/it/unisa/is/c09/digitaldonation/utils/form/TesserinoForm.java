@@ -1,9 +1,8 @@
 package it.unisa.is.c09.digitaldonation.utils.form;
 
+import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Date;
 
 /**
  * Classe che rappresenta l'oggetto Form del tesserino.
@@ -32,7 +31,11 @@ public class TesserinoForm {
    * @param dataDonazione    e' la data della donazione inserita nel form.
    * @param tipoDonazione    e' il tipo di donazione inserito nel form.
    */
-  public TesserinoForm(String nome, String cognome, String codiceFiscale, MultipartFile image, Date dataNascita, String luogoNascita, String residenza, String email, String gruppoSanguigno, String rh, String altreIndicazioni, int numeroMatricola, int numeroTessera, Date dataRilascio, Date dataDonazione, String tipoDonazione) {
+  public TesserinoForm(String nome, String cognome, String codiceFiscale, MultipartFile image,
+                       Date dataNascita, String luogoNascita, String residenza, String email,
+                       String gruppoSanguigno, String rh, String altreIndicazioni,
+                       int numeroMatricola, int numeroTessera, Date dataRilascio,
+                       Date dataDonazione, String tipoDonazione) {
     this.nome = nome;
     this.cognome = cognome;
     this.codiceFiscale = codiceFiscale;

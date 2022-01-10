@@ -1,10 +1,9 @@
 package it.unisa.is.c09.digitaldonation.utils.form;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Classe che rappresenta l'oggetto Form di indisponibilità.
@@ -20,18 +19,21 @@ public class SedutaForm {
    * @param indirizzo              e' l'indirizzo inserito nel form.
    * @param citta                  e' la citta inserita nel form.
    * @param provincia              e' la provincia inserita nel form.
-   * @param CAP                    è il CAP inserito nel form.
+   * @param cap                    è il cap inserito nel form.
    * @param orarioInizio           è l'orario di inizio inserito nel form.
    * @param orarioFine             è l'orario di fine inserito nel form.
    * @param dataInizioPrenotazione è la data di inizio prenotazione inserita nel form.
    * @param dataFinePrenotazione   è la data di fine prenotazione inserita nel form.
    */
-  public SedutaForm(Date dataSeduta, String indirizzo, String citta, String provincia, String CAP, Time orarioInizio, Time orarioFine, int numeroPartecipanti, Date dataInizioPrenotazione, Date dataFinePrenotazione) {
+  public SedutaForm(Date dataSeduta, String indirizzo, String citta,
+                    String provincia, String cap, Time orarioInizio,
+                    Time orarioFine, int numeroPartecipanti, Date dataInizioPrenotazione,
+                    Date dataFinePrenotazione) {
     this.dataSeduta = dataSeduta;
     this.indirizzo = indirizzo;
     this.citta = citta;
     this.provincia = provincia;
-    this.CAP = CAP;
+    this.cap = cap;
     this.orarioInizio = orarioInizio.toLocalTime();
     this.orarioFine = orarioFine.toLocalTime();
     this.numeroPartecipanti = numeroPartecipanti;
@@ -123,17 +125,17 @@ public class SedutaForm {
    *
    * @return CAP e' il CAP della seduta.
    */
-  public String getCAP() {
-    return CAP;
+  public String getCap() {
+    return cap;
   }
 
   /**
    * Metodo che setta il CAP della seduta.
    *
-   * @param CAP e' il CAP della seduta.
+   * @param cap e' il CAP della seduta.
    */
-  public void setCAP(String CAP) {
-    this.CAP = CAP;
+  public void setCap(String cap) {
+    this.cap = cap;
   }
 
   /**
@@ -231,7 +233,7 @@ public class SedutaForm {
   private String indirizzo;
   private String citta;
   private String provincia;
-  private String CAP;
+  private String cap;
   @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
   private LocalTime orarioInizio;
   @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)

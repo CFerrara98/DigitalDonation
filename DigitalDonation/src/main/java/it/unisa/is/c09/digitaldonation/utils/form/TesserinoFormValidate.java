@@ -3,14 +3,12 @@ package it.unisa.is.c09.digitaldonation.utils.form;
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestionetesserinoerror.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.gestionetesserinomanagement.GestioneTesserinoService;
-import org.jboss.logging.Logger;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Classe che definisce un validatore per {@link TesserinoForm}.
@@ -25,10 +23,8 @@ public class TesserinoFormValidate implements Validator {
   @Autowired
   private GestioneTesserinoService gestioneTesserinoService;
 
-  private static Logger logger = Logger.getLogger(String.valueOf(TesserinoFormValidate.class));
-
   @Override
-  public boolean supports(Class<?> aClass) {
+  public boolean supports(Class<?> aclass) {
     return false;
   }
 
@@ -102,7 +98,8 @@ public class TesserinoFormValidate implements Validator {
 
     //Valida Campo Email
     try {
-      gestioneTesserinoService.validaEmail(tesserinoForm.getEmail(), tesserinoForm.getCodiceFiscale());
+      gestioneTesserinoService.validaEmail(
+              tesserinoForm.getEmail(), tesserinoForm.getCodiceFiscale());
     } catch (TesserinoFormException e1) {
       errors.reject("TesserinoEmailError", e1.getMessage());
       tesserinoForm.setEmail("");
@@ -126,7 +123,9 @@ public class TesserinoFormValidate implements Validator {
 
     //Valida Campo Altre Indicazioni
     try {
-      if (tesserinoForm.getAltreIndicazioni() == null) tesserinoForm.setAltreIndicazioni("Nessuna");
+      if (tesserinoForm.getAltreIndicazioni() == null) {
+        tesserinoForm.setAltreIndicazioni("Nessuna");
+      }
       gestioneTesserinoService.validaAltreIndicazioni(tesserinoForm.getAltreIndicazioni());
     } catch (TesserinoFormException e1) {
       errors.reject("TesserinoAltreIndicazioniError", e1.getMessage());
@@ -140,14 +139,6 @@ public class TesserinoFormValidate implements Validator {
       errors.reject("TesserinoNumeroMatricolaError", e1.getMessage());
       tesserinoForm.setNumeroMatricola(0);
     }
-
-//        //Valida Campo Numero Tessera
-//        try {
-//            gestioneTesserinoService.validaNumeroTessera(tesserinoForm.getNumeroTessera());
-//        } catch (TesserinoFormException e1) {
-//            errors.reject("TesserinoNumeroTesseraError", e1.getMessage());
-//            tesserinoForm.setNumeroTessera(0);
-//        }
 
     //Valida Campo Data Rilascio
     try {
