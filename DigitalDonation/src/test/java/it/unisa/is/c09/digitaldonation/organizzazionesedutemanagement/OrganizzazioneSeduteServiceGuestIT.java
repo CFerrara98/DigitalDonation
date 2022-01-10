@@ -157,6 +157,7 @@ public class OrganizzazioneSeduteServiceGuestIT {
         } catch (CannotRelaseFeedbackException e) {
             e.printStackTrace();
         }
+        assertEquals(donatoreRitorno, donatore);
 
         sedutaRepository.deleteAll();
         guestRepository.deleteAll();
