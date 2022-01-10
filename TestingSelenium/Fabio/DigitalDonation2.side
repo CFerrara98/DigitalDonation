@@ -1,0 +1,21 @@
+{
+  "id": "697c4517-f4b4-430b-a8fd-b48b9d11888d",
+  "version": "2.0",
+  "name": "DigitalDonation2",
+  "url": "",
+  "tests": [{
+    "id": "91018f6c-a521-436a-bf50-f4bafe68e938",
+    "name": "Untitled",
+    "commands": []
+  }],
+  "suites": [{
+    "id": "c54fcabb-8b59-42c4-b171-dfff31496d87",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["91018f6c-a521-436a-bf50-f4bafe68e938"]
+  }],
+  "urls": [],
+  "plugins": []
+}
