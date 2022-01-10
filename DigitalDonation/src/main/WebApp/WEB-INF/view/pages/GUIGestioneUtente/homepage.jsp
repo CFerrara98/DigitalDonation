@@ -1,6 +1,6 @@
-<%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Utente" %>
-<%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Donatore" %>
-<%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Operatore" %>
+<%@ page import="it.unisa.is.c09.digitaldonation.model.entity.Utente" %>
+<%@ page import="it.unisa.is.c09.digitaldonation.model.entity.Donatore" %>
+<%@ page import="it.unisa.is.c09.digitaldonation.model.entity.Operatore" %>
 
 <!--Gestione della sessione-->
 

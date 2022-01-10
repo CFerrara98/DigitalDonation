@@ -54,7 +54,7 @@
                                                 <span class="myError">${GuestError}</span>
                                             </c:if>
 
-                                             <%--@elvariable id="guestForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.GuestForm"--%>
+                                                <%--@elvariable id="guestForm" type="it.unisa.is.c09.digitaldonation.utils.forms.GuestForm"--%>
                                             <form:form action="./inserimentoGuest" method="post"
                                                        modelAttribute="guestForm" cssClass="user"
                                                        enctype="application/x-www-form-urlencoded">

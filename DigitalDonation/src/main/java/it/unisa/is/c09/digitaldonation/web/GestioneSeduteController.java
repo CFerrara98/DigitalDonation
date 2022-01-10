@@ -1,15 +1,19 @@
 package it.unisa.is.c09.digitaldonation.web;
 
 
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.GestioneSeduteManagement.GestioneSeduteService;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
-import it.unisa.is.c09.digitaldonation.Model.Repository.DonatoreRepository;
-import it.unisa.is.c09.digitaldonation.Model.Repository.TesserinoRepository;
-import it.unisa.is.c09.digitaldonation.Model.Repository.UtenteRepository;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.*;
+import it.unisa.is.c09.digitaldonation.utils.forms.ConfermaDonazioneForm;
+import it.unisa.is.c09.digitaldonation.utils.forms.ConfermaDonazioneFormValidate;
+import it.unisa.is.c09.digitaldonation.utils.forms.IndisponibilitaDonazioneForm;
+import it.unisa.is.c09.digitaldonation.utils.forms.IndisponibilitaDonazioneFormValidate;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.gestionesedutemanagement.GestioneSeduteService;
+import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.model.entity.Utente;
+import it.unisa.is.c09.digitaldonation.model.repository.DonatoreRepository;
+import it.unisa.is.c09.digitaldonation.model.repository.TesserinoRepository;
+import it.unisa.is.c09.digitaldonation.model.repository.UtenteRepository;
+import it.unisa.is.c09.digitaldonation.utils.Forms.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
