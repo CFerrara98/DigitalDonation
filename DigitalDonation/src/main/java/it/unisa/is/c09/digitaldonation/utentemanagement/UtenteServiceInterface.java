@@ -8,10 +8,12 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Interfaccia che fornisce i metodi per la logica di business della gestione dell'utenza
+ *
  * @author Fabio Siepe, Mattia Sapere
  */
 public interface UtenteServiceInterface {
 
-    Utente login(String email, String password) throws UserNotLoggedException, NoSuchAlgorithmException;
-    void logout(Utente utente) throws AccessNotAuthorizedException;
+  Utente login(String email, String password) throws UserNotLoggedException, NoSuchAlgorithmException;
+
+  void logout(Utente utente) throws AccessNotAuthorizedException;
 }

@@ -20,52 +20,52 @@ import java.util.GregorianCalendar;
 @Component
 public class IndisponibilitaDonazioneFormValidate implements Validator {
 
-    @Autowired
-    private GestioneSeduteService gestioneSeduteService;
+  @Autowired
+  private GestioneSeduteService gestioneSeduteService;
 
-    @Override
-    public boolean supports(Class<?> aClass) {
-        return false;
+  @Override
+  public boolean supports(Class<?> aClass) {
+    return false;
+  }
+
+  /**
+   * Effettua la validazione dell'oggetto target riportando gli errori
+   * nell'oggetto errors.
+   *
+   * @param target Oggetto da validare
+   * @param errors Oggetto in cui salvare l'esito della validazione
+   */
+  @Override
+  public void validate(Object target, Errors errors) {
+
+    IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = (IndisponibilitaDonazioneForm) target;
+    gestioneSeduteService = new GestioneSeduteService();
+
+    //Validazione del campo motivazioni
+    try {
+      gestioneSeduteService.validaMotivazioni(indisponibilitaDonazioneForm.getMotivazioni());
+    } catch (IndisponibilitaDonazioneFormException e) {
+      errors.reject("MotivazioniIndisponibilitaError", e.getMessage());
+      indisponibilitaDonazioneForm.setMotivazioni("");
     }
 
-    /**
-     * Effettua la validazione dell'oggetto target riportando gli errori
-     * nell'oggetto errors.
-     *
-     * @param target Oggetto da validare
-     * @param errors Oggetto in cui salvare l'esito della validazione
-     */
-    @Override
-    public void validate(Object target, Errors errors) {
-
-        IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = (IndisponibilitaDonazioneForm) target;
-        gestioneSeduteService = new GestioneSeduteService();
-
-        //Validazione del campo motivazioni
-        try {
-            gestioneSeduteService.validaMotivazioni(indisponibilitaDonazioneForm.getMotivazioni());
-        } catch (IndisponibilitaDonazioneFormException e) {
-            errors.reject("MotivazioniIndisponibilitaError", e.getMessage());
-            indisponibilitaDonazioneForm.setMotivazioni("");
-        }
-
-        //Validazione del campo nomeMedico
-        try {
-            gestioneSeduteService.validaNomeMedico(indisponibilitaDonazioneForm.getNomeMedico());
-        } catch (IndisponibilitaDonazioneFormException e) {
-            errors.reject("NomeMedicoIndisponibilitaError", e.getMessage());
-            indisponibilitaDonazioneForm.setNomeMedico("");
-        }
-
-        //Validazione del campo dataProssimaDisponibilita
-        try {
-            gestioneSeduteService.validaDataProssimaDisponibilitaDonazione(indisponibilitaDonazioneForm.getDataProssimaDisponibilita());
-        } catch (IndisponibilitaDonazioneFormException e) {
-            errors.reject("DataProssimaDisponibilitaError", e.getMessage());
-            Calendar myCalendar = new GregorianCalendar(2022, 1, 1);
-            indisponibilitaDonazioneForm.setDataProssimaDisponibilita(myCalendar.getTime());
-        }
-        return;
+    //Validazione del campo nomeMedico
+    try {
+      gestioneSeduteService.validaNomeMedico(indisponibilitaDonazioneForm.getNomeMedico());
+    } catch (IndisponibilitaDonazioneFormException e) {
+      errors.reject("NomeMedicoIndisponibilitaError", e.getMessage());
+      indisponibilitaDonazioneForm.setNomeMedico("");
     }
+
+    //Validazione del campo dataProssimaDisponibilita
+    try {
+      gestioneSeduteService.validaDataProssimaDisponibilitaDonazione(indisponibilitaDonazioneForm.getDataProssimaDisponibilita());
+    } catch (IndisponibilitaDonazioneFormException e) {
+      errors.reject("DataProssimaDisponibilitaError", e.getMessage());
+      Calendar myCalendar = new GregorianCalendar(2022, 1, 1);
+      indisponibilitaDonazioneForm.setDataProssimaDisponibilita(myCalendar.getTime());
+    }
+    return;
+  }
 }
 

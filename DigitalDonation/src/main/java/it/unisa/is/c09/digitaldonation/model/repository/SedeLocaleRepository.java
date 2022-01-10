@@ -16,16 +16,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SedeLocaleRepository extends JpaRepository<SedeLocale, Long> {
 
-    /**
-     * Permette di ottenere una sede locale a partire dal proprio codice identificativo.
-     *
-     * @param codiceIdentificativo Long che rappresenta il codice identificativo.
-     *
-     * @return Oggetto {@link SedeLocale} che rappresenta una sede locale. Può essere
-     *         null se nel database non è presente una sede locale con codice identificativo passato come parametro.
-     *
-     * @pre codiceIdentificativo != null
-     */
-    SedeLocale findSedeLocaleByCodiceIdentificativo(Long codiceIdentificativo);
+  /**
+   * Permette di ottenere una sede locale a partire dal proprio codice identificativo.
+   *
+   * @param codiceIdentificativo Long che rappresenta il codice identificativo.
+   * @return Oggetto {@link SedeLocale} che rappresenta una sede locale. Può essere
+   * null se nel database non è presente una sede locale con codice identificativo passato come parametro.
+   * @pre codiceIdentificativo != null
+   */
+  SedeLocale findSedeLocaleByCodiceIdentificativo(Long codiceIdentificativo);
 
 }

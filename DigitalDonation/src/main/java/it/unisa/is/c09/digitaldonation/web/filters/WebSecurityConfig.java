@@ -16,13 +16,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private Logger logger = Logger.getLogger(String.valueOf(WebSecurityConfig.class));
+  private Logger logger = Logger.getLogger(String.valueOf(WebSecurityConfig.class));
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/home", "/logout","/error").permitAll();
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http
+            .authorizeRequests()
+            .antMatchers("/", "/home", "/logout", "/error").permitAll();
 //                .anyRequest()
 //                .and()
 //                .formLogin()
@@ -33,6 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .permitAll()
 //                .and()
 //                .httpBasic();
-    }
+  }
 
 }
