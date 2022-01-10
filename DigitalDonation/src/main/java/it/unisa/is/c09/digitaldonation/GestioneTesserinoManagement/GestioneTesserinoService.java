@@ -113,22 +113,6 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     }
 
     /**
-     * Questo metodo permette di generare una password in seguito alla creazione del tesserino
-     *
-     * @param tesserino Il tesserino
-     * @return la password generata
-     */
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public String generaPassword(Tesserino tesserino) throws CannotSaveDataRepositoryException {
-      String password =null;
-        if(tesserino == null){
-            throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
-        }
-        return password;
-    }
-
-    /**
      * Controlla che il nome di un tesserino sia specificato e che rispetti il formato
      * prestabilito.
      *
