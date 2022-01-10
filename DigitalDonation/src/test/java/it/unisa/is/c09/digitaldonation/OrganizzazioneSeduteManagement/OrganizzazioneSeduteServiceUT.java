@@ -2,11 +2,8 @@ package it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement;
 
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaFormValidate;
 import org.junit.Test;
@@ -14,11 +11,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.validation.Errors;
+
 import static org.mockito.Mockito.when;
 import java.sql.Time;
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;

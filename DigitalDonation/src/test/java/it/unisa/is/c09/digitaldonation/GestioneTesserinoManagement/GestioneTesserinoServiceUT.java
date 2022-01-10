@@ -3,10 +3,8 @@ package it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneTesserinoError.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.GuestFormException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaFormValidate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +15,6 @@ import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;

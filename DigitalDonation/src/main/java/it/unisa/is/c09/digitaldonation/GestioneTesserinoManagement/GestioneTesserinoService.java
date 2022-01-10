@@ -2,20 +2,15 @@ package it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement;
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneTesserinoError.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotUpdateDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.GuestFormException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.SedutaFormException;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
 import it.unisa.is.c09.digitaldonation.UtenteManagement.MailSingletonSender;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.TesserinoFormValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

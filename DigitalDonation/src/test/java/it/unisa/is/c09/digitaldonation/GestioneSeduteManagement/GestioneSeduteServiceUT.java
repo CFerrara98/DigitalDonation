@@ -3,9 +3,7 @@ package it.unisa.is.c09.digitaldonation.GestioneSeduteManagement;
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
 import it.unisa.is.c09.digitaldonation.Model.Entity.*;
 import it.unisa.is.c09.digitaldonation.Model.Repository.*;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.Utils.Forms.IndisponibilitaDonazioneForm;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaFormValidate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,7 +15,6 @@ import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.when;
 
 /**
  * Classe di test di unità per il Service Gestione Sedute
