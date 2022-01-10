@@ -1,19 +1,21 @@
 package it.unisa.is.c09.digitaldonation.gestionetesserinomanagement;
 
+import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
+
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestionetesserinoerror.TesserinoFormException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.GuestFormException;
-import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
-import it.unisa.is.c09.digitaldonation.model.entity.Indisponibilita;
-import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
-import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
-import it.unisa.is.c09.digitaldonation.model.entity.Utente;
+import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
 import it.unisa.is.c09.digitaldonation.model.entity.Guest;
-import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
-import it.unisa.is.c09.digitaldonation.model.repository.UtenteRepository;
-import it.unisa.is.c09.digitaldonation.model.repository.TesserinoRepository;
+import it.unisa.is.c09.digitaldonation.model.entity.Indisponibilita;
+import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
+import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.model.entity.Utente;
 import it.unisa.is.c09.digitaldonation.model.repository.IndisponibilitaRepository;
+import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
+import it.unisa.is.c09.digitaldonation.model.repository.TesserinoRepository;
+import it.unisa.is.c09.digitaldonation.model.repository.UtenteRepository;
 import it.unisa.is.c09.digitaldonation.utentemanagement.MailSingletonSender;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +23,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
 
 /**
  * La classe fornisce i metodi per la logica di business della gestione del tesserino.
@@ -50,7 +51,9 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   @Override
   @Transactional(rollbackFor = Exception.class)
-  public Tesserino creazioneTesserino(Donatore donatore, Tesserino tesserino, Donazione donazione) throws CannotSaveDataRepositoryException {
+  public Tesserino creazioneTesserino(Donatore donatore, Tesserino tesserino,
+                                      Donazione donazione)
+          throws CannotSaveDataRepositoryException {
     if (tesserino == null || donatore == null) {
       throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
     }
@@ -64,26 +67,28 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
   }
 
   /**
-   * Questo metodo permette di dichiarare l'indisponibilità di un donatore a donare
+   * Questo metodo permette di dichiarare l'indisponibilità di un donatore a donare.
    *
    * @param indisponibilita è l'oggetto che rappresenta l'indisponibilità.
    * @return l'indisponibilità
    */
   @Override
   @Transactional(rollbackFor = Exception.class)
-  public Indisponibilita autodichiarazioneIndisponibilita(Indisponibilita indisponibilita) throws CannotSaveDataRepositoryException {
+  public Indisponibilita autodichiarazioneIndisponibilita(
+          Indisponibilita indisponibilita) throws CannotSaveDataRepositoryException {
 
-    List<Seduta> listaSedute;
     if (indisponibilita.getDataProssimaDisponibilita() == null) {
-      throw new CannotSaveDataRepositoryException("autodichiarazioneError", "Errore, la data è null");
-    } else
-      indisponibilitaRepository.save(indisponibilita);
+      throw new CannotSaveDataRepositoryException(
+              "autodichiarazioneError", "Errore, la data è null");
+    }
+    indisponibilitaRepository.save(indisponibilita);
 
-    listaSedute = sedutaRepository.findAll();
+    List<Seduta> listaSedute = sedutaRepository.findAll();
     for (Seduta s : listaSedute) {
       if (s.getDataSeduta().before(indisponibilita.getDataProssimaDisponibilita())) {
         for (int i = 0; i < s.getListaDonatore().size(); i++) {
-          if (s.getListaDonatore().get(i).getCodiceFiscale().equals(indisponibilita.getCodiceFiscaleDonatore())) {
+          if (s.getListaDonatore().get(i).getCodiceFiscale()
+                          .equals(indisponibilita.getCodiceFiscaleDonatore())) {
             s.getListaDonatore().remove(i);
             i--;
           }
@@ -104,7 +109,8 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
   @Override
   @Transactional(rollbackFor = Exception.class)
   public Tesserino aggiornaTesserino(Utente utente) throws CannotSaveDataRepositoryException {
-    Tesserino tesserino = tesserinoRepository.findByDonatoreUtenteCodiceFiscale(utente.getCodiceFiscale());
+    Tesserino tesserino = tesserinoRepository
+            .findByDonatoreUtenteCodiceFiscale(utente.getCodiceFiscale());
     if (tesserino == null) {
       throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
     }
@@ -122,10 +128,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public String validaNome(String nome) throws TesserinoFormException {
     if (nome == null) {
-      throw new TesserinoFormException("TesserinoNomeError", "Il nome non rispetta il formato.  Inserire solo caratteri alfabetici.");
+      throw new TesserinoFormException("TesserinoNomeError",
+              "Il nome non rispetta il formato.  Inserire solo caratteri alfabetici.");
     } else {
       if (!nome.matches(Donatore.NOME_COGNOME_REGEX)) {
-        throw new TesserinoFormException("TesserinoNomeError", "Il nome non rispetta il formato.  Inserire solo caratteri alfabetici.");
+        throw new TesserinoFormException("TesserinoNomeError",
+                "Il nome non rispetta il formato.  Inserire solo caratteri alfabetici.");
       } else {
         return nome;
       }
@@ -143,10 +151,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public String validaCognome(String cognome) throws TesserinoFormException {
     if (cognome == null) {
-      throw new TesserinoFormException("TesserinoCognomeError", "Il cognome non rispetta il formato. Inserire solo caratteri alfabetici.");
+      throw new TesserinoFormException("TesserinoCognomeError",
+              "Il cognome non rispetta il formato. Inserire solo caratteri alfabetici.");
     } else {
       if (!cognome.matches(Donatore.NOME_COGNOME_REGEX)) {
-        throw new TesserinoFormException("TesserinoCognomeError", "Il cognome non rispetta il formato. Inserire solo caratteri alfabetici.");
+        throw new TesserinoFormException("TesserinoCognomeError",
+                "Il cognome non rispetta il formato. Inserire solo caratteri alfabetici.");
       } else {
         return cognome;
       }
@@ -164,13 +174,16 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public String validaCodiceFiscale(String codiceFiscale) throws TesserinoFormException {
     if (codiceFiscale == null) {
-      throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
+      throw new TesserinoFormException(
+              "TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
     }
     if (!codiceFiscale.matches(Tesserino.CODICEFISCALE_REGEX)) {
-      throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
+      throw new TesserinoFormException(
+              "TesserinoCodiceFiscaleError", "Il CF non rispetta il formato.");
     }
     if ((utenteRepository.findByCodiceFiscaleUtente(codiceFiscale) != null)) {
-      throw new TesserinoFormException("TesserinoCodiceFiscaleError", "Utente con questo codice fiscale gia esistente sul database");
+      throw new TesserinoFormException("TesserinoCodiceFiscaleError",
+              "Utente con questo codice fiscale gia esistente sul database");
     }
     return codiceFiscale;
   }
@@ -181,22 +194,27 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    *
    * @param image Stringa che rappresenta l'immagine da controllare
    * @return image La stringa che rappresenta l'immagine da controllare validata
-   * @throws TesserinoFormException
+   * @throws TesserinoFormException eccezione per il tesserino
    */
   public String validaImage(String image) throws TesserinoFormException {
-    if (image == null || image.equals(""))
-      throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.");
+    if (image == null || image.equals("")) {
+      throw new TesserinoFormException("TesserinoImageError",
+              "Il formato dell’immagine non è corretto. "
+                      + "Inserire un’immagine che ha formato png o jpg.");
+    }
     String end = image.substring(image.indexOf("."));
-    if (end.matches(".png") || end.matches(".jpeg"))
+    if (end.matches(".png") || end.matches(".jpeg")) {
       return image;
-    else
-      throw new TesserinoFormException("TesserinoImageError", "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpeg.");
+    } else {
+      throw new TesserinoFormException("TesserinoImageError",
+              "Il formato dell’immagine non è corretto. "
+                      + "Inserire un’immagine che ha formato png o jpeg.");
+    }
   }
 
-
   /**
-   * Controlla che il la data di nascita di un tesserino sia specificato e che rispetti il formato
-   * prestabilito.
+   * Controlla che il la data di nascita di un tesserino
+   * sia specificato e che rispetti il formato prestabilito.
    *
    * @param dataDiNascita Stringa che rappresenta la data di nascita da controllare
    * @return dataDiNascita La stringa che rappresenta la data di nascita da controllare validata
@@ -206,17 +224,22 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
   public Date validaDataDiNascita(Date dataDiNascita) throws TesserinoFormException {
     Date date = new Date();
     if (dataDiNascita == null) {
-      throw new TesserinoFormException("TesserinoDataNscitaError", "La data non rispetta il formato. Inserire solo dati numerici e del formato dd/mm/aaaa");
+      throw new TesserinoFormException("TesserinoDataNscitaError",
+              "La data non rispetta il formato. "
+                      + "Inserire solo dati numerici e del formato dd/mm/aaaa");
     } else {
       if (!(parsDateToString(dataDiNascita).matches(Tesserino.DATARILASCIO_REGEX))) {
-        throw new TesserinoFormException("TesserinoDataNscitaError", "La data non rispetta il formato. Inserire solo dati numerici e del formato dd/mm/aaaa");
+        throw new TesserinoFormException("TesserinoDataNscitaError",
+                "La data non rispetta il formato. "
+                        + "Inserire solo dati numerici e del formato dd/mm/aaaa");
       } else if (((date.getYear()) - (dataDiNascita.getYear())) < 18) {
-        throw new TesserinoFormException("TesserinoDataNscitaError", "L’utente non è maggiorenne. Inserire una data corretta.");
+        throw new TesserinoFormException("TesserinoDataNscitaError",
+                "L’utente non è maggiorenne. "
+                        + "Inserire una data corretta.");
       }
       return dataDiNascita;
     }
   }
-
 
   /**
    * Controlla che il luogoDiNascita di un tesserino sia specificato e che rispetti il formato
@@ -229,10 +252,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public String validaLuogoDiNascita(String luogoDiNascita) throws TesserinoFormException {
     if (luogoDiNascita == null) {
-      throw new TesserinoFormException("TesserinoLuogoNascitaError", "Il luogo di nascita non rispetta il formato. Inserire solo valori alfabetici.");
+      throw new TesserinoFormException("TesserinoLuogoNascitaError",
+              "Il luogo di nascita non rispetta il formato. Inserire solo valori alfabetici.");
     } else {
       if (!luogoDiNascita.matches(Donatore.LUOGONASCITA_REGEX)) {
-        throw new TesserinoFormException("TesserinoLuogoNascitaError", "Il luogo di nascita non rispetta il formato. Inserire solo valori alfabetici.");
+        throw new TesserinoFormException("TesserinoLuogoNascitaError",
+                "Il luogo di nascita non rispetta il formato. Inserire solo valori alfabetici.");
       } else {
         return luogoDiNascita;
       }
@@ -250,10 +275,14 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public String validaResidenza(String residenza) throws TesserinoFormException {
     if (residenza == null) {
-      throw new TesserinoFormException("TesserinoResidenzaError", "La residenza non rispetta il formato. Inserire solo dati alfanumerici e segni di punteggiatura.");
+      throw new TesserinoFormException("TesserinoResidenzaError",
+              "La residenza non rispetta il formato. "
+                      + "Inserire solo dati alfanumerici e segni di punteggiatura.");
     } else {
       if (!residenza.matches(Donatore.RESIDENZA_REGEX)) {
-        throw new TesserinoFormException("TesserinoResidenzaError", "La residenza non rispetta il formato. Inserire solo dati alfanumerici e segni di punteggiatura.");
+        throw new TesserinoFormException("TesserinoResidenzaError",
+                "La residenza non rispetta il formato. "
+                        + "Inserire solo dati alfanumerici e segni di punteggiatura.");
       } else {
         return residenza;
       }
@@ -271,10 +300,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public String validaEmail(String email, String codiceFiscale) throws TesserinoFormException {
     if (email == null) {
-      throw new TesserinoFormException("TesserinoEmailError", "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
+      throw new TesserinoFormException("TesserinoEmailError",
+              "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
     } else {
       if (!email.matches(Donatore.EMAIL_REGEX)) {
-        throw new TesserinoFormException("TesserinoEmailError", "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
+        throw new TesserinoFormException("TesserinoEmailError",
+                "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
       }
       return email;
     }
@@ -291,10 +322,14 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public String validaGruppoSanguigno(String gruppoSanguigno) throws TesserinoFormException {
     if (gruppoSanguigno == null) {
-      throw new TesserinoFormException("TesserinoGruppoSanguignoError", "Il gruppo sanguigno non rispetta il formato. Il gruppo sanguigno può assumere solo valori  “0”, “A”, “B”, “AB”.");
+      throw new TesserinoFormException("TesserinoGruppoSanguignoError",
+              "Il gruppo sanguigno non rispetta il formato. "
+                      + "Il gruppo sanguigno può assumere solo valori  “0”, “A”, “B”, “AB”.");
     } else {
       if (!gruppoSanguigno.matches(Tesserino.GRUPPOSANGUIGNO_REGEX)) {
-        throw new TesserinoFormException("TesserinoGruppoSanguignoError", "Il gruppo sanguigno non rispetta il formato. Il gruppo sanguigno può assumere solo valori  “0”, “A”, “B”, “AB”.");
+        throw new TesserinoFormException("TesserinoGruppoSanguignoError",
+                "Il gruppo sanguigno non rispetta il formato. "
+                        + "Il gruppo sanguigno può assumere solo valori  “0”, “A”, “B”, “AB”.");
       } else {
         return gruppoSanguigno;
       }
@@ -305,26 +340,28 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    * Controlla che l'rh di un tesserino sia specificato e che rispetti il formato
    * prestabilito.
    *
-   * @param Rh Stringa che rappresenta l'rh da controllare
-   * @return Rh La stringa che rappresenta l'rh da controllare validato
+   * @param rh Stringa che rappresenta l'rh da controllare
+   * @return rh La stringa che rappresenta l'rh da controllare validato
    * @throws TesserinoFormException se l'rh non è specificato oppure se non
    *                                rispetta il formato {@link Tesserino#RH_REGEX}
    */
-  public String validaRh(String Rh) throws TesserinoFormException {
-    if (Rh == null) {
-      throw new TesserinoFormException("TesserinoRhError", "Il campo RH non rispetta il formato. Può assumere solo valori “POS” e “NEG”");
+  public String validaRh(String rh) throws TesserinoFormException {
+    if (rh == null) {
+      throw new TesserinoFormException("TesserinoRhError",
+              "Il campo RH non rispetta il formato. Può assumere solo valori “POS” e “NEG”");
     } else {
-      if (!Rh.matches(Tesserino.RH_REGEX)) {
-        throw new TesserinoFormException("TesserinoRhError", "Il campo RH non rispetta il formato. Può assumere solo valori “POS” e “NEG”");
+      if (!rh.matches(Tesserino.RH_REGEX)) {
+        throw new TesserinoFormException("TesserinoRhError",
+                "Il campo RH non rispetta il formato. Può assumere solo valori “POS” e “NEG”");
       } else {
-        return Rh;
+        return rh;
       }
     }
   }
 
   /**
-   * Controlla che le altre indicazioni di un tesserino siano specificate e che rispettino il formato
-   * prestabilito.
+   * Controlla che le altre indicazioni di un tesserino siano
+   * specificate e che rispettino il formato prestabilito.
    *
    * @param altreIndicazioni Stringa che rappresenta altre indicazioni da controllare
    * @return altreIndicazioni La stringa che rappresenta altre indicazioni da controllare validate
@@ -333,10 +370,14 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public String validaAltreIndicazioni(String altreIndicazioni) throws TesserinoFormException {
     if (altreIndicazioni == null) {
-      throw new TesserinoFormException("TesserinoAltreIndicazioniError", "Altre indicazioni non rispetta il formato. Inserire caratteri alfanumerici e punteggiatura.");
+      throw new TesserinoFormException("TesserinoAltreIndicazioniError",
+              "Altre indicazioni non rispetta il formato. "
+                      + "Inserire caratteri alfanumerici e punteggiatura.");
     } else {
       if (!altreIndicazioni.matches(Tesserino.ALTREINDICAZIONI_REGEX)) {
-        throw new TesserinoFormException("TesserinoAltreIndicazioniError", "Altre indicazioni non rispetta il formato. Inserire caratteri alfanumerici e punteggiatura.");
+        throw new TesserinoFormException("TesserinoAltreIndicazioniError",
+                "Altre indicazioni non rispetta il formato. "
+                        + "Inserire caratteri alfanumerici e punteggiatura.");
       } else {
         return altreIndicazioni;
       }
@@ -348,22 +389,26 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    * prestabilito.
    *
    * @param numeroMatricola Stringa che rappresenta il numero di matricola da controllare
-   * @return numeroMatricola La stringa che rappresenta il numero di matricola da controllare validato
+   * @return numeroMatricola La stringa che rappresenta
+   *         il numero di matricola da controllare validato
    * @throws TesserinoFormException se il numero di matricola non è specificato oppure se non
    *                                rispetta il formato {@link Tesserino#NUMEROMATRICOLA_REGEX}
    */
   public int validaNumeroMatricola(int numeroMatricola) throws TesserinoFormException {
     if (!(numeroMatricola != 0)) {
-      throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.");
+      throw new TesserinoFormException("TesserinoNumeroMatricolaError",
+              "Il numero di matricola non rispetta il formato. "
+                      + "Inserire solo 7 caratteri numerici.");
     } else {
       if (!String.valueOf(numeroMatricola).matches(Tesserino.NUMEROMATRICOLA_REGEX)) {
-        throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.");
+        throw new TesserinoFormException("TesserinoNumeroMatricolaError",
+                "Il numero di matricola non rispetta il formato. "
+                        + "Inserire solo 7 caratteri numerici.");
       } else {
         return numeroMatricola;
       }
     }
   }
-
 
   /**
    * Controlla che il numero di tessera di un tesserino sia specificato e che rispetti il formato
@@ -376,10 +421,14 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public int validaNumeroTessera(int numeroTessera) throws TesserinoFormException {
     if (!(numeroTessera != 0)) {
-      throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di tesserino non rispetta il formato. Inserire solo 7 caratteri numerici.");
+      throw new TesserinoFormException("TesserinoNumeroMatricolaError",
+              "Il numero di tesserino non rispetta il formato. "
+                      + "Inserire solo 7 caratteri numerici.");
     } else {
       if (!String.valueOf(numeroTessera).matches(Tesserino.NUMEROMATRICOLA_REGEX)) {
-        throw new TesserinoFormException("TesserinoNumeroMatricolaError", "Il numero di tesserino non rispetta il formato. Inserire solo 7 caratteri numerici.");
+        throw new TesserinoFormException("TesserinoNumeroMatricolaError",
+                "Il numero di tesserino non rispetta il formato. "
+                        + "Inserire solo 7 caratteri numerici.");
       } else {
         return numeroTessera;
       }
@@ -390,20 +439,28 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    * Controlla che il la data di rilascio di un tesserino sia specificato e che rispetti il formato
    * prestabilito.
    *
-   * @param dataRilascio Stringa che rappresenta la data di rialscio del tesserino da controllare
-   * @return dataRilascio La stringa che rappresenta la data di rialscio del tesserino da controllare validata
-   * @throws TesserinoFormException se la data di rilascio non è specificata oppure se non
+   * @param dataRilascio Stringa che rappresenta la data
+   *                     di rialscio del tesserino da controllare
+   * @return dataRilascio La stringa che rappresenta la data
+   *                      di rilascio del tesserino da controllare validata
+   * @throws TesserinoFormException se la data di rilascio non è
+   *                                specificata oppure se non
    *                                rispetta il formato {@link Tesserino#DATARILASCIO_REGEX}
    */
   public Date validaDataRilascio(Date dataRilascio) throws TesserinoFormException {
     Date date = new Date();
     if (dataRilascio == null) {
-      throw new TesserinoFormException("TesserinoDataRilascioError", "Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa");
+      throw new TesserinoFormException("TesserinoDataRilascioError",
+              "Data rilascio tessera non rispetta il formato. "
+                      + "La data deve avere solo valori numeri del formato: dd/mm/aaaa");
     } else {
       if (!(parsDateToString(dataRilascio).matches(Tesserino.DATARILASCIO_REGEX))) {
-        throw new TesserinoFormException("TesserinoDataRilascioError", "Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa");
+        throw new TesserinoFormException("TesserinoDataRilascioError",
+                "Data rilascio tessera non rispetta il formato. "
+                        + "La data deve avere solo valori numeri del formato: dd/mm/aaaa");
       } else if (dataRilascio.after(date)) {
-        throw new TesserinoFormException("TesserinoDataRilascioError", "Data rilascio tessera non può superare la data attuale.");
+        throw new TesserinoFormException("TesserinoDataRilascioError",
+                "Data rilascio tessera non può superare la data attuale.");
       }
       return dataRilascio;
     }
@@ -421,12 +478,17 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
   public Date validaDataDonazione(Date dataDonazione) throws TesserinoFormException {
     Date date = new Date();
     if (dataDonazione == null) {
-      throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa");
+      throw new TesserinoFormException("TesserinoTipoDonazioneError",
+              "Data donazione non rispetta il formato. "
+                      + "La data deve avere solo valori numeri del formato: dd/mm/aaaa");
     } else {
       if (!(parsDateToString(dataDonazione).matches(Tesserino.DATARILASCIO_REGEX))) {
-        throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa");
+        throw new TesserinoFormException("TesserinoTipoDonazioneError",
+                "Data donazione non rispetta il formato. "
+                        + "La data deve avere solo valori numeri del formato: dd/mm/aaaa");
       } else if (dataDonazione.after(date)) {
-        throw new TesserinoFormException("TesserinoTipoDonazioneError", "Data donazione non può superare la data attuale.");
+        throw new TesserinoFormException("TesserinoTipoDonazioneError",
+                "Data donazione non può superare la data attuale.");
       }
       return dataDonazione;
     }
@@ -443,10 +505,14 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    */
   public String validaTipoDonazione(String tipoDonazione) throws TesserinoFormException {
     if (tipoDonazione == null) {
-      throw new TesserinoFormException("TesserinoTipoDonazioneError", "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue”");
+      throw new TesserinoFormException("TesserinoTipoDonazioneError",
+              "Il campo tipo donazione non rispetta il formato. "
+                      + "Può assumere solo valori “plasma”,  “cito” e “sangue”");
     } else {
       if (!tipoDonazione.matches(Tesserino.TIPODONAZIONE_REGEX)) {
-        throw new TesserinoFormException("TesserinoTipoDonazioneError", "Il campo tipo donazione non rispetta il formato. Può assumere solo valori “plasma”,  “cito” e “sangue”");
+        throw new TesserinoFormException("TesserinoTipoDonazioneError",
+                "Il campo tipo donazione non rispetta il formato. "
+                        + "Può assumere solo valori “plasma”,  “cito” e “sangue”");
       } else {
         return tipoDonazione;
       }
@@ -467,30 +533,37 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
   }
 
   /**
-   * Controlla che il la data di prossima disponibilità presente su un tesserino sia specificata e che rispetti il formato
-   * prestabilito.
+   * Controlla che il la data di prossima disponibilità presente su
+   * un tesserino sia specificata e che rispetti il formato prestabilito.
    *
-   * @param dataProssimaDisponibilita Stringa che rappresenta la data di prossima disponibilità da controllare
-   * @return dataProssimaDisponibilita La stringa che rappresenta la data di prossima disponibilità da controllare validata
-   * @throws TesserinoFormException se  data di prossima disponibilità non è specificata oppure se non
+   * @param dataProssimaDisponibilita Stringa che rappresenta la data di
+   *                                  prossima disponibilità da controllare
+   * @return dataProssimaDisponibilita La stringa che rappresenta la data
+   *         di prossima disponibilità da controllare validata
+   * @throws TesserinoFormException se  data di prossima disponibilità
+   *                                non è specificata oppure se non
    *                                rispetta il formato {@link Tesserino#DATARILASCIO_REGEX}
    */
-  public Date validaDataProssimaDisponibilitaDonazione(Date dataProssimaDisponibilita) throws TesserinoFormException {
+  public Date validaDataProssimaDisponibilitaDonazione(Date dataProssimaDisponibilita)
+          throws TesserinoFormException {
     Date date = new Date();
     if (dataProssimaDisponibilita == null) {
-      throw new TesserinoFormException("DataProssimaDisponibilitaError", "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa");
+      throw new TesserinoFormException("DataProssimaDisponibilitaError",
+              "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa");
     } else {
       if (!(parsDateToString(dataProssimaDisponibilita).matches(Tesserino.DATARILASCIO_REGEX))) {
-        throw new TesserinoFormException("DataProssimaDisponibilitaError", "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa");
+        throw new TesserinoFormException("DataProssimaDisponibilitaError",
+                "La Data Di Prossima Disponibilità non rispetta il formato: gg/mm/aaaa");
       } else if (dataProssimaDisponibilita.before(date)) {
-        throw new TesserinoFormException("DataProssimaDisponibilitaError", "La Data Di Prossima Disponibilità non può essere antecedente a quella attuale");
+        throw new TesserinoFormException("DataProssimaDisponibilitaError",
+                "La Data Di Prossima Disponibilità non può essere antecedente a quella attuale");
       }
       return dataProssimaDisponibilita;
     }
   }
 
   /**
-   * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa
+   * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa.
    *
    * @param date data in input
    * @return stringa gg-mm-aaaa

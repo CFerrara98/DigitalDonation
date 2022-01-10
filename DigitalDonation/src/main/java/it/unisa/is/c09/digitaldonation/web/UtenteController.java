@@ -161,7 +161,7 @@ public class UtenteController {
     return "redirect:/goLogin";
   }
 
-  .  /**
+  /**
    * Metodo che permette ad un utente di effettuare il logout
    *
    * @param request è la richiesta inviata dall'utente.

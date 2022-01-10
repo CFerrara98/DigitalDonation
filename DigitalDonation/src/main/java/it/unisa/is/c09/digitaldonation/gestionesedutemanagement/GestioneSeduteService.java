@@ -68,10 +68,12 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
       throw new CannotSaveDataRepositoryException("donatoreError", "Errore, il donatore è null");
     } else if (seduta == null) {
       throw new CannotSaveDataRepositoryException("sedutaError", "Errore, la seduta è null");
-    } else if (sedutaRepository.existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(seduta.getIdSeduta(), donatore.getCodiceFiscale())) {
+    } else if (sedutaRepository.existsByIdSedutaAndListaDonatore_CodiceFiscaleUtente(
+            seduta.getIdSeduta(), donatore.getCodiceFiscale())) {
       donazione = new Donazione(seduta.getDataSeduta(), tipoDonazione);
 
-      tesserino = tesserinoRepository.findByDonatoreUtenteCodiceFiscale(donatore.getCodiceFiscale());
+      tesserino = tesserinoRepository.findByDonatoreUtenteCodiceFiscale(
+              donatore.getCodiceFiscale());
       donazione.setTesserino(tesserino);
       donazioneRepository.save(donazione);
       tesserino.addDonazione(donazione);
@@ -113,8 +115,8 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
   @Override
   @Transactional(rollbackFor = Exception.class)
   public Indisponibilita salvataggioIndisponibilita(String codiceFiscaleDonatore, Long idSeduta,
-                       IndisponibilitaDonazioneForm indisponibilitaDonazioneForm) throws CannotSaveDataRepositoryException {
-    List<Seduta> listaSedute;
+                       IndisponibilitaDonazioneForm indisponibilitaDonazioneForm)
+          throws CannotSaveDataRepositoryException {
     Indisponibilita indisponibilita = new Indisponibilita();
     Donatore donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore);
     Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
@@ -125,12 +127,13 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
     }
 
     indisponibilita.setCodiceFiscaleDonatore(codiceFiscaleDonatore);
-    indisponibilita.setDataProssimaDisponibilita(indisponibilitaDonazioneForm.
-            getDataProssimaDisponibilita());
+    indisponibilita.setDataProssimaDisponibilita(indisponibilitaDonazioneForm
+            .getDataProssimaDisponibilita());
     indisponibilita.setMotivazioni(indisponibilitaDonazioneForm.getMotivazioni());
     indisponibilita.setNomeMedico(indisponibilitaDonazioneForm.getNomeMedico());
     indisponibilitaRepository.save(indisponibilita);
 
+    List<Seduta> listaSedute;
     listaSedute = sedutaRepository.findAll();
     for (Seduta s : listaSedute) {
       if (s.getDataSeduta().before(indisponibilita.getDataProssimaDisponibilita())) {
@@ -177,7 +180,8 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
    * @param motivazioni Stringa che rappresenta le motivazioni da controllare
    * @return motivazioni La stringa che rappresenta le motivazioni da controllare validate
    * @throws IndisponibilitaDonazioneFormException se le motivazioni non sono
-   *          specificate oppure se non rispetta il formato {@link Indisponibilita#MOTIVAZIONI_REGEX}
+   *          specificate oppure se non rispetta il formato
+   *          {@link Indisponibilita#MOTIVAZIONI_REGEX}
    */
   public String validaMotivazioni(String motivazioni) throws IndisponibilitaDonazioneFormException {
     if (motivazioni == null) {
@@ -199,15 +203,19 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
    *
    * @param nomeMedico Stringa che rappresenta il nome da controllare
    * @return nomeMedico La stringa che rappresenta il nome da controllare validato
-   * @throws IndisponibilitaDonazioneFormException se il nome del medico non è specificato oppure se non
+   * @throws IndisponibilitaDonazioneFormException se il nome
+   *         del medico non è specificato oppure se non
    *         rispetta il formato {@link Indisponibilita#NOME_MEDICO_REGEX}
    */
-  public String validaNomeMedico(String nomeMedico) throws IndisponibilitaDonazioneFormException {
+  public String validaNomeMedico(String nomeMedico)
+          throws IndisponibilitaDonazioneFormException {
     if (nomeMedico == null) {
-      throw new IndisponibilitaDonazioneFormException("GuestNomeMedicoError", "Il formato del nome del medico è errato.");
+      throw new IndisponibilitaDonazioneFormException(
+              "GuestNomeMedicoError", "Il formato del nome del medico è errato.");
     } else {
       if (!nomeMedico.matches(Indisponibilita.NOME_MEDICO_REGEX)) {
-        throw new IndisponibilitaDonazioneFormException("GuestNomeMedicoError", "Il formato del nome del medico è errato.");
+        throw new IndisponibilitaDonazioneFormException("GuestNomeMedicoError",
+                "Il formato del nome del medico è errato.");
       } else {
         return nomeMedico;
       }
@@ -215,32 +223,39 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
   }
 
   /**
-   * Controlla che la data di prossima disponibilità di partecipazione ad una donazione sia specificata e che rispetti il formato
-   * prestabilito.
+   * Controlla che la data di prossima disponibilità di partecipazione ad
+   * una donazione sia specificata e che rispetti il formato prestabilito.
    *
    * @param dataProssimaDisponibilita data che rappresenta la data da controllare
-   * @return dataProssimaDisponibilita Date che rappresenta la data di prossima disponibilità di partecipazione ad una donazione
+   * @return dataProssimaDisponibilita Date che rappresenta la data di prossima
+   *         disponibilità di partecipazione ad una donazione
    * @throws IndisponibilitaDonazioneFormException se la data non è specificata oppure se non
    *          rispetta il formato
    *        {@link Indisponibilita#DATA_PROSSIMA_DISPONIBILITA_REGEX}
    */
-  public Date validaDataProssimaDisponibilitaDonazione(Date dataProssimaDisponibilita) throws IndisponibilitaDonazioneFormException {
+  public Date validaDataProssimaDisponibilitaDonazione(Date dataProssimaDisponibilita)
+          throws IndisponibilitaDonazioneFormException {
     Date date = new Date();
     if (dataProssimaDisponibilita == null) {
-      throw new IndisponibilitaDonazioneFormException("DataProssimaDisponibilitaError", "La data di prossima disponibilità inserita non rispetta il formato: gg/mm/aaaa.");
+      throw new IndisponibilitaDonazioneFormException("DataProssimaDisponibilitaError",
+              "La data di prossima disponibilità inserita non rispetta il formato: gg/mm/aaaa.");
     } else {
-      if (!(parsDateToString(dataProssimaDisponibilita).matches(Indisponibilita.DATA_PROSSIMA_DISPONIBILITA_REGEX))) {
-        throw new IndisponibilitaDonazioneFormException("DataProssimaDisponibilitaError", "La data di prossima disponibilità inserita non rispetta il formato: gg/mm/aaaa.");
+      if (!(parsDateToString(dataProssimaDisponibilita).matches(
+              Indisponibilita.DATA_PROSSIMA_DISPONIBILITA_REGEX))) {
+        throw new IndisponibilitaDonazioneFormException(
+                "DataProssimaDisponibilitaError", "La data di prossima disponibilità "
+                + "inserita non rispetta il formato: gg/mm/aaaa.");
       } else if (dataProssimaDisponibilita.before(date)) {
-        throw new IndisponibilitaDonazioneFormException("DataProssimaDisponibilitaError", "La data di prossima disponibilità inserita è minore della data corrente.");
+        throw new IndisponibilitaDonazioneFormException(
+                "DataProssimaDisponibilitaError", "La data di prossima disponibilità "
+                + "inserita è minore della data corrente.");
       }
-
       return dataProssimaDisponibilita;
     }
   }
 
   /**
-   * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa
+   * Metodo che fa parsing dalla (Date) date alla Stringa gg-mm-aaaa.
    *
    * @param date data in input
    * @return stringa gg-mm-aaaa
