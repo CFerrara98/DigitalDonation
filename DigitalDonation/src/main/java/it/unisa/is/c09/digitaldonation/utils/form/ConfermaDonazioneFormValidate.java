@@ -22,7 +22,7 @@ public class ConfermaDonazioneFormValidate implements Validator {
   private GestioneSeduteService gestioneSeduteService;
 
   @Override
-  public boolean supports(Class<?> aClass) {
+  public boolean supports(Class<?> aclass) {
     return false;
   }
 

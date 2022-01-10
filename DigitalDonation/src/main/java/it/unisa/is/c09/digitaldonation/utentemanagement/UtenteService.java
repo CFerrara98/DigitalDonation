@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 
-import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMD5.getMD5;
+import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
 
 /**
  * La classe fornisce i metodi per la logica di business della gestione delle sedute.
@@ -42,8 +42,8 @@ public class UtenteService implements UtenteServiceInterface {
     if (email == null) {
       throw new UserNotLoggedException("login", "L'email non può essere nulla.");
     }
-    String newpass = getMD5(password);
-    Utente utente = utenteRepository.findByEmailAndPassword(email, getMD5(password));
+    String newpass = getMd5(password);
+    Utente utente = utenteRepository.findByEmailAndPassword(email, getMd5(password));
     if (utente != null) {
       return utente;
     }

@@ -1,10 +1,14 @@
 package it.unisa.is.c09.digitaldonation.model.entity;
 
-import lombok.Data;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+import javax.persistence.GenerationType;
+import lombok.Data;
 
 /**
  * Classe che modella l'indisponibilità a donare di un donatore.
@@ -135,5 +139,6 @@ public class Indisponibilita implements Serializable {
   /**
    * Espressione regolare che definisce il formato del campo data prossima disponibilità.
    */
-  public static final String DATA_PROSSIMA_DISPONIBILITA_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$";
+  public static final String DATA_PROSSIMA_DISPONIBILITA_REGEX =
+          "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$";
 }

@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMD5.getMD5;
+import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
 
 /**
  * La classe fornisce i metodi per la logica di business della gestione del tesserino.
@@ -56,7 +56,7 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
       throw new CannotSaveDataRepositoryException("tesserinoError", "Errore, il tesserino è null");
     }
     String password = mailSingletonSender.sendEmailCreazioneAccount(donatore);
-    String cripted = getMD5(password);
+    String cripted = getMd5(password);
     donatore.setPassword(cripted);
     utenteRepository.save(donatore);
     tesserinoRepository.save(tesserino);

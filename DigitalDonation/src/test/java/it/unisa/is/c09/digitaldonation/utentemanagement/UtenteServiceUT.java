@@ -14,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMD5.getMD5;
+import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
@@ -138,7 +138,7 @@ public class UtenteServiceUT {
         String email = "mattiasapere66@gmail.com";
         String password = ("Mattia.123");
 
-        when(utenteRepository.findByEmailAndPassword(email, getMD5(password))).thenReturn(utente);
+        when(utenteRepository.findByEmailAndPassword(email, getMd5(password))).thenReturn(utente);
 
         try {
             utenteService.login(email, password);

@@ -1,7 +1,6 @@
 package it.unisa.is.c09.digitaldonation.utils.form;
 
 import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -33,7 +32,7 @@ public class AutodichiarazioneIndisponibilitaForm {
    * Metodo che ritorna la data di disponbilità dell'autodichiarazione di indisponibilità.
    *
    * @return dataProssimaDisponibilita e' la data di disponbilità
-   * dell'autodichiarazione di indisponibilità.
+   *         dell'autodichiarazione di indisponibilità.
    */
   public Date getDataProssimaDisponibilita() {
     return dataProssimaDisponibilita;

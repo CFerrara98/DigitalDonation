@@ -1,8 +1,7 @@
 package it.unisa.is.c09.digitaldonation.utils.form;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Classe che rappresenta l'oggetto Form di indisponibilità.
@@ -18,7 +17,8 @@ public class IndisponibilitaDonazioneForm {
    * @param motivazioni               sone le motivazioni inserite nel form.
    * @param nomeMedico                è il nome del medico inserito nel form.
    */
-  public IndisponibilitaDonazioneForm(Date dataProssimaDisponibilita, String motivazioni, String nomeMedico) {
+  public IndisponibilitaDonazioneForm(Date dataProssimaDisponibilita,
+                                      String motivazioni, String nomeMedico) {
     this.dataProssimaDisponibilita = dataProssimaDisponibilita;
     this.motivazioni = motivazioni;
     this.nomeMedico = nomeMedico;

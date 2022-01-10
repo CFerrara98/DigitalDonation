@@ -8,15 +8,15 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author Kevin Pacifico
  */
-public class CryptoByMD5 {
+public class CryptoByMd5 {
   /**
-   * Metodo che crypta la password
+   * Metodo che crypta la password.
    *
    * @param cleanPassword la password in chiaro
    * @return la password cryptata
-   * @throws NoSuchAlgorithmException
+   * @throws NoSuchAlgorithmException eccezione per l'algoritmo.
    */
-  public static String getMD5(String cleanPassword) {
+  public static String getMd5(String cleanPassword) {
     if (cleanPassword != null) {
       MessageDigest messageDigest = null;
       try {
@@ -32,7 +32,8 @@ public class CryptoByMD5 {
         sb.append(Integer.toHexString((int) (b & 0xff)));
       }
       return sb.toString();
-    } else
+    } else {
       return "";
+    }
   }
 }
