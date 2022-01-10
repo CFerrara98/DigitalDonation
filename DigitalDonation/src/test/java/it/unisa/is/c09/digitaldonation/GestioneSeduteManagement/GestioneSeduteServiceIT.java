@@ -2,6 +2,7 @@ package it.unisa.is.c09.digitaldonation.GestioneSeduteManagement;
 
 
 import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Donazione;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Seduta;
 import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
@@ -78,6 +79,7 @@ public class GestioneSeduteServiceIT {
     private Donazione donazione;
     private Tesserino tesserino;
     private Seduta seduta;
+    private Donatore donatore;
 
 
 
@@ -88,19 +90,19 @@ public class GestioneSeduteServiceIT {
 
     @Before
     public void setUp() {
-        donazioneRepository.deleteAll();
-        guestRepository.deleteAll();
-        indisponibilitaRepository.deleteAll();
-        operatoreRepository.deleteAll();
-        sedeLocaleRepository.deleteAll();
-        sedutaRepository.deleteAll();
-        tesserinoRepository.deleteAll();
-        donatoreRepository.deleteAll();
-        utenteRepository.deleteAll();
-
         donazione = new Donazione();
         tesserino = new Tesserino();
         seduta = new Seduta();
+        donatore = new Donatore();
+
+        donatore.setCodiceFiscale("ABRBAK53R70D887V");
+        donatore.setResidenza("Prova");
+        Calendar dataNascitaDonatore = new GregorianCalendar(2000, 4, 15);
+        donatore.setDataDiNascita(dataNascitaDonatore.getTime());
+        donatore.setLuogoDiNascita("Salerno");
+        //donatore.setTesserino(new Tesserino());
+        //donatore.setListaIndisponibilita();
+
 
         Calendar dataDonazione = new GregorianCalendar(2022, 4, 15);
         donazione.setDataDonazione(dataDonazione.getTime());
@@ -129,21 +131,15 @@ public class GestioneSeduteServiceIT {
         seduta.setSedeLocale(1L);
         //seduta.setListaGuest();
         //seduta.setListaDonatore();
-
-        codiceFiscale = "AFCLCW23302F362J";
-        id = 689L;
-        tipoDonazione = "Plasma";
-
-        codiceFiscaleDonatore = "AFCLCW22AV2F362J";
-        id1 = 2L;
     }
 
     @Test
     public void SalvataggioDonazione(){
-        Donazione donazioneSalvata = null;
+        donatoreRepository.save(donatore);
+        sedutaRepository.save(seduta);
+
         try {
-            assertThat(gestioneSeduteService.salvataggioDonazione(codiceFiscale, id, tipoDonazione), isNotNull());
-            //donazioneSalvata = gestioneSeduteService.salvataggioDonazione(codiceFiscale, id, tipoDonazione);
+            assertThat(gestioneSeduteService.salvataggioDonazione(donatore.getCodiceFiscale(), seduta.getIdSeduta(), "cito"), isNotNull());
         } catch (CannotSaveDataRepositoryException e) {
             e.printStackTrace();
         }
