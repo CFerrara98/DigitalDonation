@@ -43,7 +43,6 @@ public interface IndisponibilitaRepository extends JpaRepository<Indisponibilita
    */
   @Query("select i from Indisponibilita i where i.codiceFiscaleDonatore = ?1 "
           + "and i.dataProssimaDisponibilita > ?2")
-  List<Indisponibilita>
-  findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter(String codiceFiscale,
-                                                                              Date data);
+  List<Indisponibilita> findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter(
+          String codiceFiscale, Date data);
 }

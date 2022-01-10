@@ -38,7 +38,11 @@ public class GoogleDriveService implements GoogleDriveServiceInterface {
   @Value("${google.folder_id}")
   private String folderId;
 
-
+  /**
+   * Metodo che restituisce il service per la connessione a Google Drive.
+   *
+   * @return Drive è il Drive.
+   */
   public Drive getDriveService() {
     Drive service = null;
     try {
@@ -60,29 +64,19 @@ public class GoogleDriveService implements GoogleDriveServiceInterface {
     return service;
   }
 
+  /**
+   * Metodo che permette di caricare l'immagine su Drive.
+   *
+   * @param fileName è il nome del file.
+   * @param filePath è il path del file.
+   * @param mimeType è il MIME dell'immagine.
+   * @return File ritorna il File;
+   */
   @Override
   public File upLoadFile(String fileName, String filePath, String mimeType) {
     File file = new File();
     try {
       java.io.File fileUpload = new java.io.File(filePath);
-      com.google.api.services.drive.model.File fileMetadata =
-              new com.google.api.services.drive.model.File();
-      fileMetadata.setMimeType(mimeType);
-      fileMetadata.setName(fileName);
-      fileMetadata.setParents(Collections.singletonList(folderId));
-      com.google.api.client.http.FileContent fileContent = new FileContent(mimeType, fileUpload);
-      file = getDriveService().files().create(fileMetadata, fileContent)
-              .setFields("id,webContentLink,webViewLink").execute();
-    } catch (Exception e) {
-      LOGGER.error(e.getMessage());
-    }
-    return file;
-  }
-
-  @Override
-  public File upLoadFile(String fileName, java.io.File fileUpload, String mimeType) {
-    File file = new File();
-    try {
       com.google.api.services.drive.model.File fileMetadata =
               new com.google.api.services.drive.model.File();
       fileMetadata.setMimeType(mimeType);
@@ -111,5 +105,4 @@ public class GoogleDriveService implements GoogleDriveServiceInterface {
     String subPath = path.substring(path.lastIndexOf("/d/") + 3, path.lastIndexOf("/view"));
     return startingPath + subPath;
   }
-
 }

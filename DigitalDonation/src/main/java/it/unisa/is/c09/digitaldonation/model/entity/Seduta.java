@@ -5,7 +5,16 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  * Classe che modella una seduta di donazione.
@@ -38,15 +47,15 @@ public class Seduta implements Serializable {
   @Column(name = "id_sedeLocale")
   private Long sedeLocaleCodiceIdentificativo;
 
-  @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE,
-          CascadeType.REFRESH, CascadeType.DETACH})
+  @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE,
+      CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
   @JoinTable(name = "seduta_guest",
-          joinColumns = @JoinColumn(name = "id_seduta"),
-          inverseJoinColumns = @JoinColumn(name = "codice_fiscale_guest"))
+      joinColumns = @JoinColumn(name = "id_seduta"),
+      inverseJoinColumns = @JoinColumn(name = "codice_fiscale_guest"))
   private List<Guest> listaGuest = new ArrayList<>();
 
-  @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE,
-          CascadeType.REFRESH, CascadeType.DETACH})
+  @ManyToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE,
+      CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
   @JoinTable(name = "seduta_donatore",
           joinColumns = @JoinColumn(name = "id_seduta"),
           inverseJoinColumns = @JoinColumn(name = "codice_fiscale_donatore"))
