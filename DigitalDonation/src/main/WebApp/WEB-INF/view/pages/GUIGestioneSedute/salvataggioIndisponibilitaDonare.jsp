@@ -140,7 +140,7 @@
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div class="card shadow mb-4" >
-                                    <%--@elvariable id="indisponibilitaDonazioneForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.IndisponibilitaDonazioneForm"--%>
+                                        <%--@elvariable id="indisponibilitaDonazioneForm" type="it.unisa.is.c09.digitaldonation.utils.forms.IndisponibilitaDonazioneForm"--%>
                                     <form:form action="./indisponibilitaByOperatore" method="post"
                                                modelAttribute="indisponibilitaDonazioneForm" cssClass="user"
                                                enctype="application/x-www-form-urlencoded">

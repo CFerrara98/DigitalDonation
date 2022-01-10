@@ -1,15 +1,15 @@
 package it.unisa.is.c09.digitaldonation.web;
 
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.*;
-import it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement.GestioneTesserinoService;
-import it.unisa.is.c09.digitaldonation.Model.Entity.*;
-import it.unisa.is.c09.digitaldonation.Model.Repository.SedutaRepository;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
-import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestForm;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.GuestFormValidate;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaFormValidate;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.*;
+import it.unisa.is.c09.digitaldonation.gestionetesserinomanagement.GestioneTesserinoService;
+import it.unisa.is.c09.digitaldonation.model.entity.*;
+import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
+import it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement.OrganizzazioneSeduteService;
+import it.unisa.is.c09.digitaldonation.utentemanagement.UtenteService;
+import it.unisa.is.c09.digitaldonation.utils.forms.GuestForm;
+import it.unisa.is.c09.digitaldonation.utils.forms.GuestFormValidate;
+import it.unisa.is.c09.digitaldonation.utils.forms.SedutaForm;
+import it.unisa.is.c09.digitaldonation.utils.forms.SedutaFormValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

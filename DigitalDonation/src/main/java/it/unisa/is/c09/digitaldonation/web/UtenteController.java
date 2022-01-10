@@ -1,20 +1,17 @@
 package it.unisa.is.c09.digitaldonation.web;
 
-import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.AccessNotAuthorizedException;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.OrganizzazioneSeduteError.CannotSaveDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.GestioneTesserinoManagement.GestioneTesserinoService;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Donatore;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Operatore;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Tesserino;
-import it.unisa.is.c09.digitaldonation.Model.Entity.Utente;
-import it.unisa.is.c09.digitaldonation.ErroreManagement.GestioneUtenteError.UserNotLoggedException;
-import it.unisa.is.c09.digitaldonation.OrganizzazioneSeduteManagement.OrganizzazioneSeduteService;
-import it.unisa.is.c09.digitaldonation.UtenteManagement.UtenteService;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm;
-import it.unisa.is.c09.digitaldonation.Utils.Forms.LoginFormValidate;
-import org.apache.commons.lang3.RandomStringUtils;
+import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.AccessNotAuthorizedException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.gestionetesserinomanagement.GestioneTesserinoService;
+import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Operatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.model.entity.Utente;
+import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.UserNotLoggedException;
+import it.unisa.is.c09.digitaldonation.utentemanagement.UtenteService;
+import it.unisa.is.c09.digitaldonation.utils.forms.LoginForm;
+import it.unisa.is.c09.digitaldonation.utils.forms.LoginFormValidate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 

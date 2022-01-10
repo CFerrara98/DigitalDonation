@@ -43,7 +43,7 @@
                                                     creare un nuovo tesserino compilando il form sottostante</h3>
                                             </div>
 
-                                                <%--@elvariable id="tesserinoForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.TesserinoForm"--%>
+                                                <%--@elvariable id="tesserinoForm" type="it.unisa.is.c09.digitaldonation.utils.forms.TesserinoForm"--%>
                                             <form:form action="./creazioneTesserino" method="post"
                                                        modelAttribute="tesserinoForm" cssClass="user"
                                                        enctype="multipart/form-data" >
