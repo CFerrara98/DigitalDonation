@@ -1,16 +1,19 @@
 package it.unisa.is.c09.digitaldonation.gestionesedutemanagement;
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.*;
-import it.unisa.is.c09.digitaldonation.model.entity.*;
+import it.unisa.is.c09.digitaldonation.model.entity.Donazione;
+import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
+import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Indisponibilita;
 import it.unisa.is.c09.digitaldonation.model.repository.*;
 import it.unisa.is.c09.digitaldonation.utils.form.IndisponibilitaDonazioneForm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * La classe fornisce i metodi per la logica di business della gestione delle sedute.
@@ -102,8 +105,8 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
    */
   @Override
   @Transactional(rollbackFor = Exception.class)
-  public Indisponibilita salvataggioIndisponibilita(String codiceFiscaleDonatore, Long idSeduta, IndisponibilitaDonazioneForm indisponibilitaDonazioneForm) throws CannotSaveDataRepositoryException {
-
+  public Indisponibilita salvataggioIndisponibilita(String codiceFiscaleDonatore, Long idSeduta,
+                       IndisponibilitaDonazioneForm indisponibilitaDonazioneForm) throws CannotSaveDataRepositoryException {
     List<Seduta> listaSedute;
     Indisponibilita indisponibilita = new Indisponibilita();
     Donatore donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore);
@@ -115,7 +118,8 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
     }
 
     indisponibilita.setCodiceFiscaleDonatore(codiceFiscaleDonatore);
-    indisponibilita.setDataProssimaDisponibilita(indisponibilitaDonazioneForm.getDataProssimaDisponibilita());
+    indisponibilita.setDataProssimaDisponibilita(indisponibilitaDonazioneForm.
+            getDataProssimaDisponibilita());
     indisponibilita.setMotivazioni(indisponibilitaDonazioneForm.getMotivazioni());
     indisponibilita.setNomeMedico(indisponibilitaDonazioneForm.getNomeMedico());
     indisponibilitaRepository.save(indisponibilita);
@@ -142,7 +146,7 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
    * @param tipoDonazione Stringa che rappresenta il tipo di donazione da controllare
    * @return tipoDonazione La stringa che rappresenta il tipo di donazione da controllare validato
    * @throws ConfermaDonazioneFormException se il nome non è specificato oppure se non
-   *                                        rispetta il formato {@link Donazione#TIPODONAZIONE_REGEX}
+   *          rispetta il formato {@link Donazione#TIPODONAZIONE_REGEX}
    */
   public String validaTipoDonazione(String tipoDonazione) throws ConfermaDonazioneFormException {
 

@@ -7,11 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
+ * Classe che definisce le operazioni per la modellazione e l'accesso
+ * alle informazioni persistenti relative ad un utente registrato alla
+ * piattaforma.
+ *
  * @author Kevin Pacifico, Elpidio Mazza
- *        Classe che definisce le operazioni per la modellazione e l'accesso
- *        alle informazioni persistenti relative ad un utente registrato alla
- *        piattaforma.
- *        @see Donatore
+ * @see Donatore
  */
 @Repository
 public interface DonatoreRepository extends JpaRepository<Donatore, String> {
