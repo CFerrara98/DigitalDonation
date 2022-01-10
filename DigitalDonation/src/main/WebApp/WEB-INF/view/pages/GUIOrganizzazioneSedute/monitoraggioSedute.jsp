@@ -47,7 +47,8 @@
                             <h6 class="m-0 font-weight-bold text-primary">Elenco sedute da svolgersi:</h6>
                         </div>
 
-
+                <c:choose>
+                    <c:when test="${listaSedute.size() > 0}">
                         <c:forEach begin="0" end="${listaSedute.size()-1}" step="1"
                                    var="i"> <!-- controllare il dollaro -->
 
@@ -126,6 +127,11 @@
                                 <!-- fine elenco monitoraggio -->
                             </div>
                         </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <h6 align="center"> Non ci sono sedute schedulate. </h6><br>
+                    </c:otherwise>
+                </c:choose>
                     </div>
 
                 </div>
