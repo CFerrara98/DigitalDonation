@@ -80,7 +80,7 @@ public class OrganizzazioneSeduteServiceUT {
         organizzazioneSeduteService.validaIndirizzo(indirizzo);
         organizzazioneSeduteService.validaCitta(citta);
         organizzazioneSeduteService.validaProvincia(provincia);
-        organizzazioneSeduteService.validaCaP(CAP);
+        organizzazioneSeduteService.validaCap(CAP);
         organizzazioneSeduteService.validaNumeroPartecipanti(numeroPartecipanti);
         organizzazioneSeduteService.validaDataInizioPrenotazioni(sedutaForm);
         organizzazioneSeduteService.validaDataFinePrenotazioni(sedutaForm);

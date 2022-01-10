@@ -1,10 +1,10 @@
 package it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement;
 
-import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotRelaseFeedbackException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotDeleteDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotLoadDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotRelaseFeedbackException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotUpdateDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotDeleteDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.GuestFormException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.SedutaFormException;
 import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
@@ -20,16 +20,15 @@ import it.unisa.is.c09.digitaldonation.model.repository.IndisponibilitaRepositor
 import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.utentemanagement.MailSingletonSender;
 import it.unisa.is.c09.digitaldonation.utils.form.SedutaForm;
-import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * La classe fornisce i metodi per la logica di business dell'organizzazione delle sedute.
@@ -38,7 +37,6 @@ import java.util.List;
  */
 @Service
 public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceInterface {
-  private static Logger logger = Logger.getLogger(OrganizzazioneSeduteService.class);
 
   @Autowired
   private MailSingletonSender mailSingletonSender;
@@ -162,8 +160,8 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     List<Donatore> donatori = donatoreRepository.findAll();
     for (int i = 0; i < donatori.size(); i++) {
       List<Indisponibilita> indisponibilitaLista = indisponibilitaRepository
-              .findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter
-                      (donatori.get(i).getCodiceFiscale(), seduta.getDataSeduta());
+              .findIndisponibilitaByCodiceFiscaleDonatoreAndDataProssimaDisponibilitaAfter(
+                      donatori.get(i).getCodiceFiscale(), seduta.getDataSeduta());
       if (indisponibilitaLista.isEmpty()) {
         mailSingletonSender.sendEmailSchedulazioneSeduta(seduta, donatori.get(i));
       }
@@ -186,7 +184,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     SedeLocale sedeLocale = operatore.getSedeLocale();
 
     Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
-    List<Donatore> listaDonatori = seduta.getListaDonatore();
     seduta.setDataFinePrenotazione(sedutaForm.getDataFinePrenotazione());
     seduta.setDataSeduta(sedutaForm.getDataSeduta());
     seduta.setDataInizioPrenotazione(sedutaForm.getDataInizioPrenotazione());
@@ -204,6 +201,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
       throw new CannotUpdateDataRepositoryException("sedutaError",
               "La seduta da modificare non può essere null");
     }
+    List<Donatore> listaDonatori = seduta.getListaDonatore();
     for (int i = 0; i < listaDonatori.size(); i++) {
       mailSingletonSender.sendEmailModificaSeduta(seduta, listaDonatori.get(i));
     }
@@ -277,7 +275,6 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
         Indisponibilita i = listaIndisponibilitaDonatore.get(j);
         Date dataFineIndisponibilita = i.getDataProssimaDisponibilita();
         seduteDisponibili = sedutaRepository.findAllByDataSedutaAfter(dataFineIndisponibilita);
-        logger.info("Size lista sedute" + seduteDisponibili.size());
       }
     }
 
@@ -541,22 +538,22 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    * Controlla che il CAP di una seduta sia specificato e che rispetti il formato
    * prestabilito.
    *
-   * @param CAP String che rappresenta il CAP  della seduta
+   * @param cap String che rappresenta il CAP  della seduta
    * @return CAP String che provincia il CAP  della seduta
    * @throws SedutaFormException se la data non è specificata oppure se non
    *                             rispetta il formato
    *                             {@link Seduta#CAP_REGEX}
    */
-  public String validaCaP(String CaP) throws SedutaFormException {
-    if (CaP == null) {
+  public String validaCap(String cap) throws SedutaFormException {
+    if (cap == null) {
       throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto:"
               + " ammette solo 5 caratteri numerici.");
     } else {
-      if (!CaP.matches(Seduta.CAP_REGEX)) {
+      if (!cap.matches(Seduta.CAP_REGEX)) {
         throw new SedutaFormException("SedutaCAPError", "Il CAP inserito non è corretto:"
                 + "ammette solo 5 caratteri numerici.");
       }
-      return CaP;
+      return cap;
     }
   }
 
