@@ -1,6 +1,6 @@
 package it.unisa.is.c09.digitaldonation.GestioneSeduteManagement;
 
-
+/*
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -46,10 +46,13 @@ public class GestioneSeduteServiceIT {
 
     private Donatore donatore;
 
+
+ */
     /**
      * Salva la lista di donatori su database prima dell'esecuzione di ogni singolo
      * test.
      */
+    /*
     @Before
     public void salvaDonatore() {
 
@@ -67,4 +70,4 @@ public class GestioneSeduteServiceIT {
 
         donatoreRepository.save(donatore);
     }
-}
+}*/
