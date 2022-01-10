@@ -30,7 +30,7 @@ public class CannotLoadDataRepositoryException extends Exception {
 
   /**
    * Genera un'eccezione che riporta come messaggio un messaggio passato come
-   * parametro
+   * parametro.
    *
    * @param messaggio Stringa che rappresenta il messaggio da mostrare
    *                  nell'output dell'eccezione
@@ -41,7 +41,7 @@ public class CannotLoadDataRepositoryException extends Exception {
 
   /**
    * Genera un'eccezione  etichettata con parametro di discriminazione
-   * che riporta come messaggio, un messaggio passato come parametro
+   * che riporta come messaggio, un messaggio passato come parametro.
    *
    * @param target    Stringa che rappresenta il tipo di errore generato
    * @param messaggio Stringa che rappresenta il messaggio da mostrare nell'output dell'eccezione

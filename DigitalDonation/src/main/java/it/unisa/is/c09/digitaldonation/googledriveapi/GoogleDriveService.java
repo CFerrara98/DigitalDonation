@@ -8,15 +8,19 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.Collections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.Collections;
-
+/**
+ * Classe che implementa la logica di business per caricare le immagini su Google Drive.
+ *
+ * @author Elpidio Mazza
+ */
 @Service
 public class GoogleDriveService implements GoogleDriveServiceInterface {
 
@@ -32,7 +36,7 @@ public class GoogleDriveService implements GoogleDriveServiceInterface {
   private String serviceAccountKey;
 
   @Value("${google.folder_id}")
-  private String folderID;
+  private String folderId;
 
 
   public Drive getDriveService() {
@@ -47,7 +51,8 @@ public class GoogleDriveService implements GoogleDriveServiceInterface {
               .setJsonFactory(jsonFactory).setServiceAccountId(serviceAccountEmail)
               .setServiceAccountScopes(Collections.singleton(DriveScopes.DRIVE))
               .setServiceAccountPrivateKeyFromP12File(key).build();
-      service = new Drive.Builder(httpTransport, jsonFactory, credential).setApplicationName(applicationName)
+      service = new Drive.Builder(httpTransport, jsonFactory,
+              credential).setApplicationName(applicationName)
               .setHttpRequestInitializer(credential).build();
     } catch (Exception e) {
       LOGGER.error(e.getMessage());
@@ -60,10 +65,11 @@ public class GoogleDriveService implements GoogleDriveServiceInterface {
     File file = new File();
     try {
       java.io.File fileUpload = new java.io.File(filePath);
-      com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File();
+      com.google.api.services.drive.model.File fileMetadata =
+              new com.google.api.services.drive.model.File();
       fileMetadata.setMimeType(mimeType);
       fileMetadata.setName(fileName);
-      fileMetadata.setParents(Collections.singletonList(folderID));
+      fileMetadata.setParents(Collections.singletonList(folderId));
       com.google.api.client.http.FileContent fileContent = new FileContent(mimeType, fileUpload);
       file = getDriveService().files().create(fileMetadata, fileContent)
               .setFields("id,webContentLink,webViewLink").execute();
@@ -77,10 +83,11 @@ public class GoogleDriveService implements GoogleDriveServiceInterface {
   public File upLoadFile(String fileName, java.io.File fileUpload, String mimeType) {
     File file = new File();
     try {
-      com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File();
+      com.google.api.services.drive.model.File fileMetadata =
+              new com.google.api.services.drive.model.File();
       fileMetadata.setMimeType(mimeType);
       fileMetadata.setName(fileName);
-      fileMetadata.setParents(Collections.singletonList(folderID));
+      fileMetadata.setParents(Collections.singletonList(folderId));
       com.google.api.client.http.FileContent fileContent = new FileContent(mimeType, fileUpload);
       file = getDriveService().files().create(fileMetadata, fileContent)
               .setFields("id,webContentLink,webViewLink").execute();
@@ -93,12 +100,10 @@ public class GoogleDriveService implements GoogleDriveServiceInterface {
   /**
    * https://drive.google.com/file/d/18dTDFIxhBleEiayTwhtpz0oNKiuVqm7u/view?usp=drivesdk
    * https://drive.google.com/uc?export=view&id=18dTDFIxhBleEiayTwhtpz0oNKiuVqm7u
-   * <p>
-   * Example of Embedding a Google Drive Image
+   * Esempio di immagine Google Drive Image
    * Original URL: https://drive.google.com/file/d/0B6wwyazyzml-OGQ3VUo0Z2thdmc/view
-   * <p>
-   * You need to copy the ID from the original URL (the characters between the /d/ and /view), and use it in this URL:
-   * <p>
+   * Bisogna copiare l'id dall'URL originale.
+   * (tra /d e /view), e va messo nell'URL:
    * https://drive.google.com/uc?export=view&id=0B6wwyazyzml-OGQ3VUo0Z2thdmc
    */
   public String pathSavedToView(String path) {

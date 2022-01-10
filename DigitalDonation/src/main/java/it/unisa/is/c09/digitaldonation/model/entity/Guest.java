@@ -1,8 +1,10 @@
 package it.unisa.is.c09.digitaldonation.model.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Data;
-
-import javax.persistence.*;
 
 /**
  * Classe che modella un guest che partecipa a una seduta.
@@ -46,7 +48,8 @@ public class Guest {
    * @param patologie       sono le patologie del guest.
    * @param gruppoSanguigno è il gruppo sanguigno del guest.
    */
-  public Guest(String codiceFiscale, String nome, String cognome, String telefono, String patologie, String gruppoSanguigno) {
+  public Guest(String codiceFiscale, String nome, String cognome, String telefono,
+               String patologie, String gruppoSanguigno) {
     this.codiceFiscaleGuest = codiceFiscale;
     this.nome = nome;
     this.cognome = cognome;
@@ -171,7 +174,7 @@ public class Guest {
   public static final String NOME_COGNOME_REGEX = "^[a-zA-Zàòùèéìê' -]{3,20}+$";
 
   /**
-   * Espressioni regolare che definisce il formato del numero di telefono
+   * Espressioni regolare che definisce il formato del numero di telefono.
    */
   public static final String NUMERO_TELEFONO = "^\\+?(?:[0-9] ?){8,12}[0-9]$";
 
@@ -181,12 +184,12 @@ public class Guest {
   public static final String CF_REGEX = "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$";
 
   /**
-   * Espressioni regolare che definisce il formato dele patologie
+   * Espressioni regolare che definisce il formato dele patologie.
    */
   public static final String REG_PATOLOGIE = "[A-Za-z0-9 _.,!\"'\\/$\\n]{2,500}";
 
   /**
-   * Espressione regolare che definisce il formato del gruppo sanguigno
+   * Espressione regolare che definisce il formato del gruppo sanguigno.
    */
   public static final String REG_GRUPPOSANGUIGNO = "^^(0-|0\\+|A-|A\\+|B-|B\\+|AB-|AB\\+)";
 }

@@ -1,10 +1,10 @@
 package it.unisa.is.c09.digitaldonation.model.entity;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  * Classe che modella un tesserino.
@@ -33,7 +33,8 @@ public class Tesserino implements Serializable {
   @Column(name = "rh")
   private String rh;
 
-  @OneToMany()
+  @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE,
+          CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
   @JoinColumn(name = "cf_tessera", referencedColumnName = "codice_fiscale_donatore")
   private List<Donazione> listaDonazioni = new ArrayList<>();
 
@@ -69,7 +70,7 @@ public class Tesserino implements Serializable {
   }
 
   /**
-   * Metodo per aggiungere una donazione al tesserino
+   * Metodo per aggiungere una donazione al tesserino.
    *
    * @param donazione la donzaione
    */
@@ -222,42 +223,44 @@ public class Tesserino implements Serializable {
   }
 
   /**
-   * Espressione regolare che definisce il formato del campo codice fiscale
+   * Espressione regolare che definisce il formato del campo codice fiscale.
    */
-  public static final String CODICEFISCALE_REGEX = "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$";//OK es: HHOHDZ33E30A831P
+  public static final String CODICEFISCALE_REGEX =
+          "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$";
 
   /**
-   * Espressione regolare che definisce il formato del campo numero matricola
+   * Espressione regolare che definisce il formato del campo numero matricola.
    */
-  public static final String NUMEROMATRICOLA_REGEX = "^[0-9]{4,7}$";//OK es: 1234 12345 123456 1234567
+  public static final String NUMEROMATRICOLA_REGEX = "^[0-9]{4,7}$";
 
   /**
    * Espressione regolare che definisce il formato del campo data rilascio.
    */
-  public static final String DATARILASCIO_REGEX = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$";//OK es: gg/mm/aa
+  public static final String DATARILASCIO_REGEX =
+          "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$";
 
   /**
    * Espressione regolare che definisce il formato del campo rh.
    */
-  public static final String RH_REGEX = "^(POS|NEG)";//OK
+  public static final String RH_REGEX = "^(POS|NEG)";
 
   /**
    * Espressione regolare che definisce il formato del campo gruppo sanguigno.
    */
-  public static final String GRUPPOSANGUIGNO_REGEX = "^(0|A|B||AB)";//OK
+  public static final String GRUPPOSANGUIGNO_REGEX = "^(0|A|B||AB)";
 
   /**
    * Espressione regolare che definisce il formato del campo altre Indicazioni.
    */
-  public static final String ALTREINDICAZIONI_REGEX = "^[A-Za-z0-9 _.,!\'\\/$\\n]{2,500}";//OK
+  public static final String ALTREINDICAZIONI_REGEX = "^[A-Za-z0-9 _.,!\'\\/$\\n]{2,500}";
 
   /**
    * Espressione regolare che definisce il formato del campo rh.
    */
-  public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)";//OK
+  public static final String TIPODONAZIONE_REGEX = "^(plasma|cito|sangue)";
 
   /**
    * Espressione regolare che definisce il formato del campo motivazioni.
    */
-  public static final String MOTIVAZIONI_REGEX = "[A-Za-z0-9 _.,!\'\\/$\\n]{2,500}";//OK
+  public static final String MOTIVAZIONI_REGEX = "[A-Za-z0-9 _.,!\'\\/$\\n]{2,500}";
 }

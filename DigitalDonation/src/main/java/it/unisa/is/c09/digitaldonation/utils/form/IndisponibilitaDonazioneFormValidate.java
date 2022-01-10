@@ -2,13 +2,12 @@ package it.unisa.is.c09.digitaldonation.utils.form;
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.IndisponibilitaDonazioneFormException;
 import it.unisa.is.c09.digitaldonation.gestionesedutemanagement.GestioneSeduteService;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Classe che definisce un validatore per {@link IndisponibilitaDonazioneForm}.
@@ -24,7 +23,7 @@ public class IndisponibilitaDonazioneFormValidate implements Validator {
   private GestioneSeduteService gestioneSeduteService;
 
   @Override
-  public boolean supports(Class<?> aClass) {
+  public boolean supports(Class<?> aclass) {
     return false;
   }
 
@@ -38,7 +37,8 @@ public class IndisponibilitaDonazioneFormValidate implements Validator {
   @Override
   public void validate(Object target, Errors errors) {
 
-    IndisponibilitaDonazioneForm indisponibilitaDonazioneForm = (IndisponibilitaDonazioneForm) target;
+    IndisponibilitaDonazioneForm indisponibilitaDonazioneForm =
+            (IndisponibilitaDonazioneForm) target;
     gestioneSeduteService = new GestioneSeduteService();
 
     //Validazione del campo motivazioni
@@ -59,7 +59,9 @@ public class IndisponibilitaDonazioneFormValidate implements Validator {
 
     //Validazione del campo dataProssimaDisponibilita
     try {
-      gestioneSeduteService.validaDataProssimaDisponibilitaDonazione(indisponibilitaDonazioneForm.getDataProssimaDisponibilita());
+      gestioneSeduteService
+              .validaDataProssimaDisponibilitaDonazione(indisponibilitaDonazioneForm
+                      .getDataProssimaDisponibilita());
     } catch (IndisponibilitaDonazioneFormException e) {
       errors.reject("DataProssimaDisponibilitaError", e.getMessage());
       Calendar myCalendar = new GregorianCalendar(2022, 1, 1);

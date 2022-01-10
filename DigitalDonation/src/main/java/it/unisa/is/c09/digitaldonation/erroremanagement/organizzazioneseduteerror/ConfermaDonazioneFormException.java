@@ -1,7 +1,8 @@
 package it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror;
 
 /**
- * Eccezione generata in caso di parametri non validi durante l'inserimento dei campi inerenti la conferma donazione form.
+ * Eccezione generata in caso di parametri non validi durante
+ * l'inserimento dei campi inerenti la conferma donazione form.
  *
  * @author Mattia Sapere
  */
@@ -10,7 +11,7 @@ public class ConfermaDonazioneFormException extends Exception {
   private static final long serialVersionUID = 2441773366582183446L;
 
   /**
-   * Parametro indicante il tipo di errore avvenuto
+   * Parametro indicante il tipo di errore avvenuto.
    */
   private String target;
 
@@ -29,7 +30,7 @@ public class ConfermaDonazioneFormException extends Exception {
 
   /**
    * Genera un'eccezione che riporta come messaggio un messaggio passato come
-   * parametro
+   * parametro.
    *
    * @param messaggio Stringa che rappresenta il messaggio da mostrare
    *                  nell'output dell'eccezione
@@ -40,7 +41,7 @@ public class ConfermaDonazioneFormException extends Exception {
 
   /**
    * Genera un'eccezione  etichettata con parametro di discriminazione
-   * che riporta come messaggio, un messaggio passato come parametro
+   * che riporta come messaggio, un messaggio passato come parametro.
    *
    * @param target    Stringa che rappresenta il tipo di errore generato
    * @param messaggio Stringa che rappresenta il messaggio da mostrare nell'output dell'eccezione

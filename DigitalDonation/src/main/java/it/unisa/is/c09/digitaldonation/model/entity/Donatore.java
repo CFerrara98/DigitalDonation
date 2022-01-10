@@ -4,12 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.EqualsAndHashCode;
 
 /**
@@ -33,12 +29,14 @@ public class Donatore extends Utente implements Serializable {
   @Column(name = "residenza")
   private String residenza;
 
-  @OneToOne()
+  @OneToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE,
+          CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
   @JoinColumn(name = "codice_fiscale_utente",
           referencedColumnName = "codice_fiscale_donatore", nullable = true)
   private Tesserino tesserino;
 
-  @OneToMany()
+  @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE,
+          CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
   @JoinColumn(name = "codice_fiscale_donatore", nullable = true)
   private List<Indisponibilita> listaIndisponibilita = new ArrayList<>();
 

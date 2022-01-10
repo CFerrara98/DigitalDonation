@@ -1,18 +1,18 @@
 package it.unisa.is.c09.digitaldonation.utentemanagement;
 
+import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5.getMd5;
+
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.AccessNotAuthorizedException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.MailNonEsistenteException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.MailNonValidaException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.gestioneutenteerror.UserNotLoggedException;
 import it.unisa.is.c09.digitaldonation.model.entity.Utente;
 import it.unisa.is.c09.digitaldonation.model.repository.UtenteRepository;
+import java.security.NoSuchAlgorithmException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.security.NoSuchAlgorithmException;
-
-import static it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMD5.getMD5;
 
 /**
  * La classe fornisce i metodi per la logica di business della gestione delle sedute.
@@ -34,7 +34,8 @@ public class UtenteService implements UtenteServiceInterface {
    * @throws UserNotLoggedException se la coppia (email, password) non è presente nel sistema
    */
   @Override
-  public Utente login(String email, String password) throws UserNotLoggedException, NoSuchAlgorithmException {
+  public Utente login(String email, String password) throws UserNotLoggedException,
+          NoSuchAlgorithmException {
 
     if (password == null) {
       throw new UserNotLoggedException("login", "La password non è valida.");
@@ -42,8 +43,8 @@ public class UtenteService implements UtenteServiceInterface {
     if (email == null) {
       throw new UserNotLoggedException("login", "L'email non può essere nulla.");
     }
-    String newpass = getMD5(password);
-    Utente utente = utenteRepository.findByEmailAndPassword(email, getMD5(password));
+    String newpass = getMd5(password);
+    Utente utente = utenteRepository.findByEmailAndPassword(email, getMd5(password));
     if (utente != null) {
       return utente;
     }

@@ -1,14 +1,13 @@
 package it.unisa.is.c09.digitaldonation.utils.form;
 
-import it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.SedutaFormException;
+import it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement.OrganizzazioneSeduteService;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Classe che definisce un validatore per {@link SedutaForm}.
@@ -24,7 +23,7 @@ public class SedutaFormValidate implements Validator {
   private OrganizzazioneSeduteService organizzazioneSeduteService;
 
   @Override
-  public boolean supports(Class<?> aClass) {
+  public boolean supports(Class<?> aclass) {
     return false;
   }
 
@@ -77,10 +76,10 @@ public class SedutaFormValidate implements Validator {
 
     //Validazione del campo CAP
     try {
-      organizzazioneSeduteService.validaCAP(sedutaForm.getCAP());
+      organizzazioneSeduteService.validaCaP(sedutaForm.getCap());
     } catch (SedutaFormException e1) {
       errors.reject("CAPError", e1.getMessage());
-      sedutaForm.setCAP("");
+      sedutaForm.setCap("");
     }
 
     //Validazione del campo numeroPartecipanti
@@ -112,5 +111,4 @@ public class SedutaFormValidate implements Validator {
     }
     return;
   }
-
 }
