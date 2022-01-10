@@ -1,6 +1,6 @@
-<%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Utente" %>
-<%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Donatore" %>
-<%@ page import="it.unisa.is.c09.digitaldonation.Model.Entity.Operatore" %>
+<%@ page import="it.unisa.is.c09.digitaldonation.model.entity.Utente" %>
+<%@ page import="it.unisa.is.c09.digitaldonation.model.entity.Donatore" %>
+<%@ page import="it.unisa.is.c09.digitaldonation.model.entity.Operatore" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -60,7 +60,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Benvenuto in Digital Donation!</h1>
                                 </div>
 
-                                <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.LoginForm"--%>
+                                <%--@elvariable id="loginForm" type="it.unisa.is.c09.digitaldonation.utils.forms.LoginForm"--%>
                                 <form:form action="./login" method="post" modelAttribute="loginForm" cssClass="user"
                                            enctype="application/x-www-form-urlencoded">
                                 <div class="form-group">

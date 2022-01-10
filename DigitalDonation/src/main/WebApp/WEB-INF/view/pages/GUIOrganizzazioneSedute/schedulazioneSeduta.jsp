@@ -42,7 +42,7 @@
                                                     seduta</h3>
                                             </div>
 
-                                            <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.Utils.Forms.SedutaForm"--%>
+                                                <%--@elvariable id="sedutaForm" type="it.unisa.is.c09.digitaldonation.utils.forms.SedutaForm"--%>
                                             <form:form action="./schedulazioneSeduta" method="post"
                                                        modelAttribute="sedutaForm" cssClass="user"
                                                        enctype="application/x-www-form-urlencoded">
