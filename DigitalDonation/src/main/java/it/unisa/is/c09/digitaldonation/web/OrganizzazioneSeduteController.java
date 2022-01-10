@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -414,6 +415,11 @@ public class OrganizzazioneSeduteController {
       request.getSession().setAttribute("codiceErrore", 401);
       return "redirect:/error";
     }
+    LocalTime oraInizio = LocalTime.of(8,0) ;
+    sedutaForm.setOrarioInizio(oraInizio);
+
+    LocalTime oraFine = LocalTime.of(12,0) ;
+    sedutaForm.setOrarioFine(oraFine);
 
     try {
       sedutaFormValidate.validate(sedutaForm, result);

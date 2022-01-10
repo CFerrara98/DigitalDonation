@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author Kevin Pacifico, Elpidio Mazza
- *        <p>
+ *
  *        Classe che definisce le operazioni per la modellazione e l'accesso
  *        alle informazioni persistenti relative ad un tesserino.
  * @see Tesserino
