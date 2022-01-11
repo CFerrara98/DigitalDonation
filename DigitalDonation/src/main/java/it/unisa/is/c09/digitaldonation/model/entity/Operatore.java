@@ -1,7 +1,12 @@
 package it.unisa.is.c09.digitaldonation.model.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -16,7 +21,7 @@ public class Operatore extends Utente implements Serializable {
 
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "sede_locale_codice_identificativo",
-          referencedColumnName = "id_sede", nullable = true)
+          referencedColumnName = "id_sede")
   private SedeLocale sedeLocale;
 
   /**

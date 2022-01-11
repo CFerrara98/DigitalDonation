@@ -1,14 +1,18 @@
 package it.unisa.is.c09.digitaldonation.web;
 
-import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotRelaseFeedbackException;
-import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotLoadDataRepositoryException;
-import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotUpdateDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotDeleteDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotLoadDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotRelaseFeedbackException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
+import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotUpdateDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.gestionetesserinomanagement.GestioneTesserinoService;
-import it.unisa.is.c09.digitaldonation.model.entity.*;
-
-
+import it.unisa.is.c09.digitaldonation.model.entity.Donatore;
+import it.unisa.is.c09.digitaldonation.model.entity.Guest;
+import it.unisa.is.c09.digitaldonation.model.entity.Operatore;
+import it.unisa.is.c09.digitaldonation.model.entity.SedeLocale;
+import it.unisa.is.c09.digitaldonation.model.entity.Seduta;
+import it.unisa.is.c09.digitaldonation.model.entity.Tesserino;
+import it.unisa.is.c09.digitaldonation.model.entity.Utente;
 import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.organizzazionesedutemanagement.OrganizzazioneSeduteService;
 import it.unisa.is.c09.digitaldonation.utentemanagement.UtenteService;
@@ -16,14 +20,14 @@ import it.unisa.is.c09.digitaldonation.utils.form.GuestForm;
 import it.unisa.is.c09.digitaldonation.utils.form.GuestFormValidate;
 import it.unisa.is.c09.digitaldonation.utils.form.SedutaForm;
 import it.unisa.is.c09.digitaldonation.utils.form.SedutaFormValidate;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -35,9 +39,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-
-
 
 /**
  * Controller per l'organizzazione delle sedute.
@@ -164,7 +165,7 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione alla pagina delle sedute disponibile.
    */
   @RequestMapping(value = "/goSeduteDisponibili", method = RequestMethod.GET)
-  public String seduteDisponibili(HttpServletRequest request, Model model) {
+  public String visualizzaSeduteDisponibili(HttpServletRequest request, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
 
     if (!(utente instanceof Donatore) || utente == null) {
@@ -173,7 +174,7 @@ public class OrganizzazioneSeduteController {
     }
     try {
       List<Seduta> lista = organizzazioneSeduteService
-              .visualizzaElencoSeduteDisponibili(utente.getCodiceFiscale());
+              .visualizzaSeduteDisponibili(utente.getCodiceFiscale());
       model.addAttribute("listaSedutePrenotabili", lista);
     } catch (CannotLoadDataRepositoryException e) {
       e.printStackTrace();
@@ -305,7 +306,7 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione alla pagina delle sedute disponibile.
    */
   @RequestMapping(value = "/goSchedulazioneSeduta", method = RequestMethod.GET)
-  public String schedulazioneSeduta(HttpServletRequest request, Model model) {
+  public String schedulazioneSedutaGet(HttpServletRequest request, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);
@@ -520,8 +521,8 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/goEliminaSeduta", method = RequestMethod.GET)
-  public String goEliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute,
-                                Model model) {
+  public String eliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute,
+                              Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);

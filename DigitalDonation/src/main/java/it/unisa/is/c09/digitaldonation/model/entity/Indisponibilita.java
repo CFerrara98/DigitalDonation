@@ -23,9 +23,9 @@ public class Indisponibilita implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id_indisponibilita")
+  @Column(name = "id_indisponibilita", nullable = false)
   private Long idIndisponibilita;
-  @Column(name = "codice_fiscale_donatore", nullable = true)
+  @Column(name = "codice_fiscale_donatore", nullable = false)
   private String codiceFiscaleDonatore;
   @Column(name = "data_prossima_disponibilita")
   private Date dataProssimaDisponibilita;

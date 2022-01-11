@@ -23,7 +23,7 @@ public class Utente implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @Column(name = "codice_fiscale_utente")
+  @Column(name = "codice_fiscale_utente", nullable = false)
   private String codiceFiscaleUtente;
   @Column(name = "cognome")
   private String cognome;
@@ -156,14 +156,18 @@ public class Utente implements Serializable {
   /**
    * Espressione regolare che definisce il formato dell'email.
    */
-  public static final String EMAIL_REGEX = "^([^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x" +
-          "3a-\\x3c\\x3e\\x40\\x5b-\\x5d\\x7f-\\xff]+|\\x22([^\\x0d\\x22\\x5c\\x80-\\xff]|\\x" +
-          "5c[\\x00-\\x7f])*\\x22)(\\x2e([^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x3a-\\x3c\\x3e\\x" +
-          "40\\x5b-\\x5d\\x7f-\\xff]+|\\x22([^\\x0d\\x22\\x5c\\x80-\\xff]|\\x5c[\\x00-\\x7f])*\\x22))" +
-          "*\\x40([^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x3a-\\x3c\\x3e\\x40\\x5b-\\x5d\\x7f-\\xff]+" +
-          "|\\x5b([^\\\\x5b\\x5d\\x80-\\xff]|\\x5c[\\x00-\\x7f])*\\x5d)(\\x2e([^\\x00-\\x20\\x22\\x28\\x2" +
-          "9\\x2c\\x2e\\x3a-\\x3c\\x3e\\x40\\x5b-\\x5d\\x7f-\\xff]+|\\x5b([^\\x0d\\x5b-\\x5d\\x80-\\xff]|\\x5" +
-          "c[\\x00-\\x7f])*\\x5d))*$";
+  public static final String EMAIL_REGEX = "^([^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x"
+         + "3a-\\x3c\\x3e\\x40\\x5b-\\x5d\\x7f-\\xff]+|\\x22([^\\x0d\\x22\\x5c\\x80-\\xff]|\\x"
+         + "5c[\\x00-\\x7f])*\\x22)(\\x2e([^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x3a-\\x3c\\x3e\\x"
+         + "40\\x5b-\\x5d\\x7f-\\xff]+|\\x22([^\\x0d\\x22\\x5c\\x80-\\xff]|\\x5"
+         + "c[\\x00-\\x7f])*\\x22))"
+         + "*\\x40([^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x3a-\\x3c\\x3"
+         + "e\\x40\\x5b-\\x5d\\x7f-\\xff]+"
+         + "|\\x5b([^\\\\x5b\\x5d\\x80-\\xff]|\\x5c[\\x00-\\x7f])*\\x5d)"
+         + "(\\x2e([^\\x00-\\x20\\x22\\x28\\x2"
+         + "9\\x2c\\x2e\\x3a-\\x3c\\x3e\\x40\\x5b-\\x5d\\x7f-\\xff]+|\\x5b"
+         + "([^\\x0d\\x5b-\\x5d\\x80-\\xff]|\\x5"
+         + "c[\\x00-\\x7f])*\\x5d))*$";
 
   /**
    * Espressione regolare che definisce il formato del campo password.

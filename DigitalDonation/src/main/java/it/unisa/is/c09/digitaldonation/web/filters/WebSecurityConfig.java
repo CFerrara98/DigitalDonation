@@ -23,16 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http
             .authorizeRequests()
             .antMatchers("/", "/home", "/logout", "/error").permitAll();
-//                .anyRequest()
-//                .and()
-//                .formLogin()
-//                .loginPage("/goLogin")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll()
-//                .and()
-//                .httpBasic();
   }
 
 }

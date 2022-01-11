@@ -18,11 +18,10 @@ import it.unisa.is.c09.digitaldonation.model.repository.SedutaRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.TesserinoRepository;
 import it.unisa.is.c09.digitaldonation.model.repository.UtenteRepository;
 import it.unisa.is.c09.digitaldonation.utentemanagement.MailSingletonSender;
+import it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import it.unisa.is.c09.digitaldonation.utentemanagement.cryptopassword.CryptoByMd5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -310,6 +309,11 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
         throw new TesserinoFormException("TesserinoEmailError",
                 "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
       }
+      if (utenteRepository.findByEmail(email) != null) {
+        throw new TesserinoFormException("TesserinoEmailError",
+                "L’email è già stata utilizzata. "
+                        + "L’email è stata già registrata in qualche altro tesserino.");
+      }
       return email;
     }
   }
@@ -401,12 +405,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     if (!(numeroMatricola != 0)) {
       throw new TesserinoFormException("TesserinoNumeroMatricolaError",
               "Il numero di matricola non rispetta il formato. "
-                      + "Inserire solo 7 caratteri numerici.");
+                      + "Inserire solo 5 caratteri numerici.");
     } else {
       if (!String.valueOf(numeroMatricola).matches(Tesserino.NUMEROMATRICOLA_REGEX)) {
         throw new TesserinoFormException("TesserinoNumeroMatricolaError",
                 "Il numero di matricola non rispetta il formato. "
-                        + "Inserire solo 7 caratteri numerici.");
+                        + "Inserire solo 5 caratteri numerici.");
       } else {
         return numeroMatricola;
       }

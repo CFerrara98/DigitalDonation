@@ -29,6 +29,17 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
    */
   Utente findByEmailAndPassword(String email, String password);
 
+  /**
+   * Permette di ottenere un utente a partire dalla proria mail.
+   *
+   * @param email Stringa che rappresenta l'email dell'utente
+   * @return Oggetto {@link Utente} che rappresenta l'utente. <b>Può essere
+   *        null</b> se nel database non è presente un utente con email come
+   *        parametro
+   * @pre email != null
+   */
+  Utente findByEmail(String email);
+
 
   /**
    * Permette di ottenere un utente a partire dal proprio codice fiscale.
@@ -50,14 +61,6 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
   Utente save(Utente utente);
 
   /**
-   * Permette di cancellare le informazioni di un utente nel database.
-   *
-   * @param codiceFiscaleUtente Stringa che rappresenta il codice fiscale di un utente.
-   * @pre codiceFiscale != null
-   */
-  void deleteByCodiceFiscaleUtente(String codiceFiscaleUtente);
-
-  /**
    * Permette di verificare se un'utente esiste nel database attraverso la propria
    * email.
    *
@@ -66,17 +69,6 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
    * @pre email != null
    */
   boolean existsUtenteByEmail(String email);
-
-  /**
-   * Permette di ottenere un utente a partire dalla proria mail.
-   *
-   * @param email Stringa che rappresenta l'email dell'utente
-   * @return Oggetto {@link Utente} che rappresenta l'utente. <b>Può essere
-   *        null</b> se nel database non è presente un utente con email come
-   *        parametro
-   * @pre email != null
-   */
-  Utente findByEmail(String email);
 
   /**
    * Permette di verificare se un'utente esiste nel database attraverso la propria
@@ -89,5 +81,3 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
    */
   boolean existsUtenteByEmailAndPassword(String email, String password);
 }
-
-

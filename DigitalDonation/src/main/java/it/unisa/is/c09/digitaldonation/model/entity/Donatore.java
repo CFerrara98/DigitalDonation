@@ -4,8 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
-
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -30,14 +35,14 @@ public class Donatore extends Utente implements Serializable {
   private String residenza;
 
   @OneToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE,
-          CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+      CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
   @JoinColumn(name = "codice_fiscale_utente",
-          referencedColumnName = "codice_fiscale_donatore", nullable = true)
+              referencedColumnName = "codice_fiscale_donatore")
   private Tesserino tesserino;
 
-  @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE,
-          CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
-  @JoinColumn(name = "codice_fiscale_donatore", nullable = true)
+  @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE,
+      CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+  @JoinColumn(name = "codice_fiscale_donatore")
   private List<Indisponibilita> listaIndisponibilita = new ArrayList<>();
 
   /**
@@ -176,7 +181,10 @@ public class Donatore extends Utente implements Serializable {
   /**
    * Espressione regolare che definisce il formato del campo residenza.
    */
-  public static final String RESIDENZA_REGEX = "[A-Za-z0-9 _.,!\'\\/$\\n]{2,500}";
+  public static final String RESIDENZA_REGEX = "[A-Za-z,]+(['\\/.-]{0,1}[ ]{0,1}"
+         + "[A-Za-zà-ù,]+)*[a-zà-ù,]"
+         + "+([ ]{1}([ ]{0,1}[XIV]{1})+){0,1}([,]{0,1}[ ]{1}[0-9]{0,5}([\\/]([A-Za-z]"
+         + "|[0-9]{0,5})){0,1}){0,1}[,]{0,1}([ ]{1}[A-Za-zà-ù' çÇæÆñÑü,]{2,35}[ ]{1}[A-Z]{1,2})";
 
   /**
    * Espressione regolare che definisce il formato del campo di data di nascita.

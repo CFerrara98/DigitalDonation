@@ -4,7 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Classe che modella un tesserino.
@@ -17,7 +25,7 @@ public class Tesserino implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @Column(name = "codice_fiscale_donatore")
+  @Column(name = "codice_fiscale_donatore", nullable = false)
   private String donatoreUtenteCodiceFiscale;
 
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,7 +42,7 @@ public class Tesserino implements Serializable {
   private String rh;
 
   @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE,
-          CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+      CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
   @JoinColumn(name = "cf_tessera", referencedColumnName = "codice_fiscale_donatore")
   private List<Donazione> listaDonazioni = new ArrayList<>();
 
@@ -231,7 +239,7 @@ public class Tesserino implements Serializable {
   /**
    * Espressione regolare che definisce il formato del campo numero matricola.
    */
-  public static final String NUMEROMATRICOLA_REGEX = "^[0-9]{4,7}$";
+  public static final String NUMEROMATRICOLA_REGEX = "^[0-9]{5}$";
 
   /**
    * Espressione regolare che definisce il formato del campo data rilascio.

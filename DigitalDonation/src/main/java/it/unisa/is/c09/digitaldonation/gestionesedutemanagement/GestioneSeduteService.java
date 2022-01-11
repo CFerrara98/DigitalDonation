@@ -61,7 +61,6 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
     Donazione donazione = new Donazione();
     Tesserino tesserino;
     Indisponibilita indisponibilita = new Indisponibilita();
-
     Donatore donatore = donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscaleDonatore);
     Seduta seduta = sedutaRepository.findByIdSeduta(idSeduta);
     if (donatore == null) {
@@ -253,6 +252,11 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
       }
       return dataProssimaDisponibilita;
     }
+  }
+
+  public Indisponibilita salvaIndisponibilita(Indisponibilita indisponibilita) {
+    indisponibilitaRepository.save(indisponibilita);
+    return indisponibilita;
   }
 
   /**

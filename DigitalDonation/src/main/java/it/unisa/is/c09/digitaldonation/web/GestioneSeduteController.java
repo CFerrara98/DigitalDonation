@@ -89,9 +89,11 @@ public class GestioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/indisponibilitaByOperatore", method = RequestMethod.POST)
-  public String indisponibilitaByOperatorePost(HttpServletRequest request,
-                 @ModelAttribute IndisponibilitaDonazioneForm indisponibilitaDonazioneForm,
-                 RedirectAttributes redirectAttribute, BindingResult result, Model model) {
+  public String salvataggioIndisponibilita(HttpServletRequest request,
+                                           @ModelAttribute IndisponibilitaDonazioneForm
+                                                   indisponibilitaDonazioneForm,
+                                           RedirectAttributes redirectAttribute,
+                                           BindingResult result, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);

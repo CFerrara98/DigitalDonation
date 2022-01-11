@@ -76,7 +76,7 @@ public class SedutaFormValidate implements Validator {
 
     //Validazione del campo CAP
     try {
-      organizzazioneSeduteService.validaCaP(sedutaForm.getCap());
+      organizzazioneSeduteService.validaCap(sedutaForm.getCap());
     } catch (SedutaFormException e1) {
       errors.reject("CAPError", e1.getMessage());
       sedutaForm.setCap("");
