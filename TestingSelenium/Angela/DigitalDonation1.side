@@ -6181,6 +6181,18 @@
         ["xpath=//form/input", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "e41c81b6-669d-4171-910a-08b8bce2bdf5",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError:nth-child(13)",
+      "targets": [
+        ["css=.myError:nth-child(13)", "css:finder"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/span[2]", "xpath:idRelative"],
+        ["xpath=//span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'L’email è già stata utilizzata. L’email è stata già registrata in qualche altro tesserino.')]", "xpath:innerText"]
+      ],
+      "value": "L’email è già stata utilizzata. L’email è stata già registrata in qualche altro tesserino."
     }]
   }, {
     "id": "7681e086-52c1-4791-9005-5151ea3fa3fa",
@@ -6396,6 +6408,20 @@
       ],
       "value": "Salerno"
     }, {
+      "id": "1d5ef33d-a29b-4b7a-9dce-9a1aa1bdf366",
+      "comment": "",
+      "command": "click",
+      "target": "id=residenza",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "55f38558-4bfe-461f-94d8-b11545ab82b9",
+      "comment": "",
+      "command": "type",
+      "target": "id=residenza",
+      "targets": [],
+      "value": "Via Garibaldi, 44 Salerno (SA)"
+    }, {
       "id": "e18e2921-11af-4b20-8cd7-fafd5c06f162",
       "comment": "",
       "command": "click",
@@ -6422,7 +6448,7 @@
         ["xpath=//form[@id='tesserinoForm']/div/div[2]/input[2]", "xpath:idRelative"],
         ["xpath=//input[2]", "xpath:position"]
       ],
-      "value": "Via Garibaldi, 44- Salerno(SA)"
+      "value": "maripepe@gmail.com"
     }, {
       "id": "7a28ecde-3662-4f31-b70a-375e293cde3c",
       "comment": "",
@@ -6717,6 +6743,25 @@
       "target": "name=tipoDonazione",
       "targets": [],
       "value": "label=cito"
+    }, {
+      "id": "7b218623-33b8-4418-90ae-4abebbe49575",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dc6b80b4-8a1b-4890-8fcd-7d390db0152b",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError:nth-child(3)",
+      "targets": [
+        ["css=.myError:nth-child(3)", "css:finder"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[5]/span", "xpath:idRelative"],
+        ["xpath=//div[5]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Altre indicazioni non rispetta il formato. Inserire caratteri alfanumerici e punteggiatura.')]", "xpath:innerText"]
+      ],
+      "value": "Altre indicazioni non rispetta il formato. Inserire caratteri alfanumerici e punteggiatura."
     }]
   }, {
     "id": "f45b7b7c-26a7-46fa-900d-5bceff7faa76",
@@ -7450,7 +7495,7 @@
         ["xpath=//div[2]/div/div/span", "xpath:position"],
         ["xpath=//span[contains(.,'Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.')]", "xpath:innerText"]
       ],
-      "value": "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici."
+      "value": "Il numero di matricola non rispetta il formato. Inserire solo 5 caratteri numerici."
     }]
   }, {
     "id": "b8c2381f-fd6d-4186-81e0-ec331ea76349",

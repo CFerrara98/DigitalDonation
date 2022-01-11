@@ -2,14 +2,14 @@
   "id": "6f5e7d03-d6e6-4ff7-942f-18d6f9e7c845",
   "version": "2.0",
   "name": "DigitalDonation3",
-  "url": "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C",
+  "url": "http://localhost:8080/goElencoPartecipanti?idSeduta=687",
   "tests": [{
     "id": "6b1a8d62-b100-429a-a331-bf51da4d3bc5",
     "name": "Untitled",
     "commands": []
   }, {
     "id": "ce332b7b-c1ce-400c-b6a1-8c28d1021012",
-    "name": "TC_2.2_1",
+    "name": "TC_ OSD_04_1",
     "commands": [{
       "id": "576e9263-bde7-45d6-85fd-b4420b2920bb",
       "comment": "",
@@ -254,7 +254,7 @@
     }]
   }, {
     "id": "201ce73c-d4b6-4cbe-be6e-38b74c587e59",
-    "name": "TC_2.2_2",
+    "name": "TC_ OSD_04_2",
     "commands": [{
       "id": "5453a166-3ae8-466e-b4b0-1c37ada79e4f",
       "comment": "",
@@ -499,7 +499,7 @@
     }]
   }, {
     "id": "a7b8232d-28b1-47d4-9e89-2c1ae58f8f18",
-    "name": "TC_2.2_3",
+    "name": "TC_ OSD_04_3",
     "commands": [{
       "id": "831d9d2e-d131-4c2c-baa2-200b4f70454d",
       "comment": "",
@@ -715,7 +715,7 @@
     }]
   }, {
     "id": "e8e84a16-36a0-4dbe-911d-9195bee0e895",
-    "name": "TC_2.2_4",
+    "name": "TC_ OSD_04_4",
     "commands": [{
       "id": "5ee3590a-af12-4140-8b56-f3f26b5f8e88",
       "comment": "",
@@ -930,7 +930,7 @@
     }]
   }, {
     "id": "2bbd2f2c-e47b-40c7-8b67-3b92e143f9db",
-    "name": "TC_2.2_5",
+    "name": "TC_ OSD_04_5",
     "commands": [{
       "id": "e8786117-b4c1-454d-bab9-a014232b468a",
       "comment": "",
@@ -1147,12 +1147,12 @@
     }]
   }, {
     "id": "ee14bc46-4ec2-4845-b24b-5e73ac659603",
-    "name": "TC_2.2_7",
+    "name": "TC_ OSD_04_7",
     "commands": [{
       "id": "9d1f56c8-10b5-459b-b48f-ebd626402390",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/goInserimentoUtenteGuest?idSeduta=1",
+      "target": "http://localhost:8080/goInserimentoUtenteGuest?idSeduta=270",
       "targets": [],
       "value": ""
     }, {
@@ -2219,6 +2219,6 @@
     "timeout": 300,
     "tests": ["6b1a8d62-b100-429a-a331-bf51da4d3bc5"]
   }],
-  "urls": ["http://localhost:8080/goInserimentoUtenteGuest?idSeduta=1", "http://localhost:8080/goAutodichiarazioneIndisponibilita", "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C", "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=AFKIWW94S77T163B", "http://localhost:8080/goElencoPartecipanti?idSeduta=681"],
+  "urls": ["http://localhost:8080/goInserimentoUtenteGuest?idSeduta=1", "http://localhost:8080/goAutodichiarazioneIndisponibilita", "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=ACNCZY45X38I793C", "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=AFKIWW94S77T163B", "http://localhost:8080/goElencoPartecipanti?idSeduta=681", "http://localhost:8080/goIndisponibilitaByOperatore?codiceFiscale=PCFKVN01B14D390I", "http://localhost:8080/goElencoPartecipanti?idSeduta=683", "http://localhost:8080/goElencoPartecipanti?idSeduta=687"],
   "plugins": []
 }
