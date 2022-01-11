@@ -19,7 +19,7 @@ public class SedeLocale implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @Column(name = "id_sede")
+  @Column(name = "id_sede", nullable = false)
   private Long codiceIdentificativo;
   @Column(name = "via")
   private String via;

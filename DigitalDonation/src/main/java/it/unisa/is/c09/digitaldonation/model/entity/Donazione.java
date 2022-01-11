@@ -28,7 +28,7 @@ public class Donazione implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id_donazione")
+  @Column(name = "id_donazione", nullable = false)
   private Long idDonazione;
   @Column(name = "data_donazione")
   private Date dataDonazione;
@@ -37,7 +37,7 @@ public class Donazione implements Serializable {
 
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "cf_tessera",
-          referencedColumnName = "codice_fiscale_donatore", nullable = true)
+          referencedColumnName = "codice_fiscale_donatore")
   private Tesserino tesserino;
 
 

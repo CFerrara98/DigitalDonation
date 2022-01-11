@@ -69,7 +69,7 @@ public class SedutaRepositoryIT {
     public void salvaSeduta() {
 
         seduta = new Seduta();
-        //seduta.setIdSeduta(null);
+        seduta.setIdSeduta(420l);
 
         Calendar myCalendar = new GregorianCalendar(2022, 1, 2);
         seduta.setDataSeduta(myCalendar.getTime());
@@ -88,7 +88,6 @@ public class SedutaRepositoryIT {
         seduta.setListaGuest(null);
         seduta.setListaDonatore(null);
 
-        sedutaRepository.save(seduta);
     }
 
     /**
@@ -104,9 +103,9 @@ public class SedutaRepositoryIT {
 
         // Controlla che ogni seduta inserita per il test sia presente su database
         // restituendolo in base all id
-        seduta = new Seduta();
-        seduta.setIdSeduta(1l);
+        seduta = sedutaRepository.save(seduta);
         Seduta sedutaSalvata = sedutaRepository.findByIdSeduta(seduta.getIdSeduta());
+
         assertThat(seduta.getIdSeduta(), is(equalTo(sedutaSalvata.getIdSeduta())));
     }
 
@@ -119,10 +118,9 @@ public class SedutaRepositoryIT {
      */
     @Test
     public void saveDonatore() {
-        seduta = new Seduta();
-        seduta.setIdSeduta(1l);
+        //seduta = new Seduta();
         Seduta sedutaSalvata = sedutaRepository.save(seduta);
-        assertThat(seduta.getIdSeduta(), is(equalTo(sedutaSalvata.getIdSeduta())));
+        assertThat(seduta.getSedeLocale(), is(equalTo(sedutaSalvata.getSedeLocale())));
     }
 
 

@@ -329,7 +329,7 @@ public class OrganizzazioneSeduteServiceUT {
         Time orarioInizio = new Time(8,30,00);
         Time orarioFine = new Time(17,00,00);
         sedutaForm = new SedutaForm(dataSeduta, indirizzo, citta, provincia, CAP, orarioInizio, orarioFine, numeroPartecipanti, dataInizioPrenotazione, dataFinePrenotazione);
-        final String message = "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.";
+        final String message = "Il CAP inserito non è corretto:ammette solo 5 caratteri numerici.";
 
         try {
             validaCampi();

@@ -21,7 +21,7 @@ public class Operatore extends Utente implements Serializable {
 
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "sede_locale_codice_identificativo",
-          referencedColumnName = "id_sede", nullable = true)
+          referencedColumnName = "id_sede")
   private SedeLocale sedeLocale;
 
   /**

@@ -18,7 +18,7 @@ public class Guest {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @Column(name = "codice_fiscale_guest")
+  @Column(name = "codice_fiscale_guest", nullable = false)
   private String codiceFiscaleGuest;
   @Column(name = "cognome")
   private String cognome;

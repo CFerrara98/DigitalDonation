@@ -97,15 +97,13 @@ public class GestioneTesserinoServiceUT {
      */
     public void validaCampi() throws TesserinoFormException {
         tesserino = null;
-        when(tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino);
 
         Donatore donatore = new Donatore("ACNCZY45X38I793C", null, null, "test@gmai.com", null, null, null, null, null, null);
-        when(donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscale)).thenReturn(donatore);
 
         gestioneTesserinoService.validaNome(nome);
         gestioneTesserinoService.validaCognome(cognome);
         gestioneTesserinoService.validaCodiceFiscale(codiceFiscale);
-        //gestioneTesserinoService.validaImage(image);
+        gestioneTesserinoService.validaImage("src/test/java/it/unisa/is/c09/digitaldonation/OrganizzazioneSeduteManagement/test.png");
         gestioneTesserinoService.validaDataDiNascita(dataDiNascita);
         gestioneTesserinoService.validaLuogoDiNascita(luogoDiNascita);
         gestioneTesserinoService.validaResidenza(residenza);
@@ -147,7 +145,6 @@ public class GestioneTesserinoServiceUT {
         tesserino = new Tesserino();
         utente = new Utente();
         donatore = new Donatore();
-        when(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())).thenReturn(tesserino);
         final String message = "Il tesserino già esiste";
         try {
             gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
@@ -166,7 +163,6 @@ public class GestioneTesserinoServiceUT {
         tesserino = new Tesserino();
         utente = new Utente();
         donatore = new Donatore();
-        when(tesserinoRepository.findTesserinoByIdTessera(tesserino.getIdTessera())).thenReturn(null);
         when(mailSingletonSender.sendEmailCreazioneAccount(donatore)).thenReturn("123456");
         try {
             gestioneTesserinoService.creazioneTesserino(donatore, tesserino, donazione);
@@ -480,9 +476,9 @@ public class GestioneTesserinoServiceUT {
         dataDonazione = datadonazione.getTime();
         tipoDonazione = "cito";
 
-        Tesserino tesserino1 = new Tesserino();
+        Utente utente12 = new Utente();
 
-        when(tesserinoRepository.findByDonatoreUtenteCodiceFiscale(codiceFiscale)).thenReturn(tesserino1);
+        when(utenteRepository.findByCodiceFiscaleUtente(codiceFiscale)).thenReturn(utente12);
 
         final String message = "Utente con questo codice fiscale gia esistente sul database";
         try {
@@ -522,7 +518,7 @@ public class GestioneTesserinoServiceUT {
 
         final String message = "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.";
         try {
-            validaCampi();
+            gestioneTesserinoService.validaImage(null);
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
             return;
@@ -909,11 +905,11 @@ public class GestioneTesserinoServiceUT {
         Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
         dataDonazione = datadonazione.getTime();
         tipoDonazione = "cito";
-        final String message = "L’email è già stata utilizzata. L’email è stata già registrata in qualche altro tesserino";
+        final String message = "L’email è già stata utilizzata. L’email è stata già registrata "
+              + "in qualche altro tesserino.";
 
-        Donatore donatore = new Donatore();
-        donatore.setEmail(email);
-        when(donatoreRepository.findDonatoreByCodiceFiscaleUtente(codiceFiscale)).thenReturn(donatore);
+        Utente utente1 = new Utente();
+        when(utenteRepository.findByEmail(email)).thenReturn(utente1);
         try {
             gestioneTesserinoService.validaEmail(email, codiceFiscale);
         } catch (TesserinoFormException exception) {

@@ -28,7 +28,7 @@ public class Seduta implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id_seduta")
+  @Column(name = "id_seduta", nullable = false)
   private Long idSeduta;
   @Column(name = "data_fine_prenotazione")
   private Date dataFinePrenotazione;
@@ -38,7 +38,7 @@ public class Seduta implements Serializable {
   private Date dataSeduta;
   @Column(name = "luogo")
   private String luogo;
-  @Column(name = "numero_partecipanti", nullable = true)
+  @Column(name = "numero_partecipanti", nullable = false)
   private Integer numeroPartecipanti;
   @Column(name = "ora_fine")
   private Time oraFine;
