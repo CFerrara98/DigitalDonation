@@ -404,12 +404,12 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
     if (!(numeroMatricola != 0)) {
       throw new TesserinoFormException("TesserinoNumeroMatricolaError",
               "Il numero di matricola non rispetta il formato. "
-                      + "Inserire solo 7 caratteri numerici.");
+                      + "Inserire solo 5 caratteri numerici.");
     } else {
       if (!String.valueOf(numeroMatricola).matches(Tesserino.NUMEROMATRICOLA_REGEX)) {
         throw new TesserinoFormException("TesserinoNumeroMatricolaError",
                 "Il numero di matricola non rispetta il formato. "
-                        + "Inserire solo 7 caratteri numerici.");
+                        + "Inserire solo 5 caratteri numerici.");
       } else {
         return numeroMatricola;
       }

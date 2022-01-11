@@ -239,7 +239,7 @@ public class Tesserino implements Serializable {
   /**
    * Espressione regolare che definisce il formato del campo numero matricola.
    */
-  public static final String NUMEROMATRICOLA_REGEX = "^[0-9]{4,7}$";
+  public static final String NUMEROMATRICOLA_REGEX = "^[0-9]{5}$";
 
   /**
    * Espressione regolare che definisce il formato del campo data rilascio.

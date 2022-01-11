@@ -71,10 +71,7 @@
                                                             </c:choose>
                                                             <label class="custom-file-label" for="customFile">Inserisci
                                                                 la tua foto</label>
-                                                        </div>
-
-                                                        <br>
-                                                        <br>
+                                                        </div><br><br><br>
 
                                                         <div class="form-group row">
                                                             <div class="col-sm-3 mb-3 mb-sm-0">
@@ -196,14 +193,14 @@
                                                                 <form:input type="text"
                                                                             class="form-control form-control-user"
                                                                             id="residenza"
-                                                                            placeholder="es. Via Garibaldi, 45, Cava de' Tirreni, Salerno"
+                                                                            placeholder="es. Via Garibaldi, 45, Altavilla Silentina, SA"
                                                                             path="residenza"/>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <form:input type="text"
                                                                             class="form-control form-control-user is-invalid"
                                                                             id="residenza"
-                                                                            placeholder="es. Via Garibaldi, 45, Cava de' Tirreni, Salerno"
+                                                                            placeholder="es. Via Garibaldi, 45, Altavilla Silentina, SA"
                                                                             path="residenza"/>
                                                                 <span class="myError">${TesserinoResidenzaError}</span>
                                                             </c:otherwise>

@@ -38,7 +38,7 @@ public class TesserinoFormValidate implements Validator {
   @Override
   public void validate(Object target, Errors errors) {
     TesserinoForm tesserinoForm = (TesserinoForm) target;
-    //gestioneTesserinoService = new GestioneTesserinoService();
+
     //Valida Campo Nome
     try {
       gestioneTesserinoService.validaNome(tesserinoForm.getNome());
