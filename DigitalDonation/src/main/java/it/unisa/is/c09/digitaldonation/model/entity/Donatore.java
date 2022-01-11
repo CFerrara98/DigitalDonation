@@ -181,7 +181,8 @@ public class Donatore extends Utente implements Serializable {
   /**
    * Espressione regolare che definisce il formato del campo residenza.
    */
-  public static final String RESIDENZA_REGEX = "[A-Za-z,]+(['\\/.-]{0,1}[ ]{0,1}[A-Za-zà-ù,]+)*[a-zà-ù,]"
+  public static final String RESIDENZA_REGEX = "[A-Za-z,]+(['\\/.-]{0,1}[ ]{0,1}"
+         + "[A-Za-zà-ù,]+)*[a-zà-ù,]"
          + "+([ ]{1}([ ]{0,1}[XIV]{1})+){0,1}([,]{0,1}[ ]{1}[0-9]{0,5}([\\/]([A-Za-z]"
          + "|[0-9]{0,5})){0,1}){0,1}[,]{0,1}([ ]{1}[A-Za-zà-ù' çÇæÆñÑü,]{2,35}[ ]{1}[A-Z]{1,2})";
 
