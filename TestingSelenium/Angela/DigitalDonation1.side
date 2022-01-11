@@ -7975,7 +7975,7 @@
       ],
       "value": ""
     }, {
-      "id": "e6b53030-d328-4efd-9cd6-23cba6a6ea9c",
+      "id": "6c4f9059-3fb4-4e2e-9669-644342e34a79",
       "comment": "",
       "command": "assertText",
       "target": "css=.myError:nth-child(3)",
@@ -7986,6 +7986,1637 @@
         ["xpath=//span[contains(.,'Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa')]", "xpath:innerText"]
       ],
       "value": "Data rilascio tessera non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa"
+    }]
+  }, {
+    "id": "398308d9-d644-439e-b695-074e633fa531",
+    "name": "TC_ GTD_01_17",
+    "commands": [{
+      "id": "51e3de96-257a-4b0b-a49f-bc834c32c671",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/goCreazioneTesserino",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "13496cb7-51ff-4376-814d-21852558b4e3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "673x680",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4cf43c74-940c-4c1c-b2de-6be9494eadd4",
+      "comment": "",
+      "command": "click",
+      "target": "id=nomeTesserino",
+      "targets": [
+        ["id=nomeTesserino", "id"],
+        ["name=nome", "name"],
+        ["css=#nomeTesserino", "css:finder"],
+        ["xpath=//input[@id='nomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "105fb0e4-be91-4015-a8fb-a16faf228402",
+      "comment": "",
+      "command": "type",
+      "target": "id=nomeTesserino",
+      "targets": [
+        ["id=nomeTesserino", "id"],
+        ["name=nome", "name"],
+        ["css=#nomeTesserino", "css:finder"],
+        ["xpath=//input[@id='nomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Marika"
+    }, {
+      "id": "56a0b57d-2ce5-4e13-ac11-7b5220c3f533",
+      "comment": "",
+      "command": "click",
+      "target": "id=cognomeTesserino",
+      "targets": [
+        ["id=cognomeTesserino", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognomeTesserino", "css:finder"],
+        ["xpath=//input[@id='cognomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "10d61ac0-9bd3-4740-a5be-fa744131d757",
+      "comment": "",
+      "command": "type",
+      "target": "id=cognomeTesserino",
+      "targets": [
+        ["id=cognomeTesserino", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognomeTesserino", "css:finder"],
+        ["xpath=//input[@id='cognomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Pepe"
+    }, {
+      "id": "23ec5c0d-175c-432c-8404-a36b8282b217",
+      "comment": "",
+      "command": "click",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "65d5c33c-5f86-4abb-9279-07bb6d9aa4da",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0002-01-13"
+    }, {
+      "id": "fef78bdc-2d95-4c71-97f3-b657fbb41cc1",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0020-01-13"
+    }, {
+      "id": "537767c9-cf77-49ed-97c2-098c216425ce",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0200-01-13"
+    }, {
+      "id": "57572ce5-5148-46f0-9cd2-863d6391cc53",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2000-01-13"
+    }, {
+      "id": "03537a4f-778c-47a4-a046-d8763594b682",
+      "comment": "",
+      "command": "click",
+      "target": "id=codiceFiscaleTesserino",
+      "targets": [
+        ["id=codiceFiscaleTesserino", "id"],
+        ["name=codiceFiscale", "name"],
+        ["css=#codiceFiscaleTesserino", "css:finder"],
+        ["xpath=//input[@id='codiceFiscaleTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "54ea0053-35fe-4799-869c-bb2c840f6557",
+      "comment": "",
+      "command": "type",
+      "target": "id=codiceFiscaleTesserino",
+      "targets": [
+        ["id=codiceFiscaleTesserino", "id"],
+        ["name=codiceFiscale", "name"],
+        ["css=#codiceFiscaleTesserino", "css:finder"],
+        ["xpath=//input[@id='codiceFiscaleTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/input", "xpath:position"]
+      ],
+      "value": "PPEMRK00A53H703Y"
+    }, {
+      "id": "1453d422-7624-45ec-8e3f-75c848903493",
+      "comment": "",
+      "command": "click",
+      "target": "id=luogo",
+      "targets": [
+        ["id=luogo", "id"],
+        ["name=luogoNascita", "name"],
+        ["css=#luogo", "css:finder"],
+        ["xpath=//input[@id='luogo']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0f2ad533-fc75-486c-82c2-63321cfe7fde",
+      "comment": "",
+      "command": "type",
+      "target": "id=luogo",
+      "targets": [
+        ["id=luogo", "id"],
+        ["name=luogoNascita", "name"],
+        ["css=#luogo", "css:finder"],
+        ["xpath=//input[@id='luogo']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": "Salerno"
+    }, {
+      "id": "ff60620d-2d46-4b4f-8bb8-43b683ef55c8",
+      "comment": "",
+      "command": "click",
+      "target": "id=residenza",
+      "targets": [
+        ["id=residenza", "id"],
+        ["name=residenza", "name"],
+        ["css=#residenza", "css:finder"],
+        ["xpath=//input[@id='residenza']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6c8ef91-5081-472b-a08e-b3584e1fc98a",
+      "comment": "",
+      "command": "click",
+      "target": "id=residenza",
+      "targets": [
+        ["id=residenza", "id"],
+        ["name=residenza", "name"],
+        ["css=#residenza", "css:finder"],
+        ["xpath=//input[@id='residenza']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b0230eb1-964d-4262-87f5-472ceca30caa",
+      "comment": "",
+      "command": "click",
+      "target": "id=residenza",
+      "targets": [
+        ["id=residenza", "id"],
+        ["name=residenza", "name"],
+        ["css=#residenza", "css:finder"],
+        ["xpath=//input[@id='residenza']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f6fcb400-6a6a-438e-89e7-3cc9fd31a7e4",
+      "comment": "",
+      "command": "type",
+      "target": "id=residenza",
+      "targets": [
+        ["id=residenza", "id"],
+        ["name=residenza", "name"],
+        ["css=#residenza", "css:finder"],
+        ["xpath=//input[@id='residenza']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div/div[2]/input", "xpath:position"]
+      ],
+      "value": "Via Garibaldi, 44 Salerno (SA)"
+    }, {
+      "id": "3606adc1-228c-4adc-a5d0-84dbf07d7619",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b0fd927e-8c0b-414f-b633-cd0965d76322",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "maripepe@gmail.com"
+    }, {
+      "id": "fff4129a-85c4-408d-b476-234403845159",
+      "comment": "",
+      "command": "click",
+      "target": "id=rh",
+      "targets": [
+        ["id=rh", "id"],
+        ["name=rh", "name"],
+        ["css=#rh", "css:finder"],
+        ["xpath=//select[@id='rh']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[4]/div/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ebbef3d4-0b7c-483f-9a9f-c51a36ec7865",
+      "comment": "",
+      "command": "select",
+      "target": "id=rh",
+      "targets": [],
+      "value": "label=POS"
+    }, {
+      "id": "fc0266de-3094-4e89-a7fd-d3a326e6f875",
+      "comment": "",
+      "command": "click",
+      "target": "id=gruppoSanguigno",
+      "targets": [
+        ["id=gruppoSanguigno", "id"],
+        ["name=gruppoSanguigno", "name"],
+        ["css=.col-sm-5 > #gruppoSanguigno", "css:finder"],
+        ["xpath=//select[@id='gruppoSanguigno']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[4]/div/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7981afe1-b11b-4df9-a1a2-de930ac1230c",
+      "comment": "",
+      "command": "click",
+      "target": "id=altreIndicazioni",
+      "targets": [
+        ["id=altreIndicazioni", "id"],
+        ["name=altreIndicazioni", "name"],
+        ["css=#altreIndicazioni", "css:finder"],
+        ["xpath=//textarea[@id='altreIndicazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[5]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "75934220-1a3f-4163-a5c7-440336fd053a",
+      "comment": "",
+      "command": "type",
+      "target": "id=altreIndicazioni",
+      "targets": [
+        ["id=altreIndicazioni", "id"],
+        ["name=altreIndicazioni", "name"],
+        ["css=#altreIndicazioni", "css:finder"],
+        ["xpath=//textarea[@id='altreIndicazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[5]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Nessuno"
+    }, {
+      "id": "ff69c3e4-f82e-42d6-87ee-021b521e8ebb",
+      "comment": "",
+      "command": "click",
+      "target": "id=numeroMatricola",
+      "targets": [
+        ["id=numeroMatricola", "id"],
+        ["name=numeroMatricola", "name"],
+        ["css=#numeroMatricola", "css:finder"],
+        ["xpath=//input[@id='numeroMatricola']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fc69db15-4a30-4b5a-8018-466119a5605c",
+      "comment": "",
+      "command": "type",
+      "target": "id=numeroMatricola",
+      "targets": [
+        ["id=numeroMatricola", "id"],
+        ["name=numeroMatricola", "name"],
+        ["css=#numeroMatricola", "css:finder"],
+        ["xpath=//input[@id='numeroMatricola']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "53453"
+    }, {
+      "id": "2d707aea-610c-4803-8c9a-2c0c64d1a387",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e197fc47-d9e2-472d-a66e-b69ec951b47e",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "647b7cc2-a46b-4585-b992-cfadb629efe5",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ec6910b-fd5a-4f4a-bd3b-927d40882995",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "0002-12-11"
+    }, {
+      "id": "030fdd5b-f8b6-4988-b91c-1dfcffdb7fc7",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "0020-12-11"
+    }, {
+      "id": "100da9d1-b902-4217-bb2b-148c1767a856",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "0203-12-11"
+    }, {
+      "id": "ab6944d1-57b5-4242-9cee-7aa8b78f5a87",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "2030-12-11"
+    }, {
+      "id": "e2aabeea-9a9b-4725-aadc-3d1cf214f7ba",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d7a98720-b1ac-4570-939a-c32bcf5602fb",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "79106514-48a7-4acf-b4d1-6a6b81722f86",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "0002-07-11"
+    }, {
+      "id": "b0e381d8-637c-4809-9124-2b10b46c0046",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "0020-07-11"
+    }, {
+      "id": "05d64d5f-956d-48cf-9b8b-79bce49205b2",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "0202-07-11"
+    }, {
+      "id": "f03d0af6-04b6-497b-a6ed-be4726bb8d86",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "2021-07-11"
+    }, {
+      "id": "86960d5b-9cdf-49f9-b704-214c31b23669",
+      "comment": "",
+      "command": "click",
+      "target": "name=tipoDonazione",
+      "targets": [
+        ["name=tipoDonazione", "name"],
+        ["css=.col-sm-12 > #gruppoSanguigno", "css:finder"],
+        ["xpath=(//select[@id='gruppoSanguigno'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b4ec4054-2329-420d-bcfb-ebb16060d6f3",
+      "comment": "",
+      "command": "select",
+      "target": "name=tipoDonazione",
+      "targets": [],
+      "value": "label=cito"
+    }, {
+      "id": "8a5794ac-ea7e-432c-89d7-b9fb5d324b8f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [
+        ["css=.btn-user", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2fa8e202-3e78-4f44-828f-4cc7d42157d3",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError:nth-child(3)",
+      "targets": [
+        ["css=.myError:nth-child(3)", "css:finder"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/span", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Data rilascio tessera non può superare la data attuale.')]", "xpath:innerText"]
+      ],
+      "value": "Data rilascio tessera non può superare la data attuale."
+    }]
+  }, {
+    "id": "962c717d-9c3e-47ce-9c2a-0ffe6ef2d581",
+    "name": "TC_ GTD_01_18",
+    "commands": [{
+      "id": "10c2fb9a-ed2c-4884-ae95-049293f83c3b",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/goCreazioneTesserino",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fde14eb9-4e68-4c3e-9ca9-9c701b0aeafa",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "674x680",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7e5fc1a1-eecb-4cbc-98db-b572abc1024f",
+      "comment": "",
+      "command": "click",
+      "target": "id=nomeTesserino",
+      "targets": [
+        ["id=nomeTesserino", "id"],
+        ["name=nome", "name"],
+        ["css=#nomeTesserino", "css:finder"],
+        ["xpath=//input[@id='nomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a815efb2-9219-4298-885a-f004291fbd57",
+      "comment": "",
+      "command": "type",
+      "target": "id=nomeTesserino",
+      "targets": [
+        ["id=nomeTesserino", "id"],
+        ["name=nome", "name"],
+        ["css=#nomeTesserino", "css:finder"],
+        ["xpath=//input[@id='nomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Marika"
+    }, {
+      "id": "55806713-b916-4b7e-91e0-b538168806e0",
+      "comment": "",
+      "command": "click",
+      "target": "id=cognomeTesserino",
+      "targets": [
+        ["id=cognomeTesserino", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognomeTesserino", "css:finder"],
+        ["xpath=//input[@id='cognomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "19f98749-e58d-424d-a8f5-3e1184ef03ad",
+      "comment": "",
+      "command": "type",
+      "target": "id=cognomeTesserino",
+      "targets": [
+        ["id=cognomeTesserino", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognomeTesserino", "css:finder"],
+        ["xpath=//input[@id='cognomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Pepe"
+    }, {
+      "id": "39ab0442-32e0-4c22-9bc3-c0ca9d79bff4",
+      "comment": "",
+      "command": "click",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a836fadc-deb4-4639-a120-abf4ada0d40d",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0002-01-13"
+    }, {
+      "id": "6b7e3046-fa97-42ea-9f9e-04aa5e6c5224",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0020-01-13"
+    }, {
+      "id": "e1ffe61f-e94c-4dd9-8b1c-758a76548afc",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0200-01-13"
+    }, {
+      "id": "3c1f449d-b4ca-454a-81c9-95912a577481",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2000-01-13"
+    }, {
+      "id": "f5aafb5d-c9c9-4c00-8e4d-31f8a3b1c69a",
+      "comment": "",
+      "command": "click",
+      "target": "id=codiceFiscaleTesserino",
+      "targets": [
+        ["id=codiceFiscaleTesserino", "id"],
+        ["name=codiceFiscale", "name"],
+        ["css=#codiceFiscaleTesserino", "css:finder"],
+        ["xpath=//input[@id='codiceFiscaleTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "42d96c1c-248d-440f-afaa-dfb947456d82",
+      "comment": "",
+      "command": "type",
+      "target": "id=codiceFiscaleTesserino",
+      "targets": [
+        ["id=codiceFiscaleTesserino", "id"],
+        ["name=codiceFiscale", "name"],
+        ["css=#codiceFiscaleTesserino", "css:finder"],
+        ["xpath=//input[@id='codiceFiscaleTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/input", "xpath:position"]
+      ],
+      "value": "PPEMRK00A53H703Y"
+    }, {
+      "id": "5e885de9-5053-40e3-8dba-d79f3fedece7",
+      "comment": "",
+      "command": "click",
+      "target": "id=luogo",
+      "targets": [
+        ["id=luogo", "id"],
+        ["name=luogoNascita", "name"],
+        ["css=#luogo", "css:finder"],
+        ["xpath=//input[@id='luogo']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "73623bae-8d7b-4d77-81d9-580ebfcd9a2b",
+      "comment": "",
+      "command": "type",
+      "target": "id=luogo",
+      "targets": [
+        ["id=luogo", "id"],
+        ["name=luogoNascita", "name"],
+        ["css=#luogo", "css:finder"],
+        ["xpath=//input[@id='luogo']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": "Salerno"
+    }, {
+      "id": "8061aba8-8a8a-4167-96e9-07cd1955a730",
+      "comment": "",
+      "command": "click",
+      "target": "id=residenza",
+      "targets": [
+        ["id=residenza", "id"],
+        ["name=residenza", "name"],
+        ["css=#residenza", "css:finder"],
+        ["xpath=//input[@id='residenza']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "39bb6fce-4ff0-4fe8-97dc-490449667dc4",
+      "comment": "",
+      "command": "type",
+      "target": "id=residenza",
+      "targets": [
+        ["id=residenza", "id"],
+        ["name=residenza", "name"],
+        ["css=#residenza", "css:finder"],
+        ["xpath=//input[@id='residenza']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div/div[2]/input", "xpath:position"]
+      ],
+      "value": "Via Garibaldi, 44 Salerno (SA)"
+    }, {
+      "id": "43baf2f0-7ed1-4a4e-a1bf-246616c53719",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "60582c99-f0d7-4de8-8cf9-a48d45507175",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6dc9d3ed-ecb9-4954-b519-6b17b5112367",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "maripepe@gmail.com"
+    }, {
+      "id": "7e781fff-1810-44df-abef-c9f16687e291",
+      "comment": "",
+      "command": "click",
+      "target": "id=gruppoSanguigno",
+      "targets": [
+        ["id=gruppoSanguigno", "id"],
+        ["name=gruppoSanguigno", "name"],
+        ["css=.col-sm-5 > #gruppoSanguigno", "css:finder"],
+        ["xpath=//select[@id='gruppoSanguigno']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[4]/div/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f3c2a529-fd52-4211-8901-80dd2d71fd8b",
+      "comment": "",
+      "command": "click",
+      "target": "id=rh",
+      "targets": [
+        ["id=rh", "id"],
+        ["name=rh", "name"],
+        ["css=#rh", "css:finder"],
+        ["xpath=//select[@id='rh']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[4]/div/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "824a8de0-3212-4a6b-a5ed-6f372a26ab74",
+      "comment": "",
+      "command": "select",
+      "target": "id=rh",
+      "targets": [],
+      "value": "label=POS"
+    }, {
+      "id": "78b437f1-ddc3-4ed2-886d-a57a9fe8ce54",
+      "comment": "",
+      "command": "click",
+      "target": "id=altreIndicazioni",
+      "targets": [
+        ["id=altreIndicazioni", "id"],
+        ["name=altreIndicazioni", "name"],
+        ["css=#altreIndicazioni", "css:finder"],
+        ["xpath=//textarea[@id='altreIndicazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[5]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5387dac3-5b4a-48d1-891c-8ed9d3b32878",
+      "comment": "",
+      "command": "type",
+      "target": "id=altreIndicazioni",
+      "targets": [
+        ["id=altreIndicazioni", "id"],
+        ["name=altreIndicazioni", "name"],
+        ["css=#altreIndicazioni", "css:finder"],
+        ["xpath=//textarea[@id='altreIndicazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[5]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Nessuno"
+    }, {
+      "id": "2be67c6d-9c51-4c6c-b64a-51ac92f378f4",
+      "comment": "",
+      "command": "click",
+      "target": "id=numeroMatricola",
+      "targets": [
+        ["id=numeroMatricola", "id"],
+        ["name=numeroMatricola", "name"],
+        ["css=#numeroMatricola", "css:finder"],
+        ["xpath=//input[@id='numeroMatricola']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "692d5b3c-f6a8-4a90-b63d-e421a9ec55fb",
+      "comment": "",
+      "command": "type",
+      "target": "id=numeroMatricola",
+      "targets": [
+        ["id=numeroMatricola", "id"],
+        ["name=numeroMatricola", "name"],
+        ["css=#numeroMatricola", "css:finder"],
+        ["xpath=//input[@id='numeroMatricola']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "53453"
+    }, {
+      "id": "1889df97-da53-4c3c-961b-81aabe962b89",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b65e83eb-b9d5-46c5-82c0-eaf5f524f57e",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "0002-10-13"
+    }, {
+      "id": "d9279d77-9856-4a60-9750-3a28f47dd10a",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "0020-10-13"
+    }, {
+      "id": "fefdaa26-f080-4fa3-8bd2-8ebbe3775632",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "0202-10-13"
+    }, {
+      "id": "6bcf664f-3321-4e91-929b-6ccc7a5fc4a6",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "2020-10-13"
+    }, {
+      "id": "1bb8a42b-4846-4a99-a814-ae0e2b0ee765",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2a3f4e6b-7335-4797-80a5-8983336a43d1",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "ieri"
+    }, {
+      "id": "5cb36764-d06e-4aa4-9293-b5eb0691b103",
+      "comment": "",
+      "command": "click",
+      "target": "name=tipoDonazione",
+      "targets": [
+        ["name=tipoDonazione", "name"],
+        ["css=.col-sm-12 > #gruppoSanguigno", "css:finder"],
+        ["xpath=(//select[@id='gruppoSanguigno'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fbbba77a-d0eb-4fb2-9428-1614a767ca04",
+      "comment": "",
+      "command": "click",
+      "target": "name=tipoDonazione",
+      "targets": [
+        ["name=tipoDonazione", "name"],
+        ["css=.col-sm-12 > #gruppoSanguigno", "css:finder"],
+        ["xpath=(//select[@id='gruppoSanguigno'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6d27761-f253-4cc3-81c5-2563d713285e",
+      "comment": "",
+      "command": "select",
+      "target": "name=tipoDonazione",
+      "targets": [],
+      "value": "label=cito"
+    }, {
+      "id": "029cb74c-a809-4a11-82d4-a987c1207ed0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [
+        ["css=.btn-user", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c06e0c7-550a-4396-9a2d-1b40fb902d21",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError:nth-child(3)",
+      "targets": [
+        ["css=.myError:nth-child(3)", "css:finder"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa')]", "xpath:innerText"]
+      ],
+      "value": "Data donazione non rispetta il formato. La data deve avere solo valori numeri del formato: dd/mm/aaaa"
+    }]
+  }, {
+    "id": "e7666c1d-597d-417c-8156-2835ee098ccc",
+    "name": "TC_ GTD_01_19 ",
+    "commands": [{
+      "id": "03c4d97b-2b60-4b00-8c4c-22c58c745f34",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/goCreazioneTesserino",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3216cae5-80fe-4aed-8cb0-d49b71146876",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "676x680",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6417411d-eec4-4f68-8711-a42264441608",
+      "comment": "",
+      "command": "click",
+      "target": "id=nomeTesserino",
+      "targets": [
+        ["id=nomeTesserino", "id"],
+        ["name=nome", "name"],
+        ["css=#nomeTesserino", "css:finder"],
+        ["xpath=//input[@id='nomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fc2232b8-ad8e-41c9-a15f-52a96329e28f",
+      "comment": "",
+      "command": "type",
+      "target": "id=nomeTesserino",
+      "targets": [
+        ["id=nomeTesserino", "id"],
+        ["name=nome", "name"],
+        ["css=#nomeTesserino", "css:finder"],
+        ["xpath=//input[@id='nomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Marika"
+    }, {
+      "id": "9b80971b-20c9-4f46-8f36-0e5e2a0b8b7b",
+      "comment": "",
+      "command": "click",
+      "target": "id=cognomeTesserino",
+      "targets": [
+        ["id=cognomeTesserino", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognomeTesserino", "css:finder"],
+        ["xpath=//input[@id='cognomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "53dacedf-99cc-4169-8435-cfd70c65d1a8",
+      "comment": "",
+      "command": "type",
+      "target": "id=cognomeTesserino",
+      "targets": [
+        ["id=cognomeTesserino", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognomeTesserino", "css:finder"],
+        ["xpath=//input[@id='cognomeTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Pepe"
+    }, {
+      "id": "6d297a4b-b7bf-4de0-8fa9-7de555b9b7b4",
+      "comment": "",
+      "command": "click",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0bbe27c-7d58-4e43-9211-0122246cd6a3",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0002-01-13"
+    }, {
+      "id": "8704d0e6-7319-4dd0-844f-03133b9d4cb5",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0020-01-13"
+    }, {
+      "id": "4c98a1cd-8646-408a-a5d0-ae103fa3e137",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "0200-01-13"
+    }, {
+      "id": "c6c7fe10-538d-4857-85ee-a2a8918626ee",
+      "comment": "",
+      "command": "type",
+      "target": "id=data",
+      "targets": [
+        ["id=data", "id"],
+        ["name=dataNascita", "name"],
+        ["css=.col-sm-5 > #data", "css:finder"],
+        ["xpath=//input[@id='data']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[2]/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2000-01-13"
+    }, {
+      "id": "212e83d3-5661-4cfa-aace-dbdefb03c4bd",
+      "comment": "",
+      "command": "click",
+      "target": "id=codiceFiscaleTesserino",
+      "targets": [
+        ["id=codiceFiscaleTesserino", "id"],
+        ["name=codiceFiscale", "name"],
+        ["css=#codiceFiscaleTesserino", "css:finder"],
+        ["xpath=//input[@id='codiceFiscaleTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7a2c3583-b9c5-45fb-b03a-e004a2e128cb",
+      "comment": "",
+      "command": "type",
+      "target": "id=codiceFiscaleTesserino",
+      "targets": [
+        ["id=codiceFiscaleTesserino", "id"],
+        ["name=codiceFiscale", "name"],
+        ["css=#codiceFiscaleTesserino", "css:finder"],
+        ["xpath=//input[@id='codiceFiscaleTesserino']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/input", "xpath:position"]
+      ],
+      "value": "PPEMRK00A53H703Y"
+    }, {
+      "id": "2011ab02-936e-401e-b232-aa323dd55633",
+      "comment": "",
+      "command": "click",
+      "target": "id=luogo",
+      "targets": [
+        ["id=luogo", "id"],
+        ["name=luogoNascita", "name"],
+        ["css=#luogo", "css:finder"],
+        ["xpath=//input[@id='luogo']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0934aa3e-c773-4958-8a87-7f37d4c75bd9",
+      "comment": "",
+      "command": "type",
+      "target": "id=luogo",
+      "targets": [
+        ["id=luogo", "id"],
+        ["name=luogoNascita", "name"],
+        ["css=#luogo", "css:finder"],
+        ["xpath=//input[@id='luogo']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[3]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": "Salerno"
+    }, {
+      "id": "2de56635-c094-4c04-9b75-838fc785a416",
+      "comment": "",
+      "command": "click",
+      "target": "id=residenza",
+      "targets": [
+        ["id=residenza", "id"],
+        ["name=residenza", "name"],
+        ["css=#residenza", "css:finder"],
+        ["xpath=//input[@id='residenza']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a782ce00-9d86-4985-9fc8-884829f4b20b",
+      "comment": "",
+      "command": "type",
+      "target": "id=residenza",
+      "targets": [
+        ["id=residenza", "id"],
+        ["name=residenza", "name"],
+        ["css=#residenza", "css:finder"],
+        ["xpath=//input[@id='residenza']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div/div[2]/input", "xpath:position"]
+      ],
+      "value": "Via Garibaldi, 44 Salerno (SA)"
+    }, {
+      "id": "a103f056-c883-4519-9c37-ca8f774df04c",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1983dd67-04d3-483d-82de-9dfc4118166f",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "maripepe@gmail.com"
+    }, {
+      "id": "725b8390-38e8-4790-9396-658125fe4d81",
+      "comment": "",
+      "command": "click",
+      "target": "id=gruppoSanguigno",
+      "targets": [
+        ["id=gruppoSanguigno", "id"],
+        ["name=gruppoSanguigno", "name"],
+        ["css=.col-sm-5 > #gruppoSanguigno", "css:finder"],
+        ["xpath=//select[@id='gruppoSanguigno']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[4]/div/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6eb79437-1647-4d0a-9f54-e3111772d8d7",
+      "comment": "",
+      "command": "click",
+      "target": "id=rh",
+      "targets": [
+        ["id=rh", "id"],
+        ["name=rh", "name"],
+        ["css=#rh", "css:finder"],
+        ["xpath=//select[@id='rh']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[4]/div/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b62d49b6-d386-4941-bc68-a40ec5c2ff78",
+      "comment": "",
+      "command": "select",
+      "target": "id=rh",
+      "targets": [],
+      "value": "label=POS"
+    }, {
+      "id": "76f89499-7b39-4a91-8af5-006e9addd1ce",
+      "comment": "",
+      "command": "click",
+      "target": "id=altreIndicazioni",
+      "targets": [
+        ["id=altreIndicazioni", "id"],
+        ["name=altreIndicazioni", "name"],
+        ["css=#altreIndicazioni", "css:finder"],
+        ["xpath=//textarea[@id='altreIndicazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[5]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4161f502-a57e-4412-a74a-ba985ef11a13",
+      "comment": "",
+      "command": "type",
+      "target": "id=altreIndicazioni",
+      "targets": [
+        ["id=altreIndicazioni", "id"],
+        ["name=altreIndicazioni", "name"],
+        ["css=#altreIndicazioni", "css:finder"],
+        ["xpath=//textarea[@id='altreIndicazioni']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/div[5]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Nessuno"
+    }, {
+      "id": "ed966e16-e896-4cbb-a71e-39c90a73a1d8",
+      "comment": "",
+      "command": "click",
+      "target": "id=numeroMatricola",
+      "targets": [
+        ["id=numeroMatricola", "id"],
+        ["name=numeroMatricola", "name"],
+        ["css=#numeroMatricola", "css:finder"],
+        ["xpath=//input[@id='numeroMatricola']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "03635079-24e6-4b27-bde3-81176314e013",
+      "comment": "",
+      "command": "type",
+      "target": "id=numeroMatricola",
+      "targets": [
+        ["id=numeroMatricola", "id"],
+        ["name=numeroMatricola", "name"],
+        ["css=#numeroMatricola", "css:finder"],
+        ["xpath=//input[@id='numeroMatricola']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "53453"
+    }, {
+      "id": "c2a2a9a7-4730-4bf8-8d49-d8a502cef8f9",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6e28bd7d-d089-43ed-8db8-df3eeac3673e",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "04b68f0c-2fe2-458b-93a9-be6ec3da090b",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "0002-10-13"
+    }, {
+      "id": "24330bdf-18b3-4b3a-9def-00216bf72784",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "0020-10-13"
+    }, {
+      "id": "26db560c-1769-4cf2-8279-3ce3b3b77f76",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "0202-10-13"
+    }, {
+      "id": "2e4bba8c-4cec-4543-b055-d69dc5bf85be",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataRilascio",
+      "targets": [
+        ["name=dataRilascio", "name"],
+        ["css=.col-sm-12:nth-child(2) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[2]/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "2020-10-13"
+    }, {
+      "id": "d307ab9a-43a9-4f6d-8eee-a1c87a925d59",
+      "comment": "",
+      "command": "click",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "153d20f2-6988-429c-a032-e0dd98c28d9e",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "0002-05-15"
+    }, {
+      "id": "43cb172b-5a84-4e91-b62c-cfca9c95bb65",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "0020-05-15"
+    }, {
+      "id": "3562477f-7061-4e98-af65-5b16eea89fb9",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "0202-05-15"
+    }, {
+      "id": "1bcddbb6-6377-425b-9c0b-abf8cf964d69",
+      "comment": "",
+      "command": "type",
+      "target": "name=dataDonazione",
+      "targets": [
+        ["name=dataDonazione", "name"],
+        ["css=.col-sm-12:nth-child(1) > #data", "css:finder"],
+        ["xpath=(//input[@id='data'])[3]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "2022-05-15"
+    }, {
+      "id": "5b9b0342-6341-4ad3-957f-a00a1df43e90",
+      "comment": "",
+      "command": "click",
+      "target": "name=tipoDonazione",
+      "targets": [
+        ["name=tipoDonazione", "name"],
+        ["css=.col-sm-12 > #gruppoSanguigno", "css:finder"],
+        ["xpath=(//select[@id='gruppoSanguigno'])[2]", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8ccfe4b7-e432-41d2-b9ac-de065b243818",
+      "comment": "",
+      "command": "select",
+      "target": "name=tipoDonazione",
+      "targets": [],
+      "value": "label=cito"
+    }, {
+      "id": "a48d7f1c-01e0-4564-82c5-7313e8cab76e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-user",
+      "targets": [
+        ["css=.btn-user", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='tesserinoForm']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "53c6fa5a-1b8a-45b1-b973-972f9ff462d9",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError:nth-child(3)",
+      "targets": [
+        ["css=.myError:nth-child(3)", "css:finder"],
+        ["xpath=//form[@id='tesserinoForm']/div[3]/div[2]/div/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Data donazione non può superare la data attuale.')]", "xpath:innerText"]
+      ],
+      "value": "Data donazione non può superare la data attuale."
     }]
   }],
   "suites": [{
