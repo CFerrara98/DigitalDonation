@@ -165,7 +165,7 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione alla pagina delle sedute disponibile.
    */
   @RequestMapping(value = "/goSeduteDisponibili", method = RequestMethod.GET)
-  public String seduteDisponibili(HttpServletRequest request, Model model) {
+  public String visualizzaSeduteDisponibili(HttpServletRequest request, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
 
     if (!(utente instanceof Donatore) || utente == null) {
@@ -174,7 +174,7 @@ public class OrganizzazioneSeduteController {
     }
     try {
       List<Seduta> lista = organizzazioneSeduteService
-              .visualizzaElencoSeduteDisponibili(utente.getCodiceFiscale());
+              .visualizzaSeduteDisponibili(utente.getCodiceFiscale());
       model.addAttribute("listaSedutePrenotabili", lista);
     } catch (CannotLoadDataRepositoryException e) {
       e.printStackTrace();
@@ -521,8 +521,8 @@ public class OrganizzazioneSeduteController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/goEliminaSeduta", method = RequestMethod.GET)
-  public String goEliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute,
-                                Model model) {
+  public String eliminaSeduta(HttpServletRequest request, RedirectAttributes redirectAttribute,
+                              Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Donatore) {
       request.getSession().setAttribute("codiceErrore", 401);

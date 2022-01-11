@@ -263,7 +263,7 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
    * @param codiceFiscale String che rappresenta il codice fiscale del donatore.
    * @return la lista delle sedute disponibili.
    */
-  public List<Seduta> visualizzaElencoSeduteDisponibili(String codiceFiscale)
+  public List<Seduta> visualizzaSeduteDisponibili(String codiceFiscale)
           throws CannotLoadDataRepositoryException {
     List<Indisponibilita> listaIndisponibilitaDonatore = indisponibilitaRepository
             .findIndisponibilitaByCodiceFiscaleDonatore(codiceFiscale);

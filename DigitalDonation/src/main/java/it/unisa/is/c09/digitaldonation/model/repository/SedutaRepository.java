@@ -68,16 +68,6 @@ public interface SedutaRepository extends JpaRepository<Seduta, Long> {
           Long idSeduta, String codiceFiscaleUtente);
 
   /**
-   * Metodo che ritorna solo le sedute a cui si puo fare la prenotazione.
-   *
-   * @return lista sedute prenotabili ATTENZIONE le liste sono null!
-   */
-  @Query(value = "SELECT id_seduta, data_fine_prenotazione, data_inizio_prenotazione, data_seduta,"
-          + " luogo, numero_partecipanti, id_sede_locale from seduta "
-          + "where data_seduta > current_date", nativeQuery = true)
-  List<Seduta> findSedutePrenotabiliNoList();
-
-  /**
    * Metodo che ritorna tutte le sedute.
    *
    * @return lista delle sedute.

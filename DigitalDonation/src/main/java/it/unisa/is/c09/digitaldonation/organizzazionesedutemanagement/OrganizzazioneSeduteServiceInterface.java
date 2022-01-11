@@ -35,5 +35,7 @@ public interface OrganizzazioneSeduteServiceInterface {
 
   Seduta visualizzaSeduta(Long idSeduta) throws CannotLoadDataRepositoryException;
 
+  List<Seduta> visualizzaSeduteDisponibili(String codiceFiscale) throws CannotLoadDataRepositoryException;
+
   List<Seduta> visualizzaElencoSedute() throws CannotLoadDataRepositoryException;
 }

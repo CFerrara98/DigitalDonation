@@ -294,8 +294,8 @@ public class GestioneTesserinoController {
    * @return String ridirezione ad una pagina.
    */
   @RequestMapping(value = "/visualizzaTesserino", method = RequestMethod.GET)
-  public String visualizzaTesserino(HttpServletRequest request,
-             RedirectAttributes redirectAttribute, Model model) {
+  public String aggiornaTesserino(HttpServletRequest request,
+                                  RedirectAttributes redirectAttribute, Model model) {
     Utente utente = (Utente) request.getSession().getAttribute("utente");
     if (utente == null || utente instanceof Operatore) {
       request.getSession().setAttribute("codiceErrore", 401);

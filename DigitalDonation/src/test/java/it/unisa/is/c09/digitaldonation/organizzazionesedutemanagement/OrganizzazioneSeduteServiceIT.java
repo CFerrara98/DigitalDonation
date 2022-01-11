@@ -315,7 +315,7 @@ public class OrganizzazioneSeduteServiceIT {
     /**
      * Testa il corretto funzionamento del metodo visualizzaElencoSeduteDisponibili
      *
-     * @test {@link OrganizzazioneSeduteService#visualizzaElencoSeduteDisponibili(String)}
+     * @test {@link OrganizzazioneSeduteService#visualizzaSeduteDisponibili(String)}
      * @result Il test è superato se la visualizzazione dell'elenco delle sedute viene effettuata correttamente.
      */
     @Test
@@ -329,7 +329,7 @@ public class OrganizzazioneSeduteServiceIT {
         Seduta sedutaRitorno = organizzazioneSeduteService.salvaSeduta(seduta);
 
         try {
-            lista = organizzazioneSeduteService.visualizzaElencoSeduteDisponibili(donatore1.getCodiceFiscale());
+            lista = organizzazioneSeduteService.visualizzaSeduteDisponibili(donatore1.getCodiceFiscale());
         } catch (CannotLoadDataRepositoryException e) {
             e.printStackTrace();
         }
