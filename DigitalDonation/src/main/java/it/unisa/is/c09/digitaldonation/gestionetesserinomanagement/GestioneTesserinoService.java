@@ -308,9 +308,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
         throw new TesserinoFormException("TesserinoEmailError",
                 "L’email non rispetta il formato. Inserire email del formato: xxxx@xxx.xx");
       }
-      if(utenteRepository.findByEmail(email) != null) {
+      if (utenteRepository.findByEmail(email) != null) {
         throw new TesserinoFormException("TesserinoEmailError",
-                "L’email è già stata utilizzata. L’email è stata già registrata in qualche altro tesserino.");
+                "L’email è già stata utilizzata. "
+                        + "L’email è stata già registrata in qualche altro tesserino.");
       }
       return email;
     }
