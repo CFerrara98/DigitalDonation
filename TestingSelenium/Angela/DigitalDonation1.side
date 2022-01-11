@@ -2,7 +2,7 @@
   "id": "5f9da697-a058-4124-973c-b690d7dd9e8f",
   "version": "2.0",
   "name": "DigitalDonation1",
-  "url": "http://localhost:8080/goCreazioneTesserino",
+  "url": "http://lolcahost:8080/goLogin",
   "tests": [{
     "id": "f1adc7d6-6564-4363-bf5e-edd15be195f4",
     "name": "TC_GU_01_1",
@@ -4754,7 +4754,7 @@
         ["xpath=//form[@id='tesserinoForm']/div/div[2]/input", "xpath:idRelative"],
         ["xpath=//form/div/div[2]/input", "xpath:position"]
       ],
-      "value": "0000000"
+      "value": "0000000\\"
     }, {
       "id": "de9d047e-34c8-458d-a22e-9fd9dcaa0958",
       "comment": "",
@@ -5050,6 +5050,18 @@
         ["xpath=//form/input", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "ec0ee902-9ea5-48ef-bdc3-5fa61c6ec15d",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.myError:nth-child(8)",
+      "targets": [
+        ["css=.myError:nth-child(8)", "css:finder"],
+        ["xpath=//form[@id='tesserinoForm']/div/div[2]/span", "xpath:idRelative"],
+        ["xpath=//div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'La residenza non rispetta il formato. Inserire solo dati alfanumerici e segni di punteggiatura.')]", "xpath:innerText"]
+      ],
+      "value": "La residenza non rispetta il formato. Inserire solo dati alfanumerici e segni di punteggiatura. "
     }]
   }, {
     "id": "6509581d-b835-4d35-b3a2-acf9580a1fcb",
@@ -9618,6 +9630,114 @@
       ],
       "value": "Data donazione non può superare la data attuale."
     }]
+  }, {
+    "id": "24ac6477-521e-49d5-b431-b8473dd79c1a",
+    "name": "TC_GU_01_3",
+    "commands": [{
+      "id": "b30c45a6-3784-4e67-8eff-44208a53e413",
+      "comment": "",
+      "command": "open",
+      "target": "http://lolcahost:8080/goLogin",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "793c9dac-2ae8-455f-b7a7-eda5aeecd05f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1062x1112",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9aaabf0e-6ce3-4ca2-a80a-de2c4e59ede8",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='loginForm']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4abceadb-3719-42f0-ba50-259480f6dbca",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='loginForm']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mattiasapere@gmail.com"
+    }, {
+      "id": "1352874b-32a8-4f97-85b9-4d5dd534a35b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-5",
+      "targets": [
+        ["css=.p-5", "css:finder"],
+        ["xpath=//div/div/div/div/div/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7b37891-80f6-4994-b9e7-bb77acdc5804",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputPassword",
+      "targets": [
+        ["id=inputPassword", "id"],
+        ["name=password", "name"],
+        ["css=#inputPassword", "css:finder"],
+        ["xpath=//input[@id='inputPassword']", "xpath:attributes"],
+        ["xpath=//form[@id='loginForm']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "83d20b94-7e35-4f36-be09-fd61cf58348c",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputPassword",
+      "targets": [
+        ["id=inputPassword", "id"],
+        ["name=password", "name"],
+        ["css=#inputPassword", "css:finder"],
+        ["xpath=//input[@id='inputPassword']", "xpath:attributes"],
+        ["xpath=//form[@id='loginForm']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Mattiaspere.123"
+    }, {
+      "id": "90a683ea-819a-4d4d-b826-c2a4621bbee9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='loginForm']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b58762ee-c0e3-4f43-8dcf-0645e22bc527",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.container-fluid > .mb-4",
+      "targets": [
+        ["css=.container-fluid > .mb-4", "css:finder"],
+        ["xpath=//div[@id='content']/div/h1", "xpath:idRelative"],
+        ["xpath=//div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Dashboard Donatore')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "fd435df8-96fe-4f2f-8dde-935b4e6fbf52",
@@ -9627,6 +9747,6 @@
     "timeout": 300,
     "tests": []
   }],
-  "urls": ["http://localhost:8080/goLogin", "http://localhost:8080/goCreazioneTesserino"],
+  "urls": ["http://localhost:8080/goLogin", "http://localhost:8080/goCreazioneTesserino", "http://lolcahost:8080/goLogin"],
   "plugins": []
 }

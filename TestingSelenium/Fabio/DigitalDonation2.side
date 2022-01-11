@@ -1891,7 +1891,7 @@
         ["xpath=//div[2]/span", "xpath:position"],
         ["xpath=//span[contains(.,'Il CAP inserito non è corretto: ammette solo 5 caratteri numerici.')]", "xpath:innerText"]
       ],
-      "value": "Il CAP inserito non è corretto:ammette solo 5 caratteri numerici."
+      "value": "Il CAP inserito non è corretto: ammette solo 5 caratteri numerici."
     }]
   }, {
     "id": "b6c455fa-3888-495f-a306-27719355e806",
@@ -2273,7 +2273,7 @@
     }]
   }, {
     "id": "81896cf9-d2a5-42c1-962b-55ffafc0794d",
-    "name": "TC_OSD_01_7",
+    "name": "TC_OSD_01_8",
     "commands": [{
       "id": "78b432e2-5929-46e6-b49a-909afe75764c",
       "comment": "",
@@ -2623,7 +2623,7 @@
     }]
   }, {
     "id": "ebd49bcb-41ce-4148-86ae-e75ffe1baf33",
-    "name": "TC_OSD_01_8",
+    "name": "TC_OSD_01_9",
     "commands": [{
       "id": "005ee4a0-ff87-4691-a685-e178cb8f1321",
       "comment": "",
@@ -3001,7 +3001,7 @@
     }]
   }, {
     "id": "fd09aa79-a20d-427a-8ea1-49baec4e461c",
-    "name": "TC_OSD_01_9",
+    "name": "TC_OSD_01_10",
     "commands": [{
       "id": "969daa66-7c85-49d7-a2b9-aa4d9f2a963c",
       "comment": "",
@@ -3387,7 +3387,7 @@
     }]
   }, {
     "id": "fbe07048-6af3-4992-8239-fdc5da31a93f",
-    "name": "TC_OSD_01_10",
+    "name": "TC_OSD_01_11",
     "commands": [{
       "id": "e25431be-e86a-4ccf-9a07-a7aab1c6820d",
       "comment": "",
@@ -3748,7 +3748,7 @@
     }]
   }, {
     "id": "2b17e92a-eaca-4aec-bb82-7937a827be54",
-    "name": "TC_OSD_01_11",
+    "name": "TC_OSD_01_12",
     "commands": [{
       "id": "c8c4fab5-d82e-486a-ad3c-58db9f5669ce",
       "comment": "",
@@ -4123,7 +4123,7 @@
     }]
   }, {
     "id": "324748d5-0c56-4f27-b33b-526d9c82b52b",
-    "name": "TC_OSD_01_12",
+    "name": "TC_OSD_01_13",
     "commands": [{
       "id": "04842824-8656-43e8-8fc6-b79923b047f3",
       "comment": "",
@@ -4498,7 +4498,7 @@
     }]
   }, {
     "id": "dfe43afd-a587-4441-a49f-3fc4a94de4d0",
-    "name": "TC_OSD_01_13",
+    "name": "TC_OSD_01_14",
     "commands": [{
       "id": "672db4e4-b429-4ce7-85c1-98afe3557c58",
       "comment": "",
@@ -4873,7 +4873,7 @@
     }]
   }, {
     "id": "38ddc257-c581-4f36-9adc-ead8b2e7c7d5",
-    "name": "TC_OSD_01_14",
+    "name": "TC_OSD_01_15",
     "commands": [{
       "id": "cbfc8740-8802-413d-aa41-f2d2b5866d33",
       "comment": "",
