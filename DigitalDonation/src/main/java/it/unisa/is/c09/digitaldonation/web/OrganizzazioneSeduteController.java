@@ -494,6 +494,11 @@ public class OrganizzazioneSeduteController {
       request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR);
       return "redirect:/error";
     }
+    LocalTime oraInizio = LocalTime.of(8, 0);
+    sedutaForm.setOrarioInizio(oraInizio);
+
+    LocalTime oraFine = LocalTime.of(12, 0);
+    sedutaForm.setOrarioFine(oraFine);
     sedutaFormValidate.validate(sedutaForm, result);
     if (result.hasErrors()) {
       // se ci sono errori il metodo controller setta tutti i parametri

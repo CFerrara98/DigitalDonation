@@ -198,7 +198,7 @@ public class GestioneSeduteController {
       for (ObjectError x : result.getGlobalErrors()) {
         redirectAttribute.addFlashAttribute(x.getCode(), x.getDefaultMessage());
       }
-      return "/GUIGestioneSedute/confermaDonazione";
+      return "redirect:/goSalvataggioDonazione";
     }
 
 
