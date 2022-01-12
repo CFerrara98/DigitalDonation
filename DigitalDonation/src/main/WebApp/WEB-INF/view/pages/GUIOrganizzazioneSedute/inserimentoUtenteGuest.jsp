@@ -172,6 +172,8 @@
                                                                    style="color:#4e73df;">Inserisci
                                                                 il gruppo sanguigno:
                                                                 </label>
+                                                    <c:choose>
+                                                    <c:when test="${GruppoSanguignoError == null}">
                                                             <form:select name="gruppoSanguigno"
                                                                          id="gruppoSanguigno"
                                                                          class="form-control gruppo-sanguigno"
@@ -202,6 +204,41 @@
                                                             </form:option>
 
                                                             </form:select>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <form:select name="gruppoSanguigno"
+                                                                 id="gruppoSanguigno"
+                                                                 class="form-control gruppo-sanguigno"
+                                                                 path="gruppoSanguigno">
+                                                        <form:option selected="true" value="A+ ">
+                                                            A+
+                                                        </form:option>
+                                                        <form:option value="A-">
+                                                            A-
+                                                        </form:option>
+                                                        <form:option value="B+">
+                                                            B+
+                                                        </form:option>
+                                                        <form:option value="B-">
+                                                            B-
+                                                        </form:option>
+                                                        <form:option value="0+">
+                                                            0+
+                                                        </form:option>
+                                                        <form:option value="0-">
+                                                            0-
+                                                        </form:option>
+                                                        <form:option value="AB+">
+                                                            AB+
+                                                        </form:option>
+                                                        <form:option value="AB-">
+                                                            AB-
+                                                        </form:option>
+
+                                                    </form:select>
+                                                        <span class="myError">${GruppoSanguignoError}</span>
+                                                    </c:otherwise>
+                                                    </c:choose>
                                                 </div>
 
                                                         <br>

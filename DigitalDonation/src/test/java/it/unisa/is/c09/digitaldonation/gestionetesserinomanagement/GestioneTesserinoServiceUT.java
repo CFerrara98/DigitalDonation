@@ -1182,7 +1182,7 @@ public class GestioneTesserinoServiceUT {
         Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
         dataDonazione = datadonazione.getTime();
         tipoDonazione = "cito";
-        final String message = "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.";
+        final String message = "Il numero di matricola non rispetta il formato. Inserire solo 5 caratteri numerici.";
 
         try {
             validaCampi();
@@ -1221,7 +1221,7 @@ public class GestioneTesserinoServiceUT {
         Calendar datadonazione = new GregorianCalendar(2021, 7, 11);
         dataDonazione = datadonazione.getTime();
         tipoDonazione = "cito";
-        final String message = "Il numero di matricola non rispetta il formato. Inserire solo 7 caratteri numerici.";
+        final String message = "Il numero di matricola non rispetta il formato. Inserire solo 5 caratteri numerici.";
 
         try {
             validaCampi();
