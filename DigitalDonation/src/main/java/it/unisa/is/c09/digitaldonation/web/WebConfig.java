@@ -18,61 +18,44 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    /**
-     * Definisce il message source di sistema per la risoluzione dei messaggi.
-     *
-     * @return L'oggetto MessageSource che definisce classpath e codifica dei
-     *         messaggi
-     */
-    @Bean
-    public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
-        source.setBasenames("classpath:messages");
-        source.setUseCodeAsDefaultMessage(true);
-        source.setDefaultEncoding("ISO-8859-1");
-        source.setCacheSeconds(0);
-        return source;
-    }
+  /**
+   * Definisce il message source di sistema per la risoluzione dei messaggi.
+   *
+   * @return L'oggetto MessageSource che definisce classpath e codifica dei
+   *        messaggi
+   */
+  @Bean
+  public MessageSource messageSource() {
+    ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+    source.setBasenames("classpath:messages");
+    source.setUseCodeAsDefaultMessage(true);
+    source.setDefaultEncoding("ISO-8859-1");
+    source.setCacheSeconds(0);
+    return source;
+  }
 
-    /**
-     * Definisce il view resolver di sistema per la mappatura delle stringhe
-     * restituite nei controller in pagine JSP.
-     *
-     * @return L'oggetto ViewResolver che incapsula le informazioni su come
-     *         risolvere le viste delegate dai controller
-     */
-    @Bean
-    public ViewResolver internalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/view/pages/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }
+  /**
+   * Definisce il view resolver di sistema per la mappatura delle stringhe
+   * restituite nei controller in pagine JSP.
+   *
+   * @return L'oggetto ViewResolver che incapsula le informazioni su come
+   *        risolvere le viste delegate dai controller
+   */
+  @Bean
+  public ViewResolver internalResourceViewResolver() {
+    InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+    resolver.setViewClass(JstlView.class);
+    resolver.setPrefix("/WEB-INF/view/pages/");
+    resolver.setSuffix(".jsp");
+    return resolver;
+  }
 
-    /**
-     * Mappa le richieste per le risorse statiche alla locazione appropriata.
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-    }
-
-    /**
-     * Interceptor che si occupa di trasferire le informazioni relative all'utente
-     * autenticato dalla sessio del server ai livelli inferiori tramite l'utilizzo
-     * di {@link UtenzaService} e {@link AutenticazioneHolder}.
-     *
-     * @return Un oggetto interceptor
-     */
-    @Bean
-    public AutenticazioneInterceptor autenticazioneInterceptor() {
-        return new AutenticazioneInterceptor();
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(autenticazioneInterceptor());
-    }
+  /**
+   * Mappa le richieste per le risorse statiche alla locazione appropriata.
+   */
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+  }
 
 }
