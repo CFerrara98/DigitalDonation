@@ -45,7 +45,7 @@ public class AutodichiarazioneIndisponibilitaFormValidate implements Validator {
       gestioneTesserinoService
               .validaMotivazioni(autodichiarazioneIndisponibilitaForm.getMotivazioni());
     } catch (TesserinoFormException e) {
-      errors.reject("MotivazioneError", e.getMessage());
+      errors.reject("MotivazioniIndisponibilitaError", e.getMessage());
       autodichiarazioneIndisponibilitaForm.setMotivazioni("");
     }
 
