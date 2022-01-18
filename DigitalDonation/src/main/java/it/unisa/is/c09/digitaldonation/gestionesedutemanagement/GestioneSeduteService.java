@@ -189,8 +189,7 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
     } else {
       if (!motivazioni.matches(Indisponibilita.MOTIVAZIONI_REGEX)) {
         throw new IndisponibilitaDonazioneFormException("IndisponibilitaMotivazioniError",
-                "Nel parametro motivazioni non sono ammessi caratteri speciali: Inserisci solo caratteri " +
-                        "alfanumerici e punteggiatura” _.,!\"'\\/”.");
+                "Il formato delle motivazioni è errato.");
       } else {
         return motivazioni;
       }
@@ -215,7 +214,7 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
     } else {
       if (!nomeMedico.matches(Indisponibilita.NOME_MEDICO_REGEX)) {
         throw new IndisponibilitaDonazioneFormException("GuestNomeMedicoError",
-                "Il nome medico non rispetta il formato. Sono ammessi solo caratteri alfabetici.");
+                "Il formato del nome del medico è errato.");
       } else {
         return nomeMedico;
       }
@@ -247,8 +246,8 @@ public class GestioneSeduteService implements GestioneSeduteServiceInterface {
                 + "inserita non rispetta il formato: gg/mm/aaaa.");
       } else if (dataProssimaDisponibilita.before(date)) {
         throw new IndisponibilitaDonazioneFormException(
-                "DataProssimaDisponibilitaError", "La data di scadenza non può essere antecedente a quella odierna. " +
-                "Ed il formato è gg/mm/aaaa");
+                "DataProssimaDisponibilitaError", "La data di prossima disponibilità "
+                + "inserita è minore della data corrente.");
       }
       return dataProssimaDisponibilita;
     }

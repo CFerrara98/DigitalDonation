@@ -453,11 +453,11 @@ public class OrganizzazioneSeduteService implements OrganizzazioneSeduteServiceI
     Date date = new Date();
     if (dataSeduta == null) {
       throw new SedutaFormException("SedutaDataError", "La data seduta inserita non "
-              + "rispetta il formato: gg/mm/aaaa");
+              + "ispetta il formato: gg/mm/aaaa");
     } else {
       if (!(parsDateToString(dataSeduta).matches(Seduta.DATA_SEDUTA_REGEX))) {
         throw new SedutaFormException("SedutaDataError", "La data seduta inserita non "
-                + "rispetta il formato: gg/mm/aaaa");
+                + "ispetta il formato: gg/mm/aaaa");
       } else if (dataSeduta.before(date)) {
         throw new SedutaFormException("SedutaDataError", "La data seduta inserita è"
                 + " minore della data corrente.");
