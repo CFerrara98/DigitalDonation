@@ -259,7 +259,7 @@
                                                                                     path="gruppoSanguigno">
                                                                                 <form:option
                                                                                         selected="true"
-                                                                                        value="A ">A
+                                                                                        value="A">A
                                                                                 </form:option>
                                                                                 <form:option
                                                                                         value="B"> B
@@ -280,7 +280,7 @@
                                                                                     path="gruppoSanguigno">
                                                                                 <form:option
                                                                                         selected="true"
-                                                                                        value="A ">A
+                                                                                        value="A">A
                                                                                 </form:option>
                                                                                 <form:option
                                                                                         value="B"> B

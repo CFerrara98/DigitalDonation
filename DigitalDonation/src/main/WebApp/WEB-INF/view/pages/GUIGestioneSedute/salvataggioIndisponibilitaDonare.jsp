@@ -76,7 +76,11 @@
                                             </th>
                                             <th>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${tesserino.dataRilascio}"></c:out>
+                                                    <c:out value="${tesserino.dataRilascio.date}"></c:out>
+                                                    /
+                                                    <c:out value="${tesserino.dataRilascio.month + 1}"></c:out>
+                                                    /
+                                                    <c:out value="${tesserino.dataRilascio.year + 1900}"></c:out>
                                                 </h3>
                                             </th>
                                         </tr>
@@ -96,7 +100,11 @@
                                             </th>
                                             <th>
                                                 <h3 align="left" class="h6 mb-2 text-gray-800" >
-                                                    <c:out value="${donatore.dataDiNascita}"></c:out>
+                                                    <c:out value="${donatore.dataDiNascita.date}"></c:out>
+                                                    /
+                                                    <c:out value="${donatore.dataDiNascita.month + 1}"></c:out>
+                                                    /
+                                                    <c:out value="${donatore.dataDiNascita.year + 1900}"></c:out>
                                                 </h3>
                                             </th>
                                         </tr>
