@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.web.filters;
+package it.unisa.is.c09.digitaldonation.gestionesedutemanagement.web.filters;
 
 
 import org.jboss.logging.Logger;

@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.web.autogenerate;
+package it.unisa.is.c09.digitaldonation.gestionesedutemanagement.web.autogenerate;
 
 
 import it.unisa.is.c09.digitaldonation.googledriveapi.GoogleDriveService;

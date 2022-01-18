@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.web;
+package it.unisa.is.c09.digitaldonation.gestionesedutemanagement.web;
 
 import com.google.api.services.drive.model.File;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;

@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.web.error;
+package it.unisa.is.c09.digitaldonation.gestionesedutemanagement.web.error;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

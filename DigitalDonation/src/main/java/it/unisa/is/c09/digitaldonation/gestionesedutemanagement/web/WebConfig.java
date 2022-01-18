@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.web;
+package it.unisa.is.c09.digitaldonation.gestionesedutemanagement.web;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
