@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.gestionesedutemanagement.web;
+package it.unisa.is.c09.digitaldonation.web;
 
 import com.google.api.services.drive.model.File;
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +48,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
         maxFileSize = (1024 * 1024 * 10) / 2
 )
 public class GestioneTesserinoController {
-
-  private static Logger logger = Logger
-          .getLogger(String.valueOf(OrganizzazioneSeduteController.class));
 
   @Autowired
   GestioneTesserinoService gestioneTesserinoService;

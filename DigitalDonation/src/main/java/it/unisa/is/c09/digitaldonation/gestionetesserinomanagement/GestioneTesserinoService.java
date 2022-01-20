@@ -198,10 +198,10 @@ public class GestioneTesserinoService implements GestioneTesserinoServiceInterfa
    * @throws TesserinoFormException eccezione per il tesserino
    */
   public String validaImage(String image) throws TesserinoFormException {
-    if (image == null || image.equals("")) {
+    if (image == null || image.isEmpty()) {
       throw new TesserinoFormException("TesserinoImageError",
               "Il formato dell’immagine non è corretto. "
-                      + "Inserire un’immagine che ha formato png o jpg.");
+                      + "Inserire un’immagine che ha formato png o jpeg.");
     }
     String end = image.substring(image.indexOf("."));
     if (end.matches(".png") || end.matches(".jpeg")) {

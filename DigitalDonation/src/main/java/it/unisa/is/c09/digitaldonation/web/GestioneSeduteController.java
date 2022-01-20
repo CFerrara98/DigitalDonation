@@ -1,4 +1,4 @@
-package it.unisa.is.c09.digitaldonation.gestionesedutemanagement.web;
+package it.unisa.is.c09.digitaldonation.web;
 
 import it.unisa.is.c09.digitaldonation.erroremanagement.organizzazioneseduteerror.CannotSaveDataRepositoryException;
 import it.unisa.is.c09.digitaldonation.gestionesedutemanagement.GestioneSeduteService;

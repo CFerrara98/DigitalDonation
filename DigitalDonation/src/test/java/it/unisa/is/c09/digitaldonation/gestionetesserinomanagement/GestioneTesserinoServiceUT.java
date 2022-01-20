@@ -516,14 +516,14 @@ public class GestioneTesserinoServiceUT {
         dataDonazione = datadonazione.getTime();
         tipoDonazione = "cito";
 
-        final String message = "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpg.";
+        final String message = "Il formato dell’immagine non è corretto. Inserire un’immagine che ha formato png o jpeg.";
         try {
             gestioneTesserinoService.validaImage(null);
         } catch (TesserinoFormException exception) {
             assertEquals(message, exception.getMessage());
             return;
         }
-        fail("Errore! nessuna eccezione laciata");
+        fail("Errore! nessuna eccezione lanciata");
     }
 
     /**
@@ -777,7 +777,7 @@ public class GestioneTesserinoServiceUT {
         Calendar dataNascita = new GregorianCalendar(2000, 1, 13);
         dataDiNascita = dataNascita.getTime();
         luogoDiNascita = "Salerno";
-        residenza = "000000000";
+        residenza = "000000(000";
         email = "maripepe@gmail.com";
         gruppoSanguigno = "A";
         rh = "POS";
@@ -797,7 +797,7 @@ public class GestioneTesserinoServiceUT {
             assertEquals(message, exception.getMessage());
             return;
         }
-        fail("Errore! nessuna eccezione laciata");
+        fail("Errore! nessuna eccezione lanciata");
     }
 
     /**
