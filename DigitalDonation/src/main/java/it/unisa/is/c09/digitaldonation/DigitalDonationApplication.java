@@ -17,17 +17,20 @@ import org.springframework.core.io.ClassPathResource;
  * @author Kevin Pacifico
  */
 @SpringBootApplication
-@ServletComponentScan
 public class DigitalDonationApplication {
 
+  /**
+   * Metodo necessario a Spring Boot per l'avvio dell'applicazione nel caso in cui
+   * si costruisca un jar/war eseguibile con server embedded.
+   *
+   * @param args classici parametri di inizializzazione
+   */
   public static void main(String[] args) {
     SpringApplication.run(DigitalDonationApplication.class, args);
   }
 
   /**
-   * Metodo per il caricamento delle configurazioni. Visto l'utilizzo di Spring
-   * Boot e di {@link Webapp EnableAutoConfiguration}, non è necessario che il
-   * programmatore vi apporti modifiche.
+   * Metodo per la configurazione delle properties.
    */
   @Bean
   @Primary
